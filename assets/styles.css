@@ -121,6 +121,10 @@ td {
   border: 1px solid #99ff99;
 }
 
-td a{
+td h3 a, td a{
   color: green;
+}
+
+td a:hover{
+  color: #003300;
 }
