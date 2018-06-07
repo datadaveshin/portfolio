@@ -24,7 +24,7 @@ This git page has a list with links to all the online projects I have previously
 
 
 ## Technical skills
-Express, PostgreSQL, JavaScript (ES5, ES6), JQuery, REST, Knex.js, Ajax, Regex, Node.js, NPM, HTML, CSS, Vue.js \n
+Express, PostgreSQL, JavaScript (ES5, ES6), JQuery, REST, Knex.js, Ajax, Regex, Node.js, NPM, HTML, CSS, Vue.js
 
-Linkedin: https://www.linkedin.com/in/parisapostolopoulos/ \n
+Linkedin: https://www.linkedin.com/in/parisapostolopoulos/
 Github: https://github.com/papostolopoulos
