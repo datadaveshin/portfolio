@@ -47,11 +47,7 @@ table {
   border-spacing: 0;
 }
 
-/*
-  ========================================
-  main
-  ========================================
-*/
+
 body {
   background: rgba(255, 255, 255, 1);
   color: rgba(0, 0, 0, 1);
@@ -59,11 +55,7 @@ body {
   padding: 10px;
 }
 
-/*
-  ========================================
-  Typography
-  ========================================
-*/
+
 h1 {
   color: rgba(0, 0, 0, 1);
   font: 400 36px/44px "Josefin Sans", sans-serif;
@@ -94,7 +86,13 @@ table {
   border-collapse: collapse;
 }
 
+thead {
+
+}
+
 th {
+  position: sticky;
+  top: -4px;
   padding: 10px;
   font-size: 20px;
   font-weight: bold;
@@ -127,4 +125,43 @@ td h3 a, td a{
 
 td a:hover{
   color: #003300;
+}
+
+td:nth-child(1){
+  text-align: center;
+}
+
+#thAngular #thReact #thVue #thJQuery #thVanillaJs {
+  width: 9%;
+}
+
+#thDescription {
+  width: 37%;
+}
+
+#thProject {
+  width: 15%;
+}
+
+#thNo {
+  width: 3%
+}
+
+.modal {
+  position: absolute;
+  left: 0;
+  top: 0%;
+  z-index: 1;
+  padding-top: 100px;
+  width: 50%;
+  height: 50%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,128,0,0.3);
+}
+
+.modalContent {
+  width: 80%;
+  background-color: white;
+  margin: auto;
 }
