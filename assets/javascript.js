@@ -67,5 +67,33 @@ let pages = {
   }
 }
 
+function hoverModal() {
+
+}
+
+// function addEffect(letter){
+//   for(el of divKey){
+//     let elLetter = el.firstElementChild.textContent.toLowerCase();
+//     let elSound = el.lastElementChild.textContent;
+//     let selectSound = document.querySelector(`audio[src="sounds/${elSound}.wav"]`);
+//     if(elLetter === letter) {
+//       el.classList.add("playing");
+//       selectSound.currentTime = 0;
+//       selectSound.play();
+//       setTimeout(() => removeEffect(letter), 50);
+//     }
+//   }
+// }
+//
+// function removeEffect(letter) {
+//   for(el of divKey){
+//     let elLetter = el.firstElementChild.textContent.toLowerCase();
+//     if(elLetter === letter) el.classList.remove("playing");
+//   }
+// }
+
+
+// window.onkeydown = event => addEffect(event.key.toLowerCase());
+
 // document.querySelectorAll("a.screenshot")
 // Or is it onClick? How did you do it in the drum kit?
