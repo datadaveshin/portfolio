@@ -48,6 +48,10 @@ table {
 }
 
 
+
+
+
+
 body {
   background: rgba(255, 255, 255, 1);
   color: rgba(0, 0, 0, 1);
@@ -146,7 +150,7 @@ td:nth-child(1){
 }
 
 .modal {
-  display: block;
+  display: none;
   position: sticky;
   left: 5%;
   top: 5%;
@@ -163,10 +167,10 @@ td:nth-child(1){
   height: 550px;
   background-color: white;
   margin: 5% auto;
-  background-image: url("./images/writeIt.png");
+  background-image: url("./images/writeItVanilla.png");
   background-size: cover;
   background-position: center;
-  border: 2px solid green;
+  border: 5px solid green;
 }
 
 /* img {
