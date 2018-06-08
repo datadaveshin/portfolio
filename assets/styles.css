@@ -146,7 +146,7 @@ td:nth-child(1){
 }
 
 .modal {
-  display: none;
+  display: block;
   position: sticky;
   left: 5%;
   top: 5%;
@@ -159,17 +159,19 @@ td:nth-child(1){
 }
 
 .modalContent {
-  width: 80%;
-  height: 80%;
+  width: 700px;
+  height: 550px;
   background-color: white;
   margin: 5% auto;
+  background-image: url("./images/writeIt.png");
+  background-size: cover;
+  background-position: center;
+  border: 2px solid green;
 }
 
-img {
+/* img {
   width: 100%;
   border: 2px solid green;
-  background-position: center;
-  background-size: cover;
   box-sizing: border-box;
   vertical-align: middle;
-}
+} */
