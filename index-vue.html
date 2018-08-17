@@ -11,7 +11,11 @@
   <body>
     <div id="divContainer">
       <header>
-        This is the header
+        <nav>
+          <span  v-for="section in sections">
+            {{section.text}}
+          </span>
+        </nav>
       </header>
 
       <main>

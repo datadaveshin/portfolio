@@ -1,6 +1,26 @@
+// I need to work on the component. Understand how the props work
+// Vue.Component('tags', {
+//   template: `
+//     <header>
+//       <nav>
+//         <ul>
+//           <li v-for="tag in tags"></li>
+//         </ul>
+//       </nav>
+//     </header>
+//   `
+// });
+
+
 new Vue({
     el: "#divContainer",
     data: {
+      sections: [
+        {text: "Vanilla JS"},
+        {text: "jQuery"},
+        {text: "Vue"}
+      ],
+
       projects: {
         JavaScript: [
           {
