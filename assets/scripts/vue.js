@@ -1,4 +1,3 @@
-console.log("in the vue.js file");
 /*!
  * Vue.js v2.5.16
  * (c) 2014-2018 Evan You

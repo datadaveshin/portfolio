@@ -1,14 +1,12 @@
-console.log("in the main.js file");
-
-new Vue(
-    el: "main",
+new Vue({
+    el: "#divContainer",
     data: {
       projects: {
         JavaScript: [
           {
             title: "name here",
             url: "link here",
-            git: "link here"
+            git: "link here",
             description: [
               {bullet: "content here"},
               {bullet: "content here"},
@@ -30,4 +28,5 @@ new Vue(
         ]
       } //End of projects
     }
+  }
 );

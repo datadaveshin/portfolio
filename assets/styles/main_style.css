@@ -1,0 +1,28 @@
+#divContainer{
+  height: 100vh;
+  background-color: rgb(250, 220, 52);
+  background-image: url("../images/logo-javascript.png");
+  background-position:center;
+  background-size: 90vh;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+header{
+  align-self: flex-start;
+  width: 100vw;
+  height: 10vh;
+  background-color: lightgreen;
+  position: absolute;
+}
+
+footer{
+  align-self: flex-end;
+  width: 100vw;
+  height: 10vh;
+  background-color: lightgreen;
+  position: absolute;
+}
