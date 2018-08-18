@@ -1,15 +1,10 @@
 // I need to work on the component. Understand how the props work
-// Vue.Component('tags', {
-//   template: `
-//     <header>
-//       <nav>
-//         <ul>
-//           <li v-for="tag in tags"></li>
-//         </ul>
-//       </nav>
-//     </header>
-//   `
-// });
+Vue.component('nav-tags', {
+  props: ['tag'],
+  template: `
+    <li>{{tag.text}}<li>
+  `
+});
 
 
 new Vue({

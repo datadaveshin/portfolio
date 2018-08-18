@@ -12,9 +12,22 @@
     <div id="divContainer">
       <header>
         <nav>
-          <span  v-for="section in sections">
-            {{section.text}}
-          </span>
+          <ul>
+            <li  v-for="section in sections">
+              {{section.text}}
+            </li>
+          </ul>
+        </nav>
+
+        <nav>
+          <ul>
+            <nav-tags
+            v-for="section in sections"
+            v-bind:tag="section"
+            v-bind:key="section.id"
+            >
+            </nav-tags>
+          </ul>
         </nav>
       </header>
 
