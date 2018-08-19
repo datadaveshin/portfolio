@@ -2,7 +2,9 @@
 Vue.component('nav-tags', {
   props: ['tag'],
   template: `
-    <li>{{tag.text}}<li>
+    <ul>
+      <li>{{tag.text}}</li>
+    </ul>
   `
 });
 
@@ -42,6 +44,11 @@ new Vue({
 
         ]
       } //End of projects
+    }, //End of data
+    methods: {
+      doSomething: function () {
+        console.log("clicked!");
+      }
     }
   }
 );

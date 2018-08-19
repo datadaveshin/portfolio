@@ -20,15 +20,9 @@
         </nav>
 
         <nav>
-          <ul>
-            <nav-tags
-            v-for="section in sections"
-            v-bind:tag="section"
-            v-bind:key="section.id"
-            >
-            </nav-tags>
-          </ul>
+          <nav-tags v-for="section in sections" v-bind:tag="section" v-bind:key="section.id"></nav-tags>
         </nav>
+
       </header>
 
       <main>
