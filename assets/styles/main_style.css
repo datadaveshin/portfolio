@@ -26,3 +26,15 @@ footer{
   background-color: lightgreen;
   position: absolute;
 }
+
+nav {
+  width: 80vw;
+  margin: auto;
+  text-align: center;
+  background-color: white;
+}
+
+nav ul li {
+  display: inline;
+  text-align: center;
+}
