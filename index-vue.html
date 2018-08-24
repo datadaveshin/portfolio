@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Paris Apostolopoulos Coding projects</title>
     <link rel="stylesheet" href="assets/styles/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/main_style.css">
 
     <script src="assets/scripts/vue.js"></script>
@@ -11,18 +12,7 @@
   <body>
     <div id="divContainer">
       <header>
-        <nav>
-          <ul>
-            <li  v-for="section in sections">
-              {{section.text}}
-            </li>
-          </ul>
-        </nav>
-
-        <nav>
-          <nav-tags v-for="section in sections" v-bind:tag="section" v-bind:key="section.id"></nav-tags>
-        </nav>
-
+        <nav-tags></nav-tags>
       </header>
 
       <main>

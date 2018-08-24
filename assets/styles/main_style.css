@@ -1,40 +1,47 @@
+body{
+  font: normal normal 2vh 'Montserrat', Helvetica, sans-serif;
+}
+
 #divContainer{
   height: 100vh;
+  align-items: center;
   background-color: rgb(250, 220, 52);
   background-image: url("../images/logo-javascript.png");
+  box-shadow: inset 100vw 100vh rgba(250, 220, 52, .5);
   background-position:center;
-  background-size: 90vh;
   background-repeat: no-repeat;
+  background-size: 90vh;
   display: flex;
-  align-items: center;
   justify-content: center;
   position: relative;
 }
 
 header{
   align-self: flex-start;
-  width: 100vw;
-  height: 10vh;
-  background-color: lightgreen;
+  display: flex;
+  height: 8vh;
   position: absolute;
+  width: 100vw;
 }
 
 footer{
   align-self: flex-end;
-  width: 100vw;
-  height: 10vh;
   background-color: lightgreen;
+  height: 8vh;
   position: absolute;
+  width: 100vw;
 }
 
 nav {
-  width: 80vw;
   margin: auto;
   text-align: center;
-  background-color: white;
+  width: 80vw;
 }
 
 nav ul li {
-  display: inline;
-  text-align: center;
+  color: white;
+  display: inline-block;
+  font-size: 4vh;
+  margin: 1vh 2vw;
+  width: 14vw;
 }
