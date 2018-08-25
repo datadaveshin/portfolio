@@ -1,19 +1,23 @@
-// I need to work on the component. Understand how the props work
 Vue.component('nav-tags', {
   props: ['section'],
   template: `
     <nav>
       <ul>
-        <li v-for="section in sections" v-bind:key="section.id">{{section.text}}</li>
+        <li
+        v-for="section in sections"
+        v-bind:key="section.id"
+        v-bind:name="section.text">
+          {{section.text}}
+        </li>
       </ul>
     </nav>
   `,
   data() {
     return {
       sections: [
-        {id: 1, text: "Vanilla JS"},
-        {id:2, text: "jQuery"},
-        {id: 3, text: "Vue"}
+        {id: 1, text: "Vanilla"},
+        {id:2, text: "Vue"},
+        {id: 3, text: "jQuery"}
       ]
     }
   }
@@ -24,9 +28,9 @@ let instnc = new Vue({
     el: "#divContainer",
     data: {
       sections: [
-        {text: "Vanilla JS"},
-        {text: "jQuery"},
-        {text: "Vue"}
+        {text: "Vanilla"},
+        {text: "Vue"},
+        {text: "jQuery"}
       ],
 
       projects: {
@@ -48,10 +52,10 @@ let instnc = new Vue({
             code: "code in script? or iframe? or scrape off the code from page and present?"
           }
         ],
-        jQuery: [
+        Vue: [
 
         ],
-        Vue: [
+        jQuery: [
 
         ]
       } //End of projects

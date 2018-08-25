@@ -1,5 +1,6 @@
 body{
   font: normal normal 2vh 'Montserrat', Helvetica, sans-serif;
+  color: white;
 }
 
 #divContainer{
@@ -16,32 +17,80 @@ body{
   position: relative;
 }
 
+.divContainerVanilla{
+
+}
+
+.divContainerVue{
+
+}
+
+.divContainerjQuery{
+
+}
+
 header{
   align-self: flex-start;
   display: flex;
-  height: 8vh;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
   position: absolute;
   width: 100vw;
+  text-align: center;
 }
 
-footer{
-  align-self: flex-end;
-  background-color: lightgreen;
-  height: 8vh;
+.divHeaderTitle{
+  height: 100%;
   position: absolute;
-  width: 100vw;
+  top: 0;
+  width: 80vw;
+}
+
+h1{
+  font-size: 3vh;
+  font-weight: 1000;
 }
 
 nav {
   margin: auto;
   text-align: center;
   width: 80vw;
+  position: absolute;
+  left: 10vw;
+  top: 3vh;
 }
 
 nav ul li {
-  color: white;
   display: inline-block;
   font-size: 4vh;
   margin: 1vh 2vw;
   width: 14vw;
+}
+
+#divCarousel{
+  width: 90vw;
+  height: 75vh;
+  background-color: rgba(250, 250, 250, .4);
+  border-radius: 5%;
+}
+
+footer{
+  align-self: flex-end;
+  font-size: 3vh;
+  font-weight: 600;
+  height: 8vh;
+  position: absolute;
+  width: 90vw;
+  text-align: center;
+  border-top: 2px solid white;
+}
+
+footer span a{
+  color: white;
+  text-decoration: none;
+}
+
+footer span a:hover{
+  color: black;
 }
