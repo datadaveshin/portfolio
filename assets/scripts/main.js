@@ -32,6 +32,12 @@ let instnc = new Vue({
         {text: "Vue"},
         {text: "jQuery"}
       ],
+      
+      active: [
+          {vanilla: true},
+          {vue: false},
+          {jQuery: false}
+      ],
 
       projects: {
         JavaScript: [

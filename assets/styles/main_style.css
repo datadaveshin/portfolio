@@ -1,24 +1,29 @@
 body{
   font: normal normal 2vh 'Montserrat', Helvetica, sans-serif;
   color: white;
+  box-sizing: border-box;
 }
 
 #divContainer{
-  height: 100vh;
+  /* height: 100vh; */
+}
+
+.divContainerVanilla, .divContainerVue, .divContainerjQuery{
   align-items: center;
-  background-color: rgb(250, 220, 52);
-  background-image: url("../images/logo-javascript.png");
-  box-shadow: inset 100vw 100vh rgba(250, 220, 52, .5);
-  background-position:center;
-  background-repeat: no-repeat;
-  background-size: 90vh;
   display: flex;
   justify-content: center;
   position: relative;
 }
 
 .divContainerVanilla{
-
+  background-color: rgb(250, 220, 52);
+  background-image: url("../images/logo-javascript.png");
+  box-shadow: inset 100vw 100vh rgba(250, 220, 52, .5);
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: 90vh;
+  width: 100vw;
+  height: 100vh;
 }
 
 .divContainerVue{
@@ -69,21 +74,21 @@ nav ul li {
 }
 
 #divCarousel{
-  width: 90vw;
-  height: 75vh;
   background-color: rgba(250, 250, 250, .4);
   border-radius: 5%;
+  height: 80vh;
+  width: 90vw;
 }
 
 footer{
   align-self: flex-end;
+  border-top: 2px solid white;
   font-size: 3vh;
   font-weight: 600;
   height: 8vh;
   position: absolute;
-  width: 90vw;
   text-align: center;
-  border-top: 2px solid white;
+  width: 90vw;
 }
 
 footer span a{
