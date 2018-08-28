@@ -1,8 +1,21 @@
-Vue.component('nav-tags', {
+let navTag = Vue.component('nav-tags', {
   props: ['section'],
   template: `
     <nav>
-      <ul>
+    <ul>
+      <span v-for="section in sections">
+        <li v-if="section.active" style="color: black;">{{section.text}}</li>
+        <li
+        v-else
+        v-bind:key="section.id"
+        v-bind:name="section.text"
+        v-on:click="styleChange($event)">
+        {{section.text}}
+        </li>
+      </span>
+    </ul>
+      <!--<ul>
+          <li>Another one</li>
         <li
         v-for="section in sections"
         v-bind:key="section.id"
@@ -10,27 +23,33 @@ Vue.component('nav-tags', {
         v-on:click="styleChange($event)">
           {{section.text}}
         </li>
-      </ul>
+      </ul>-->
     </nav>
   `,
-  data() {
+  data: function() {
     return {
       sections: [
-        {id: 1, text: "Vanilla"},
-        {id:2, text: "Vue"},
-        {id: 3, text: "jQuery"}
+        {id: 1, text: "Vanilla", active: true},
+        {id:2, text: "Vue", active: false},
+        {id: 3, text: "jQuery", active: false}
       ]
     }
   },
   methods: {
     styleChange: function(event) {
-      console.log(event.target.getAttribute("name"));
+      console.log(this.sections);
+      let sectionsActiveArr = this.sections;
       let attr = event.target.getAttribute("name");
       let activeTag = app.$data.active;
+      sectionsActiveArr.forEach(function(el) {
+        el.text === attr ? el.active = true : el.active = false;
+        console.log(el.active);
+      });
+
+      //Change the properties in the "active" array (within data in the Vue instance)
       activeTag.forEach(function(el) {
         for (let key in el){
-          console.log("key is", key, "and attr is", attr);
-          key === attr ? el[key] = true : el[key] = false;
+          key === attr ? (el[key] = true) : (el[key] = false);
         }
       });
     }
@@ -41,15 +60,10 @@ Vue.component('nav-tags', {
 let app = new Vue({
     el: "#divContainer",
     data: {
-      active: [
-          {Vanilla: false},
+      active: [ //defines which page to render
+          {Vanilla: true},
           {Vue: false},
-          {jQuery: true}
-      ],
-      sections: [
-        {text: "Vanilla"},
-        {text: "Vue"},
-        {text: "jQuery"}
+          {jQuery: false}
       ],
 
 
