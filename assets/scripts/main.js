@@ -6,7 +6,8 @@ Vue.component('nav-tags', {
         <li
         v-for="section in sections"
         v-bind:key="section.id"
-        v-bind:name="section.text">
+        v-bind:name="section.text"
+        v-on:click="styleChange($event)">
           {{section.text}}
         </li>
       </ul>
@@ -20,27 +21,40 @@ Vue.component('nav-tags', {
         {id: 3, text: "jQuery"}
       ]
     }
+  },
+  methods: {
+    styleChange: function(event) {
+      console.log(event.target.getAttribute("name"));
+      let attr = event.target.getAttribute("name");
+      let activeTag = app.$data.active;
+      activeTag.forEach(function(el) {
+        for (let key in el){
+          console.log("key is", key, "and attr is", attr);
+          key === attr ? el[key] = true : el[key] = false;
+        }
+      });
+    }
   }
 });
 
 
-let instnc = new Vue({
+let app = new Vue({
     el: "#divContainer",
     data: {
+      active: [
+          {Vanilla: false},
+          {Vue: false},
+          {jQuery: true}
+      ],
       sections: [
         {text: "Vanilla"},
         {text: "Vue"},
         {text: "jQuery"}
       ],
-      
-      active: [
-          {vanilla: true},
-          {vue: false},
-          {jQuery: false}
-      ],
+
 
       projects: {
-        JavaScript: [
+        Vanilla: [
           {
             title: "name here",
             url: "link here",

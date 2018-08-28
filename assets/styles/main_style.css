@@ -13,6 +13,8 @@ body{
   display: flex;
   justify-content: center;
   position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 
 .divContainerVanilla{
@@ -22,16 +24,26 @@ body{
   background-position:center;
   background-repeat: no-repeat;
   background-size: 90vh;
-  width: 100vw;
-  height: 100vh;
 }
 
 .divContainerVue{
-
+  /* background-color: rgb(66, 184, 131); */
+  /* background-color: rgb(52, 72, 92); */
+  background-image: url("../images/logo-vue.png");
+  box-shadow: inset 100vw 100vh rgba(66, 184, 131, .5);
+  /* box-shadow: inset 100vw 100vh rgba(52, 72, 92, .5); */
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: 90vh;
 }
 
 .divContainerjQuery{
-
+  /* background-color: rgb(18, 26, 38); */
+  background-image: url("../images/logo-jquery.png");
+  box-shadow: inset 100vw 100vh rgba(18, 26, 38, .5);
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: 90vh;
 }
 
 header{

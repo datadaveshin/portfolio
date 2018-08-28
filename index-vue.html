@@ -11,7 +11,8 @@
   </head>
   <body>
     <div id="divContainer">
-      <div class="divContainerVanilla">
+      <div
+      v-bind:class="{divContainerVanilla: active[0].Vanilla, divContainerVue: active[1].Vue, divContainerjQuery: active[2].jQuery}">
 
         <header>
           <div class="divHeaderTitle">
