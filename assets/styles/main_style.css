@@ -95,7 +95,7 @@ nav ul li {
 footer{
   align-self: flex-end;
   border-top: 2px solid white;
-  font-size: 3vh;
+  font-size: 4vh;
   font-weight: 600;
   height: 8vh;
   position: absolute;
@@ -103,11 +103,16 @@ footer{
   width: 90vw;
 }
 
-footer span a{
+footer span{
+  line-height: 8vh;
+}
+
+a{
   color: white;
   text-decoration: none;
 }
 
-footer span a:hover{
+a:hover{
   color: black;
+  cursor: pointer;
 }

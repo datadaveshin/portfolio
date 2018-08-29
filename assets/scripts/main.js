@@ -2,28 +2,19 @@ let navTag = Vue.component('nav-tags', {
   props: ['section'],
   template: `
     <nav>
-    <ul>
-      <span v-for="section in sections">
-        <li v-if="section.active" style="color: black;">{{section.text}}</li>
-        <li
-        v-else
-        v-bind:key="section.id"
-        v-bind:name="section.text"
-        v-on:click="styleChange($event)">
-        {{section.text}}
-        </li>
-      </span>
-    </ul>
-      <!--<ul>
-          <li>Another one</li>
-        <li
-        v-for="section in sections"
-        v-bind:key="section.id"
-        v-bind:name="section.text"
-        v-on:click="styleChange($event)">
-          {{section.text}}
-        </li>
-      </ul>-->
+      <ul>
+        <span v-for="section in sections">
+          <li v-if="section.active" style="color: black;">{{section.text}}</li>
+          <li
+          v-else>
+            <a
+            v-bind:key="section.id"
+            v-bind:name="section.text"
+            v-on:click="styleChange($event)"
+            >{{section.text}}</a>
+          </li>
+        </span>
+      </ul>
     </nav>
   `,
   data: function() {
@@ -37,19 +28,19 @@ let navTag = Vue.component('nav-tags', {
   },
   methods: {
     styleChange: function(event) {
-      console.log(this.sections);
       let sectionsActiveArr = this.sections;
       let attr = event.target.getAttribute("name");
       let activeTag = app.$data.active;
+
+      //Change the property "active" in the "sections" array of the Vue component's data
       sectionsActiveArr.forEach(function(el) {
         el.text === attr ? el.active = true : el.active = false;
-        console.log(el.active);
       });
 
       //Change the properties in the "active" array (within data in the Vue instance)
       activeTag.forEach(function(el) {
         for (let key in el){
-          key === attr ? (el[key] = true) : (el[key] = false);
+          key === attr ? el[key] = true : el[key] = false;
         }
       });
     }
