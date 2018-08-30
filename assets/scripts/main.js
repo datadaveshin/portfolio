@@ -4,14 +4,22 @@ let navTag = Vue.component('nav-tags', {
     <nav>
       <ul>
         <span v-for="section in sections">
-          <li v-if="section.active" style="color: black;">{{section.text}}</li>
+          <li v-if="section.active" style="color: black;">
+            {{section.text}}
+          </li>
+
           <li
-          v-else>
+          v-else
+          v-bind:name="section.text"
+          v-on:mouseover="styleTransition($event)"
+          >
             <a
             v-bind:key="section.id"
             v-bind:name="section.text"
-            v-on:click="styleChange($event)"
-            >{{section.text}}</a>
+            v-on:click="classChange($event)"
+            >
+              {{section.text}}
+            </a>
           </li>
         </span>
       </ul>
@@ -23,11 +31,26 @@ let navTag = Vue.component('nav-tags', {
         {id: 1, text: "Vanilla", active: true},
         {id:2, text: "Vue", active: false},
         {id: 3, text: "jQuery", active: false}
-      ]
+      ],
+      hoverStyle: {
+        Vanilla: {
+          "background-color": "rgb(250, 220, 52)",
+          "background-image": 'url("../images/logo-javascript.png")',
+          "box-shadow": "inset 100vw 100vh rgba(250, 220, 52, .5)",
+        },
+        Vue: {
+          "background-image": 'url("../images/logo-vue.png")',
+          "box-shadow": "inset 100vw 100vh rgba(66, 184, 131, .5)",
+        },
+        jQuery: {
+          "background-image": 'url("../images/logo-jquery.png")',
+          "box-shadow": "inset 100vw 100vh rgba(18, 26, 38, .5)"
+        }
+      }
     }
   },
   methods: {
-    styleChange: function(event) {
+    classChange: function(event) {
       let sectionsActiveArr = this.sections;
       let attr = event.target.getAttribute("name");
       let activeTag = app.$data.active;
@@ -43,6 +66,14 @@ let navTag = Vue.component('nav-tags', {
           key === attr ? el[key] = true : el[key] = false;
         }
       });
+    },
+    styleTransition: function(event) {
+      let attr = event.target.getAttribute("name");
+      console.log(this.hoverStyle[attr]);
+      console.log(this.sections);
+      let targetDiv = document.getElementById("divTransform");
+      console.log(targetDiv);
+      targetDiv.setAttribute("class", "divContainer"+attr);
     }
   }
 });
