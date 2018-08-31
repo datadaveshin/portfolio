@@ -3,25 +3,27 @@ let navTag = Vue.component('nav-tags', {
   template: `
     <nav>
       <ul>
-        <span v-for="section in sections">
-          <li v-if="section.active" style="color: black;">
-            {{section.text}}
-          </li>
+        <li v-for="section in sections"
+        v-if="section.active"
+        v-bind:name = "section.name"
+        style="color: black;">
+          {{section.text}}
+        </li>
 
-          <li
-          v-else
+        <li
+        v-else
+        v-bind:name="section.text"
+        v-on:mouseover="classTransitionOver($event)"
+        v-on:mouseout="classTransitionLeave($event)"
+        >
+          <a
+          v-bind:key="section.id"
           v-bind:name="section.text"
-          v-on:mouseover="styleTransition($event)"
+          v-on:click="classChange($event)"
           >
-            <a
-            v-bind:key="section.id"
-            v-bind:name="section.text"
-            v-on:click="classChange($event)"
-            >
-              {{section.text}}
-            </a>
-          </li>
-        </span>
+            {{section.text}}
+          </a>
+        </li>
       </ul>
     </nav>
   `,
@@ -34,17 +36,28 @@ let navTag = Vue.component('nav-tags', {
       ],
       hoverStyle: {
         Vanilla: {
-          "background-color": "rgb(250, 220, 52)",
-          "background-image": 'url("../images/logo-javascript.png")',
-          "box-shadow": "inset 100vw 100vh rgba(250, 220, 52, .5)",
+          backgroundColor: "rgb(250, 220, 52)",
+          backgroundImage: 'url("assets/images/logo-javascript.png")',
+          boxShadow: "inset 100vw 100vh rgba(250, 220, 52, .5)",
+          transition: "all .3s"
         },
         Vue: {
-          "background-image": 'url("../images/logo-vue.png")',
-          "box-shadow": "inset 100vw 100vh rgba(66, 184, 131, .5)",
+          backgroundColor: "rgba(66, 184, 131, .0001)",
+          backgroundImage: 'url("assets/images/logo-vue.png")',
+          boxShadow: "inset 100vw 100vh rgba(66, 184, 131, .5)",
+          transition: "all .3s"
         },
         jQuery: {
-          "background-image": 'url("../images/logo-jquery.png")',
-          "box-shadow": "inset 100vw 100vh rgba(18, 26, 38, .5)"
+          backgroundColor: "rgba(18, 26, 38, .0001)",
+          backgroundImage: 'url("assets/images/logo-jquery.png")',
+          boxShadow: "inset 100vw 100vh rgba(18, 26, 38, .5)",
+          transition: "all .3s"
+        },
+        clean: {
+          backgroundColor: "",
+          backgroundImage: '',
+          boxShadow: "",
+          transition: "all .3s"
         }
       }
     }
@@ -67,14 +80,29 @@ let navTag = Vue.component('nav-tags', {
         }
       });
     },
-    styleTransition: function(event) {
+    classTransitionOver: function(event) {
       let attr = event.target.getAttribute("name");
-      console.log(this.hoverStyle[attr]);
-      console.log(this.sections);
       let targetDiv = document.getElementById("divTransform");
-      console.log(targetDiv);
-      targetDiv.setAttribute("class", "divContainer"+attr);
+      // targetDiv.className = `divHoverClass${attr}`;
+      this.addStyle(targetDiv, this.hoverStyle[attr]);
+    },
+    classTransitionLeave: function(event) {
+      console.log("leaving");
+      console.log(event.target);
+      let targetDiv = document.getElementById("divTransform");
+      // targetDiv.style.transition = "all 2s";
+      this.addStyle(targetDiv, this.hoverStyle.clean);
+    },
+    addStyle: function(el, styles) {
+      for (let key in styles){
+        console.log(key);
+        console.log(el.style[key]);
+        el.style[key] = styles[key];
+      }
     }
+  },
+  computed: {
+
   }
 });
 

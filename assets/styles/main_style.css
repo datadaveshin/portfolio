@@ -8,7 +8,7 @@ body{
   /* height: 100vh; */
 }
 
-.divContainerVanilla, .divContainerVue, .divContainerjQuery{
+.divContainerVanilla, .divContainerVue, .divContainerjQuery, .divHoverClassVanilla, .divHoverClassVue, .divHoverClassjQuery{
   align-items: center;
   display: flex;
   justify-content: center;
@@ -40,8 +40,23 @@ body{
   /* background-color: rgb(18, 26, 38); */
 }
 
-li:hover < #divTransform {
-  background-color: black;
+.divHoverClassVanilla {
+  background-color: rgb(250, 220, 52);
+  background-image: url("../images/logo-javascript.png");
+  box-shadow: inset 100vw 100vh rgba(250, 220, 52, .5);
+  transition: all 2s;
+}
+
+.divHoverClassVue {
+  background-image: url("../images/logo-vue.png");
+  box-shadow: inset 100vw 100vh rgba(66, 184, 131, .5);
+  transition: all 2s;
+}
+
+.divHoverClassjQuery {
+  background-image: url("../images/logo-jquery.png");
+  box-shadow: inset 100vw 100vh rgba(18, 26, 38, .5);
+  transition: all 2s;
 }
 
 header{
@@ -79,7 +94,7 @@ nav {
 nav ul li {
   display: inline-block;
   font-size: 4vh;
-  margin: 1vh 2vw;
+  padding: 1vh 2vw;
   width: 14vw;
 }
 
