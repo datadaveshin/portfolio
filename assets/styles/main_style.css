@@ -103,6 +103,34 @@ nav ul li {
   border-radius: 5%;
   height: 80vh;
   width: 90vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.divArrow{
+  width: 5vw;
+  height: 10vh;
+  position: absolute;
+  font-size: 10vh;
+  text-align: center;
+  line-height: 10vh;
+}
+
+.divArrow:hover {
+  color: black;
+  cursor: pointer;
+}
+
+#divArrowLeft {
+  left: 1vw;
+  top: 35vh;
+}
+
+#divArrowRight {
+  right: 1vw;
+  top: 35vh;
 }
 
 footer{

@@ -39,25 +39,25 @@ let navTag = Vue.component('nav-tags', {
           backgroundColor: "rgb(250, 220, 52)",
           backgroundImage: 'url("assets/images/logo-javascript.png")',
           boxShadow: "inset 100vw 100vh rgba(250, 220, 52, .5)",
-          transition: "all .3s"
+          transition: "all .5s"
         },
         Vue: {
           backgroundColor: "rgba(66, 184, 131, .0001)",
           backgroundImage: 'url("assets/images/logo-vue.png")',
           boxShadow: "inset 100vw 100vh rgba(66, 184, 131, .5)",
-          transition: "all .3s"
+          transition: "all .5s"
         },
         jQuery: {
           backgroundColor: "rgba(18, 26, 38, .0001)",
           backgroundImage: 'url("assets/images/logo-jquery.png")',
           boxShadow: "inset 100vw 100vh rgba(18, 26, 38, .5)",
-          transition: "all .3s"
+          transition: "all .5s"
         },
         clean: {
           backgroundColor: "",
           backgroundImage: '',
           boxShadow: "",
-          transition: "all .3s"
+          transition: "all .5s"
         }
       }
     }
@@ -83,20 +83,14 @@ let navTag = Vue.component('nav-tags', {
     classTransitionOver: function(event) {
       let attr = event.target.getAttribute("name");
       let targetDiv = document.getElementById("divTransform");
-      // targetDiv.className = `divHoverClass${attr}`;
       this.addStyle(targetDiv, this.hoverStyle[attr]);
     },
     classTransitionLeave: function(event) {
-      console.log("leaving");
-      console.log(event.target);
       let targetDiv = document.getElementById("divTransform");
-      // targetDiv.style.transition = "all 2s";
       this.addStyle(targetDiv, this.hoverStyle.clean);
     },
     addStyle: function(el, styles) {
       for (let key in styles){
-        console.log(key);
-        console.log(el.style[key]);
         el.style[key] = styles[key];
       }
     }
