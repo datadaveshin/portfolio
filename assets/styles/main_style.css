@@ -123,6 +123,10 @@ nav ul li {
   cursor: pointer;
 }
 
+.divArrow:active {
+  color: gray;
+}
+
 #divArrowLeft {
   left: 1vw;
   top: 35vh;
