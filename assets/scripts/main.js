@@ -1,4 +1,5 @@
-let navTag = Vue.component('nav-tags', {
+// NAVIGATION TAG AND ELEMENTS
+let navTags = Vue.component('nav-tags', {
   props: ['section'],
   template: `
     <nav>
@@ -63,6 +64,7 @@ let navTag = Vue.component('nav-tags', {
     }
   },
   methods: {
+    // CHANGE THE CLASS OF THE BACKGROUND AND THE SELECTED NAV ELEMENT
     classChange: function(event) {
       let sectionsActiveArr = this.sections;
       let attr = event.target.getAttribute("name");
@@ -80,15 +82,21 @@ let navTag = Vue.component('nav-tags', {
         }
       });
     },
+
+    // EFFECT THAT ACTIVATES THE TRANSITION WHEN MOUSING OVER
     classTransitionOver: function(event) {
       let attr = event.target.getAttribute("name");
       let targetDiv = document.getElementById("divTransform");
       this.addStyle(targetDiv, this.hoverStyle[attr]);
     },
+
+    // EFFECT THAT SWITCHES THE TRANSITION WHEN THE MOUSE LEAVES
     classTransitionLeave: function(event) {
       let targetDiv = document.getElementById("divTransform");
       this.addStyle(targetDiv, this.hoverStyle.clean);
     },
+
+    // LOOP THAT UPDATES THE INLINE STYLE OF THE ELEMENT THAT IS MOUSED OVER
     addStyle: function(el, styles) {
       for (let key in styles){
         el.style[key] = styles[key];
@@ -101,6 +109,32 @@ let navTag = Vue.component('nav-tags', {
 });
 
 
+
+
+
+let sectionTags = Vue.component("section-tags", {
+  props: ["project"],
+  template:
+  `
+    <section>
+      Hello, there is some text here; {{nav}}.
+    </section>
+  `,
+  data: function() {
+    return {
+      nav: navTags.extendOptions.data().sections
+    }
+  },
+  methods: {
+
+  }
+});
+
+
+
+
+
+// MAIN VUE INSTANCE
 let app = new Vue({
     el: "#divContainer",
     data: {
@@ -138,6 +172,7 @@ let app = new Vue({
           git: "https://github.com/papostolopoulos/writeit",
           code: "",
           description:
+          [
             {bullet: "Full stack blog."},
             {bullet: "WYSIWYG text editor."},
             {bullet: "Image, video upload."},
@@ -308,7 +343,7 @@ let app = new Vue({
           ],
           video_url: "",
           id: "drumKitVue"
-        }
+        },
 
         {
           title: "Street View Image Modal",
