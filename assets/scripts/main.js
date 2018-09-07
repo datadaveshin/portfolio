@@ -143,13 +143,14 @@ let app = new Vue({
           {Vue: false},
           {jQuery: false}
       ],
+      imageStr: "./assets/images/img-",
 
 
       projects: [
         {
           title: "listMe.xyz",
           url: "http://listme.xyz",
-          git: "",
+          git: "https://github.com/papostolopoulos/listme",
           code: "code in script? or iframe? or scrape off the code from page and present?",
           description: [
             {bullet: "Full stack CRUD todo list."},
@@ -158,9 +159,9 @@ let app = new Vue({
           ],
           language: "jQuery",
           images: [
-            {image: "link here"},
-            {image: "link here"},
-            {image: "link here"},
+            {image: this.imageStr + "listMejQuery1.jpg"},
+            {image: this.imageStr + "listMejQuery2.jpg"},
+            {image: this.imageStr + "listMejQuery3.jpg"},
           ],
           video_url: "",
           id: "listMeVanilla"
@@ -373,7 +374,15 @@ let app = new Vue({
     methods: {
       doSomething: function () {
         console.log("clicked!");
+      },
+      showMe: function() {
+        this.projects.map(function(el) {
+          console.log(el);
+        });
       }
+    },
+    computed: {
+
     }
   }
 );
