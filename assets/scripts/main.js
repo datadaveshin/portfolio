@@ -90,13 +90,13 @@ let navTags = Vue.component('nav-tags', {
       this.addStyle(targetDiv, this.hoverStyle[attr]);
     },
 
-    // EFFECT THAT SWITCHES THE TRANSITION WHEN THE MOUSE LEAVES
+    // EFFECT THAT DEACTIVATES THE TRANSITION WHEN THE MOUSE LEAVES
     classTransitionLeave: function(event) {
       let targetDiv = document.getElementById("divTransform");
       this.addStyle(targetDiv, this.hoverStyle.clean);
     },
 
-    // LOOP THAT UPDATES THE INLINE STYLE OF THE ELEMENT THAT IS MOUSED OVER
+    // LOOP THAT UPDATES THE INLINE STYLE OF THE ELEMENT THAT IS MOUSED OVER (FOR TRANSITION)
     addStyle: function(el, styles) {
       for (let key in styles){
         el.style[key] = styles[key];
