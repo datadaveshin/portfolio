@@ -143,7 +143,7 @@ let app = new Vue({
           {Vue: false},
           {jQuery: false}
       ],
-      imageStr: "./assets/images/img-",
+      imagePath: "./assets/images/img-",
 
 
       projects: [
@@ -159,12 +159,12 @@ let app = new Vue({
           ],
           language: "jQuery",
           images: [
-            {image: this.imageStr + "listMejQuery1.jpg"},
-            {image: this.imageStr + "listMejQuery2.jpg"},
-            {image: this.imageStr + "listMejQuery3.jpg"},
+            {image: this.imagePath + "listMejQuery1.jpg"},
+            {image: this.imagePath + "listMejQuery2.jpg"},
+            {image: this.imagePath + "listMejQuery3.jpg"},
           ],
           video_url: "",
-          id: "listMeVanilla"
+          id: "listMejQuery"
         },
 
         {
@@ -182,9 +182,9 @@ let app = new Vue({
           ],
           language: "Vanilla",
           images: [
-            {image: "./assets/images/writeit.jpg"},
-            {image: "link here"},
-            {image: "link here"},
+            {image: this.imagePath + "writeItVanilla1.jpg"},
+            {image: this.imagePath + "writeItVanilla2.jpg"},
+            {image: this.imagePath + "writeItVanilla3.jpg"},
           ],
           video_url: "",
           id: "writeItVanilla"
@@ -192,7 +192,7 @@ let app = new Vue({
 
         {
           title: "Simple CSS Tutorial",
-          url: "https://git.io/vMM8C",
+          url: " ",
           git: "",
           code: "",
           description: [
