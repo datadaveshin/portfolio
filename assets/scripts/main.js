@@ -109,7 +109,11 @@ let navTags = Vue.component('nav-tags', {
 });
 
 
+function testFunction() {
+  console.log(navTags.extendOptions.data());
+}
 
+testFunction();
 
 
 let sectionTags = Vue.component("section-tags", {
