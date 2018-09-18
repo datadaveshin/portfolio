@@ -8,7 +8,7 @@ function testFunction() {
 
 
 
-// NAVIGATION TAG AND ELEMENTS
+// NAVIGATION TAGS AND ELEMENTS
 let navTags = Vue.component('nav-tags', {
   props: ['section'],
   template: `
@@ -122,17 +122,23 @@ let navTags = Vue.component('nav-tags', {
 
 
 
+//SECTION TAGS FOR MODALS
 let sectionTags = Vue.component("section-tags", {
   props: ["project"],
   template:
   `
     <section>
-      Hello, there is some text here; {{nav}}.
+      <div style="font-size: 200%; color: black">
+      Hello there, this page is still in the works. <br>
+      You can view an initial list of my current projects
+      <a href="./index.html">here</a>
+      </div>
+      <!--Hello, there is some text here; {{nav}}.-->
     </section>
   `,
   data: function() {
     return {
-      nav: navTags.extendOptions.data().sections,
+      nav: navTags.extendOptions.data().sections
 
     }
   }, //End of data property
