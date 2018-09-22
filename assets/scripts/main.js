@@ -1,14 +1,4 @@
-
-//FUNCTION DECLARATIONS
-//CREATE STRING VALUES FOR "IMAGES" PROPERTY IN VUE DATA COMPONENT
-function testFunction() {
-  console.log(navTags.extendOptions.data());
-}
-
-
-
-
-// NAVIGATION TAGS AND ELEMENTS
+// NAVIGATION TAG AND ELEMENTS
 let navTags = Vue.component('nav-tags', {
   props: ['section'],
   template: `
@@ -66,7 +56,7 @@ let navTags = Vue.component('nav-tags', {
         },
         clean: {
           backgroundColor: "",
-          backgroundImage: "",
+          backgroundImage: '',
           boxShadow: "",
           transition: "all .5s"
         }
@@ -119,30 +109,26 @@ let navTags = Vue.component('nav-tags', {
 });
 
 
+function testFunction() {
+  console.log(navTags.extendOptions.data());
+}
+
+testFunction();
 
 
-
-//SECTION TAGS FOR MODALS
 let sectionTags = Vue.component("section-tags", {
   props: ["project"],
   template:
   `
     <section>
-      <div style="font-size: 200%; color: black">
-      Hello there, this page is still in the works. <br>
-      You can view an initial list of my current projects
-      <a href="./index.html">here</a>
-      </div>
-      <!--Hello, there is some text here; {{nav}}.-->
+      Hello, there is some text here; {{nav}}.
     </section>
   `,
   data: function() {
     return {
       nav: navTags.extendOptions.data().sections
-
     }
-  }, //End of data property
-
+  },
   methods: {
 
   }
@@ -161,6 +147,7 @@ let app = new Vue({
           {Vue: false},
           {jQuery: false}
       ],
+      imagePath: "./assets/images/img-",
 
 
       projects: [
@@ -176,9 +163,9 @@ let app = new Vue({
           ],
           language: "jQuery",
           images: [
-            {image: ""},
-            {image: ""},
-            {image: ""}
+            {image: this.imagePath + "listMejQuery1.jpg"},
+            {image: this.imagePath + "listMejQuery2.jpg"},
+            {image: this.imagePath + "listMejQuery3.jpg"},
           ],
           video_url: "",
           id: "listMejQuery"
@@ -199,16 +186,16 @@ let app = new Vue({
           ],
           language: "Vanilla",
           images: [
-            {image: ""},
-            {image: ""},
-            {image: ""}
+            {image: this.imagePath + "writeItVanilla1.jpg"},
+            {image: this.imagePath + "writeItVanilla2.jpg"},
+            {image: this.imagePath + "writeItVanilla3.jpg"},
           ],
           video_url: "",
           id: "writeItVanilla"
         },
 
         {
-          title: "Simple CSS Tutorial",
+          title: "CSS Tutorial",
           url: "https://papostolopoulos.github.io/css-exploration/index.html",
           git: "https://github.com/papostolopoulos/css-exploration",
           code: "",
@@ -221,7 +208,7 @@ let app = new Vue({
           images: [
             {image: ""},
             {image: ""},
-            {image: ""}
+            {image: ""},
           ],
           video_url: "",
           id: "cssTutorialVanilla"
@@ -230,7 +217,7 @@ let app = new Vue({
         {
           title: "Spotify Discography Search",
           url: "https://git.io/vyfiO",
-          git: "https://github.com/papostolopoulos/spotify",
+          git: "",
           code: "",
           description: [
             {bullet: "Search engine with API calls to the Spotify API."},
@@ -241,7 +228,7 @@ let app = new Vue({
           images: [
             {image: ""},
             {image: ""},
-            {image: ""}
+            {image: ""},
           ],
           video_url: "",
           id: "spotifyDiscographyVanilla"
@@ -250,7 +237,7 @@ let app = new Vue({
         {
           title: "Image editing",
           url: "https://goo.gl/s9sHDS",
-          git: "https://github.com/papostolopoulos/image_filtering",
+          git: "",
           code: "",
           description: [
             {bullet: "Image editing console."},
@@ -261,7 +248,7 @@ let app = new Vue({
           images: [
             {image: ""},
             {image: ""},
-            {image: ""}
+            {image: ""},
           ],
           video_url: "",
           id: "imageEditingVanilla"
@@ -280,8 +267,8 @@ let app = new Vue({
           language: "Vanilla",
           images: [
             {image: ""},
-            {image: ""},
-            {image: ""}
+            {image: "link here"},
+            {image: "link here"},
           ],
           video_url: "",
           id: "sportyTouristVanilla"
@@ -300,8 +287,8 @@ let app = new Vue({
           language: "jQuery",
           images: [
             {image: ""},
-            {image: ""},
-            {image: ""}
+            {image: "link here"},
+            {image: "link here"},
           ],
           video_url: "",
           id: "hangmanjQuery"
@@ -319,7 +306,7 @@ let app = new Vue({
           images: [
             {image: ""},
             {image: ""},
-            {image: ""}
+            {image: ""},
           ],
           video_url: "",
           id: "clockVanilla"
@@ -338,7 +325,7 @@ let app = new Vue({
           images: [
             {image: ""},
             {image: ""},
-            {image: ""}
+            {image: ""},
           ],
           video_url: "",
           id: "drumKitVanilla"
@@ -357,7 +344,7 @@ let app = new Vue({
           images: [
             {image: ""},
             {image: ""},
-            {image: ""}
+            {image: ""},
           ],
           video_url: "",
           id: "drumKitVue"
@@ -378,7 +365,7 @@ let app = new Vue({
           images: [
             {image: ""},
             {image: ""},
-            {image: ""}
+            {image: ""},
           ],
           video_url: "",
           id: "streetViewModalVanilla"
@@ -403,7 +390,3 @@ let app = new Vue({
     }
   }
 );
-
-
-//FUNCTION INVOCATIONS
-testFunction();
