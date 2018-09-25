@@ -120,8 +120,11 @@ let sectionTags = Vue.component("section-tags", {
   props: ["project"],
   template:
   `
-    <section>
-      Hello, there is some text here; {{nav}}.
+    <section style="font-size: 30px; margin: 80px; color: black">
+      Hello, this page is still in the works. I am currently working on different
+      projects and I will update this page when I am done with building other things.
+      If you wish to see a list of my past projects, you can click
+      <a href="index.html" target="_blank">here</a>
     </section>
   `,
   data: function() {
