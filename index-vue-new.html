@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Paris Apostolopoulos - Coding projects</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/styles/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/main_style.css">
+
+    <script src="assets/scripts/vue.js"></script>
+  </head>
+
+
+  <body>
+    <div id="divContainer">
+      <div
+      id="divTransform"
+      :class="{divContainerVanilla: active[0].Vanilla, divContainerVue: active[1].Vue, divContainerjQuery: active[2].jQuery}">
+
+        <header>
+          <div class="divHeaderTitle">
+            <h1>Coding Projects - Paris Apostolopoulos</h1>
+          </div>
+          <nav>
+            <ul>
+              <li v-for="section in sections"
+              v-if="section.active"
+              :name="section.text"
+              :text = "section.text"
+              style="color: black;">
+                {{section.text}}
+              </li>
+
+              <li
+              v-else
+              :name="section.text"
+              @mouseover="classTransitionOver($event)"
+              @mouseout="classTransitionLeave($event)">
+
+                <a
+                :key="section.id"
+                :name="section.text"
+                @click="classChange($event)">
+                  {{section.text}}
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+
+
+
+        <main>
+          <div id="divCarousel">
+            <div class="divArrow" id="divArrowLeft">
+              <i class="fas fa-angle-left"></i>
+            </div>
+
+              <section style="font-size: 30px; margin: 80px; color: black">
+                Hello, this page is still in the works. I am currently working on different
+                projects and I will update this page when I am done with building other things.
+                If you wish to see a list of my past projects, you can click
+                <a href="index.html" target="_blank">here</a>
+              </section>
+
+
+            <div class="divArrow" id="divArrowRight">
+              <i class="fas fa-angle-right"></i>
+            </div>
+          </div>
+        </main>
+
+
+
+
+        <footer>
+          <span>
+            <a href="mailto: papostolopoulos@protonmail.com"
+            title="Email me at papostolopoulos@protonmail.com">
+              <i class="fas fa-envelope"></i>
+            </a> |
+            <a href="https://www.linkedin.com/in/parisapostolopoulos/" target="_blank" title="Visit my LinkedIn page">
+              <i class="fab fa-linkedin-in"></i>
+            </a> |
+            <a href="https://github.com/papostolopoulos" target="_blank" title="Visit my github page">
+              <i class="fab fa-github"></i>
+            </a> |
+            <a href="https://docs.google.com/document/d/1lPWcJ7GO5fzVQGeyxt9YIF_g22C0Qkr0Cznon-z514I/edit?usp=sharing" target="_blank" title="Read a copy of my resume">
+              <i class="fas fa-file"></i>
+            </a> |
+            &copy 2018 - today
+          </span>
+        </footer>
+
+
+
+      </div>
+
+      <!-- MODALS -->
+      <section>
+        <article v-for="(project, index) in projects"
+        v-if="project.language === activePage">
+        {{index}} - {{project.title}}
+      </article>
+    </section>
+
+  </div> <!-- END OF TAG THAT CONTAINS THE VUE INSTANCE -->
+
+
+    <script src="assets/scripts/main-new.js"></script>
+  </body>
+</html>
