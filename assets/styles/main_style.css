@@ -161,3 +161,16 @@ a:hover{
   color: black;
   cursor: pointer;
 }
+
+.articleModals{
+  font-size: 30px;
+  color: black;
+/* OPEN THE FOLLOWING TWO WHEN YOU ARE READY */
+  /* position: fixed;  */
+  /* display: none; */
+  left:0;
+  top: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+}

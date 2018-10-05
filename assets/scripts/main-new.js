@@ -2,7 +2,7 @@
 let app = new Vue({
     el: "#divContainer",
     data: {
-      active: [ //defines which page to render
+      active: [ //defines which page to render - see div with it divTransform in html
           {Vanilla: true},
           {Vue: false},
           {jQuery: false}
@@ -42,9 +42,14 @@ let app = new Vue({
         }
       },  //End of hoverstyle
 
+      modalStyle: {
+        backgroundColor: "red",
+        fontWeight: "bold"
+      },
+
       projects: [
         {
-          id: 1,
+          key: 1,
           title: "listMe.xyz",
           url: "http://listme.xyz",
           git: "https://github.com/papostolopoulos/listme",
@@ -61,11 +66,14 @@ let app = new Vue({
             {image: this.imagePath + "listMejQuery3.jpg"},
           ],
           video_url: "",
-          id: "listMejQuery"
+          id: "listMejQuery",
+          modalId: {
+            background: "red";
+          }
         },
 
         {
-          id: 2,
+          key: 2,
           title: "writeit.pro",
           url: "http://writeit.pro",
           git: "https://github.com/papostolopoulos/writeit",
@@ -89,7 +97,7 @@ let app = new Vue({
         },
 
         {
-          id: 3
+          key: 3,
           title: "CSS Tutorial",
           url: "https://papostolopoulos.github.io/css-exploration/index.html",
           git: "https://github.com/papostolopoulos/css-exploration",
@@ -110,7 +118,7 @@ let app = new Vue({
         },
 
         {
-          id: 4,
+          key: 4,
           title: "Spotify Discography Search",
           url: "https://git.io/vyfiO",
           git: "",
@@ -131,7 +139,7 @@ let app = new Vue({
         },
 
         {
-          id: 5,
+          key: 5,
           title: "Image editing",
           url: "https://goo.gl/s9sHDS",
           git: "",
@@ -152,7 +160,7 @@ let app = new Vue({
         },
 
         {
-          id: 6,
+          key: 6,
           title: "SportyTourist",
           url: "http://sportytourist.com",
           git: "https://github.com/papostolopoulos/sportytourist",
@@ -173,7 +181,7 @@ let app = new Vue({
         },
 
         {
-          id: 7,
+          key: 7,
           title: "Hangman",
           url: "http://hangman.pro",
           git: "https://github.com/papostolopoulos/hangman",
@@ -194,7 +202,7 @@ let app = new Vue({
         },
 
         {
-          id: 8,
+          key: 8,
           title: "Clock",
           url: "https://papostolopoulos.github.io/js30/02-clock/index-vanilla.html",
           git: "https://github.com/papostolopoulos/js30/tree/master/02-clock",
@@ -213,7 +221,7 @@ let app = new Vue({
         },
 
         {
-          id: 9,
+          key: 9,
           title: "Drum Kit",
           url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vanilla.html",
           git: "https://github.com/papostolopoulos/js30/tree/master/01-drum_kit",
@@ -233,7 +241,7 @@ let app = new Vue({
         },
 
         {
-          id: 10,
+          key: 10,
           title: "Drum Kit",
           url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vue.html",
           git: "https://github.com/papostolopoulos/js30/tree/master/01-drum_kit",
@@ -253,7 +261,7 @@ let app = new Vue({
         },
 
         {
-          id: 11,
+          key: 11,
           title: "Street View Image Modal",
           url: "https://git.io/vppLs",
           git: "https://github.com/papostolopoulos/streetViewModal",
@@ -281,58 +289,83 @@ let app = new Vue({
     methods: {
 
       // CHANGE THE CLASS OF THE BACKGROUND AND THE SELECTED NAV ELEMENT
-      classChange: function(event) {
+      classChange(event) {
         let attr = event.target.getAttribute("name");
         //Change the activePage property. This one will define which images will be
         //displayed in the carousel
         this.activePage = attr;
 
         //Change the property "active" for each object element in the "sections" array
-        this.sections.forEach(function(el) {
-          el.text === attr ? el.active = true : el.active = false;
-        });
+        this.sections.forEach((el) => el.text === attr ? el.active = true : el.active = false);
 
         //Change the properties in the "active" array (within data in the Vue instance)
-        this.active.forEach(function(el) {
-          for (let key in el){
-            key === attr ? el[key] = true : el[key] = false;
-          }
-
+        this.active.forEach((el) => {
+          for (let key in el) key === attr ? el[key] = true : el[key] = false;
         });
       },
 
       // EFFECT THAT ACTIVATES THE TRANSITION WHEN MOUSING OVER
-      classTransitionOver: function(event) {
+      classTransitionOver(event) {
         let attr = event.target.getAttribute("name");
         let targetDiv = document.getElementById("divTransform");
         this.addStyle(targetDiv, this.hoverStyle[attr]);
       },
 
       // EFFECT THAT DEACTIVATES THE TRANSITION WHEN THE MOUSE LEAVES
-      classTransitionLeave: function(event) {
+      classTransitionLeave(event) {
         let targetDiv = document.getElementById("divTransform");
         this.addStyle(targetDiv, this.hoverStyle.clean);
       },
 
       // LOOP THAT UPDATES THE INLINE STYLE OF THE ELEMENT THAT IS MOUSED OVER (FOR TRANSITION)
-      addStyle: function(el, styles) {
+      addStyle(el, styles) {
         for (let key in styles){
           el.style[key] = styles[key];
         }
       },
 
+      imagesPathCreate() {
+        let self = this;
+        let projectsArr = this.projects;
+        projectsArr.forEach((el) => {
+          el.images.forEach((ele, idx) => ele.image = self.imagePath + el.id + (idx+1) + ".jpg");
+        }); //end of projectsArr.forEach
+      },
+
+      modalbackImage(){
+        console.log("I am creating classes");
+      },
+
       //CREAT CAROUSEL
-      carouselCreate: function() {
+      carouselCreate() {
         console.log("carousel created");
       },
 
       //CREATE ALL MODALS
-      modalCreate: function() {
+      modalCreateClass() {
         console.log("modal create fired");
+      },
+
+      //OPEN THE MODAL
+      modalOpen() {
+        console.log("Modal should open");
       }
     }, //End of methods
+    beforeMount(){
+      this.imagesPathCreate();
+      this.modalbackImage();
+    },
     computed: {
 
     }
   }
 );
+
+
+// Create image paths for the Vue instance
+// ((vueInstance) => {
+//   let projectsArr = vueInstance.projects;
+//   projectsArr.forEach((el) => {
+//     el.images.forEach((ele, idx) => ele.image = vueInstance.imagePath + el.id + (idx+1) + ".jpg");
+//   }); //end of projectsArr.forEach
+// })(app);
