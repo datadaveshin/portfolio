@@ -13,7 +13,7 @@
 
 
   <body>
-    <div id="divContainer">
+    <div id="divContainer"> <!--Beginning of the Vue instance-->
       <div
       id="divTransform"
       :class="{divContainerVanilla: active[0].Vanilla, divContainerVue: active[1].Vue, divContainerjQuery: active[2].jQuery}">
@@ -60,7 +60,7 @@
               <section style="font-size: 30px; margin: 80px; color: black;">
 
                 <article v-for="(project, index) in projects"
-                v-if="project.language === activePage"
+                v-if="project.language === activeModals"
                 :id="'carousel'+project.id"
                 :key="project.key">
                 <a v-on:click="modalOpen">
@@ -99,25 +99,29 @@
           </span>
         </footer>
 
+      </div> <!--End of divTransform. This is where all the transition of vanilla, vue and jquery happens-->
 
 
-      </div>
+
 
       <!-- MODALS -->
       <section id="sectionProjects">
         <article v-for="(project, index) in projects"
-        v-if="project.language === activePage"
+        v-if="project.language === activeModals"
         :id="'modal'+project.id"
         :key="project.key"
         class="articleModals"
-        v-on:load="modalbackImage($event)"
+        v-bind:style="project.bgImage"
         >
-        {{index}} - {{project.title}} <br>
-        Include title, link to url, link to github, code area, description (v-for), video area.
+        <div class="divModalContent">
+          <span class="spanCloseModal">&times;</span>
+          {{index}} - {{project.title}} <br>
+          Include title, link to url, link to github, code area, description (v-for), video area.
+        </div>
       </article>
     </section>
 
-  </div> <!-- END OF TAG THAT CONTAINS THE VUE INSTANCE -->
+  </div> <!-- END OF TAG THAT CONTAINS THE VUE INSTANCE - divContainer-->
 
 
     <script src="assets/scripts/main-new.js"></script>

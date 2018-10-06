@@ -7,14 +7,14 @@ let app = new Vue({
           {Vue: false},
           {jQuery: false}
       ],
-      imagePath: "./assets/images/img-",
+      imagePath: "assets/images/img-",
 
       sections: [
         {id: 1, text: "Vanilla", active: true},
         {id:2, text: "Vue", active: false},
         {id: 3, text: "jQuery", active: false}
       ],
-      activePage: "Vanilla",
+
       hoverStyle: {
         Vanilla: {
           backgroundColor: "rgb(250, 220, 52)",
@@ -42,10 +42,7 @@ let app = new Vue({
         }
       },  //End of hoverstyle
 
-      modalStyle: {
-        backgroundColor: "red",
-        fontWeight: "bold"
-      },
+      activeModals: "Vanilla",
 
       projects: [
         {
@@ -61,14 +58,14 @@ let app = new Vue({
           ],
           language: "jQuery",
           images: [
-            {image: this.imagePath + "listMejQuery1.jpg"},
-            {image: this.imagePath + "listMejQuery2.jpg"},
-            {image: this.imagePath + "listMejQuery3.jpg"},
+            {image: ""},
+            {image: ""},
+            {image: ""},
           ],
           video_url: "",
           id: "listMejQuery",
-          modalId: {
-            background: "red";
+          bgImage: {
+            backgroundImage: "  "
           }
         },
 
@@ -88,12 +85,15 @@ let app = new Vue({
           ],
           language: "Vanilla",
           images: [
-            {image: this.imagePath + "writeItVanilla1.jpg"},
-            {image: this.imagePath + "writeItVanilla2.jpg"},
-            {image: this.imagePath + "writeItVanilla3.jpg"},
+            {image: ""},
+            {image: ""},
+            {image: ""},
           ],
           video_url: "",
-          id: "writeItVanilla"
+          id: "writeItVanilla",
+          bgImage: {
+            backgroundImage: ""
+          }
         },
 
         {
@@ -114,7 +114,10 @@ let app = new Vue({
             {image: ""},
           ],
           video_url: "",
-          id: "cssTutorialVanilla"
+          id: "cssTutorialVanilla",
+          bgImage: {
+            backgroundImage: ""
+          }
         },
 
         {
@@ -135,7 +138,10 @@ let app = new Vue({
             {image: ""},
           ],
           video_url: "",
-          id: "spotifyDiscographyVanilla"
+          id: "spotifyDiscographyVanilla",
+          bgImage: {
+            backgroundImage: ""
+          }
         },
 
         {
@@ -156,7 +162,10 @@ let app = new Vue({
             {image: ""},
           ],
           video_url: "",
-          id: "imageEditingVanilla"
+          id: "imageEditingVanilla",
+          bgImage: {
+            backgroundImage: ""
+          }
         },
 
         {
@@ -173,11 +182,14 @@ let app = new Vue({
           language: "Vanilla",
           images: [
             {image: ""},
-            {image: "link here"},
-            {image: "link here"},
+            {image: ""},
+            {image: ""},
           ],
           video_url: "",
-          id: "sportyTouristVanilla"
+          id: "sportyTouristVanilla",
+          bgImage: {
+            backgroundImage: ""
+          }
         },
 
         {
@@ -194,11 +206,14 @@ let app = new Vue({
           language: "jQuery",
           images: [
             {image: ""},
-            {image: "link here"},
-            {image: "link here"},
+            {image: ""},
+            {image: ""},
           ],
           video_url: "",
-          id: "hangmanjQuery"
+          id: "hangmanjQuery",
+          bgImage: {
+            backgroundImage: ""
+          }
         },
 
         {
@@ -217,7 +232,10 @@ let app = new Vue({
             {image: ""},
           ],
           video_url: "",
-          id: "clockVanilla"
+          id: "clockVanilla",
+          bgImage: {
+            backgroundImage: ""
+          }
         },
 
         {
@@ -237,7 +255,10 @@ let app = new Vue({
             {image: ""},
           ],
           video_url: "",
-          id: "drumKitVanilla"
+          id: "drumKitVanilla",
+          bgImage: {
+            backgroundImage: ""
+          }
         },
 
         {
@@ -257,7 +278,10 @@ let app = new Vue({
             {image: ""},
           ],
           video_url: "",
-          id: "drumKitVue"
+          id: "drumKitVue",
+          bgImage: {
+            backgroundImage: ""
+          }
         },
 
         {
@@ -279,7 +303,10 @@ let app = new Vue({
             {image: ""},
           ],
           video_url: "",
-          id: "streetViewModalVanilla"
+          id: "streetViewModalVanilla",
+          bgImage: {
+            backgroundImage: ""
+          }
         }
 
     ], //end of projects
@@ -302,6 +329,8 @@ let app = new Vue({
         this.active.forEach((el) => {
           for (let key in el) key === attr ? el[key] = true : el[key] = false;
         });
+
+        this.activeModals = attr;
       },
 
       // EFFECT THAT ACTIVATES THE TRANSITION WHEN MOUSING OVER
@@ -325,11 +354,17 @@ let app = new Vue({
       },
 
       imagesPathCreate() {
+        //CREATES THE PATHS FOR ALL THE IMAGES IN THE PROJECTS ARRAY INSIDE "DATA"
         let self = this;
         let projectsArr = this.projects;
+
         projectsArr.forEach((el) => {
+          //Add path in projects[i].images.image
           el.images.forEach((ele, idx) => ele.image = self.imagePath + el.id + (idx+1) + ".jpg");
-        }); //end of projectsArr.forEach
+          //Add path in projects[i].bgImage.backgroundImage
+          // backgroundImage: 'url("assets/images/logo-vue.png")',
+          el.bgImage.backgroundImage = "url(" + el.images[0].image + ")"
+        });
       },
 
       modalbackImage(){
@@ -356,7 +391,9 @@ let app = new Vue({
       this.modalbackImage();
     },
     computed: {
+      getFirstImage: function() {
 
+      }
     }
   }
 );
