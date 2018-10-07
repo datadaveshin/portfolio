@@ -113,9 +113,20 @@
         class="articleModals"
         v-bind:style="project.bgImage"
         >
-        <div class="divModalContent">
+        <div class="divModalContent"
+
+        >
           <span class="spanCloseModal">&times;</span>
-          {{index}} - {{project.title}} <br>
+          <div class="divModalLeftRail">
+            <h1>{{project.title}}</h1>
+            <ul>
+              <li v-for="list in project.description">{{list.bullet}}</li>
+            </ul>
+          </div>
+          <div class="divModalRightRail">
+            The code needs to be somewhere around here
+          </div>
+          {{index}} -  <br>
           Include title, link to url, link to github, code area, description (v-for), video area.
         </div>
       </article>

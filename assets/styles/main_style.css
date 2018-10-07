@@ -192,3 +192,17 @@ a:hover{
   margin: auto;
   padding: 10px;
 }
+
+.divModalLeftRail, .divModalRightRail{
+  background: lightgreen;
+  display: inline-block;
+  height: 90%;
+}
+
+.divModalLeftRail{
+  width: 55%;
+}
+
+.divModalRightRail{
+  width: 40%;
+}
