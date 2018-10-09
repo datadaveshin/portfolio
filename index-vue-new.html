@@ -57,7 +57,8 @@
               <i class="fas fa-angle-left"></i>
             </div>
 
-              <section style="font-size: 30px; margin: 80px; color: black;">
+              <section id="sectionCarouselArea"
+              style="font-size: 30px; margin: 80px; color: black;">
 
                 <article v-for="(project, index) in projects"
                 v-if="project.language === activeModals"
@@ -108,7 +109,7 @@
       <section id="sectionProjects">
         <article v-for="(project, index) in projects"
         v-if="project.language === activeModals"
-        :id="'modal'+project.id"
+        :id="'modal-'+project.id"
         :key="project.key"
         class="articleModals"
         v-bind:style="project.bgImage"
@@ -116,7 +117,12 @@
         <div class="divModalContent">
 
           <div class="divCloseModal">&times;</div>
-          <div class="divModalLeftRail">
+          <div class="divModalLeftRail"
+          :style="project.language === 'Vanilla' ? 'backgroundColor : rgba(250, 220, 52, .7)' :
+                  project.language === 'Vue' ? 'backgroundColor : rgba(66, 184, 131, .5)' :
+                  project.language === 'jQuery' ? 'backgroundColor : rgba(18, 26, 38, .5)' :
+                  null"
+          >
             <h1>{{project.title}}</h1>
             <ul>
               <li v-for="list in project.description">{{list.bullet}}</li>

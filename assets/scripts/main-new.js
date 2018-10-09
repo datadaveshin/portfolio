@@ -65,7 +65,8 @@ let app = new Vue({
           video_url: "",
           id: "listMejQuery",
           bgImage: {
-            backgroundImage: "  "
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -92,7 +93,8 @@ let app = new Vue({
           video_url: "",
           id: "writeItVanilla",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -116,7 +118,8 @@ let app = new Vue({
           video_url: "",
           id: "cssTutorialVanilla",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -140,7 +143,8 @@ let app = new Vue({
           video_url: "",
           id: "spotifyDiscographyVanilla",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -164,7 +168,8 @@ let app = new Vue({
           video_url: "",
           id: "imageEditingVanilla",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -188,7 +193,8 @@ let app = new Vue({
           video_url: "",
           id: "sportyTouristVanilla",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -212,7 +218,8 @@ let app = new Vue({
           video_url: "",
           id: "hangmanjQuery",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -234,7 +241,8 @@ let app = new Vue({
           video_url: "",
           id: "clockVanilla",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -257,7 +265,8 @@ let app = new Vue({
           video_url: "",
           id: "drumKitVanilla",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -280,7 +289,8 @@ let app = new Vue({
           video_url: "",
           id: "drumKitVue",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         },
 
@@ -305,7 +315,8 @@ let app = new Vue({
           video_url: "",
           id: "streetViewModalVanilla",
           bgImage: {
-            backgroundImage: ""
+            backgroundImage: "",
+            boxShadow: ""
           }
         }
 
@@ -330,6 +341,7 @@ let app = new Vue({
           for (let key in el) key === attr ? el[key] = true : el[key] = false;
         });
 
+        //This is for changing the active class of the <divTransform> tag
         this.activeModals = attr;
       },
 
@@ -353,8 +365,20 @@ let app = new Vue({
         }
       },
 
+      //ADDS A BOX SHADOW TO THE MODALS BASED ON THEIR CATEGORY
+      modalsBoxShadow(event) {
+        let sectionProjectsChildrenArr = document.getElementById("sectionProjects").children;
+        for (var i = 0; i < sectionProjectsChildrenArr.length; i++) {
+          // console.log(sectionProjectsChildrenArr[i]);
+        }
+        // console.log("I am in the modal box shadow");
+        // console.log(document.getElementById("sectionProjects").children);
+      },
+
       imagesPathCreate() {
         //CREATES THE PATHS FOR ALL THE IMAGES IN THE PROJECTS ARRAY INSIDE "DATA"
+        //ADDS THE BACKGROUND IMAGE IN MODALS
+        //ADDS THE BOX SHADOW IN MODALS
         let self = this;
         let projectsArr = this.projects;
 
@@ -364,6 +388,11 @@ let app = new Vue({
           //Add path in projects[i].bgImage.backgroundImage
           // backgroundImage: 'url("assets/images/logo-vue.png")',
           el.bgImage.backgroundImage = "url(" + el.images[0].image + ")"
+          //Add attribute value for boxShadow for each modal
+          el.language === "Vanilla" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(250, 220, 52, .5)" :
+          el.language === "Vue" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(66, 184, 131, .5)" :
+          el.language === "jQuery" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(18, 26, 38, .5)" :
+          null;
         });
       },
 
@@ -388,7 +417,7 @@ let app = new Vue({
     }, //End of methods
     beforeMount(){
       this.imagesPathCreate();
-      this.modalbackImage();
+      this.modalsBoxShadow();
     },
     computed: {
       getFirstImage: function() {
