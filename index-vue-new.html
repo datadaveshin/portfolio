@@ -113,21 +113,120 @@
         class="articleModals"
         v-bind:style="project.bgImage"
         >
-        <div class="divModalContent"
+        <div class="divModalContent">
 
-        >
-          <span class="spanCloseModal">&times;</span>
+          <div class="divCloseModal">&times;</div>
           <div class="divModalLeftRail">
             <h1>{{project.title}}</h1>
             <ul>
               <li v-for="list in project.description">{{list.bullet}}</li>
             </ul>
+            Include title, link to url, link to github, code area, description (v-for), video area.
           </div>
           <div class="divModalRightRail">
-            The code needs to be somewhere around here
+            <div class="divModalRightRailHeading">
+              <h2>Sample code</h2>
+              <hr>
+            </div>
+            <code>
+<pre>
+body{
+  font: normal normal 2vh 'Montserrat', Helvetica, sans-serif;
+  color: white;
+  box-sizing: border-box;
+}
+
+h1{
+  font-size: 3vh;
+  /* font-weight: 1000; */
+}
+
+nav {
+  margin: auto;
+  text-align: center;
+  width: 80vw;
+  position: absolute;
+  left: 10vw;
+  top: 3vh;
+}
+
+nav ul li {
+  display: inline-block;
+  font-size: 4vh;
+  padding: 1vh 2vw;
+  width: 14vw;
+}
+
+#divContainer{
+
+}
+
+.divContainerVanilla, .divContainerVue, .divContainerjQuery, .divHoverClassVanilla, .divHoverClassVue, .divHoverClassjQuery{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: 90vh;
+}
+
+.divContainerVanilla{
+  background-color: rgb(250, 220, 52);
+  background-image: url("../images/logo-javascript.png");
+  box-shadow: inset 100vw 100vh rgba(250, 220, 52, .5);
+}
+
+.divContainerVue{
+  background-image: url("../images/logo-vue.png");
+  box-shadow: inset 100vw 100vh rgba(66, 184, 131, .5);
+  /* background-color: rgb(66, 184, 131); */
+  /* background-color: rgb(52, 72, 92); */
+  /* box-shadow: inset 100vw 100vh rgba(52, 72, 92, .5); */
+}
+
+.divContainerjQuery{
+  background-image: url("../images/logo-jquery.png");
+  box-shadow: inset 100vw 100vh rgba(18, 26, 38, .5);
+  /* background-color: rgb(18, 26, 38); */
+}
+
+.divHoverClassVanilla {
+  background-color: rgb(250, 220, 52);
+  background-image: url("../images/logo-javascript.png");
+  box-shadow: inset 100vw 100vh rgba(250, 220, 52, .5);
+  transition: all 2s;
+}
+
+.divHoverClassVue {
+  background-image: url("../images/logo-vue.png");
+  box-shadow: inset 100vw 100vh rgba(66, 184, 131, .5);
+  transition: all 2s;
+}
+
+.divHoverClassjQuery {
+  background-image: url("../images/logo-jquery.png");
+  box-shadow: inset 100vw 100vh rgba(18, 26, 38, .5);
+  transition: all 2s;
+}
+
+header{
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  position: absolute;
+  width: 100vw;
+  text-align: center;
+}
+</pre>
+            </code>
+
           </div>
-          {{index}} -  <br>
-          Include title, link to url, link to github, code area, description (v-for), video area.
+
         </div>
       </article>
     </section>
