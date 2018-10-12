@@ -176,39 +176,7 @@ a:hover{
   background-repeat: no-repeat;
   background-size: 100vw;
   display: flex;
-}
-
-.divCloseModal{
-  float: right;
-  position: absolute;
-  z-index: 1;
-  right: 3vw;
-  font-size: 50px;
-  font-weight: bold;
-  line-height: 45px;
-  text-align: center;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  margin-top: 10px;
   color: white;
-  background-color: rgba(255,255,255,.5);
-}
-
-.divCloseModal:hover {
-  background-color: rgb(255,255,255);
-  color: black;
-  cursor: pointer;
-
-}
-
-.divModalContent{
-  /* background: rgba(250, 220, 52, .6); */
-  width: 95vw;
-  height: 95vh;
-  margin: auto;
-  padding: 10px;
-  font-size: 3vh;
 }
 
 .articleModals h1{
@@ -225,38 +193,92 @@ a:hover{
 
 }
 
-.articleModals hr{
-  width: 80%;
-}
+.divCloseModal{
+  float: right;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  margin-top: 5px;
 
-.divModalLeftRail, .divModalRightRail{
-  /* background: rgba(250, 220, 52, .5); */
-  display: inline-block;
-  height: 100%;
-  float: left;
-}
-
-.divModalLeftRail{
-  box-sizing: border-box;
-  width: 59%;
-  margin-right: 1%;
-}
-
-.divModalRightRail{
-  box-sizing: border-box;
-  width: 40%;
-  background-color: rgba(0,0,0,.6);
-  height: 100%;
-  overflow: auto;
-  padding: 1%;
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 45px;
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
   color: white;
+  background-color: rgba(255,255,255,.5);
+}
+
+.divCloseModal:hover {
+  background-color: rgb(255,255,255);
+  color: black;
+  cursor: pointer;
+}
+
+.divModalContainer{
+  width: 96vw;
+  height: 96vh;
+  margin: auto;
+  font-size: 3vh;
+  position: relative;
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "divModalLeft divModalRight" "divModalLeft divModalRight";
+  grid-column-gap: .5vw;
+}
+
+.divModalLeft{
+  box-sizing: border-box;
+  width: 64vw;
+  height: 96vh;
+  grid-area: divModalLeft;
+  /* display:flex; */
+  padding: 0 10px;
+}
+
+.divModalLeftL1{
+  background: lightblue;
+  height: 50%;
+}
+
+.divModalLeftL2{
+  background: pink;
+  height: 20%;
+}
+
+.divModalLeftL3{
+  background: lightblue;
+  height: 20%;
+}
+
+.divModalLeftL4{
+  background: pink;
+  height: 10%;
+}
+
+.divModalRight{
+  box-sizing: border-box;
+  width: 32vw;
+  background-color: rgba(0,0,0,.6);
+  height: 96vh;
+  overflow: auto;
+  color: white;
+  grid-area: divModalRight;
+}
+
+.divModalRight hr{
+  width: 80%;
+  margin-bottom: 20px;
 }
 
 code{
   font: normal normal 2vh courier;
 }
 
-.divModalRightRailHeading{
+.divModalRightHeading{
   position: sticky;
   top: 15px;
 }

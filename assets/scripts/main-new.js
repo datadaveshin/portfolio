@@ -365,16 +365,6 @@ let app = new Vue({
         }
       },
 
-      //ADDS A BOX SHADOW TO THE MODALS BASED ON THEIR CATEGORY
-      modalsBoxShadow(event) {
-        let sectionProjectsChildrenArr = document.getElementById("sectionProjects").children;
-        for (var i = 0; i < sectionProjectsChildrenArr.length; i++) {
-          // console.log(sectionProjectsChildrenArr[i]);
-        }
-        // console.log("I am in the modal box shadow");
-        // console.log(document.getElementById("sectionProjects").children);
-      },
-
       imagesPathCreate() {
         //CREATES THE PATHS FOR ALL THE IMAGES IN THE PROJECTS ARRAY INSIDE "DATA"
         //ADDS THE BACKGROUND IMAGE IN MODALS
@@ -417,7 +407,6 @@ let app = new Vue({
     }, //End of methods
     beforeMount(){
       this.imagesPathCreate();
-      this.modalsBoxShadow();
     },
     computed: {
       getFirstImage: function() {
