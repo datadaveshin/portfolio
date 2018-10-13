@@ -241,22 +241,41 @@ a:hover{
 
 .divModalLeftL1{
   background: lightblue;
-  height: 50%;
+  height: 40%;
 }
 
 .divModalLeftL2{
-  background: pink;
-  height: 20%;
+  height: 30%;
+  text-align: center;
 }
 
 .divModalLeftL3{
   background: lightblue;
-  height: 20%;
+  height: 30%;
 }
 
-.divModalLeftL4{
-  background: pink;
-  height: 10%;
+.divModalImages{
+  height: 100%;
+  display: flex;
+  width: 30%;
+  margin: 0 1%;
+  box-sizing: border-box;
+  background-size:cover;
+  background-position: center;
+}
+
+.imgModal{
+  height: 90%;
+  display: inline-block;
+  width: 30%;
+  margin: 0 1%;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5%;
+}
+
+.divModalImages img{
+  width: 100%;
 }
 
 .divModalRight{
@@ -270,7 +289,7 @@ a:hover{
 }
 
 .divModalRight hr{
-  width: 80%;
+  /* width: 80%; */
   margin-bottom: 20px;
 }
 

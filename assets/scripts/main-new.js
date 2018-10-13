@@ -386,7 +386,21 @@ let app = new Vue({
         });
       },
 
-      modalbackImage(){
+      txtPathCreate() {
+        console.log("txtPathCreate fired");
+        // var xmlhttp = new XMLHttpRequest();
+        // xmlhttp.onreadystatechange = function() {
+        //   if (this.readyState == 4 && this.status == 200) {
+        //     var content = JSON.parse(this.responsetext);
+        //     console.log(content);
+          // }
+        // }
+        //
+        // xmlhttp.open("GET", "assets/txt_files/text.txt", true);
+        // xmlhttp.send();
+      },
+
+      modalbackImage() {
         console.log("I am creating classes");
       },
 
@@ -407,6 +421,7 @@ let app = new Vue({
     }, //End of methods
     beforeMount(){
       this.imagesPathCreate();
+      this.txtPathCreate();
     },
     computed: {
       getFirstImage: function() {
