@@ -146,7 +146,7 @@
                   <img :src="project.images[0].image" alt="" class="imgProjectScreenshots">
                 </a>
 
-                <div class="divImageModal" v-on:click="imageModalClose($event)">
+                <div class="divImageModal" v-on:click.stop="imageModalClose($event)">
                   <div class="divImageModalClose">
                     <a v-on:click="imageModalClose($event)">&times;</a>
                   </div>
@@ -163,7 +163,7 @@
                   <img :src="project.images[1].image" alt="" class="imgProjectScreenshots">
                 </a>
 
-                <div class="divImageModal" v-on:click="imageModalClose($event)">
+                <div class="divImageModal" v-on:click.stop="imageModalClose($event)">
                   <div class="divImageModalClose">
                     <a v-on:click="imageModalClose($event)">&times;</a>
                   </div>
@@ -180,7 +180,7 @@
                   <img :src="project.images[2].image" alt="" class="imgProjectScreenshots">
                 </a>
 
-                <div class="divImageModal" v-on:click="imageModalClose($event)">
+                <div class="divImageModal" v-on:click.stop="imageModalClose($event)">
                   <div class="divImageModalClose">
                     <a v-on:click="imageModalClose($event)">&times;</a>
                   </div>
