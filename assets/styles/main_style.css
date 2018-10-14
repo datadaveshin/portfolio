@@ -235,7 +235,6 @@ a:hover{
   width: 64vw;
   height: 96vh;
   grid-area: divModalLeft;
-  /* display:flex; */
   padding: 0 10px;
 }
 
@@ -254,28 +253,53 @@ a:hover{
   height: 30%;
 }
 
-.divModalImages{
+.divImageScreenshots{
   height: 100%;
-  display: flex;
-  width: 30%;
+  display: inline-block;
+  /* width: 20%; */
   margin: 0 1%;
   box-sizing: border-box;
-  background-size:cover;
-  background-position: center;
 }
 
-.imgModal{
-  height: 90%;
-  display: inline-block;
-  width: 30%;
-  margin: 0 1%;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 5%;
+.imgProjectScreenshots{
+  height: 60%;
+  /* display: inline-block; */
+  /* margin: 0 1%; */
+  /* border-width: 2px; */
+  /* border-style: solid; */
+  /* border-radius: 5%; */
 }
 
-.divModalImages img{
-  width: 100%;
+.divImageModal{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.divImageModalContent{
+  width: 80vw;
+  height: 80vh;
+  text-align: center;
+}
+
+.divImageModalImage{
+  height: 100%;
+}
+
+.divImageModalClose{
+  font-size: 15vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 5vh;
+  margin: -40px 10px 0 0;
 }
 
 .divModalRight{
@@ -289,7 +313,6 @@ a:hover{
 }
 
 .divModalRight hr{
-  /* width: 80%; */
   margin-bottom: 20px;
 }
 

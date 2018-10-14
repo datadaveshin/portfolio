@@ -386,6 +386,16 @@ let app = new Vue({
         });
       },
 
+      imageModalOpen(event){
+        console.log(event.target);
+        console.log(event.path[1].nextElementSibling);
+        event.path[1].nextElementSibling.style.display = "flex";
+      },
+
+      imageModalClose(event){
+        event.path[2].style.display = "none";
+      },
+
       txtPathCreate() {
         console.log("txtPathCreate fired");
         // var xmlhttp = new XMLHttpRequest();
