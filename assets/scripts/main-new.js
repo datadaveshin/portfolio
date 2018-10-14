@@ -393,6 +393,7 @@ let app = new Vue({
       },
 
       imageModalClose(event){
+        console.log(Object.values(event.path));
         event.path[2].style.display = "none";
       },
 
