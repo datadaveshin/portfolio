@@ -245,24 +245,23 @@ a:hover{
 
 .divModalLeftL2{
   height: 30%;
-  text-align: center;
-}
-
-.divModalLeftL3{
-  background: lightblue;
-  height: 30%;
+  /* text-align: center; */
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 100%;
+  grid-template-areas: "divModalLeftL2A divModalLeftL2B divModalLeftL2C"; */
 }
 
 .divImageScreenshots{
   height: 100%;
+  width: 33.33%;
   display: inline-block;
-  /* width: 20%; */
-  margin: 0 1%;
   box-sizing: border-box;
+  text-align: center;
 }
 
-.imgProjectScreenshots{
-  height: 60%;
+.imgIcons{
+  height: 80%;
   /* display: inline-block; */
   /* margin: 0 1%; */
   /* border-width: 2px; */
@@ -300,6 +299,11 @@ a:hover{
   right: 0;
   height: 5vh;
   margin: -40px 10px 0 0;
+}
+
+.divModalLeftL3{
+  background: lightblue;
+  height: 30%;
 }
 
 .divModalRight{

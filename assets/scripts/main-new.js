@@ -345,6 +345,7 @@ let app = new Vue({
         this.activeModals = attr;
       },
 
+
       // EFFECT THAT ACTIVATES THE TRANSITION WHEN MOUSING OVER
       classTransitionOver(event) {
         let attr = event.target.getAttribute("name");
@@ -352,11 +353,13 @@ let app = new Vue({
         this.addStyle(targetDiv, this.hoverStyle[attr]);
       },
 
+
       // EFFECT THAT DEACTIVATES THE TRANSITION WHEN THE MOUSE LEAVES
       classTransitionLeave(event) {
         let targetDiv = document.getElementById("divTransform");
         this.addStyle(targetDiv, this.hoverStyle.clean);
       },
+
 
       // LOOP THAT UPDATES THE INLINE STYLE OF THE ELEMENT THAT IS MOUSED OVER (FOR TRANSITION)
       addStyle(el, styles) {
@@ -364,6 +367,7 @@ let app = new Vue({
           el.style[key] = styles[key];
         }
       },
+
 
       imagesPathCreate() {
         //CREATES THE PATHS FOR ALL THE IMAGES IN THE PROJECTS ARRAY INSIDE "DATA"

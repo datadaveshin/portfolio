@@ -132,69 +132,46 @@
                   null"
           >
             <div class="divModalLeftL1">
-              <h1>{{project.title}}</h1>
+              <h1>
+                {{project.title}} |
+                <a :href="project.url" target="_blank" title="Check out the web page"><i class="fas fa-link"></i></a>
+              </h1>
               <ul>
                 <li v-for="list in project.description">{{list.bullet}}</li>
               </ul>
               Include title, link to url, link to github, code area, description (v-for), video area.
             </div>
 
+
+
             <div class="divModalLeftL2">
-
-              <div class="divImageScreenshots">
-                <a  v-on:click="imageModalOpen($event)">
-                  <img :src="project.images[0].image" alt="" class="imgProjectScreenshots">
-                </a>
-
-                <div class="divImageModal">
-                  <div class="divImageModalClose">
-                    <a v-on:click.stop="imageModalClose($event)">&times;</a>
-                  </div>
-
-                  <div class="divImageModalContent">
-                    <img :src="project.images[0].image" alt="" class="divImageModalImage">
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="divImageScreenshots">
-                <a  v-on:click="imageModalOpen($event)">
-                  <img :src="project.images[1].image" alt="" class="imgProjectScreenshots">
-                </a>
-
-                <div class="divImageModal">
-                  <div class="divImageModalClose">
-                    <a v-on:click="imageModalClose($event)">&times;</a>
-                  </div>
-
-                  <div class="divImageModalContent">
-                    <img :src="project.images[1].image" alt="" class="divImageModalImage">
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="divImageScreenshots">
+              <div class="divImageScreenshots" v-for="(images, idx) in project.images">
+                <!-- screenshot icons of the images -->
                 <a v-on:click="imageModalOpen($event)">
-                  <img :src="project.images[2].image" alt="" class="imgProjectScreenshots">
+                  <img :src="images.image" alt="" class="imgIcons">
                 </a>
 
-                <div class="divImageModal">
-                  <div class="divImageModalClose">
-                    <a v-on:click="imageModalClose($event)">&times;</a>
-                  </div>
-
-                  <div class="divImageModalContent">
-                    <img :src="project.images[2].image" alt="" class="divImageModalImage">
-                  </div>
+              <!-- Image modal -->
+              <div class="divImageModal">
+                <div class="divImageModalClose">
+                  <a v-on:click.stop="imageModalClose($event)">&times;</a>
                 </div>
-              </div>
 
-            </div>
+                <div class="divImageModalContent">
+                  <img :src="images.image" alt="" class="divImageModalImage">
+                </div>
+              </div> <!--End of divImageModal-->
+
+            </div> <!--End of divImageScreenshots-->
+
+            </div> <!--End of divModalLeftL2-->
+
+
+
             <div class="divModalLeftL3">
-            </div>
+            </div> <!--End of divModalLeftL3-->
           </div> <!--End of divModalLeft-->
+
 
 
 
@@ -202,9 +179,6 @@
             <div class="divModalRightHeading">
               <h2>
                 Sample code |
-                <a :href="project.url" target="_blank" title="Check out the web page">
-                  <i class="fas fa-bookmark"></i>
-                </a>  |
                 <a :href="project.git" target="_blank" title="Check out the github page">
                   <i class="fab fa-github"></i>
                 </a>
