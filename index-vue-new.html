@@ -145,30 +145,30 @@
 
 
             <div class="divModalLeftL2">
+            </div> <!--End of divModalLeftL2-->
+
+
+
+            <div class="divModalLeftL3">
               <div class="divImageScreenshots" v-for="(images, idx) in project.images">
                 <!-- screenshot icons of the images -->
                 <a v-on:click="imageModalOpen($event)">
                   <img :src="images.image" alt="" class="imgIcons">
                 </a>
 
-              <!-- Image modal -->
-              <div class="divImageModal">
-                <div class="divImageModalClose">
-                  <a v-on:click.stop="imageModalClose($event)">&times;</a>
-                </div>
+                <!-- Image modal -->
+                <div class="divImageModal">
+                  <div class="divImageModalClose">
+                    <a v-on:click.stop="imageModalClose($event)">&times;</a>
+                  </div>
 
-                <div class="divImageModalContent">
-                  <img :src="images.image" alt="" class="divImageModalImage">
-                </div>
-              </div> <!--End of divImageModal-->
+                  <div class="divImageModalContent">
+                    <img :src="images.image" alt="" class="divImageModalImage">
+                  </div>
+                </div> <!--End of divImageModal-->
 
-            </div> <!--End of divImageScreenshots-->
+              </div> <!--End of divImageScreenshots-->
 
-            </div> <!--End of divModalLeftL2-->
-
-
-
-            <div class="divModalLeftL3">
             </div> <!--End of divModalLeftL3-->
           </div> <!--End of divModalLeft-->
 

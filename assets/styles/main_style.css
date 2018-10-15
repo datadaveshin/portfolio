@@ -235,38 +235,39 @@ a:hover{
   width: 64vw;
   height: 96vh;
   grid-area: divModalLeft;
-  padding: 0 10px;
+  padding: 10px;
 }
 
 .divModalLeftL1{
   background: lightblue;
-  height: 40%;
+  height: 50%;
 }
 
 .divModalLeftL2{
-  height: 30%;
-  /* text-align: center; */
-  /* display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 100%;
-  grid-template-areas: "divModalLeftL2A divModalLeftL2B divModalLeftL2C"; */
+  height: 25%;
+}
+
+.divModalLeftL3{
+  box-sizing: border-box;
+  height: 25%;
 }
 
 .divImageScreenshots{
+  box-sizing: border-box;
   height: 100%;
   width: 33.33%;
   display: inline-block;
-  box-sizing: border-box;
   text-align: center;
 }
 
 .imgIcons{
-  height: 80%;
-  /* display: inline-block; */
-  /* margin: 0 1%; */
-  /* border-width: 2px; */
-  /* border-style: solid; */
-  /* border-radius: 5%; */
+  border-radius: 5%;
+  width: 90%;
+}
+
+.imgIcons:hover{
+  border: 2px solid black;
+  box-sizing: border-box;
 }
 
 .divImageModal{
@@ -299,11 +300,6 @@ a:hover{
   right: 0;
   height: 5vh;
   margin: -40px 10px 0 0;
-}
-
-.divModalLeftL3{
-  background: lightblue;
-  height: 30%;
 }
 
 .divModalRight{
