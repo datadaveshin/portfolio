@@ -239,12 +239,19 @@ a:hover{
 }
 
 .divModalLeftL1{
-  background: lightblue;
-  height: 50%;
+  height: 40%;
+}
+
+.divModalLeftL1 ul li{
+  list-style-type: circle;
+  list-style-position: inside;
 }
 
 .divModalLeftL2{
-  height: 25%;
+  height: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .divModalLeftL3{
@@ -256,13 +263,17 @@ a:hover{
   box-sizing: border-box;
   height: 100%;
   width: 33.33%;
-  display: inline-block;
+  display: inline-flex;
   text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .imgIcons{
-  border-radius: 5%;
+  border-radius: 15%;
   width: 90%;
+  margin: auto 0;
+
 }
 
 .imgIcons:hover{
