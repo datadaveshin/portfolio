@@ -239,7 +239,7 @@ a:hover{
 }
 
 .divModalLeftL1{
-  height: 40%;
+  height: 30%;
 }
 
 .divModalLeftL1 ul li{
@@ -248,10 +248,15 @@ a:hover{
 }
 
 .divModalLeftL2{
-  height: 35%;
+  height: 45%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.divModalLeftL2 video{
+  height: 100%;
+  border: 2px solid black;
 }
 
 .divModalLeftL3{
