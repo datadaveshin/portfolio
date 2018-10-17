@@ -1,3 +1,14 @@
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        console.log(myObj.example);
+    }
+};
+xmlhttp.open("GET", "assets/txt_files/test.txt", true);
+xmlhttp.send();
+
+
 // MAIN VUE INSTANCE
 let app = new Vue({
     el: "#divContainer",
@@ -8,6 +19,8 @@ let app = new Vue({
           {jQuery: false}
       ],
       imagePath: "assets/images/img-",
+      videoPath: "assets/videos/vid-",
+      textPath: "assets/txt_files/txt-",
 
       sections: [
         {id: 1, text: "Vanilla", active: true},
@@ -369,10 +382,11 @@ let app = new Vue({
       },
 
 
-      imagesPathCreate() {
+      pathCreate() {
         //CREATES THE PATHS FOR ALL THE IMAGES IN THE PROJECTS ARRAY INSIDE "DATA"
         //ADDS THE BACKGROUND IMAGE IN MODALS
         //ADDS THE BOX SHADOW IN MODALS
+        //CREATES THE PATHS FOR ALL THE VIDEOS IN THE PROJECTS ARRAY INSIDE DATA
         let self = this;
         let projectsArr = this.projects;
 
@@ -387,6 +401,10 @@ let app = new Vue({
           el.language === "Vue" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(66, 184, 131, .5)" :
           el.language === "jQuery" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(18, 26, 38, .5)" :
           null;
+          // Add path in projects[i].video_url
+          el.video_url = self.videoPath + el.id + ".mp4";
+          // Add path in projects[i].code
+          el.code = self.textPath + el.id + ".txt";
         });
       },
 
@@ -435,7 +453,7 @@ let app = new Vue({
       }
     }, //End of methods
     beforeMount(){
-      this.imagesPathCreate();
+      this.pathCreate();
       this.txtPathCreate();
     },
     computed: {
