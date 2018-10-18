@@ -2,10 +2,10 @@ var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var myObj = JSON.parse(this.responseText);
-        console.log(myObj.example);
+        console.log(myObj.sample);
     }
 };
-xmlhttp.open("GET", "https://papostolopoulos.github.io/writeit/public/javascripts/wysiwyg.js", true);
+xmlhttp.open("GET", "https://papostolopoulos.github.io/portfolio/assets/txt_files/code-writeItVanilla.txt", true);
 xmlhttp.send();
 
 

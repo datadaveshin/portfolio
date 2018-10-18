@@ -254,9 +254,15 @@ a:hover{
   justify-content: center;
 }
 
-.divModalLeftL2 video{
-  height: 100%;
+.divVideoContainer{
+  align-self: center;
+  height: 96%;
+}
+
+.videoInModal{
   border: 2px solid black;
+  box-sizing: border-box;
+  height: inherit;
 }
 
 .divModalLeftL3{

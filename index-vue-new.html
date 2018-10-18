@@ -144,9 +144,11 @@
 
 
             <div class="divModalLeftL2">
-              <video controls>
-                <source :src="project.video_url" type="video/mp4">
-              </video>
+              <div class="divVideoContainer">
+                <video class="videoInModal" controls>
+                  <source :src="project.video_url" type="video/mp4">
+                  </video>
+              </div>
             </div> <!--End of divModalLeftL2-->
 
 
