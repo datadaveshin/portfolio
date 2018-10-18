@@ -1,1 +1,3 @@
-{"example": "Hello, this is the txt file that should render in the code section of the page. "}
+{"example": `Hello, this is the txt file that should
+
+render in the code section of the page.`}
