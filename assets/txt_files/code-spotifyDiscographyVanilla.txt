@@ -1,0 +1,156 @@
+window.onload = function(){
+  var artistSearchForm = document.getElementById("artistSearchForm");
+  var artistNameEntry = document.getElementById("artistNameEntry");
+  var submitButton = document.getElementById("submitButton");
+
+  artistSearchForm.addEventListener("submit", function (event) {
+    //Clear up the main content and prevent default
+    event.preventDefault();
+
+
+    var articlesDiv = document.getElementById("articlesDiv");
+    articlesDiv.innerHTML = "";
+    var nameEntryValue = artistNameEntry.value.replace(/\s/g, "+");
+
+    fetch("https://api.spotify.com/v1/search?q=\"" + nameEntryValue + "\"&type=artist&limit=1",
+    {
+      method: "GET",
+      headers: {
+        "Authorization": "Basic *<base64 encoded d0acac994f0e4947b5eacdc3c480e31d:c5fe231aa97a41b29bef006c193a8a1c>*",
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (json) {
+      console.log("JSON is", json);
+      if (json.artists.items[0] === undefined) {
+        var errorMessage = document.createElement("h3");
+        errorMessage.innerHTML = "Sorry but your search did not return any results";
+        articlesDiv.appendChild(errorMessage);
+        artistSearchForm.reset();
+      }
+      console.log("json.artists is", json.artists);
+      var artistId = json.artists.items[0].id;
+      console.log("artistId is", artistId);
+      return artistId
+    })
+    .then(function (artistId) {
+      fetch("https://api.spotify.com/v1/artists/" + artistId + "/albums",
+      {
+        method: "GET",
+        headers: {
+          "Authorization": "Basic base64 encoded d0acac994f0e4947b5eacdc3c480e31d:c5fe231aa97a41b29bef006c193a8a1c",
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function (json) {
+        var jsonItems = json.items;
+        console.log("json items is", jsonItems);
+        var albums = [];
+        for (let i = 0; i < jsonItems.length; i++) {
+          var albumItem = {}
+          albumItem.artistName = artistNameEntry.value
+          albumItem.albumName = jsonItems[i].name;
+          albumItem.albumID = jsonItems[i].id;
+          albumItem.tracks = {};
+          albumItem.images = jsonItems[i].images;
+          albums.push(albumItem);
+        }
+        return albums;
+      })
+      .then(function(albums) {
+        var trackPromises = [];
+        for (let j = 0; j < albums.length; j++) {
+          let trackPromise = fetch("https://api.spotify.com/v1/albums/" + albums[j].albumID + "/tracks",
+          {
+            method: "GET",
+            headers: {
+              "Authorization": "Bearer BQBd97aViKgz3QrJQQ8KNh-bc5r8ZEEYYIXrz7fdsaSyQRD_lAHVSGNHfWzuXlrwKyqrPXYWQTM6sQAHw6NHql1q4TFWP9sxqK83bhja_jzpOkLairz61aADXU9Se85RdRd7ZPeWg_142GEB6Q",
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            var albumTracks = json.items;
+            for (let k = 0; k < albumTracks.length; k++) {
+              albums[j].tracks["song"+(k+1)] = albumTracks[k].name;
+            }
+            return albums[j];
+          });
+          trackPromises.push(trackPromise);
+        } //End of the for loop
+        return Promise.all(trackPromises);
+      })//good up to here. put parenthesis if it does not work
+      .then(function(albums) {
+        // var articlesDiv = document.getElementById("articlesDiv");
+
+        var articleH1 = document.createElement("h1");
+        // var h1Value = artistNameEntry.value.slice(0,1).toUpperCase() + artistNameEntry.value.slice(1).toLowerCase() + " Discography";
+        var h1Value = artistNameEntry.value[0].toUpperCase();
+        for (let o = 1; o < artistNameEntry.value.length; o++) {
+          if (artistNameEntry.value[o-1] === " ") {
+            h1Value += artistNameEntry.value[o].toUpperCase();
+          }
+          else {
+            h1Value += artistNameEntry.value[o].toLowerCase();
+          }
+        }
+
+        h1Value += " Discography"
+        articleH1.innerHTML = h1Value;
+        articlesDiv.appendChild(articleH1)
+
+        var articleH1 = document.createElement("h1");
+        articleH1.innerHTML = artistNameEntry;
+
+        for (let l = 0; l < albums.length; l++) {
+          var albumTitle = document.createElement("h3");
+          albumTitle.innerHTML = albums[l].albumName
+          // console.log(albums[l].images[0].height);
+
+          let albumSongs = albums[l].tracks;
+
+          var albumOl = document.createElement("ol");
+          var counter = 1
+          for (let key in albumSongs) {
+            var albumLi = document.createElement("li");
+            albumLi.innerHTML = counter + ". " + albumSongs[key];
+            albumOl.appendChild(albumLi);
+            counter++
+          }
+
+          var backgroundImageURL = albums[l].images[1].url;
+          console.log(backgroundImageURL);
+          // var image = document.createElement("img");
+          // image.src = backgroundImageURL;
+          var textDiv = document.createElement("div");
+
+          var article = document.createElement("article");
+          article.className += "albumSlot";
+          article.style.background = "url(" + backgroundImageURL + ")";
+          // article.appendChild(image);
+          textDiv.appendChild(albumTitle);
+          textDiv.appendChild(albumOl);
+          article.appendChild(textDiv);
+
+
+          // var articlesDiv = document.getElementById("articlesDiv");
+          articlesDiv.appendChild(article);
+        }
+        console.log(albums);
+      });
+    });
+    // artistSearchForm.reset();
+  }); //End of submit Event Listener
+
+}; //End of window.onload

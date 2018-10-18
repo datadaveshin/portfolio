@@ -5,7 +5,7 @@ xmlhttp.onreadystatechange = function() {
         console.log(myObj.example);
     }
 };
-xmlhttp.open("GET", "https://papostolopoulos.github.io/portfolio/assets/txt_files/test.txt", true);
+xmlhttp.open("GET", "assets/txt_files/test.txt", true);
 xmlhttp.send();
 
 
@@ -20,7 +20,7 @@ let app = new Vue({
       ],
       imagePath: "assets/images/img-",
       videoPath: "assets/videos/vid-",
-      textPath: "assets/txt_files/txt-",
+      textPath: "assets/txt_files/code-",
 
       sections: [
         {id: 1, text: "Vanilla", active: true},
@@ -391,18 +391,30 @@ let app = new Vue({
         let projectsArr = this.projects;
 
         projectsArr.forEach((el) => {
+
+
           //Add path in projects[i].images.image
           el.images.forEach((ele, idx) => ele.image = self.imagePath + el.id + (idx+1) + ".jpg");
+
+
           //Add path in projects[i].bgImage.backgroundImage
           // backgroundImage: 'url("assets/images/logo-vue.png")',
           el.bgImage.backgroundImage = "url(" + el.images[0].image + ")"
+
+
           //Add attribute value for boxShadow for each modal
           el.language === "Vanilla" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(250, 220, 52, .5)" :
           el.language === "Vue" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(66, 184, 131, .5)" :
           el.language === "jQuery" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(18, 26, 38, .5)" :
           null;
+
+
           // Add path in projects[i].video_url
           el.video_url = self.videoPath + el.id + ".mp4";
+
+
+          //Add path in projects[i].code textPath: "assets/txt_files/code-"
+          el.code = self.textPath + el.id + ".txt";
         });
       },
 
@@ -468,10 +480,10 @@ cssTutorialVanilla: https://github.com/papostolopoulos/css-exploration/blob/mast
 drumKitVanilla: https://github.com/papostolopoulos/js30/blob/master/01-drum_kit/index-vanilla.html
 drumKitVue: https://github.com/papostolopoulos/js30/blob/master/01-drum_kit/index-vue.html
 hangmanjQuary: https://papostolopoulos.github.io/hangman/assets/hangman_scripts.js
-imageEditingVanilla:
-listMejQuery:
-writeItVanilla:
-streetViewModalVanilla:
-sportyTouristVanilla:
-spotifyDiscographyVanilla:
+imageEditingVanilla: https://github.com/papostolopoulos/image_filtering/blob/master/public/js_files/menubar_script.js
+listMejQuery: https://github.com/papostolopoulos/listme/blob/master/routes/index.js
+writeItVanilla: https://github.com/papostolopoulos/writeit/blob/master/public/javascripts/wysiwyg.js
+streetViewModalVanilla: https://github.com/papostolopoulos/streetViewModal/blob/master/assets/javascript/main.js
+sportyTouristVanilla: https://github.com/papostolopoulos/sportytourist/blob/master/assets/jsfiles/index.js
+spotifyDiscographyVanilla: https://github.com/papostolopoulos/spotify/blob/master/assets/js/script-new.js
 */
