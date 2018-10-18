@@ -1,1 +1,1 @@
-{"example": "Hello, this is the txt file that should render in the\n\ncode section of the page. "}\n
+{"example": "Hello, this is the txt file that should render in the\n\ncode section of the page. "}
