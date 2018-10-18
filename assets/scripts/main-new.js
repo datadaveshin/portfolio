@@ -5,7 +5,7 @@ xmlhttp.onreadystatechange = function() {
         console.log(myObj.example);
     }
 };
-xmlhttp.open("GET", "assets/txt_files/test.txt", true);
+xmlhttp.open("GET", "https://papostolopoulos.github.io/writeit/public/javascripts/wysiwyg.js", true);
 xmlhttp.send();
 
 
@@ -63,7 +63,7 @@ let app = new Vue({
           title: "listMe.xyz",
           url: "http://listme.xyz",
           git: "https://github.com/papostolopoulos/listme",
-          code: "code in script? or iframe? or scrape off the code from page and present?",
+          code: "",
           description: [
             {bullet: "Full stack CRUD todo list."},
             {bullet: "Create, read, update and delete lists of todo items"},
@@ -88,7 +88,7 @@ let app = new Vue({
           title: "writeit.pro",
           url: "http://writeit.pro",
           git: "https://github.com/papostolopoulos/writeit",
-          code: "",
+          code: "https://papostolopoulos.github.io/writeit/public/javascripts/wysiwyg.js",
           description:
           [
             {bullet: "Full stack blog."},
@@ -140,8 +140,8 @@ let app = new Vue({
           key: 4,
           title: "Spotify Discography Search",
           url: "https://git.io/vyfiO",
-          git: "",
-          code: "",
+          git: "https://github.com/papostolopoulos/spotify",
+          code: "https://papostolopoulos.github.io/spotify/assets/js/script-new.js",
           description: [
             {bullet: "Search engine with API calls to the Spotify API."},
             {bullet: "The user can search for artists' discographies and review the song titles and album covers"},
@@ -165,8 +165,8 @@ let app = new Vue({
           key: 5,
           title: "Image editing",
           url: "https://goo.gl/s9sHDS",
-          git: "",
-          code: "",
+          git: "https://github.com/papostolopoulos/image_filtering",
+          code: "https://papostolopoulos.github.io/image_filtering/public/js_files/canvas_script.js",
           description: [
             {bullet: "Image editing console."},
             {bullet: "This is a barebones image filtering environment. The user can open images from the hard drive or online sources and apply filters or save in a different image format"},
@@ -191,7 +191,7 @@ let app = new Vue({
           title: "SportyTourist",
           url: "http://sportytourist.com",
           git: "https://github.com/papostolopoulos/sportytourist",
-          code: "",
+          code: "https://papostolopoulos.github.io/sportytourist/assets/jsfiles/index.js",
           description: [
             {bullet: "Sports news aggregator."},
             {bullet: "News API calls"},
@@ -403,8 +403,6 @@ let app = new Vue({
           null;
           // Add path in projects[i].video_url
           el.video_url = self.videoPath + el.id + ".mp4";
-          // Add path in projects[i].code
-          el.code = self.textPath + el.id + ".txt";
         });
       },
 
@@ -464,11 +462,16 @@ let app = new Vue({
   }
 );
 
-
-// Create image paths for the Vue instance
-// ((vueInstance) => {
-//   let projectsArr = vueInstance.projects;
-//   projectsArr.forEach((el) => {
-//     el.images.forEach((ele, idx) => ele.image = vueInstance.imagePath + el.id + (idx+1) + ".jpg");
-//   }); //end of projectsArr.forEach
-// })(app);
+/* DO YOU NEED TO MODIFY THE HTML TAGS IN SOME OF THEM?
+clockVanilla: https://github.com/papostolopoulos/js30/blob/master/02-clock/index-vanilla.html
+cssTutorialVanilla: https://github.com/papostolopoulos/css-exploration/blob/master/assets/stylesheets/006.css
+drumKitVanilla: https://github.com/papostolopoulos/js30/blob/master/01-drum_kit/index-vanilla.html
+drumKitVue: https://github.com/papostolopoulos/js30/blob/master/01-drum_kit/index-vue.html
+hangmanjQuary: https://papostolopoulos.github.io/hangman/assets/hangman_scripts.js
+imageEditingVanilla:
+listMejQuery:
+writeItVanilla:
+streetViewModalVanilla:
+sportyTouristVanilla:
+spotifyDiscographyVanilla:
+*/

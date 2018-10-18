@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Clock - vanilla JS</title>
+
+    <style media="screen">
+      body{
+        background-image: url(clock-vanilla.jpg);
+        background-size: cover;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: verdana, helvetica, serif;
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+        font-size: 8vh;
+      }
+      h1{
+        padding: 0;
+        margin: 0;
+        font-size: 8vh;
+      }
+      .clock-body {
+        width: 50vh;
+        height: 50vh;
+        border-radius: 50%;
+        border: 3vh solid red;
+        padding: 2px;
+        position: relative;
+      }
+      .clock-face {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .clock-overlay {
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: rgba(255, 255, 255, .8);
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .top_third, .middle_third, .bottom_third {
+        width: 100%;
+        height: 33.33%;
+      }
+      .top_third {
+        text-align: center;
+      }
+      .middle_third {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .middle1, .middle2, .middle3{
+        width: 33.33%;
+        height: 100%;
+      }
+      .middle1 {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .middle2{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .middle3{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .bottom_third{
+        position: relative;
+        text-align: center;
+      }
+      .bottom_third span{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+      .center_dot {
+        width: 30%;
+        height: 30%;
+        background-color: black;
+        border-radius: 50%;
+        z-index: 1;
+      }
+      #hours{
+        height: 45%;
+        background-color: black;
+        width: 5%;
+        position: absolute;
+        left: 47.5%;
+        top: 5%;
+        transform-origin: bottom;
+      }
+      #minutes{
+        height: 50%;
+        background-color: black;
+        width: 3%;
+        position: absolute;
+        left: 48.5%;
+        transform-origin: bottom;
+      }
+      #seconds{
+        height: 50%;
+        background-color: black;
+        width: 1%;
+        position: absolute;
+        left: 49.5%;
+        transform-origin: bottom;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="clock-body">
+
+      <div class="clock-face">
+        <div id="hours"></div>
+        <div id="minutes"></div>
+        <div id="seconds"></div>
+      </div>
+
+      <div class="clock-overlay">
+        <div class="top_third">12</div>
+        <div class="middle_third">
+          <div class="middle1">9</div>
+          <div class="middle2">
+            <div class="center_dot"></div>
+          </div>
+          <div class="middle3">3</div>
+        </div>
+        <div class="bottom_third">
+          <span>6</span>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <script>
+      var hoursPointer = document.getElementById("hours");
+      var minutesPointer = document.getElementById("minutes");
+      var secondsPointer = document.getElementById("seconds");
+      function playTime() {
+        var newDate = new Date();
+        var getTheHours = newDate.getHours();
+        var getTheMinutes = newDate.getMinutes();
+        var getTheSeconds = newDate.getSeconds();
+        var secondsTurn = (360 / 60) * getTheSeconds;
+        var minutesTurn = (360 / 60) * getTheMinutes + (secondsTurn / 60);
+        var hoursTurn = (360 / 12) * getTheHours + (minutesTurn / 12);
+        secondsPointer.style.transform = `rotate(${secondsTurn}deg)`
+        minutesPointer.style.transform = `rotate(${minutesTurn}deg)`
+        hoursPointer.style.transform = `rotate(${hoursTurn}deg)`
+      }
+      setInterval(playTime, 1000);
+      playTime();
+    </script>
+
+  </body>
+</html>
