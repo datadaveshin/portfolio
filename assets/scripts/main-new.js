@@ -1,12 +1,12 @@
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        var myObj = JSON.parse(this.responseText);
-        console.log(myObj.code);
-    }
-};
-xmlhttp.open("GET", "https://papostolopoulos.github.io/portfolio/assets/txt_files/test.json", true);
-xmlhttp.send();
+// var xmlhttp = new XMLHttpRequest();
+// xmlhttp.onreadystatechange = function() {
+//     if (this.readyState == 4 && this.status == 200) {
+//         var myObj = JSON.parse(this.responseText);
+//         console.log(myObj.code);
+//     }
+// };
+// xmlhttp.open("GET", "https://papostolopoulos.github.io/portfolio/assets/txt_files/test.json", true);
+// xmlhttp.send();
 
 
 // MAIN VUE INSTANCE
@@ -437,11 +437,12 @@ let app = new Vue({
 
 
       txtCodeCreate(prop, path) {
-        console.log("txtCodeCreate fired");
         console.log(path);
-        var xmlhttp = new XMLHttpRequest();
+        let xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
+          console.log(this.status);
+          if (this.readyState == 4) {
+            console.log(this.responseText);
             var content = JSON.parse(this.responsetext);
             prop = content.code;
           }
