@@ -443,7 +443,7 @@ let app = new Vue({
           console.log(this.status);
           if (this.readyState == 4) {
             let content = JSON.parse(this.responsetext);
-            console.log(content.code);
+            console.log(content);
             prop = content.code;
           }
         }
