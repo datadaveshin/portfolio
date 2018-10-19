@@ -426,12 +426,12 @@ let app = new Vue({
 
 
           //Add path in projects[i].code_url textPath: "assets/txt_files/code-"
-          el.code_url = self.textPath + el.id + ".txt";
+          el.code_url = self.textPath + el.id + ".json";
 
 
           // Add code text in projects[i].code
-          codePath = "https://papostolopoulos.github.io/portfolio/" + self.textPath + el.id + ".txt";
-          self.txtCodeCreate(el.code, el.code_url);
+          // codePath = "https://papostolopoulos.github.io/portfolio/" + self.textPath + el.id + ".json";
+          self.txtCodeCreate("https://papostolopoulos.github.io/portfolio/" + el.code_url, el.code_url);
         });
       },
 
