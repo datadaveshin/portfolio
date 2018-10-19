@@ -442,8 +442,8 @@ let app = new Vue({
         xmlhttp.onreadystatechange = function() {
           console.log(this.status);
           if (this.readyState == 4) {
-            console.log(this.responseText);
-            var content = JSON.parse(this.responsetext);
+            let content = JSON.parse(this.responsetext);
+            console.log(content.code);
             prop = content.code;
           }
         }
