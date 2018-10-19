@@ -63,7 +63,8 @@ let app = new Vue({
           title: "listMe.xyz",
           url: "http://listme.xyz",
           git: "https://github.com/papostolopoulos/listme",
-          code: "",
+          code_url: "",
+          code: ``,
           description: [
             {bullet: "Full stack CRUD todo list."},
             {bullet: "Create, read, update and delete lists of todo items"},
@@ -88,7 +89,8 @@ let app = new Vue({
           title: "writeit.pro",
           url: "http://writeit.pro",
           git: "https://github.com/papostolopoulos/writeit",
-          code: "https://papostolopoulos.github.io/writeit/public/javascripts/wysiwyg.js",
+          code_url: "",
+          code: ``,
           description:
           [
             {bullet: "Full stack blog."},
@@ -116,7 +118,8 @@ let app = new Vue({
           title: "CSS Tutorial",
           url: "https://papostolopoulos.github.io/css-exploration/index.html",
           git: "https://github.com/papostolopoulos/css-exploration",
-          code: "",
+          code_url: "",
+          code: ``,
           description: [
             {bullet: "CSS tutorial for the users interested learning basic aspects of CSS"},
             {bullet: "Analyzed Reset, Specificity, the Box Model, Positioning, Typography, Backgrounds, Responsive Design"},
@@ -141,7 +144,8 @@ let app = new Vue({
           title: "Spotify Discography Search",
           url: "https://git.io/vyfiO",
           git: "https://github.com/papostolopoulos/spotify",
-          code: "https://papostolopoulos.github.io/spotify/assets/js/script-new.js",
+          code_url: "",
+          code: ``,
           description: [
             {bullet: "Search engine with API calls to the Spotify API."},
             {bullet: "The user can search for artists' discographies and review the song titles and album covers"},
@@ -167,6 +171,7 @@ let app = new Vue({
           url: "https://goo.gl/s9sHDS",
           git: "https://github.com/papostolopoulos/image_filtering",
           code: "https://papostolopoulos.github.io/image_filtering/public/js_files/canvas_script.js",
+          code_url: "",
           description: [
             {bullet: "Image editing console."},
             {bullet: "This is a barebones image filtering environment. The user can open images from the hard drive or online sources and apply filters or save in a different image format"},
@@ -192,6 +197,7 @@ let app = new Vue({
           url: "http://sportytourist.com",
           git: "https://github.com/papostolopoulos/sportytourist",
           code: "https://papostolopoulos.github.io/sportytourist/assets/jsfiles/index.js",
+          code_url: "",
           description: [
             {bullet: "Sports news aggregator."},
             {bullet: "News API calls"},
@@ -216,7 +222,8 @@ let app = new Vue({
           title: "Hangman",
           url: "http://hangman.pro",
           git: "https://github.com/papostolopoulos/hangman",
-          code: "",
+          code_url: "",
+          code: ``,
           description: [
             {bullet: "Game of hangman."},
             {bullet: "Random word pick and play."},
@@ -241,7 +248,8 @@ let app = new Vue({
           title: "Clock",
           url: "https://papostolopoulos.github.io/js30/02-clock/index-vanilla.html",
           git: "https://github.com/papostolopoulos/js30/tree/master/02-clock",
-          code: "",
+          code_url: "",
+          code: ``,
           description: [
             {bullet: "A clock that updates automatically by firing interval calls."}
           ],
@@ -264,7 +272,8 @@ let app = new Vue({
           title: "Drum Kit",
           url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vanilla.html",
           git: "https://github.com/papostolopoulos/js30/tree/master/01-drum_kit",
-          code: "",
+          code_url: "",
+          code: ``,
           description: [
             {bullet: "Drum Kit. Press the keys and hear the drums playing."},
             {bullet: "Vanilla JavaScript, CSS, HTML."}
@@ -287,8 +296,9 @@ let app = new Vue({
           key: 10,
           title: "Drum Kit",
           url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vue.html",
+          code_url: "",
           git: "https://github.com/papostolopoulos/js30/tree/master/01-drum_kit",
-          code: "",
+          code: ``,
           description: [
             {bullet: "Drum Kit. Press the keys and hear the drums playing."},
             {bullet: "Vue, CSS, HTML."}
@@ -312,7 +322,8 @@ let app = new Vue({
           title: "Street View Image Modal",
           url: "https://git.io/vppLs",
           git: "https://github.com/papostolopoulos/streetViewModal",
-          code: "",
+          code_url: "",
+          code: ``,
           description: [
             {bullet: "Modal that displays static Google Street View image."},
             {bullet: "Camera rotation and zooming"},
@@ -389,6 +400,7 @@ let app = new Vue({
         //CREATES THE PATHS FOR ALL THE VIDEOS IN THE PROJECTS ARRAY INSIDE DATA
         let self = this;
         let projectsArr = this.projects;
+        let codePath = "";
 
         projectsArr.forEach((el) => {
 
@@ -413,9 +425,29 @@ let app = new Vue({
           el.video_url = self.videoPath + el.id + ".mp4";
 
 
-          //Add path in projects[i].code textPath: "assets/txt_files/code-"
-          el.code = self.textPath + el.id + ".txt";
+          //Add path in projects[i].code_url textPath: "assets/txt_files/code-"
+          el.code_url = self.textPath + el.id + ".txt";
+
+
+          // Add code text in projects[i].code
+          codePath = "https://papostolopoulos.github.io/portfolio/" + self.textPath + el.id + ".txt";
+          self.txtCodeCreate(el.code, el.code_url);
         });
+      },
+
+
+      txtCodeCreate(prop, path) {
+        console.log("txtCodeCreate fired");
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var content = JSON.parse(this.responsetext);
+            prop = content.code;
+          }
+        }
+
+        xmlhttp.open("GET", path, true);
+        xmlhttp.send();
       },
 
       imageModalOpen(event){
@@ -427,20 +459,6 @@ let app = new Vue({
       imageModalClose(event){
         console.log(Object.values(event.path));
         event.path[2].style.display = "none";
-      },
-
-      txtPathCreate() {
-        console.log("txtPathCreate fired");
-        // var xmlhttp = new XMLHttpRequest();
-        // xmlhttp.onreadystatechange = function() {
-        //   if (this.readyState == 4 && this.status == 200) {
-        //     var content = JSON.parse(this.responsetext);
-        //     console.log(content);
-          // }
-        // }
-        //
-        // xmlhttp.open("GET", "assets/txt_files/text.txt", true);
-        // xmlhttp.send();
       },
 
       modalbackImage() {
@@ -464,7 +482,7 @@ let app = new Vue({
     }, //End of methods
     beforeMount(){
       this.pathCreate();
-      this.txtPathCreate();
+      // this.txtCodeCreate();
     },
     computed: {
       getFirstImage: function() {
