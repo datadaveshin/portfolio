@@ -5,7 +5,7 @@ xmlhttp.onreadystatechange = function() {
         console.log(myObj.example);
     }
 };
-xmlhttp.open("GET", "https://papostolopoulos.github.io/portfolio/assets/txt_files/test.txt", true);
+xmlhttp.open("GET", "https://papostolopoulos.github.io/portfolio/assets/txt_files/test.json", true);
 xmlhttp.send();
 
 
