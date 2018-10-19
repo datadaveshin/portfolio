@@ -431,13 +431,14 @@ let app = new Vue({
 
           // Add code text in projects[i].code
           // codePath = "https://papostolopoulos.github.io/portfolio/" + self.textPath + el.id + ".json";
-          self.txtCodeCreate("https://papostolopoulos.github.io/portfolio/" + el.code_url, el.code_url);
+          self.txtCodeCreate(el.code, "https://papostolopoulos.github.io/portfolio/" + el.code_url);
         });
       },
 
 
       txtCodeCreate(prop, path) {
         console.log("txtCodeCreate fired");
+        console.log(path);
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
