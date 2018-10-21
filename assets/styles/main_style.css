@@ -260,7 +260,6 @@ a:hover{
 }
 
 .videoInModal{
-  border: 2px solid black;
   box-sizing: border-box;
   height: inherit;
 }
@@ -284,12 +283,15 @@ a:hover{
   border-radius: 15%;
   width: 90%;
   margin: auto 0;
+  box-sizing: border-box;
+}
 
+[id^=imgIcon]:hover {
+  border: 2px solid black;
 }
 
 .imgIcons:hover{
   border: 2px solid black;
-  box-sizing: border-box;
 }
 
 .divImageModal{
@@ -332,6 +334,7 @@ a:hover{
   overflow: auto;
   color: white;
   grid-area: divModalRight;
+  padding-left: 10px;
 }
 
 .divModalRight hr{
