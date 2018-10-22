@@ -182,11 +182,13 @@ a:hover{
 .articleModals h1{
   font-size: 5vh;
   font-weight: bold;
+  text-align: center;
 }
 
 .articleModals h2{
   font-size: 4vh;
   text-align: center;
+  padding-top: 1vh;
 }
 
 .articleModals p{
@@ -224,30 +226,30 @@ a:hover{
   font-size: 3vh;
   position: relative;
   display:grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "divModalLeft divModalRight" "divModalLeft divModalRight";
   grid-column-gap: .5vw;
 }
 
-.divModalLeft{
+.divModalRight{
   box-sizing: border-box;
   width: 64vw;
   height: 96vh;
-  grid-area: divModalLeft;
+  grid-area: divModalRight;
   padding: 10px;
 }
 
-.divModalLeftL1{
+.divModalRightL1{
   height: 30%;
 }
 
-.divModalLeftL1 ul li{
+.divModalRightL1 ul li{
   list-style-type: circle;
   list-style-position: inside;
 }
 
-.divModalLeftL2{
+.divModalRightL2{
   height: 45%;
   display: flex;
   align-items: center;
@@ -264,34 +266,30 @@ a:hover{
   height: inherit;
 }
 
-.divModalLeftL3{
+.divModalRightL3{
   box-sizing: border-box;
   height: 25%;
-}
-
-.divImageScreenshots{
-  box-sizing: border-box;
-  height: 100%;
-  width: 33.33%;
-  display: inline-flex;
-  text-align: center;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.imgIcons{
-  border-radius: 15%;
-  width: 90%;
-  margin: auto 0;
+.divImageScreenshots{
   box-sizing: border-box;
+  height: 90%;
+  width: 33%;
+  margin: 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-[id^=imgIcon]:hover {
+.divImageScreenshots:hover {
+  cursor: pointer;
   border: 2px solid black;
-}
-
-.imgIcons:hover{
-  border: 2px solid black;
+  box-shadow: inset 100vw 100vh rgba(0, 0, 0, .2);
 }
 
 .divImageModal{
@@ -326,18 +324,18 @@ a:hover{
   margin: -40px 10px 0 0;
 }
 
-.divModalRight{
+.divModalLeft{
   box-sizing: border-box;
   width: 32vw;
   background-color: rgba(0,0,0,.6);
   height: 96vh;
   overflow: auto;
   color: white;
-  grid-area: divModalRight;
+  grid-area: divModalLeft;
   padding-left: 10px;
 }
 
-.divModalRight hr{
+.divModalLeft hr{
   margin-bottom: 20px;
 }
 
@@ -345,7 +343,7 @@ code{
   font: normal normal 2vh courier;
 }
 
-.divModalRightHeading{
+.divModalLeftHeading{
   position: sticky;
   top: 15px;
 }

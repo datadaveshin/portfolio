@@ -120,77 +120,9 @@
           <div class="divCloseModal">&times;</div>
 
 
-          <!--COLORS: 80% lighter and 20% darker of original background color
-          used in the main page. Colors picked as per https://www.w3schools.com/colors/colors_picker.asp
-          Vanilla original: rgb(250, 220, 52) - 80% 20%
-          Vue original: rgb(66, 184, 131)
-          jQuery original: rgb(18, 26, 38) -->
-          <div class="divModalLeft"
-          :id="'divModalLeft-'+project.id"
-          :style="project.language === 'Vanilla' ? 'backgroundColor : rgba(254, 246, 205, .8); color: rgb(100, 85, 2);' :
-                  project.language === 'Vue' ? 'backgroundColor : rgba(180, 228, 206, .8); color: rgb(27, 75, 53);' :
-                  project.language === 'jQuery' ? 'backgroundColor : rgba(186, 200, 222, .8); color: rgb(18, 26, 38);' :
-                  null"
-          >
-            <div class="divModalLeftL1">
-              <h1>
-                {{project.title}} |
-                <a :href="project.url" target="_blank" title="Check out the web page"><i class="fas fa-link"></i></a>
-              </h1>
-              <ul>
-                <li v-for="list in project.description">{{list.bullet}}</li>
-              </ul>
-            </div>
 
-
-
-            <div class="divModalLeftL2">
-              <div class="divVideoContainer">
-                <video class="videoInModal" controls
-                :style="project.language === 'Vanilla' ? 'border: 2px solid rgb(100, 85, 2);' :
-                        project.language === 'Vue' ? 'border: 2px solid rgb(27, 75, 53);' :
-                        project.language === 'jQuery' ? 'border: 2px solid rgb(18, 26, 38);' :
-                        null">
-                  <source :src="project.video_url" type="video/mp4">
-                  </video>
-              </div>
-            </div> <!--End of divModalLeftL2-->
-
-
-
-            <div class="divModalLeftL3">
-              <div class="divImageScreenshots" v-for="(images, idx) in project.images">
-                <!-- screenshot icons of the images -->
-                <a v-on:click="imageModalOpen($event)">
-                  <img :src="images.image" alt="" class="imgIcons" :id="'imgIcon'+idx+'-'+project.id"
-                  :style="project.language === 'Vanilla' ? 'border: 2px solid rgb(100, 85, 2);' :
-                          project.language === 'Vue' ? 'border: 2px solid rgb(27, 75, 53);' :
-                          project.language === 'jQuery' ? 'border: 2px solid rgb(18, 26, 38);' :
-                          null"
-                  >
-                </a>
-
-                <!-- Image modal -->
-                <div class="divImageModal">
-                  <div class="divImageModalClose">
-                    <a v-on:click.stop="imageModalClose($event)">&times;</a>
-                  </div>
-
-                  <div class="divImageModalContent">
-                    <img :src="images.image" alt="" class="divImageModalImage">
-                  </div>
-                </div> <!--End of divImageModal-->
-
-              </div> <!--End of divImageScreenshots-->
-
-            </div> <!--End of divModalLeftL3-->
-          </div> <!--End of divModalLeft-->
-
-
-
-
-          <div class="divModalRight" :id="'divModalRight-'+project.id">
-            <div class="divModalRightHeader">
+          <div class="divModalLeft" :id="'divModalLeft-'+project.id">
+            <div class="divModalLeftHeader">
               <h2>
                 Sample code |
                 <a :href="project.git" target="_blank" title="Check out the github page">
@@ -207,7 +139,86 @@
               </pre>
             </code>
 
+          </div> <!--End of divModalLeft-->
+
+
+
+
+
+          <!--COLORS: 80% lighter and 20% darker of original background color
+          used in the main page. Colors picked as per https://www.w3schools.com/colors/colors_picker.asp
+          Vanilla original: rgb(250, 220, 52) - 80% 20%
+          Vue original: rgb(66, 184, 131)
+          jQuery original: rgb(18, 26, 38) -->
+          <div class="divModalRight"
+          :id="'divModalRight-'+project.id"
+          :style="project.language === 'Vanilla' ? 'backgroundColor : rgba(254, 246, 205, .8); color: rgb(100, 85, 2);' :
+                  project.language === 'Vue' ? 'backgroundColor : rgba(180, 228, 206, .8); color: rgb(27, 75, 53);' :
+                  project.language === 'jQuery' ? 'backgroundColor : rgba(186, 200, 222, .8); color: rgb(18, 26, 38);' :
+                  null"
+          >
+            <div class="divModalRightL1">
+              <h1>
+                {{project.title}} |
+                <a :href="project.url" target="_blank" title="Check out the web page"><i class="fas fa-link"></i></a>
+              </h1>
+              <ul>
+                <li v-for="list in project.description">{{list.bullet}}</li>
+              </ul>
+            </div>
+
+
+
+            <div class="divModalRightL2">
+              <div class="divVideoContainer">
+                <video controls
+                class="videoInModal"
+                :id="'video-'+project.id"
+                :style="project.language === 'Vanilla' ? 'border: 2px solid rgb(100, 85, 2);' :
+                        project.language === 'Vue' ? 'border: 2px solid rgb(27, 75, 53);' :
+                        project.language === 'jQuery' ? 'border: 2px solid rgb(18, 26, 38);' :
+                        null">
+                  <source :src="project.video_url" type="video/mp4">
+                  </video>
+              </div>
+            </div> <!--End of divModalRightL2-->
+
+
+
+            <div class="divModalRightL3">
+
+
+              <!-- Image screenshots -->
+              <div class="divImageScreenshots"
+              v-on:click="imageModalOpen($event)"
+              v-for="(images, idx) in project.images"
+              :style="{backgroundImage: 'url('+project.images[idx].image+')'}"
+              :id="'imageScreenshot'+idx+'-'+project.id"
+              :alt="'imageScreenshot'+idx+'-'+project.id+'. Click to view a larger image'"
+              >
+
+              <!-- :style="project.language === 'Vanilla' ? 'border: 2px solid rgb(100, 85, 2);' :
+                      project.language === 'Vue' ? 'border: 2px solid rgb(27, 75, 53);' :
+                      project.language === 'jQuery' ? 'border: 2px solid rgb(18, 26, 38);' :
+                      null" -->
+
+                <!-- Image modal -->
+                <div class="divImageModal">
+                  <div class="divImageModalClose">
+                    <a v-on:click.stop="imageModalClose($event)">&times;</a>
+                  </div>
+
+                  <div class="divImageModalContent">
+                    <img :src="images.image" alt="" class="divImageModalImage">
+                  </div>
+                </div> <!--End of divImageModal-->
+
+              </div> <!--End of divImageScreenshots-->
+
+
+            </div> <!--End of divModalRightL3-->
           </div> <!--End of divModalRight-->
+
 
 
 

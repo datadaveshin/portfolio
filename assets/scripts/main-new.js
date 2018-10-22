@@ -427,35 +427,11 @@ let app = new Vue({
 
           //Add path in projects[i].code_url textPath: "assets/txt_files/code-"
           el.code_url = self.textPath + el.id + ".json";
-
-
-          // Add code text in projects[i].code
-          // codePath = "https://papostolopoulos.github.io/portfolio/" + self.textPath + el.id + ".json";
-          // self.txtCodeCreate(el.code, "https://papostolopoulos.github.io/portfolio/" + el.code_url);
         });
       },
 
-
-      // txtCodeCreate(prop, path) {
-      //   console.log(path);
-      //   let xmlhttp = new XMLHttpRequest();
-      //   xmlhttp.onreadystatechange = function() {
-      //     console.log(this.status);
-      //     if (this.readyState == 4) {
-      //       let content = JSON.parse(this.responsetext);
-      //       console.log(content);
-      //       prop = content.code;
-      //     }
-      //   }
-      //
-      //   xmlhttp.open("GET", path, true);
-      //   xmlhttp.send();
-      // },
-
       imageModalOpen(event){
-        console.log(event.target);
-        console.log(event.path[1].nextElementSibling);
-        event.path[1].nextElementSibling.style.display = "flex";
+        event.target.children[0].style.display = "flex";
       },
 
       imageModalClose(event){
