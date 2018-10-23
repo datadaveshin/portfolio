@@ -179,6 +179,30 @@ a:hover{
   color: white;
 }
 
+.articleModalsBorderVanilla{
+  border: 2px solid rgb(100, 85, 2);
+}
+
+.articleModalsFontVanilla{
+  color: rgb(100, 85, 2);
+}
+
+.articleModalsBorderVue{
+  border: 2px solid rgb(27, 75, 53);
+}
+
+.articleModalsFontVue{
+  color: rgb(27, 75, 53);
+}
+
+.articleModalsBorderjQuery{
+  border: 2px solid rgb(18, 26, 38);
+}
+
+.articleModalsFontjQuery{
+  color: color: rgb(18, 26, 38);
+}
+
 .articleModals h1{
   font-size: 5vh;
   font-weight: bold;
@@ -201,7 +225,6 @@ a:hover{
   z-index: 1;
   right: 0;
   margin-top: 5px;
-
   font-size: 50px;
   font-weight: bold;
   line-height: 45px;
@@ -209,7 +232,6 @@ a:hover{
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  color: white;
   background-color: rgba(255,255,255,.5);
 }
 
@@ -274,7 +296,7 @@ a:hover{
   justify-content: center;
 }
 
-.divImageScreenshots{
+.divImageIcon{
   box-sizing: border-box;
   height: 90%;
   width: 33%;
@@ -286,7 +308,7 @@ a:hover{
   background-size: cover;
 }
 
-.divImageScreenshots:hover {
+.divImageIcon:hover {
   cursor: pointer;
   border: 2px solid black;
   box-shadow: inset 100vw 100vh rgba(0, 0, 0, .2);
@@ -303,6 +325,7 @@ a:hover{
   display: none;
   align-items: center;
   justify-content: center;
+  transition: display 2s;
 }
 
 .divImageModalContent{
@@ -332,7 +355,7 @@ a:hover{
   overflow: auto;
   color: white;
   grid-area: divModalLeft;
-  padding-left: 10px;
+  padding: 0 10px;
 }
 
 .divModalLeft hr{

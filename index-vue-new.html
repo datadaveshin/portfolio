@@ -64,7 +64,7 @@
                 v-if="project.language === activeModals"
                 :id="'carousel'+project.id"
                 :key="project.key">
-                <a v-on:click="modalOpen">
+                <a @click="modalOpen">
                   {{project.key}} This is the link for the carousel
                 </a>
                 </article>
@@ -117,7 +117,18 @@
 
         <div class="divModalContainer">
 
-          <div class="divCloseModal">&times;</div>
+          <div
+          class="divCloseModal"
+          :class="{articleModalsBorderVanilla: active[0].Vanilla,
+                  articleModalsFontVanilla: active[0].Vanilla,
+                  articleModalsBorderVue: active[1].Vue,
+                  articleModalsFontVue: active[1].Vue,
+                  articleModalsBorderjQuery: active[2].jQuery,
+                  articleModalsFontjQuery: active[2].jQuery
+                  }"
+          >
+            &times;
+          </div>
 
 
 
@@ -129,6 +140,10 @@
                   <i class="fab fa-github"></i>
                 </a>
               </h2>
+
+              <div class="divCodeModalClose">
+                <a @click="codeModalClose($event)">&times;</a>
+              </div>
 
               <hr>
             </div>
@@ -152,9 +167,13 @@
           jQuery original: rgb(18, 26, 38) -->
           <div class="divModalRight"
           :id="'divModalRight-'+project.id"
-          :style="project.language === 'Vanilla' ? 'backgroundColor : rgba(254, 246, 205, .8); color: rgb(100, 85, 2);' :
-                  project.language === 'Vue' ? 'backgroundColor : rgba(180, 228, 206, .8); color: rgb(27, 75, 53);' :
-                  project.language === 'jQuery' ? 'backgroundColor : rgba(186, 200, 222, .8); color: rgb(18, 26, 38);' :
+          :class="{articleModalsFontVanilla: active[0].Vanilla,
+                  articleModalsFontVue: active[1].Vue,
+                  articleModalsFontjQuery: active[2].jQuery
+                  }"
+          :style="project.language === 'Vanilla' ? 'backgroundColor : rgba(254, 246, 205, .8);' :
+                  project.language === 'Vue' ? 'backgroundColor : rgba(180, 228, 206, .8);' :
+                  project.language === 'jQuery' ? 'backgroundColor : rgba(186, 200, 222, .8);' :
                   null"
           >
             <div class="divModalRightL1">
@@ -174,10 +193,12 @@
                 <video controls
                 class="videoInModal"
                 :id="'video-'+project.id"
-                :style="project.language === 'Vanilla' ? 'border: 2px solid rgb(100, 85, 2);' :
+                :class="{articleModalsBorderVanilla: active[0].Vanilla, articleModalsBorderVue: active[1].Vue, articleModalsBorderjQuery: active[2].jQuery}"
+                >
+                <!-- :style="project.language === 'Vanilla' ? 'border: 2px solid rgb(100, 85, 2);' :
                         project.language === 'Vue' ? 'border: 2px solid rgb(27, 75, 53);' :
                         project.language === 'jQuery' ? 'border: 2px solid rgb(18, 26, 38);' :
-                        null">
+                        null" -->
                   <source :src="project.video_url" type="video/mp4">
                   </video>
               </div>
@@ -189,31 +210,32 @@
 
 
               <!-- Image screenshots -->
-              <div class="divImageScreenshots"
-              v-on:click="imageModalOpen($event)"
+              <div class="divImageIcon"
               v-for="(images, idx) in project.images"
+              @click="imageModalOpen($event)"
               :style="{backgroundImage: 'url('+project.images[idx].image+')'}"
+              :class="{articleModalsBorderVanilla: active[0].Vanilla, articleModalsBorderVue: active[1].Vue, articleModalsBorderjQuery: active[2].jQuery}"
               :id="'imageScreenshot'+idx+'-'+project.id"
               :alt="'imageScreenshot'+idx+'-'+project.id+'. Click to view a larger image'"
               >
 
-              <!-- :style="project.language === 'Vanilla' ? 'border: 2px solid rgb(100, 85, 2);' :
-                      project.language === 'Vue' ? 'border: 2px solid rgb(27, 75, 53);' :
-                      project.language === 'jQuery' ? 'border: 2px solid rgb(18, 26, 38);' :
-                      null" -->
+              </div> <!--End of divImageIcon-->
 
-                <!-- Image modal -->
-                <div class="divImageModal">
-                  <div class="divImageModalClose">
-                    <a v-on:click.stop="imageModalClose($event)">&times;</a>
-                  </div>
+              <!-- Image modal -->
+              <div
+              class="divImageModal"
+              :id="'divImageModal'+idx+'-'+project.id"
+              v-for="(images, idx) in project.images"
+              >
 
-                  <div class="divImageModalContent">
-                    <img :src="images.image" alt="" class="divImageModalImage">
-                  </div>
-                </div> <!--End of divImageModal-->
+                <div class="divImageModalClose">
+                  <a @click="imageModalClose($event)">&times;</a>
+                </div>
 
-              </div> <!--End of divImageScreenshots-->
+                <div class="divImageModalContent">
+                  <img :src="images.image" alt="" class="divImageModalImage">
+                </div>
+              </div> <!--End of divImageModal-->
 
 
             </div> <!--End of divModalRightL3-->
