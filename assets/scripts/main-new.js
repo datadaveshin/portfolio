@@ -439,7 +439,22 @@ let app = new Vue({
         event.path[2].style.display = "none";
       },
 
+      expandCodeModal(event){
+        event.path[3].style.position = "fixed";
+        event.path[3].style.zIndex = 2;
+        event.path[3].style.left = 0;
+        event.path[3].style.top = 0;
+        event.path[3].style.width = "100vw";
+        event.path[3].style.height = "100vh";
+        //add a true or false perhaps?
+      },
+
       codeModalClose(event){
+        console.log(event.path[3]);
+        event.path[3].position = "static";
+        event.path[3].style.width = "32vw";
+        event.path[3].style.height = "96vh";
+        // how do I bring back left and top to normal?
 
       },
 

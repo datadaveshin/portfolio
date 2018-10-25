@@ -135,7 +135,7 @@
           <div class="divModalLeft" :id="'divModalLeft-'+project.id">
             <div class="divModalLeftHeader">
               <h2>
-                Sample code |
+                <a @click="expandCodeModal($event)">Sample code</a> |
                 <a :href="project.git" target="_blank" title="Check out the github page">
                   <i class="fab fa-github"></i>
                 </a>
