@@ -133,20 +133,24 @@
 
 
           <div class="divModalLeft" :id="'divModalLeft-'+project.id">
-            <div class="divModalLeftHeader">
-              <h2>
-                <a @click="expandCodeModal($event)">Sample code</a> |
-                <a :href="project.git" target="_blank" title="Check out the github page">
-                  <i class="fab fa-github"></i>
-                </a>
-              </h2>
+            <!-- <div class="divModalLeftHeaderContainer"> -->
+
+              <div class="divModalLeftHeader">
+                <h2>
+                  <a @click="expandCodeModal($event)">Sample code</a> |
+                  <a :href="project.git" target="_blank" title="Check out the github page">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </h2>
+              </div>
 
               <div class="divCodeModalClose">
                 <a @click="codeModalClose($event)">&times;</a>
               </div>
-
               <hr>
-            </div>
+
+            <!-- </div>  -->
+            <!--End of divModalLeftHeaderContainer -->
             <code>
               <pre>
                 {{project.code}}

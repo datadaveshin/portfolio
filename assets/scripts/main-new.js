@@ -451,7 +451,7 @@ let app = new Vue({
 
       codeModalClose(event){
         console.log(event.path[3]);
-        event.path[3].position = "static";
+        event.path[3].style.position = "static";
         event.path[3].style.width = "32vw";
         event.path[3].style.height = "96vh";
         // how do I bring back left and top to normal?

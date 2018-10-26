@@ -358,6 +358,11 @@ a:hover{
   padding: 0 10px;
 }
 
+/* .divCodeModalClose{
+  background-color: yellow;
+  font-size: 15vh;
+} */
+
 .divModalLeft hr{
   margin-bottom: 20px;
 }
