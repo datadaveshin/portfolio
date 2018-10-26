@@ -446,16 +446,17 @@ let app = new Vue({
         event.path[3].style.top = 0;
         event.path[3].style.width = "100vw";
         event.path[3].style.height = "100vh";
+        event.path[2].children[1].style.display = "flex";
         //add a true or false perhaps?
       },
 
       codeModalClose(event){
-        console.log(event.path[3]);
         event.path[3].style.position = "static";
+        event.path[3].style.zIndex = 1;
         event.path[3].style.width = "32vw";
         event.path[3].style.height = "96vh";
+        event.path[1].style.display = "none";
         // how do I bring back left and top to normal?
-
       },
 
       modalbackImage() {

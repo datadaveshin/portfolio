@@ -358,10 +358,22 @@ a:hover{
   padding: 0 10px;
 }
 
-/* .divCodeModalClose{
-  background-color: yellow;
+.divCodeModalClose{
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 8vh;
+  float: right;
   font-size: 15vh;
-} */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 8vh;
+  margin: -30px 0 0 0;
+}
+
+.divCodeModalClose:hover{
+  background-color: white;
+}
 
 .divModalLeft hr{
   margin-bottom: 20px;
