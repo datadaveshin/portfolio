@@ -1,504 +1,269 @@
 <!DOCTYPE html>
-  <html>
+<html lang="en" dir="ltr">
   <head>
-    <title>Paris Apostolopoulos - Coding portfolio</title>
-    <link rel="stylesheet" href="assets/styles/desktop_styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,600" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Paris Apostolopoulos - Coding projects</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/styles/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/main_style.css">
 
-    <script type="text/javascript" src="assets/scripts/javascript.js"></script>
+    <script src="assets/scripts/vue.js"></script>
   </head>
+
+
   <body>
-    <div class="modal" id="modal1">
-      <div class="modalContent">
-        <!-- <span class="modalClose">&times;</span> -->
-        <!-- <img src="assets/images/writeIt.png" alt=""> -->
-      </div>
-    </div>
+    <div id="divContainer"> <!--Beginning of the Vue instance-->
+      <div
+      id="divTransform"
+      :class="{divContainerVanilla: active[0].Vanilla, divContainerVue: active[1].Vue, divContainerjQuery: active[2].jQuery}">
 
-
-    <header>
-      <h1>Paris Apostolopoulos. Coding projects</h1>
-    </header>
-
-    <div>
-
-      <table>
-        <thead>
-          <tr>
-            <th id="thProject">Project</th>
-            <th id="thDescription">Description</th>
-            <th id="thVanillaJs">Vanilla JS</th>
-            <th id="thJQuery">JQuery</th>
-            <th id="thVue">Vue.js</th>
-            <th id="thReact">React</th>
-            <th id="thAngular">Angular</th>
-          </tr>
-        </thead>
-
-
-
-
-        <tr>
-          <td>
-            <h3>
-              <a href="https://papostolopoulos.github.io/js30/02-clock/index-vanilla.html">Clock</a>
-            </h3>
-          </td>
-          <td>
+        <header>
+          <div class="divHeaderTitle">
+            <h1>Coding Projects - Paris Apostolopoulos</h1>
+          </div>
+          <nav>
             <ul>
-              <li>Clock. A clock that updates automatically by firing interval calls</li>
-              <li><i>This is based on the JavaScript30 tutorial</i></li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li>
-                <a href="https://papostolopoulos.github.io/js30/02-clock/index-vanilla.html" target="_blank">Site</a>
+              <li v-for="section in sections"
+              v-if="section.active"
+              :name="section.text"
+              :text = "section.text"
+              style="color: black;">
+                {{section.text}}
               </li>
-              <li>
-                <a href="https://github.com/papostolopoulos/js30/tree/master/02-clock" target="_blank">Git</a>
-              </li>
-              <li>
-                <a class="screenshot" id="clockVanilla" href="#">Screenshot</a>
+
+              <li
+              v-else
+              :name="section.text"
+              @mouseover="classTransitionOver($event)"
+              @mouseout="classTransitionLeave($event)">
+
+                <a
+                :key="section.id"
+                :name="section.text"
+                @click="classChange($event)">
+                  {{section.text}}
+                </a>
               </li>
             </ul>
-          </td>
-          <td>
-            <!-- JQuery -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Vue -->
-            &nbsp
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
+          </nav>
+        </header>
+
+
+
+        <main>
+          <div id="divCarousel">
+            <div class="divArrow" id="divArrowLeft">
+              <i class="fas fa-angle-left"></i>
+            </div>
+
+              <section class="sectionCarouselArea"
+              :class="{sectionCarouselAreaFontVanilla: active[0].Vanilla,
+                      sectionCarouselAreaFontVue: active[1].Vue,
+                      sectionCarouselAreaFontjQuery: active[2].jQuery,
+                      }"
+              >
+
+                <article v-for="(project, index) in projects"
+                v-if="project.language === activeModals"
+                :id="'carousel'+project.id"
+                :key="project.key"
+                >
+                <a @click="modalOpen"
+                :id = "'aModalOpen-' + project.id"
+                >
+                  {{project.key}}: {{project.title}}
+                </a>
+                </article>
+
+              </section>
+
+
+            <div class="divArrow" id="divArrowRight">
+              <i class="fas fa-angle-right"></i>
+            </div>
+          </div>
+        </main>
 
 
 
 
-        <tr>
-          <td>
-            <h3>
-              <a href="https://papostolopoulos.github.io/js30/01-drum_kit/index-vanilla.html">Drum Kit</a>
-            </h3>
-          </td>
-          <td>
-            <ul>
-              <li>Drum Kit. Press the keys and hear the drums playing</li>
-              <li><i>This is based on the JavaScript30 tutorial</i></li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li>
-                <a href="https://papostolopoulos.github.io/js30/01-drum_kit/index-vanilla.html" target="_blank">Site</a>
-              </li>
-              <li>
-                <a href="https://github.com/papostolopoulos/js30/tree/master/01-drum_kit" target="_blank">Git</a>
-              </li>
-              <li>
-                <a class="screenshot" id="drumKitVanilla" href="#">Screenshot</a>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <!-- JQuery -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Vue -->
-            <ul>
-              <li>
-                <a href="https://papostolopoulos.github.io/js30/01-drum_kit/index-vue.html" target="_blank">Site</a>
-              </li>
-              <li>
-                <a href="https://github.com/papostolopoulos/js30/tree/master/01-drum_kit" target="_blank">Git</a>
-              </li>
-              <li>
-                <a class="screenshot" id="drumKitVue" href="#">Screenshot</a>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
+        <footer>
+          <span>
+            <a href="mailto: papostolopoulos@protonmail.com"
+            title="Email me at papostolopoulos@protonmail.com">
+              <i class="fas fa-envelope"></i>
+            </a> |
+            <a href="https://www.linkedin.com/in/parisapostolopoulos/" target="_blank" title="Visit my LinkedIn page">
+              <i class="fab fa-linkedin-in"></i>
+            </a> |
+            <a href="https://github.com/papostolopoulos" target="_blank" title="Visit my github page">
+              <i class="fab fa-github"></i>
+            </a> |
+            <a href="https://docs.google.com/document/d/1lPWcJ7GO5fzVQGeyxt9YIF_g22C0Qkr0Cznon-z514I/edit?usp=sharing" target="_blank" title="Read a copy of my resume">
+              <i class="fas fa-file"></i>
+            </a> |
+            &copy 2018 - today
+          </span>
+        </footer>
+
+      </div> <!--End of divTransform. This is where all the transition of vanilla, vue and jquery happens-->
+
+
+
+      <!-- MODALS -->
+      <section id="sectionProjects">
+        <article v-for="(project, index) in projects"
+        v-if="project.language === activeModals"
+        :id="'modal-'+project.id"
+        :key="project.key"
+        class="articleModals"
+        v-bind:style="project.bgImage"
+        >
+
+
+        <div class="divModalContainer">
+
+          <div
+          class="divCloseModal"
+          :class="{borderVanilla: active[0].Vanilla,
+                  fontVanilla: active[0].Vanilla,
+                  borderVue: active[1].Vue,
+                  fontVue: active[1].Vue,
+                  borderjQuery: active[2].jQuery,
+                  fontjQuery: active[2].jQuery
+                  }"
+          :id="'divCloseModal-' + project.id"
+          @click="modalClose"
+          >
+            &times;
+          </div>
+
+
+
+          <div class="divModalLeft" :id="'divModalLeft-'+project.id">
+            <!-- <div class="divModalLeftHeaderContainer"> -->
+
+              <div class="divModalLeftHeader">
+                <h2>
+                  <a @click="expandCodeModal($event)">Sample code</a> |
+                  <a :href="project.git" target="_blank" title="Check out the github page">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </h2>
+                <div class="divCodeModalClose">
+                  <a @click="codeModalClose($event)">&times;</a>
+                </div>
+              </div>
+
+              <hr>
+
+            <!-- </div>  -->
+            <!--End of divModalLeftHeaderContainer -->
+            <code>
+              <pre>
+                {{project.code}}
+
+              </pre>
+            </code>
+
+          </div> <!--End of divModalLeft-->
 
 
 
 
-        <tr>
-          <td>
-            <h3><a href="http://writeit.pro" target="_blank">writeIt</a></h3>
-          </td>
-          <td>
-            <ul>
-              <li>Full stack CRUD blog page.</li>
-              <li>Write different text, upload images and videos,
-                save, modify, delete</li>
-              <li>WYSIWYG editor.</li>
-              <li>Image, video upload.</li>
-              <li>Responsive.</li>
-              <li>Node, psql, JavaScript, handlebars, CSS</li>
-            </ul>
-          </td>
-          <td>
-            <!-- Vanilla JS -->
-            <ul>
-              <li><a href="http://writeit.pro" target="_blank">Site</a></li>
-              <li> <a href="https://github.com/papostolopoulos/writeit">Git</a> </li>
-              <li>
-                <a class="screenshot" id="writeItVanilla" href="#">Screenshot</a>
-              </li>
-            </ul>
 
-          </td>
-          <td>
-            <!-- JQuery -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Vue -->
-            &nbsp
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
-
-
-
-        <tr>
-          <td>
-            <h3><a href="http://listMe.xyz" target="_blank">listMe</a></h3>
-          </td>
-          <td>
-            <ul>
-              <li>Full stack CRUD todo list. Create, update and delete lists of things you need to do.</li>
-              <li>Node, knex, psql, JQuery, handlebars, Vanilla CSS</li>
-            </ul>
-          </td>
-          <td>
-            <!-- Vanilla JS -->
-            &nbsp
-          </td>
-          <td>
-            <ul>
-              <li>
-                <a href="http://listMe.xyz" target="_blank">Site</a>
-              </li>
-              <li>
-                <a href="https://github.com/papostolopoulos/listme">Git</a>
-              </li>
-              <li>
-                <a class="screenshot" id="listMeVanilla" href="#">Screenshot</a>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <!-- Vue -->
-            &nbsp
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
-
-
-
-        <tr>
-          <td>
-            <h3> <a href="http://hangman.pro" target="_blank">Hangman game</a> </h3>
-          </td>
-          <td>
-            <ul>
-              <li>Game of hangman. Random word pick and play.</li>
-              <li>jQuery, Vanilla CSS</li>
+          <!--COLORS: 80% lighter and 20% darker of original background color
+          used in the main page. Colors picked as per https://www.w3schools.com/colors/colors_picker.asp
+          Vanilla original: rgb(250, 220, 52) - 80% 20%
+          Vue original: rgb(66, 184, 131)
+          jQuery original: rgb(18, 26, 38) -->
+          <div class="divModalRight"
+          :id="'divModalRight-'+project.id"
+          :class="{fontVanilla: active[0].Vanilla,
+                  fontVue: active[1].Vue,
+                  fontjQuery: active[2].jQuery
+                  }"
+          :style="project.language === 'Vanilla' ? 'backgroundColor : rgba(254, 246, 205, .8);' :
+                  project.language === 'Vue' ? 'backgroundColor : rgba(180, 228, 206, .8);' :
+                  project.language === 'jQuery' ? 'backgroundColor : rgba(186, 200, 222, .8);' :
+                  null"
+          >
+            <div class="divModalRightL1">
+              <h1>
+                {{project.title}} |
+                <a :href="project.url" target="_blank" title="Check out the web page"><i class="fas fa-link"></i></a>
+              </h1>
+              <ul>
+                <li v-for="list in project.description">{{list.bullet}}</li>
               </ul>
-          </td>
-          <td>
-            <!-- Vanilla JS -->
-            &nbsp
-          </td>
-          <td>
-            <ul>
-              <li>
-                <a href="http://hangman.pro" target="_blank">Site</a>
-              </li>
-              <li>
-                <a href="https://github.com/papostolopoulos/hangman">Git</a>
-              </li>
-              <li>
-                <a class="screenshot" id="hangmanVanilla" href="#">Screenshot</a>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <!-- Vue -->
-            &nbsp
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
+            </div>
 
 
 
-        <tr>
-          <td>
-            <h3> <a href="http://sportyTourist.com" target="_blank">sportyTourist</a> </h3>
-          </td>
-          <td>
-            <ul>
-              <li>Sports news aggregator.</li>
-              <li>News API calls</li>
-              <li>Vanilla JavaScript, Vanilla CSS</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li>
-                <a href="http://sportytourist.com" target="_blank">Site</a>
-              </li>
-              <li>
-                <a href="https://github.com/papostolopoulos/sportytourist">Git</a>
-              </li>
-              <li>
-                <a class="screenshot" id="sportyTouristVanilla" href="#">Screenshot</a>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <!-- JQuery -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Vue -->
-            &nbsp
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
+            <div class="divModalRightL2">
+              <div class="divVideoContainer">
+                <video controls
+                class="videoInModal"
+                :id="'video-'+project.id"
+                :class="{borderVanilla: active[0].Vanilla, borderVue: active[1].Vue, borderjQuery: active[2].jQuery}"
+                >
+                <!-- :style="project.language === 'Vanilla' ? 'border: 2px solid rgb(100, 85, 2);' :
+                        project.language === 'Vue' ? 'border: 2px solid rgb(27, 75, 53);' :
+                        project.language === 'jQuery' ? 'border: 2px solid rgb(18, 26, 38);' :
+                        null" -->
+                  <source :src="project.video_url" type="video/mp4">
+                  </video>
+              </div>
+            </div> <!--End of divModalRightL2-->
+
+
+
+            <div class="divModalRightL3">
+
+
+              <!-- Image screenshots -->
+              <div class="divImageIcon"
+              v-for="(images, idx) in project.images"
+              @click="imageModalOpen($event)"
+              :style="{backgroundImage: 'url('+project.images[idx].image+')'}"
+              :class="{borderVanilla: active[0].Vanilla, borderVue: active[1].Vue, borderjQuery: active[2].jQuery}"
+              :id="'imageScreenshot'+idx+'-'+project.id"
+              :alt="'imageScreenshot'+idx+'-'+project.id+'. Click to view a larger image'"
+              >
+
+              </div> <!--End of divImageIcon-->
+
+              <!-- Image modal -->
+              <div
+              class="divImageModal"
+              :id="'divImageModal'+idx+'-'+project.id"
+              v-for="(images, idx) in project.images"
+              >
+
+                <div class="divImageModalClose">
+                  <a @click="imageModalClose($event)">&times;</a>
+                </div>
+
+                <div class="divImageModalContent">
+                  <img :src="images.image" alt="" class="divImageModalImage">
+                </div>
+              </div> <!--End of divImageModal-->
+
+
+            </div> <!--End of divModalRightL3-->
+          </div> <!--End of divModalRight-->
 
 
 
 
-        <tr>
-          <td>
-            <h3><a href="https://git.io/vppLs" target="_blank">Street view image modal</a></h3>
-          </td>
-          <td>
-            <ul>
-              <li>Modal that displays static Google Street View image.</li>
-              <li>Camera rotation and zooming</li>
-              <li>Google maps API call</li>
-              <li>Vanilla JavaScript, Vanilla CSS</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li>
-                <a href="https://git.io/vppLs" target="_blank">Site</a>
-              </li>
-              <li>
-                <a href="https://github.com/papostolopoulos/streetViewModal">Git</a>
-              </li>
-              <li>
-                <a class="screenshot" id="streetViewModalVanilla" href="#">Screenshot</a>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <!-- JQuery -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Vue -->
-            &nbsp
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
+        </div> <!--End of divModalContainer-->
+      </article>
+    </section>
+
+  </div> <!-- END OF TAG THAT CONTAINS THE VUE INSTANCE - divContainer-->
 
 
-
-
-        <tr>
-          <td>
-            <h3> <a href="https://git.io/vMM8C" target="_blank">A CSS tutorial</a> </h3>
-          </td>
-          <td>
-            <ul>
-              <li>A css tutorial that displays how the code modifies the page's experience.</li>
-              <li>Pages get updated with new css rules as the user reads the content.</li>
-              <li>html, vanilla CSS</li>
-              <li>Responsive</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li>
-                <a href="https://git.io/vMM8C">Site</a>
-              </li>
-              <li>
-                <a href="https://github.com/papostolopoulos/css-exploration">Git</a>
-              </li>
-              <li>
-                <a class="screenshot" id="cssExplorationVanilla" href="#">Screenshot</a>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <!-- JQuery -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Vue -->
-            &nbsp
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
-
-
-
-
-        <tr>
-          <td>
-            <h3> <a href="https://git.io/vyfiO">Spotify artists discography</a> </h3>
-          </td>
-          <td>
-            <ul>
-              <li>API call to Spotify for the display of artist's discography</li>
-              <li>html, css, javascript, promises, Ajax calls</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li>
-                <a href="https://git.io/vyfiO">Site</a>
-              </li>
-              <li>
-                <a href="https://github.com/papostolopoulos/spotify">Git</a>
-              </li>
-              <li>
-                <a class="screenshot" id="spotifyDiscographyVanilla" href="#">Screenshot</a>
-              </li>
-            </ul>
-          </td>
-          <td>
-            <!-- JQuery -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Vue -->
-            &nbsp
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
-
-
-
-        <tr>
-          <td>
-            <h3> <a href="goo.gl/s9sHDS">Image filtering console</a> </h3>
-          </td>
-          <td>
-            <ul>
-              <li>Console with algorithmic calculation for the filtering of images.</li>
-              <li>node.js server, html, css, javascript.</li>
-              <li>This is an incomplete work based on the needs of a class project.</li>
-            </ul>
-          </td>
-          <td>
-            <a href="goo.gl/s9sHDS">Vanilla JS link</a>
-          </td>
-          <td>
-            <!-- JQuery -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Vue -->
-            &nbsp
-          </td>
-          <td>
-            <!-- React -->
-            &nbsp
-          </td>
-          <td>
-            <!-- Angular -->
-            &nbsp
-          </td>
-        </tr>
-
-
-      </table>
-
-    </div>
-
-
-
-
-
-
-
-
-
-    <footer>
-      <small></small>
-    </footer>
+    <script src="assets/scripts/main.js"></script>
   </body>
-  </html>
+</html>

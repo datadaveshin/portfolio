@@ -109,6 +109,25 @@ header{
   position: relative;
 }
 
+.sectionCarouselArea {
+  font-size: 30px;
+  margin: 80px;
+  color: white;
+}
+
+.sectionCarouselAreaFontVanilla {
+  text-shadow: 1px 1px 2px rgb(100, 85, 2);
+}
+
+.sectionCarouselAreaFontVue {
+  text-shadow: 1px 1px 2px rgb(27, 75, 53);
+}
+
+.sectionCarouselAreaFontjQuery {
+  color: rgb(18, 26, 38);
+  text-shadow: 1px 1px 2px rgb(18, 26, 38);
+}
+
 .divArrow{
   width: 5vw;
   height: 10vh;
@@ -165,8 +184,8 @@ a:hover{
 .articleModals{
   color: black;
 /* OPEN THE FOLLOWING TWO WHEN YOU ARE READY */
-  /* position: fixed;  */
-  /* display: none; */
+  position: fixed;
+  display: none;
   left: 0;
   top: 0;
   z-index: 1;
@@ -175,31 +194,30 @@ a:hover{
   background-position:center;
   background-repeat: no-repeat;
   background-size: 100vw;
-  display: flex;
   color: white;
 }
 
-.articleModalsBorderVanilla{
+.borderVanilla{
   border: 2px solid rgb(100, 85, 2);
 }
 
-.articleModalsFontVanilla{
+.fontVanilla{
   color: rgb(100, 85, 2);
 }
 
-.articleModalsBorderVue{
+.borderVue{
   border: 2px solid rgb(27, 75, 53);
 }
 
-.articleModalsFontVue{
+.fontVue{
   color: rgb(27, 75, 53);
 }
 
-.articleModalsBorderjQuery{
+.borderjQuery{
   border: 2px solid rgb(18, 26, 38);
 }
 
-.articleModalsFontjQuery{
+.fontjQuery{
   color: color: rgb(18, 26, 38);
 }
 
