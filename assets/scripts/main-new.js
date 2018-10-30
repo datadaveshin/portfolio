@@ -447,7 +447,8 @@ let app = new Vue({
         event.path[3].style.width = "100vw";
         event.path[3].style.height = "100vh";
         event.path[2].children[1].style.display = "flex";
-        //add a true or false perhaps?
+        event.path[3].style.transition = "all 2s";
+        console.log(event.path[2].children[1]);
       },
 
       codeModalClose(event){
@@ -456,6 +457,7 @@ let app = new Vue({
         event.path[3].style.width = "32vw";
         event.path[3].style.height = "96vh";
         event.path[1].style.display = "none";
+        event.path[3].style.transition = "all 2s";
         // how do I bring back left and top to normal?
       },
 
