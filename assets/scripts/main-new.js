@@ -265,7 +265,7 @@ let app = new Vue({
 
         {
           key: 9,
-          title: "Drum Kit",
+          title: "Drum Kit - Vanilla",
           url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vanilla.html",
           git: "https://github.com/papostolopoulos/js30/tree/master/01-drum_kit",
           code_url: "",
@@ -291,7 +291,7 @@ let app = new Vue({
 
         {
           key: 10,
-          title: "Drum Kit",
+          title: "Drum Kit - Vue",
           url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vue.html",
           code_url: "",
           git: "https://github.com/papostolopoulos/js30/tree/master/01-drum_kit",
@@ -448,7 +448,6 @@ let app = new Vue({
         event.path[3].style.height = "100vh";
         event.path[2].children[1].style.display = "flex";
         event.path[3].style.transition = "all 2s";
-        console.log(event.path[2].children[1]);
       },
 
       codeModalClose(event){

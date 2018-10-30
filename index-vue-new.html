@@ -63,9 +63,11 @@
                 <article v-for="(project, index) in projects"
                 v-if="project.language === activeModals"
                 :id="'carousel'+project.id"
-                :key="project.key">
-                <a @click="modalOpen">
-                  {{project.key}} This is the link for the carousel
+                :key="project.key"
+                >
+                <a @click="modalOpen"
+                >
+                  {{project.key}}: {{project.title}}
                 </a>
                 </article>
 
