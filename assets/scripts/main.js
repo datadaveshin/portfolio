@@ -291,6 +291,83 @@ let app = new Vue({
 
         {
           key: 10,
+          title: "addEventListener.xyz",
+          url: "http://addEventListener.xyz",
+          code_url: "YOU NEED TO ADD A COPY OF THE CODE. YOU NEED TO ADD IMAGES. YOU NEED TO ADD VIDEO FOOTAGE",
+          git: "https://github.com/papostolopoulos/portfolio",
+          code: "",
+          description: [
+            {bullet: "Single page application"},
+            {bullet: "A Personal web page with a list of all the coding projects"},
+            {bullet: "Multiple class transitions, CSS transformations and interactive display through a single Vue instance."},
+            {bullet: "Vue, CSS, HTML."}
+          ],
+          language: "Vue",
+          images: [
+            {image: ""},
+            {image: ""},
+            {image: ""},
+          ],
+          video_url: "",
+          id: "addEventListenerVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
+        },
+
+        {
+          key: 11,
+          title: "JSON files copy-paste viewer",
+          url: "https://papostolopoulos.github.io/tutorials/work/copypaste3.html",
+          code_url: "",
+          git: "https://github.com/papostolopoulos/tutorials/tree/master/work/copypaste",
+          code: "You need to add the description, code, images and video footage",
+          description: [
+            {bullet: "Add a description"}
+          ],
+          language: "Vue",
+          images: [
+            {image: ""},
+            {image: ""},
+            {image: ""},
+          ],
+          video_url: "",
+          id: "jsonCopyPasteVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
+        },
+
+        {
+          key: 12,
+          title: "A Vue tutorial",
+          url: "https://papostolopoulos.github.io/tutorials/vue/vue_website_tutorial/000-vue_introduction.html",
+          code_url: "",
+          git: "https://github.com/papostolopoulos/tutorials/tree/master/vue/vue_website_tutorial",
+          code: "Need to add the code, description, images and video footage",
+          description: [
+            {bullet: "Drum Kit. Press the keys and hear the drums playing."},
+            {bullet: "Vue, CSS, HTML."},
+            {bullet: "Similar project in the Vanilla section."}
+          ],
+          language: "Vue",
+          images: [
+            {image: ""},
+            {image: ""},
+            {image: ""},
+          ],
+          video_url: "",
+          id: "vueTutorialVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
+        },
+
+        {
+          key: 13,
           title: "Drum Kit - Vue",
           url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vue.html",
           code_url: "",
@@ -428,11 +505,23 @@ let app = new Vue({
         });
       },
 
+      //OPEN THE MODAL
+      modalOpen() {
+        var getModalId = event.target.id.replace("aModalOpen", "modal");
+        document.getElementById(getModalId).style.display = "flex";
+      },
+
+      //CLOSE THE MODAL
+      modalClose() {
+        var getModalId = event.target.id.replace("divCloseModal", "modal");
+        document.getElementById(getModalId).style.display = "none";
+      },
+
       imageModalOpen(event){
         //Get the id from the "imageScreenshot". Change the name to match that of the modal
-        let modalId = event.target.id.replace("imageScreenshot", "divImageModal");
+        let divImageId = event.target.id.replace("imageScreenshot", "divImageModal");
         //Change the display from "none" to "flex"
-        document.getElementById(modalId).style.display="flex";
+        document.getElementById(divImageId).style.display="flex";
       },
 
       imageModalClose(event){
@@ -448,6 +537,10 @@ let app = new Vue({
         event.path[3].style.height = "100vh";
         event.path[2].children[1].style.display = "flex";
         event.path[3].style.transition = "all 2s";
+        console.log(event.path[2]);
+        //This is what you need to do if you decide to transfer the above in a new object.
+        // let targetDiv = document.getElementById("divTransform");
+        // this.addStyle(targetDiv, this.hoverStyle.clean);
       },
 
       codeModalClose(event){
@@ -457,7 +550,6 @@ let app = new Vue({
         event.path[3].style.height = "96vh";
         event.path[1].style.display = "none";
         event.path[3].style.transition = "all 2s";
-        // how do I bring back left and top to normal?
       },
 
       modalbackImage() {
@@ -472,18 +564,6 @@ let app = new Vue({
       //CREATE ALL MODALS
       modalCreateClass() {
         console.log("modal create fired");
-      },
-
-      //OPEN THE MODAL
-      modalOpen() {
-        var getModalId = event.target.id.replace("aModalOpen", "modal");
-        document.getElementById(getModalId).style.display = "flex";
-      },
-
-      //CLOSE THE MODAL
-      modalClose() {
-        var getModalId = event.target.id.replace("divCloseModal", "modal");
-        document.getElementById(getModalId).style.display = "none";
       }
     }, //End of methods
     beforeMount(){
