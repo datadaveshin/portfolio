@@ -451,14 +451,14 @@ let app = new Vue({
       // EFFECT THAT ACTIVATES THE TRANSITION WHEN MOUSING OVER
       classTransitionOver(event) {
         let attr = event.target.getAttribute("name");
-        let targetDiv = document.getElementById("divTransform");
+        let targetDiv = window["divTransform"];
         this.addStyle(targetDiv, this.hoverStyle[attr]);
       },
 
 
       // EFFECT THAT DEACTIVATES THE TRANSITION WHEN THE MOUSE LEAVES
       classTransitionLeave(event) {
-        let targetDiv = document.getElementById("divTransform");
+        let targetDiv = window["divTransform"];
         this.addStyle(targetDiv, this.hoverStyle.clean);
       },
 
@@ -511,20 +511,20 @@ let app = new Vue({
       //OPEN THE MODAL
       modalOpen() {
         var getModalId = event.target.id.replace("aModalOpen", "modal");
-        document.getElementById(getModalId).style.display = "flex";
+        window[getModalId].style.display = "flex";
       },
 
       //CLOSE THE MODAL
       modalClose() {
         var getModalId = event.target.id.replace("divCloseModal", "modal");
-        document.getElementById(getModalId).style.display = "none";
+        window[getModalId].style.display = "none";
       },
 
       imageModalOpen(event){
         //Get the id from the "imageScreenshot". Change the name to match that of the modal
         let divImageId = event.target.id.replace("imageScreenshot", "divImageModal");
         //Change the display from "none" to "flex"
-        document.getElementById(divImageId).style.display="flex";
+        window[divImageId].style.display="flex";
       },
 
       imageModalClose(event){
