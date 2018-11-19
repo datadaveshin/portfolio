@@ -571,7 +571,6 @@ let app = new Vue({
     }, //End of methods
     beforeMount(){
       this.pathCreate();
-      // this.txtCodeCreate();
     },
     computed: {
       getFirstImage: function() {
