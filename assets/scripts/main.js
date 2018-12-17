@@ -540,7 +540,7 @@ let app = new Vue({
         event.path[3].style.width = "100vw";
         event.path[3].style.height = "100vh";
         event.path[2].children[1].style.display = "flex";
-        event.path[3].style.transition = "all 2s";
+        // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
         console.log(event.path[2]);
         //This is what you need to do if you decide to transfer the above in a new object.
         // let targetDiv = document.getElementById("divTransform");
@@ -553,7 +553,7 @@ let app = new Vue({
         event.path[3].style.width = "32vw";
         event.path[3].style.height = "96vh";
         event.path[1].style.display = "none";
-        event.path[3].style.transition = "all 2s";
+        // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
       },
 
       modalbackImage() {
