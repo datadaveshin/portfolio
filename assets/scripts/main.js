@@ -487,16 +487,18 @@ let app = new Vue({
           el.images.forEach((ele, idx) => ele.image = self.imagePath + el.id + (idx+1) + ".jpg");
 
 
+          // DEACTIVATED IT - TRYING TO SEE IF IT LOOKS BETTER WITHOUT A BG IMAGE IN MODAL
           //Add path in projects[i].bgImage.backgroundImage
-          // backgroundImage: 'url("assets/images/logo-vue.png")',
-          el.bgImage.backgroundImage = "url(" + el.images[0].image + ")"
+          // backgroundImage: 'url("assets/images/logo-vue.png")'
+          // el.bgImage.backgroundImage = "url(" + el.images[0].image + ")"
 
 
+          // DEACTIVATED IT. SEE ABOVE COMMENT
           //Add attribute value for boxShadow for each modal
-          el.language === "Vanilla" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(250, 220, 52, .5)" :
-          el.language === "Vue" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(66, 184, 131, .5)" :
-          el.language === "jQuery" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(18, 26, 38, .5)" :
-          null;
+          // el.language === "Vanilla" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(250, 220, 52, .5)" :
+          // el.language === "Vue" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(66, 184, 131, .5)" :
+          // el.language === "jQuery" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(18, 26, 38, .5)" :
+          // null;
 
 
           // Add path in projects[i].video_url
