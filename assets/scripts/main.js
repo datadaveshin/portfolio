@@ -319,7 +319,7 @@ let app = new Vue({
         {
           key: 11,
           title: "JSON files copy-paste viewer",
-          url: "https://papostolopoulos.github.io/tutorials/work/copypaste/copypaste3.html",
+          url: "https://papostolopoulos.github.io/tutorials/work/copypaste/copypaste4.html",
           code_url: "",
           git: "https://github.com/papostolopoulos/tutorials/tree/master/work/copypaste",
           code: "You need to add the description, code, images and video footage",
