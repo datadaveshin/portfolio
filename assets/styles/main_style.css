@@ -1,12 +1,14 @@
+*{
+  box-sizing: border-box;
+}
+
 body{
   font: normal normal 2vh 'Montserrat', Helvetica, sans-serif;
   color: white;
-  box-sizing: border-box;
 }
 
 h1{
   font-size: 3vh;
-  /* font-weight: 1000; */
 }
 
 nav {
@@ -184,8 +186,8 @@ a:hover{
 .articleModals{
   color: black;
 /* OPEN THE FOLLOWING TWO WHEN YOU ARE READY */
-  position: fixed;
-  display: none;
+  position: fixed; /*activate position to fixed when done with formatting modal*/
+  display: none; /*Put it back to "none" when you are done with formatting*/
   left: 0;
   top: 0;
   z-index: 1;

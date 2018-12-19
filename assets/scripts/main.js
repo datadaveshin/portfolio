@@ -396,7 +396,7 @@ let app = new Vue({
         },
 
         {
-          key: 11,
+          key: 14,
           title: "Street View Image Modal",
           url: "https://git.io/vppLs",
           git: "https://github.com/papostolopoulos/streetViewModal",
