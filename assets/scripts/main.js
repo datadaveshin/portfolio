@@ -517,7 +517,7 @@ let app = new Vue({
       },
 
       //CLOSE THE MODAL
-      modalClose() {
+      modalClose(event) {
         var getModalId = event.target.id.replace("divCloseModal", "modal");
         window[getModalId].style.display = "none";
       },
