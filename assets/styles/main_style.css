@@ -292,20 +292,26 @@ a:hover{
 }
 
 .divModalRightL2{
-  height: 45%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 70%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "divVideoContainer divImageIcon";
+  /* align-items: center;
+  justify-content: center; */
 }
 
 .divVideoContainer{
-  align-self: center;
-  height: 96%;
+  /* align-self: center; */
+  grid-area: divVideoContainer;
+  width: 31vw;
+  height: 40vh;
 }
 
 .videoInModal{
   box-sizing: border-box;
   height: inherit;
+  width: inherit;
 }
 
 .divModalRightL3{
@@ -317,13 +323,14 @@ a:hover{
 }
 
 .divImageIcon{
+  grid-area: divImageIcon;
   box-sizing: border-box;
-  height: 90%;
-  width: 33%;
-  margin: 0 3px;
-  display: flex;
+  height: 40vh;
+  width: 31vw;
+  /* margin: 0 3px; */
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -214,23 +214,24 @@
                         null" -->
                   <source :src="project.video_url" type="video/mp4">
                   </video>
-              </div>
-            </div> <!--End of divModalRightL2-->
+              </div> <!--End of Video container-->
 
 
 
-            <div class="divModalRightL3">
+
 
 
               <!-- Image screenshots -->
               <div class="divImageIcon"
-              v-for="(images, idx) in project.images"
+              :src="project.images[0].image"
+
               @click="imageModalOpen($event)"
-              :style="{backgroundImage: 'url('+project.images[idx].image+')'}"
+              :style="{backgroundImage: 'url('+project.images[0].image+')'}"
               :class="{borderVanilla: active[0].Vanilla, borderVue: active[1].Vue, borderjQuery: active[2].jQuery}"
-              :id="'imageScreenshot'+idx+'-'+project.id"
-              :alt="'imageScreenshot'+idx+'-'+project.id+'. Click to view a larger image'"
+              :id="'imageScreenshot0'+'-'+project.id"
+              :alt="'imageScreenshot0'+'-'+project.id+'. Click to view a larger image'"
               >
+              <!-- v-for="(images, idx) in project.images" -->
 
               </div> <!--End of divImageIcon-->
 
@@ -249,6 +250,17 @@
                   <img :src="images.image" alt="" class="divImageModalImage">
                 </div>
               </div> <!--End of divImageModal-->
+
+
+
+
+            </div> <!--End of divModalRightL2-->
+
+
+
+            <div class="divModalRightL3">
+
+
 
 
             </div> <!--End of divModalRightL3-->
