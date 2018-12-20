@@ -134,9 +134,9 @@
                   fontjQuery: active[2].jQuery
                   }"
           :id="'divCloseModal-' + project.id"
-          @click="modalClose"
           >
-            &times;
+            <i class="far fa-times-circle" @click="modalClose"></i>
+            <!-- &times; -->
           </div>
 
 
@@ -152,7 +152,7 @@
                   </a>
                 </h2>
                 <div class="divCodeModalClose">
-                  <a @click="codeModalClose($event)">&times;</a>
+                  <i class="far fa-times-circle" @click="codeModalClose($event)"></i>
                 </div>
               </div>
 
@@ -189,6 +189,8 @@
                   project.language === 'jQuery' ? 'backgroundColor : rgba(186, 200, 222, .8);' :
                   null"
           >
+
+
             <div class="divModalRightL1">
               <h1>
                 {{project.title}} |
@@ -202,6 +204,12 @@
 
 
             <div class="divModalRightL2">
+              This is the divmodalL2
+            </div>
+
+
+
+            <div class="divModalRightL3">
               <div class="divVideoContainer">
                 <video controls
                 class="videoInModal"
@@ -215,9 +223,6 @@
                   <source :src="project.video_url" type="video/mp4">
                   </video>
               </div> <!--End of Video container-->
-
-
-
 
 
 
@@ -243,7 +248,9 @@
               >
 
                 <div class="divImageModalClose">
-                  <a @click="imageModalClose($event)">&times;</a>
+                  <i class="far fa-times-circle" @click="imageModalClose($event)"></i>
+                    <!-- &times; -->
+                  </a>
                 </div>
 
                 <div class="divImageModalContent">
@@ -253,17 +260,16 @@
 
 
 
+            </div> <!--End of divModalRightL3-->
+
+
+
+            <div class="divModalRightL2">
+
+
+
 
             </div> <!--End of divModalRightL2-->
-
-
-
-            <div class="divModalRightL3">
-
-
-
-
-            </div> <!--End of divModalRightL3-->
           </div> <!--End of divModalRight-->
 
 

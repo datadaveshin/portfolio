@@ -240,25 +240,15 @@ a:hover{
 }
 
 .divCloseModal{
-  /* float: right; */
   position: fixed;
   z-index: 1;
-  font-size: 15vh;
+  font-size: 7vh;
   right: 4vh;
   top: 3vh;
   width: 8vh;
   height: 8vh;
-  border-radius: 50%;
-  /* background-color: white; */
-  padding-right: 78px;
   border: none;
-  /* padding-left: -130px; */
-
-
-  /* margin-top: 5px; */
-  /* font-weight: bold; */
-  line-height: 68px;
-  /* text-align: center; */
+  border-radius: 50%;
 }
 
 .divCloseModal:hover {
@@ -298,7 +288,11 @@ a:hover{
 }
 
 .divModalRightL2{
-  height: 70%;
+  height: 20%;
+}
+
+.divModalRightL3{
+  height: 50%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
@@ -320,7 +314,7 @@ a:hover{
   width: inherit;
 }
 
-.divModalRightL3{
+.divModalRightL2{
   box-sizing: border-box;
   height: 25%;
   display: flex;
@@ -383,53 +377,42 @@ a:hover{
 }
 
 .divImageModalClose{
-  position: fixed;
-  top: 25px;
-  right: 40px;
+  display: table;
+}
+
+.divImageModalClose a font{
+  /* line-height: 16vh; */
 }
 
 .divCodeModalClose, .divImageModalClose{
-  font-size: 15vh;
-  background-color: rgba(0,0,0,.2);
+  position: fixed;
+  font-size: 7vh;
+  right: 4vh;
+  top: 3vh;
   width: 8vh;
   height: 8vh;
   border-radius: 50%;
-  border: 2px solid white;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
+  color: white;
 }
 
 .divCodeModalClose:hover, .divImageModalClose:hover{
-  background-color: white;
-  border: 2px solid black;
-}
-
-.divImageModalClose a{
-  position: fixed;
-  top: -22px;
-  right: 37px;
-  color: white;
+  /* background-color: white;
+  border: 2px solid black; */
 }
 
 .divCodeModalClose{
-  /* float: right; */
-  top: 23px;
-  right: 40px;
   display: none;
+  top: 4vh;
 }
 
-.divCodeModalClose a{
-  color: white;
-}
-
-.divCodeModalClose:hover a, .divImageModalClose a:hover{
+.divCodeModalClose:hover, .divImageModalClose:hover{
   color: black;
+  cursor: pointer;
 }
 
 .divModalLeft hr{
   margin-bottom: 20px;
-  width: 90%
+  width: 80%
 }
 
 code{
