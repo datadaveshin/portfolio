@@ -412,14 +412,16 @@ a:hover{
 
 .divModalLeft hr{
   margin-bottom: 20px;
-  width: 80%
+  width: 80%;
+  position: sticky;
+  top: 80px;
 }
 
 code{
   font: normal normal 2vh courier;
 }
 
-.divModalLeftHeading{
+.divModalLeftHeader{
   position: sticky;
   top: 15px;
 }

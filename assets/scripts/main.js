@@ -45,6 +45,7 @@ let app = new Vue({
       },  //End of hoverstyle
 
       activeModals: "Vanilla",
+      counter: 0,
 
       projects: [
         {
@@ -557,6 +558,10 @@ let app = new Vue({
         // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
       },
 
+      closeCodeModal(event){
+        console.log(event.path[0]);
+      },
+
       modalbackImage() {
         console.log("I am creating classes");
       },
@@ -574,11 +579,15 @@ let app = new Vue({
     beforeMount(){
       this.pathCreate();
     },
-    computed: {
-      getFirstImage: function() {
-
+    watch: {
+      updateImage() {
+        let self = this;
+        setInterval(function(){
+          self.counter++;
+        }, 3000);
+        console.log(self.counter);
       }
-    }
+    } //End of computed properties
   }
 );
 

@@ -141,7 +141,7 @@
 
 
 
-          <div class="divModalLeft" :id="'divModalLeft-'+project.id">
+          <div class="divModalLeft" :id="'divModalLeft-'+project.id" @click="closeCodeModal($event)">
             <!-- <div class="divModalLeftHeaderContainer"> -->
 
               <div class="divModalLeftHeader">
@@ -154,9 +154,9 @@
                 <div class="divCodeModalClose">
                   <i class="far fa-times-circle" @click="codeModalClose($event)"></i>
                 </div>
-              </div>
-
+              </div> <!--End of divModalLeftHeader-->
               <hr>
+
 
             <!-- </div>  -->
             <!--End of divModalLeftHeaderContainer -->
