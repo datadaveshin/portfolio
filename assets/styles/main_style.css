@@ -401,8 +401,7 @@ a:hover{
 }
 
 .divCodeModalClose{
-  display: none;
-  top: 4vh;
+  /* display: none; */
 }
 
 .divCodeModalClose:hover, .divImageModalClose:hover{

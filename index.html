@@ -151,10 +151,10 @@
                     <i class="fab fa-github"></i>
                   </a>
                 </h2>
-                <div class="divCodeModalClose">
-                  <i class="far fa-times-circle" @click="codeModalClose($event)"></i>
-                </div>
               </div> <!--End of divModalLeftHeader-->
+              <div class="divCodeModalClose">
+                <i class="far fa-times-circle" @click="codeModalClose($event)"></i>
+              </div>
               <hr>
 
 
@@ -228,13 +228,13 @@
 
               <!-- Image screenshots -->
               <div class="divImageIcon"
-              :src="project.images[0].image"
+              :src="project.images[counter].image"
 
               @click="imageModalOpen($event)"
-              :style="{backgroundImage: 'url('+project.images[0].image+')'}"
+              :style="{backgroundImage: 'url('+project.images[counter].image+')'}"
               :class="{borderVanilla: active[0].Vanilla, borderVue: active[1].Vue, borderjQuery: active[2].jQuery}"
-              :id="'imageScreenshot0'+'-'+project.id"
-              :alt="'imageScreenshot0'+'-'+project.id+'. Click to view a larger image'"
+              :id="'imageScreenshot' + counter +'-'+project.id"
+              :alt="'imageScreenshot'+ counter +'-'+project.id+'. Click to view a larger image'"
               >
               <!-- v-for="(images, idx) in project.images" -->
 

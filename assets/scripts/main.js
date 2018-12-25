@@ -46,6 +46,7 @@ let app = new Vue({
 
       activeModals: "Vanilla",
       counter: 0,
+      modalDisplay: "none",
 
       projects: [
         {
@@ -515,12 +516,15 @@ let app = new Vue({
       modalOpen() {
         var getModalId = event.target.id.replace("aModalOpen", "modal");
         window[getModalId].style.display = "flex";
+        this.modalDisplay = "flex";
       },
 
       //CLOSE THE MODAL
       modalClose(event) {
         var getModalId = event.path[1].id.replace("divCloseModal", "modal");
         window[getModalId].style.display = "none";
+        this.modalDisplay = "none";
+        this.counter = 0;
       },
 
       imageModalOpen(event){
@@ -535,30 +539,33 @@ let app = new Vue({
       },
 
       expandCodeModal(event){
+        console.log("3:", event.path[3], "2:", event.path[3].children);
         event.path[3].style.position = "fixed";
         event.path[3].style.zIndex = 2;
         event.path[3].style.left = 0;
         event.path[3].style.top = 0;
         event.path[3].style.width = "100vw";
         event.path[3].style.height = "100vh";
-        event.path[2].children[1].style.display = "flex";
+        event.path[3].children[1].style.display = "block";
         // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
-        console.log(event.path[2]);
         //This is what you need to do if you decide to transfer the above in a new object.
         // let targetDiv = document.getElementById("divTransform");
         // this.addStyle(targetDiv, this.hoverStyle.clean);
       },
 
       codeModalClose(event){
-        event.path[3].style.position = "static";
-        event.path[3].style.zIndex = 1;
-        event.path[3].style.width = "32vw";
-        event.path[3].style.height = "96vh";
+        console.log("---------------------");
+        console.log("Path for code modal close", event.path);
+        console.log("3:", event.path[3], "1:", event.path[1]);
+        event.path[2].style.position = "static";
+        event.path[2].style.zIndex = 1;
+        event.path[2].style.width = "32vw";
+        event.path[2].style.height = "96vh";
         event.path[1].style.display = "none";
         // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
       },
 
-      closeCodeModal(event){
+      closeCodeModal(event){ //In case I want to have it close on click anywhere in the area of the modal
         console.log(event.path[0]);
       },
 
@@ -579,13 +586,24 @@ let app = new Vue({
     beforeMount(){
       this.pathCreate();
     },
-    watch: {
-      updateImage() {
+    computed: {
+      changeCounterValue() {
         let self = this;
-        setInterval(function(){
-          self.counter++;
-        }, 3000);
+        while (this.modalDisplay === "flex") {
+          setInterval(function(){
+            console.log(self.counter);
+            // self.counter < 3 ? self.counter++ : self.counter = 0;
+
+          }, 3000);
+        }
         console.log(self.counter);
+        // while(window[getModalId].style.display === "flex"){
+        //   setInterval(()=>{console.log("hello");}, 2000);
+        // }
+        //perhaps set a while loop saying, while this is flex, set interval for changing
+        // the value of the counter.
+        //In the modal close, set the value of the counter to 0
+        //Perhaps set the interval in computed while one data property is flex, then play interval
       }
     } //End of computed properties
   }
