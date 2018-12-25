@@ -538,8 +538,8 @@ let app = new Vue({
         event.path[2].style.display = "none";
       },
 
+      //EXPAND THE CODE MODAL TO FULL SCREEN
       expandCodeModal(event){
-        console.log("3:", event.path[3], "2:", event.path[3].children);
         event.path[3].style.position = "fixed";
         event.path[3].style.zIndex = 2;
         event.path[3].style.left = 0;
@@ -553,10 +553,8 @@ let app = new Vue({
         // this.addStyle(targetDiv, this.hoverStyle.clean);
       },
 
+      //MINIMIZE THE CODE MODAL TO THE LEFT SIDE OF THE SCREEN
       codeModalClose(event){
-        console.log("---------------------");
-        console.log("Path for code modal close", event.path);
-        console.log("3:", event.path[3], "1:", event.path[1]);
         event.path[2].style.position = "static";
         event.path[2].style.zIndex = 1;
         event.path[2].style.width = "32vw";
@@ -587,7 +585,7 @@ let app = new Vue({
       this.pathCreate();
     },
     computed: {
-      changeCounterValue() {
+      changeCounterValue() {  //PERHAPS THIS IS A METHOD THAT I WANT TO RUN WHEN THE MODAL OPENS (FIND RELATED METHOD)
         let self = this;
         while (this.modalDisplay === "flex") {
           setInterval(function(){
