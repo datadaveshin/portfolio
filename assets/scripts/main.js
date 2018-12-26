@@ -516,13 +516,18 @@ let app = new Vue({
       modalOpen() {
         var getModalId = event.target.id.replace("aModalOpen", "modal");
         window[getModalId].style.display = "flex";
+
+
         this.modalDisplay = "flex";
+        this.changeCounterValue();
       },
 
       //CLOSE THE MODAL
       modalClose(event) {
         var getModalId = event.path[1].id.replace("divCloseModal", "modal");
         window[getModalId].style.display = "none";
+
+
         this.modalDisplay = "none";
         this.counter = 0;
       },
@@ -579,30 +584,23 @@ let app = new Vue({
       //CREATE ALL MODALS
       modalCreateClass() {
         console.log("modal create fired");
+      },
+
+      //CHANGE THE VALUE OF THE COUNTER SO THAT THE IMAGES CHANGE IN THE MODAL DISPLAY
+      changeCounterValue() {
+        let self = this;
+        var x = setInterval(function(){
+          if (self.modalDisplay !== "flex") clearInterval(x);
+          console.log(self.counter);
+          self.counter < 2 ? self.counter++ : self.counter = 0;
+          console.log(self.modalDisplay);
+        }, 3000);
       }
     }, //End of methods
     beforeMount(){
       this.pathCreate();
     },
     computed: {
-      changeCounterValue() {  //PERHAPS THIS IS A METHOD THAT I WANT TO RUN WHEN THE MODAL OPENS (FIND RELATED METHOD)
-        let self = this;
-        while (this.modalDisplay === "flex") {
-          setInterval(function(){
-            console.log(self.counter);
-            // self.counter < 3 ? self.counter++ : self.counter = 0;
-
-          }, 3000);
-        }
-        console.log(self.counter);
-        // while(window[getModalId].style.display === "flex"){
-        //   setInterval(()=>{console.log("hello");}, 2000);
-        // }
-        //perhaps set a while loop saying, while this is flex, set interval for changing
-        // the value of the counter.
-        //In the modal close, set the value of the counter to 0
-        //Perhaps set the interval in computed while one data property is flex, then play interval
-      }
     } //End of computed properties
   }
 );
