@@ -62,6 +62,11 @@ let app = new Vue({
             {bullet: "Create, update or delete user account."},
             {bullet: "Node, Express, knex, psql, JQuery, handlebars, CSS."}
           ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
+          ],
           language: "jQuery",
           images: [
             {image: ""},
@@ -91,6 +96,11 @@ let app = new Vue({
             {bullet: "Responsive / mobile."},
             {bullet: "Node, Express, psql, JavaScript, handlebars, html, CSS"}
           ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
+          ],
           language: "Vanilla",
           images: [
             {image: ""},
@@ -117,6 +127,11 @@ let app = new Vue({
             {bullet: "Reset, Specificity, the Box Model, Positioning, Typography, Backgrounds, Responsive Design."},
             {bullet: "Responsive, mobile."},
             {bullet: "HTML, Vanilla CSS."}
+          ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
           ],
           language: "Vanilla",
           images: [
@@ -145,6 +160,11 @@ let app = new Vue({
             {bullet: "Review the song titles and album covers"},
             {bullet: "JavaScript, Ajax calls, CSS, HTML"}
           ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
+          ],
           language: "Vanilla",
           images: [
             {image: ""},
@@ -161,7 +181,7 @@ let app = new Vue({
 
         {
           key: 5,
-          title: "Image editing",
+          title: "Image filtering",
           url: "https://goo.gl/s9sHDS",
           git: "https://github.com/papostolopoulos/image_filtering",
           code_url: "",
@@ -172,6 +192,11 @@ let app = new Vue({
             {bullet: "Filters for brightness, contrast, transparency, grayscale, blur etc."},
             {bullet: "Save in a different image formats."},
             {bullet: "Node, JavaScript, CSS, HTML"}
+          ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
           ],
           language: "Vanilla",
           images: [
@@ -189,7 +214,7 @@ let app = new Vue({
 
         {
           key: 6,
-          title: "SportyTourist",
+          title: "SportyTourist.com",
           url: "http://sportytourist.com",
           git: "https://github.com/papostolopoulos/sportytourist",
           code_url: "",
@@ -198,6 +223,11 @@ let app = new Vue({
             {bullet: "Sports news aggregator."},
             {bullet: "News API calls"},
             {bullet: "JavaScript, AJAX, CSS, HTML"}
+          ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
           ],
           language: "Vanilla",
           images: [
@@ -215,7 +245,7 @@ let app = new Vue({
 
         {
           key: 7,
-          title: "Hangman",
+          title: "hangman.pro",
           url: "http://hangman.pro",
           git: "https://github.com/papostolopoulos/hangman",
           code_url: "",
@@ -224,6 +254,11 @@ let app = new Vue({
             {bullet: "Game of hangman."},
             {bullet: "Random word pick and play."},
             {bullet: "JQuery, AJAX, CSS, HTML"}
+          ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
           ],
           language: "jQuery",
           images: [
@@ -251,6 +286,11 @@ let app = new Vue({
             {bullet: "Updates automatically by firing interval calls."},
             {bullet: "JavaScript, CSS, HTML."}
           ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
+          ],
           language: "Vanilla",
           images: [
             {image: ""},
@@ -276,6 +316,11 @@ let app = new Vue({
             {bullet: "Drum Kit. Press the keys and hear the drums playing."},
             {bullet: "Vanilla JavaScript, CSS, HTML."},
             {bullet: "Similar project in the Vue section."}
+          ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
           ],
           language: "Vanilla",
           images: [
@@ -304,6 +349,11 @@ let app = new Vue({
             {bullet: "Multiple class transitions, CSS transformations and interactive display through a single Vue instance."},
             {bullet: "Vue, CSS, HTML."}
           ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
+          ],
           language: "Vue",
           images: [
             {image: ""},
@@ -331,6 +381,11 @@ let app = new Vue({
             {bullet: "He can filter the results as needed."},
             {bullet: "Vue, HTML, CSS."}
           ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
+          ],
           language: "Vue",
           images: [
             {image: ""},
@@ -356,6 +411,11 @@ let app = new Vue({
             {bullet: "Drum Kit. Press the keys and hear the drums playing."},
             {bullet: "Vue, CSS, HTML."},
             {bullet: "Similar project in the Vanilla section."}
+          ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
           ],
           language: "Vue",
           images: [
@@ -383,6 +443,11 @@ let app = new Vue({
             {bullet: "Vue, CSS, HTML."},
             {bullet: "Similar project in the Vanilla section."}
           ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
+          ],
           language: "Vue",
           images: [
             {image: ""},
@@ -409,6 +474,11 @@ let app = new Vue({
             {bullet: "Camera rotation and zooming."},
             {bullet: "Google maps API call."},
             {bullet: "Vanilla JavaScript, Vanilla CSS."}
+          ],
+          highlights: [
+            {fact: "Higlhlight 1"},
+            {fact: "Higlhlight 2"},
+            {fact: "Higlhlight 3"},
           ],
           language: "Vanilla",
           images: [
@@ -589,11 +659,10 @@ let app = new Vue({
       //CHANGE THE VALUE OF THE COUNTER SO THAT THE IMAGES CHANGE IN THE MODAL DISPLAY
       changeCounterValue() {
         let self = this;
-        var x = setInterval(function(){
-          if (self.modalDisplay !== "flex") clearInterval(x);
-          console.log(self.counter);
+        let intervalId = setInterval(function(){
+          if (self.modalDisplay !== "flex") clearInterval(intervalId);
           self.counter < 2 ? self.counter++ : self.counter = 0;
-          console.log(self.modalDisplay);
+          console.log(self.counter);
         }, 3000);
       }
     }, //End of methods
