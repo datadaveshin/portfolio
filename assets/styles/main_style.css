@@ -243,8 +243,8 @@ a:hover{
   position: fixed;
   z-index: 1;
   font-size: 7vh;
-  right: 4vh;
-  top: 3vh;
+  right: 2vh;
+  top: 2vh;
   width: 8vh;
   height: 8vh;
   border: none;
@@ -387,8 +387,8 @@ a:hover{
 .divCodeModalClose, .divImageModalClose{
   position: fixed;
   font-size: 7vh;
-  right: 4vh;
-  top: 3vh;
+  right: 2vh;
+  top: 2vh;
   width: 8vh;
   height: 8vh;
   border-radius: 50%;
