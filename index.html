@@ -141,7 +141,7 @@
 
 
 
-          <div class="divModalLeft" :id="'divModalLeft-'+project.id" @click="closeCodeModal($event)">
+          <div class="divModalLeft" :id="'divModalLeft-'+project.id" @click.stop="divCodeModalClose($event)">
             <!-- <div class="divModalLeftHeaderContainer"> -->
 
               <div class="divModalLeftHeader">

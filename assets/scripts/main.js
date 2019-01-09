@@ -640,7 +640,7 @@ let app = new Vue({
         this.changeCounterValue();
       },
 
-      //CLOSE THE MODAL
+      //CLOSE THE MODAL FROM THE X ICON
       modalClose(event) {
         var getModalId = event.path[1].id.replace("divCloseModal", "modal");
         window[getModalId].style.display = "none";
@@ -671,15 +671,21 @@ let app = new Vue({
         // this.addStyle(targetDiv, this.updateStyle.clean);
       },
 
-      //MINIMIZE THE CODE MODAL TO THE LEFT SIDE OF THE SCREEN
+      //MINIMIZE THE CODE MODAL TO THE LEFT SIDE OF THE SCREEN BY CLICKING THE X BUTTON
       codeModalClose(event){
         this.addStyle(event.path[2], this.updateStyle.codeModalClose);
         event.path[1].style.display = "none";
         // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
       },
 
-      closeCodeModal(event){ //In case I want to have it close on click anywhere in the area of the modal
-        console.log(event.path[0]);
+      //MINIMIZE THE CODE MODAL BY CLICKING IN THE BODY OF THE SCREEN
+      divCodeModalClose(event){
+        if (event.target.localName === "pre" &&
+            event.path[2].className === "divModalLeft" &&
+            event.path[2].style.position === "fixed") {
+              event.path[2].children[1].style.display = "none";
+              this.addStyle(event.path[2], this.updateStyle.codeModalClose);
+            }
       },
 
       modalbackImage() {
