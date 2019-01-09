@@ -17,32 +17,46 @@ let app = new Vue({
         {id: 3, text: "jQuery", active: false}
       ],
 
-      hoverStyle: {
-        Vanilla: {
+      updateStyle: {
+        Vanilla: { //This is for the hovering over the vanilla link
           backgroundColor: "rgb(250, 220, 52)",
           backgroundImage: 'url("assets/images/logo-javascript.png")',
           boxShadow: "inset 100vw 100vh rgba(250, 220, 52, .5)",
           transition: "all .3s"
         },
-        Vue: {
+        Vue: { //This is for the hovering over the Vue link
           backgroundColor: "rgba(66, 184, 131, .0001)",
           backgroundImage: 'url("assets/images/logo-vue.png")',
           boxShadow: "inset 100vw 100vh rgba(66, 184, 131, .5)",
           transition: "all .3s"
         },
-        jQuery: {
+        jQuery: { //This is for the hovering over the jQuery link
           backgroundColor: "rgba(18, 26, 38, .0001)",
           backgroundImage: 'url("assets/images/logo-jquery.png")',
           boxShadow: "inset 100vw 100vh rgba(18, 26, 38, .5)",
           transition: "all .3s"
         },
-        clean: {
+        clean: { //This is for the mousing out of the Vanilla, Vue or jQuery links in header
           backgroundColor: "",
           backgroundImage: '',
           boxShadow: "",
           transition: "all .3s"
+        },
+        expandCodeModal: {
+          position: "fixed",
+          zIndex: 2,
+          left: 0,
+          top: 0,
+          width: "100vw",
+          height: "100vh"
+        },
+        codeModalClose: {
+          position: "static",
+          zIndex: 1,
+          width: "32vw",
+          height: "96vh"
         }
-      },  //End of hoverstyle
+      },  //End of updateStyle
 
       activeModals: "Vanilla",
       counter: 0,
@@ -558,14 +572,14 @@ let app = new Vue({
       classTransitionOver(event) {
         let attr = event.target.getAttribute("name");
         let targetDiv = window["divTransform"];
-        this.addStyle(targetDiv, this.hoverStyle[attr]);
+        this.addStyle(targetDiv, this.updateStyle[attr]);
       },
 
 
       // EFFECT THAT DEACTIVATES THE TRANSITION WHEN THE MOUSE LEAVES
       classTransitionLeave(event) {
         let targetDiv = window["divTransform"];
-        this.addStyle(targetDiv, this.hoverStyle.clean);
+        this.addStyle(targetDiv, this.updateStyle.clean);
       },
 
 
@@ -649,25 +663,17 @@ let app = new Vue({
 
       //EXPAND THE CODE MODAL TO FULL SCREEN
       expandCodeModal(event){
-        event.path[3].style.position = "fixed";
-        event.path[3].style.zIndex = 2;
-        event.path[3].style.left = 0;
-        event.path[3].style.top = 0;
-        event.path[3].style.width = "100vw";
-        event.path[3].style.height = "100vh";
+        this.addStyle(event.path[3], this.updateStyle.expandCodeModal);
         event.path[3].children[1].style.display = "block";
         // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
         //This is what you need to do if you decide to transfer the above in a new object.
         // let targetDiv = document.getElementById("divTransform");
-        // this.addStyle(targetDiv, this.hoverStyle.clean);
+        // this.addStyle(targetDiv, this.updateStyle.clean);
       },
 
       //MINIMIZE THE CODE MODAL TO THE LEFT SIDE OF THE SCREEN
       codeModalClose(event){
-        event.path[2].style.position = "static";
-        event.path[2].style.zIndex = 1;
-        event.path[2].style.width = "32vw";
-        event.path[2].style.height = "96vh";
+        this.addStyle(event.path[2], this.updateStyle.codeModalClose);
         event.path[1].style.display = "none";
         // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
       },
