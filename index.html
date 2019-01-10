@@ -53,7 +53,7 @@
               v-else
               :name="section.text"
               @mouseover="classTransitionOver($event)"
-              @mouseout="classTransitionLeave($event)">
+              @mouseout="classTransitionOut($event)">
 
                 <a
                 :key="section.id"
@@ -70,7 +70,7 @@
 
         <main>
           <div id="divCarousel">
-            <div class="divArrow" id="divArrowLeft">
+            <div class="divArrow" id="divArrowLeft" @click="changePage">
               <i class="fas fa-angle-left"></i>
             </div>
 
@@ -96,7 +96,7 @@
               </section>
 
 
-            <div class="divArrow" id="divArrowRight">
+            <div class="divArrow" id="divArrowRight" @click="changePage">
               <i class="fas fa-angle-right"></i>
             </div>
           </div>

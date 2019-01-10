@@ -385,9 +385,9 @@ let app = new Vue({
         {
           key: 11,
           title: "JSON files copy-paste viewer",
-          url: "https://papostolopoulos.github.io/tutorials/work/copypaste/copypaste4.html",
+          url: "https://papostolopoulos.github.io/xPathDataExtraction/copypaste/copypaste4.html",
           code_url: "",
-          git: "https://github.com/papostolopoulos/tutorials/tree/master/work/copypaste",
+          git: "https://github.com/papostolopoulos/xPathDataExtraction/copypaste",
           code: "You need to add the description, code, images and video footage",
           description: [
             {bullet: "This is a project that was done for internal company work. It doesn't work with random files."},
@@ -568,6 +568,23 @@ let app = new Vue({
       },
 
 
+      //CHANGE PAGES FROM ARROWS
+      changePage(){
+        let targetDiv = window["divTransform"];
+        let arrowId = event.target.id.replace(/divArrow/, "").toLowerCase();
+        console.log("Arrow ID:", arrowId);
+        console.log(event);
+        console.log(this.activeModals);
+        this.sections.forEach((el)=>{
+          if (el.active) {
+            console.log(el.id);
+            console.log(el.text);
+            console.log(el.active);
+          }
+        });
+      },
+
+
       // EFFECT THAT ACTIVATES THE TRANSITION WHEN MOUSING OVER
       classTransitionOver(event) {
         let attr = event.target.getAttribute("name");
@@ -577,7 +594,7 @@ let app = new Vue({
 
 
       // EFFECT THAT DEACTIVATES THE TRANSITION WHEN THE MOUSE LEAVES
-      classTransitionLeave(event) {
+      classTransitionOut(event) {
         let targetDiv = window["divTransform"];
         this.addStyle(targetDiv, this.updateStyle.clean);
       },
@@ -591,11 +608,11 @@ let app = new Vue({
       },
 
 
+      //CREATES THE PATHS FOR ALL THE IMAGES IN THE PROJECTS ARRAY INSIDE "DATA"
+      //ADDS THE BACKGROUND IMAGE IN MODALS
+      //ADDS THE BOX SHADOW IN MODALS
+      //CREATES THE PATHS FOR ALL THE VIDEOS IN THE PROJECTS ARRAY INSIDE DATA
       pathCreate() {
-        //CREATES THE PATHS FOR ALL THE IMAGES IN THE PROJECTS ARRAY INSIDE "DATA"
-        //ADDS THE BACKGROUND IMAGE IN MODALS
-        //ADDS THE BOX SHADOW IN MODALS
-        //CREATES THE PATHS FOR ALL THE VIDEOS IN THE PROJECTS ARRAY INSIDE DATA
         let self = this;
         let projectsArr = this.projects;
         let codePath = "";
