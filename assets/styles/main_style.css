@@ -327,10 +327,6 @@ a:hover{
   box-sizing: border-box;
   height: 40vh;
   width: 31vw;
-  /* margin: 0 3px; */
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -352,7 +348,7 @@ a:hover{
   display: none;
   align-items: center;
   justify-content: center;
-  transition: display 2s;
+  transition: all 2s;
 }
 
 .divImageModalContent{

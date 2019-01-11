@@ -59,8 +59,8 @@ let app = new Vue({
       },  //End of updateStyle
 
       activeModals: "Vanilla",
-      counter: 0,
-      modalDisplay: "none",
+      counter: 0, //This is for the image and text transition inside each modal
+      modalDisplay: "none", //This is for the image and text transition
 
       projects: [
         {
@@ -553,7 +553,7 @@ let app = new Vue({
         let attr = event.target.getAttribute("name");
         //Change the activePage property. This one will define which images will be
         //displayed in the carousel
-        this.activePage = attr;
+        // this.activePage = attr;
 
         //Change the property "active" for each object element in the "sections" array
         this.sections.forEach((el) => el.text === attr ? el.active = true : el.active = false);
@@ -571,12 +571,49 @@ let app = new Vue({
       //CHANGE PAGES FROM ARROWS
       changePage(){
         let targetDiv = window["divTransform"];
-        let arrowId = event.target.id.replace(/divArrow/, "").toLowerCase();
+        let arrowId = event.target.id.replace(/(div)?Arrow/i, "").toLowerCase();
         console.log("Arrow ID:", arrowId);
         console.log(event);
         console.log(this.activeModals);
-        this.sections.forEach((el)=>{
+        this.sections.forEach((el, idx, arr)=>{
           if (el.active) {
+            if (el.id === 3 && arrowId === "right" && el.active === true) {
+              // let attr =
+              //Change the property "active" for each object element in the "sections" array
+              // this.sections.forEach((el) => el.text === attr ? el.active = true : el.active = false);
+              //
+              // //Change the properties in the "active" array (within data in the Vue instance)
+              // this.active.forEach((el) => {
+              //   for (let key in el) key === attr ? el[key] = true : el[key] = false;
+              // });
+              //
+              // //This is for changing the active class of the <divTransform> tag
+              // this.activeModals = attr;
+
+
+
+              this.active[el.text] = false;
+              this.active[arr[0].text] = true;
+              el.active = false;
+              arr[0].active = true;
+              this.addStyle(targetDiv, this.updateStyle[arr[0].text]);
+
+              console.log(`The el.id is ${el.id} and I need to go ${arrowId}
+                The active tag needs to be ${arr[0].text} and the element's active property needs to become true`);
+                /*Change the following:
+                */
+            }
+            else if (el.id === 1 && arrowId === "left" && el.active === true) {
+              console.log(`The el.id is ${el.id} and I need to go ${arrowId}
+                The active tag needs to be ${arr[2].text} and the element's active property needs to become true`);
+
+            }
+            else if (arrowId === "right") {
+              console.log("I need to go right");
+            }
+            else {
+              console.log("I need to go left");
+            }
             console.log(el.id);
             console.log(el.text);
             console.log(el.active);
