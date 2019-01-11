@@ -684,7 +684,6 @@ let app = new Vue({
         var getModalId = event.path[1].id.replace("divCloseModal", "modal");
         window[getModalId].style.display = "none";
 
-
         this.modalDisplay = "none";
         this.counter = 0;
       },
