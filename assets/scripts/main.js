@@ -548,9 +548,15 @@ let app = new Vue({
     }, //End of data
     methods: {
 
+      // CHANGE THE CLASS OF THE BACKGROUND AND THE SELECTED NAV ELEMENT FROM HEADERS
+      headersClassChange(event) {
+        let attrName = event.target.getAttribute("name");
+        this.classChange(attrName);
+      },
+
+
       // CHANGE THE CLASS OF THE BACKGROUND AND THE SELECTED NAV ELEMENT
-      classChange(event) {
-        let attr = event.target.getAttribute("name");
+      classChange(attr){
         //Change the activePage property. This one will define which images will be
         //displayed in the carousel
         // this.activePage = attr;
@@ -569,55 +575,34 @@ let app = new Vue({
 
 
       //CHANGE PAGES FROM ARROWS
-      changePage(){
+      changePage(event){
         let targetDiv = window["divTransform"];
         let arrowId = event.target.id.replace(/(div)?Arrow/i, "").toLowerCase();
-        console.log("Arrow ID:", arrowId);
-        console.log(event);
-        console.log(this.activeModals);
-        this.sections.forEach((el, idx, arr)=>{
-          if (el.active) {
-            if (el.id === 3 && arrowId === "right" && el.active === true) {
-              // let attr =
-              //Change the property "active" for each object element in the "sections" array
-              // this.sections.forEach((el) => el.text === attr ? el.active = true : el.active = false);
-              //
-              // //Change the properties in the "active" array (within data in the Vue instance)
-              // this.active.forEach((el) => {
-              //   for (let key in el) key === attr ? el[key] = true : el[key] = false;
-              // });
-              //
-              // //This is for changing the active class of the <divTransform> tag
-              // this.activeModals = attr;
+        let arr = this.sections;
 
-
-
-              this.active[el.text] = false;
-              this.active[arr[0].text] = true;
-              el.active = false;
-              arr[0].active = true;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].active) {
+            if (arr[i].id === 3 && arrowId === "right" && arr[i].active === true) {
+              this.classChange(arr[0].text)
               this.addStyle(targetDiv, this.updateStyle[arr[0].text]);
-
-              console.log(`The el.id is ${el.id} and I need to go ${arrowId}
-                The active tag needs to be ${arr[0].text} and the element's active property needs to become true`);
-                /*Change the following:
-                */
+              break;
             }
-            else if (el.id === 1 && arrowId === "left" && el.active === true) {
-              console.log(`The el.id is ${el.id} and I need to go ${arrowId}
-                The active tag needs to be ${arr[2].text} and the element's active property needs to become true`);
-
-            }
-            else if (arrowId === "right") {
-              console.log("I need to go right");
+            else if (arr[i].id === 1 && arrowId === "left" && arr[i].active === true) {
+              this.classChange(arr[2].text)
+              this.addStyle(targetDiv, this.updateStyle[arr[2].text]);
+              break;
             }
             else {
-              console.log("I need to go left");
+              arrowId === "right" ?
+              (this.classChange(arr[i + 1].text), this.addStyle(targetDiv, this.updateStyle[arr[i + 1].text])) :
+              (this.classChange(arr[i - 1].text), this.addStyle(targetDiv, this.updateStyle[arr[i - 1].text]));
+              break;
             }
-            console.log(el.id);
-            console.log(el.text);
-            console.log(el.active);
           }
+        }
+
+        this.sections.forEach((el, idx, arr)=>{
+
         });
       },
 

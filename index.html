@@ -58,7 +58,7 @@
                 <a
                 :key="section.id"
                 :name="section.text"
-                @click="classChange($event)">
+                @click="headersClassChange($event)">
                   {{section.text}}
                 </a>
               </li>
@@ -70,7 +70,7 @@
 
         <main>
           <div id="divCarousel">
-            <div class="divArrow" id="divArrowLeft" @click="changePage">
+            <div class="divArrow" id="divArrowLeft" @click.stop="changePage">
               <i class="fas fa-angle-left" id="arrowLeft"></i>
             </div>
 
@@ -96,7 +96,7 @@
               </section>
 
 
-            <div class="divArrow" id="divArrowRight" @click="changePage">
+            <div class="divArrow" id="divArrowRight" @click.stop="changePage">
               <i class="fas fa-angle-right" id="ArrowRight"></i>
             </div>
           </div>
