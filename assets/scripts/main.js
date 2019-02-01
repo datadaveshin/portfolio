@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 // MAIN VUE INSTANCE
 let app = new Vue({
     el: "#divContainer",
@@ -583,12 +584,12 @@ let app = new Vue({
         for (let i = 0; i < arr.length; i++) {
           if (arr[i].active) {
             if (arr[i].id === 3 && arrowId === "right" && arr[i].active === true) {
-              this.classChange(arr[0].text)
+              this.classChange(arr[0].text);
               this.addStyle(targetDiv, this.updateStyle[arr[0].text]);
               break;
             }
             else if (arr[i].id === 1 && arrowId === "left" && arr[i].active === true) {
-              this.classChange(arr[2].text)
+              this.classChange(arr[2].text);
               this.addStyle(targetDiv, this.updateStyle[arr[2].text]);
               break;
             }
