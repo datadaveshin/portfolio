@@ -27,10 +27,6 @@ nav ul li {
   width: 14vw;
 }
 
-#divContainer{
-
-}
-
 .divContainerVanilla, .divContainerVue, .divContainerjQuery, .divHoverClassVanilla, .divHoverClassVue, .divHoverClassjQuery{
   align-items: center;
   display: flex;
@@ -137,6 +133,8 @@ header{
   font-size: 10vh;
   text-align: center;
   line-height: 10vh;
+  transition-property: color;
+  transition-duration: 300ms;
 }
 
 .divArrow:hover {
@@ -176,6 +174,8 @@ footer span{
 a{
   color: white;
   text-decoration: none;
+  transition-property: color;
+  transition-duration: 300ms;
 }
 
 a:hover{
@@ -184,7 +184,8 @@ a:hover{
 }
 
 .articleModals{
-  color: black;
+  /* color: black; */
+  color: white;
 /* OPEN THE FOLLOWING TWO WHEN YOU ARE READY */
   position: fixed; /*activate position to fixed when done with formatting modal*/
   display: none; /*Put it back to "none" when you are done with formatting*/
@@ -196,7 +197,6 @@ a:hover{
   background-position:center;
   background-repeat: no-repeat;
   background-size: 100vw;
-  color: white;
 }
 
 .borderVanilla{
@@ -220,7 +220,7 @@ a:hover{
 }
 
 .fontjQuery{
-  color: color: rgb(18, 26, 38);
+  color: rgb(18, 26, 38);
 }
 
 .articleModals h1{
@@ -231,24 +231,22 @@ a:hover{
 
 .articleModals h2{
   font-size: 4vh;
-  text-align: center;
   padding-top: 1vh;
-}
-
-.articleModals p{
-
+  text-align: center;
 }
 
 .divCloseModal{
-  position: fixed;
-  z-index: 1;
-  font-size: 7vh;
-  right: 2vh;
-  top: 2vh;
-  width: 8vh;
-  height: 8vh;
   border: none;
   border-radius: 50%;
+  font-size: 7vh;
+  height: 8vh;
+  position: fixed;
+  right: 3vh;
+  top: 3vh;
+  width: 8vh;
+  transition-duration: 300ms;
+  transition-property: color;
+  z-index: 1;
 }
 
 .divCloseModal:hover {
@@ -383,21 +381,14 @@ a:hover{
 .divCodeModalClose, .divImageModalClose{
   position: fixed;
   font-size: 7vh;
-  right: 2vh;
-  top: 2vh;
+  right: 3vh;
+  top: 3vh;
   width: 8vh;
   height: 8vh;
   border-radius: 50%;
   color: white;
-}
-
-.divCodeModalClose:hover, .divImageModalClose:hover{
-  /* background-color: white;
-  border: 2px solid black; */
-}
-
-.divCodeModalClose{
-  /* display: none; */
+  transition-property: color;
+  transition-duration: 300ms;
 }
 
 .divCodeModalClose:hover, .divImageModalClose:hover{
