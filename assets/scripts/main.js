@@ -88,7 +88,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/QI_-P_XE8fo",
           id: "listMejQuery",
           bgImage: {
             backgroundImage: "",
@@ -122,7 +122,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/DB0xETCAt4E",
           id: "writeItVanilla",
           bgImage: {
             backgroundImage: "",
@@ -154,7 +154,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/k-3_nybOPAQ",
           id: "cssTutorialVanilla",
           bgImage: {
             backgroundImage: "",
@@ -219,7 +219,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/RYklsgi93uA",
           id: "imageEditingVanilla",
           bgImage: {
             backgroundImage: "",
@@ -250,7 +250,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/85MEVokytgs",
           id: "sportyTouristVanilla",
           bgImage: {
             backgroundImage: "",
@@ -281,7 +281,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/hpI6RAwc0g0",
           id: "hangmanjQuery",
           bgImage: {
             backgroundImage: "",
@@ -312,7 +312,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/qc0xtBvhYE8",
           id: "clockVanilla",
           bgImage: {
             backgroundImage: "",
@@ -343,7 +343,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/gHnogNy7aSk",
           id: "drumKitVanilla",
           bgImage: {
             backgroundImage: "",
@@ -375,7 +375,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/X2GlA4nhJb4",
           id: "addEventListenerVue",
           bgImage: {
             backgroundImage: "",
@@ -407,7 +407,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/FEzatw3eGjk",
           id: "jsonCopyPasteVue",
           bgImage: {
             backgroundImage: "",
@@ -438,7 +438,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/4PPgpb3XgfI",
           id: "vueTutorialVue",
           bgImage: {
             backgroundImage: "",
@@ -469,7 +469,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/HNRwOGbi2sU",
           id: "drumKitVue",
           bgImage: {
             backgroundImage: "",
@@ -501,7 +501,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/Ce009inkFAA",
           id: "streetViewModalVanilla",
           bgImage: {
             backgroundImage: "",
@@ -534,7 +534,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://youtube.com/embed/weG_SlyUaXM",
           id: "cssTutorialVue",
           bgImage: {
             backgroundImage: "",
@@ -568,7 +568,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
+          video_url: "https://www.youtube.com/embed/YRh_VZG0TJ4",
           id: "xPathGeneratorVue",
           bgImage: {
             backgroundImage: "",
@@ -695,8 +695,9 @@ let app = new Vue({
           // null;
 
 
+          //DEACTIVATED TO SEE IF THE YOUTUBE LINKS WORK BETTER
           // Add path in projects[i].video_url
-          el.video_url = self.videoPath + el.id + ".mp4";
+          // el.video_url = self.videoPath + el.id + ".mp4";
 
 
           //Add path in projects[i].code_url textPath: "assets/txt_files/code-"

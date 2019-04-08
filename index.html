@@ -228,17 +228,22 @@
 
             <div class="divModalRightL3">
               <div class="divVideoContainer">
-                <video controls
+                <iframe
+                class="videoInModal"
+                :class="{borderVanilla: active[0].Vanilla, borderVue: active[1].Vue, borderjQuery: active[2].jQuery}"
+                :id="'video-'+project.id"
+                :src="project.video_url"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+
+                </iframe>
+                <!-- Deactivated so that I test the Youtube iFrame -->
+                <!-- <video controls
                 class="videoInModal"
                 :id="'video-'+project.id"
                 :class="{borderVanilla: active[0].Vanilla, borderVue: active[1].Vue, borderjQuery: active[2].jQuery}"
                 >
-                <!-- :style="project.language === 'Vanilla' ? 'border: 2px solid rgb(100, 85, 2);' :
-                        project.language === 'Vue' ? 'border: 2px solid rgb(27, 75, 53);' :
-                        project.language === 'jQuery' ? 'border: 2px solid rgb(18, 26, 38);' :
-                        null" -->
                   <source :src="project.video_url" type="video/mp4">
-                  </video>
+                </video> -->
               </div> <!--End of Video container-->
 
 
