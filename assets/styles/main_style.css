@@ -114,30 +114,10 @@ header{
   position: relative;
 }
 
+/* This is for making sure that I can display the spanBubble
+when hovering over the project titles */
 .articleProjectTitle{
   position: relative;
-}
-
-.spanBubble{
-  font-size: .5em;
-  position: absolute;
-  padding: 5px;
-  overlay: .7;
-  z-index: -1;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s;
-  width: 250px;
-  background-color: black;
-  border-radius: 5%;
-  left: -260px;
-  color: white;
-}
-
-.articleProjectTitle a:hover + .spanBubble{
-  visibility: visible;
-  z-index: 1;
-  opacity: .7;
 }
 
 .sectionCarouselAreaFontVanilla {
@@ -181,6 +161,47 @@ header{
 #divArrowRight {
   right: 1vw;
   top: 35vh;
+}
+
+
+.spanBubble{
+  font-size: .5em;
+  position: absolute;
+  padding: 5px;
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s;
+  border-radius: 5%;
+  color: white;
+  text-align: center;
+}
+
+.spanBubbleProjectDescription{
+  width: 250px;
+  left: -260px;
+}
+
+.spanBubbleWebsiteLink{
+  margin-left: 10px;
+}
+
+a:hover + .spanBubble{
+  visibility: visible;
+  z-index: 1;
+  opacity: 1;
+}
+
+.spanBubbleBackgroundVanilla{
+  background-color: rgb(250, 220, 52);
+}
+
+.spanBubbleBackgroundVue{
+  background-color: rgb(66, 184, 131, .5);
+}
+
+.spanBubbleBackgroundjQuery{
+  background-color: rgba(18, 26, 38, .5);
 }
 
 footer{

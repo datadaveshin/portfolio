@@ -92,7 +92,11 @@
                 >
                   {{project.key}}: {{project.title}}
                 </a>
-                <span class="spanBubble">{{project.highlights[0].fact}}</span>
+                <span class="spanBubble spanBubbleProjectDescription"
+                :class="{spanBubbleBackgroundVanilla: active[0].Vanilla, spanBubbleBackgroundVue: active[1].Vue, spanBubbleBackgroundjQuery: active[2].jQuery}"
+                >
+                  {{project.highlights[0].fact}}
+                </span>
                 </article>
 
               </section>
@@ -169,6 +173,11 @@
                   <a :href="project.git" target="_blank" title="Check out the github page">
                     <i class="fab fa-github"></i>
                   </a>
+                  <span class="spanBubble spanBubbleWebsiteLink"
+                  :class="{spanBubbleBackgroundVanilla: active[0].Vanilla, spanBubbleBackgroundVue: active[1].Vue, spanBubbleBackgroundjQuery: active[2].jQuery}"
+                  >
+                    Link to github page
+                  </span>
                 </h2>
               </div> <!--End of divModalLeftHeader-->
               <div class="divCodeModalClose">
@@ -213,7 +222,12 @@
             <div class="divModalRightL1">
               <h1>
                 {{project.title}} |
-                <a :href="project.url" target="_blank" title="Check out the web page"><i class="fas fa-link"></i></a>
+                <a :href="project.url" target="_blank"><i class="fas fa-link"></i></a>
+                <span class="spanBubble spanBubbleWebsiteLink"
+                :class="{spanBubbleBackgroundVanilla: active[0].Vanilla, spanBubbleBackgroundVue: active[1].Vue, spanBubbleBackgroundjQuery: active[2].jQuery}"
+                >
+                  Link to web page
+                </span>
               </h1>
               <ul>
                 <li v-for="list in project.description">{{list.bullet}}</li>

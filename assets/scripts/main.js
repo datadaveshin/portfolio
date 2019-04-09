@@ -78,7 +78,7 @@ let app = new Vue({
             {bullet: "Node, Express, knex, psql, JQuery, handlebars, CSS."}
           ],
           highlights: [
-            {fact: "Customized to-do lists. 2007/03"},
+            {fact: "Customized to-do lists. (2017-03)"},
             {fact: "Why was it built? I helped a colleague with his capstone project by creating the backend, database logic, backend - frontend connectivity"},
             {fact: "Interesting fact: The user can update and customize the lists."},
           ],
@@ -112,7 +112,7 @@ let app = new Vue({
             {bullet: "Node, Express, psql, JavaScript, handlebars, html, CSS"}
           ],
           highlights: [
-            {fact: "Blog with a WYSIWYG editor. 2017/02"},
+            {fact: "Blog with a WYSIWYG editor. (2017-02)"},
             {fact: "Why was it built? It was my capstone project. I liked the idea of creating something that would allow people to save thoughts"},
             {fact: "Interesting feature: Ability to upload images, video and modify the display of text"},
           ],
@@ -144,7 +144,7 @@ let app = new Vue({
             {bullet: "HTML, Vanilla CSS."}
           ],
           highlights: [
-            {fact: "Basic CSS tutorial. 2017/01"},
+            {fact: "Basic CSS tutorial. (2016-12)"},
             {fact: "Why was it built? It was some kind of homework for my coding school"},
             {fact: "Interesting fact: As you progress through the pages, you will see more CSS being added."},
           ],
@@ -176,7 +176,7 @@ let app = new Vue({
             {bullet: "JavaScript, Ajax calls, CSS, HTML"}
           ],
           highlights: [
-            {fact: "See the discography of your favorite artist.2017/01"},
+            {fact: "See the discography of your favorite artist. (2017-01)"},
             {fact: "Why was it built? It was built as a school assignment. I wanted to learn on API calls"},
             {fact: "Interesting fact: Different API calls in spotify with promises."},
           ],
@@ -209,7 +209,7 @@ let app = new Vue({
             {bullet: "Node, JavaScript, CSS, HTML"}
           ],
           highlights: [
-            {fact: "Image filters through algo calculations. 2016/12"},
+            {fact: "Image filters through algo calculations. (2016-11)"},
             {fact: "Why was it built? Class project. I wanted to learn some techniques on loading and editing images online."},
             {fact: "Interesting fact: Images can be saved in different formats"},
           ],
@@ -240,7 +240,7 @@ let app = new Vue({
             {bullet: "JavaScript, AJAX, CSS, HTML"}
           ],
           highlights: [
-            {fact: "Sports news highlights from different sources. 2016/08"},
+            {fact: "Sports news highlights from different sources. (2016-08)"},
             {fact: "Why was it built? I wanted to learn on api calls"},
             {fact: "Interesting fact: All the api calls are done from one source."},
           ],
@@ -271,7 +271,7 @@ let app = new Vue({
             {bullet: "JQuery, AJAX, CSS, HTML"}
           ],
           highlights: [
-            {fact: "Play hangman online. 2016/08"},
+            {fact: "Play hangman online. (2016-08)"},
             {fact: "Why was it built? This was my first online project."},
             {fact: "Interesting fact: You can cheat by looking at the developer tools."},
           ],
@@ -302,7 +302,7 @@ let app = new Vue({
             {bullet: "JavaScript, CSS, HTML."}
           ],
           highlights: [
-            {fact: "Working clock displaying computer time. 2018/09"},
+            {fact: "Working clock displaying computer time. (2018-09)"},
             {fact: "Why was it built? Good practice for CSS transforms and timeouts"},
             {fact: "Interesting fact:"},
           ],
@@ -333,7 +333,7 @@ let app = new Vue({
             {bullet: "Similar project in the Vue section."}
           ],
           highlights: [
-            {fact: "Play the drums from your keyboard. 2018-05"},
+            {fact: "Play the drums from your keyboard. (2018-05)"},
             {fact: "Why was it built? Good practice for Javascript and CSS"},
             {fact: "Interesting fact: I built the same project in Vue.js too"},
           ],
@@ -365,7 +365,7 @@ let app = new Vue({
             {bullet: "Vue, CSS, HTML."}
           ],
           highlights: [
-            {fact: "My coding projects list. 2019/01"},
+            {fact: "My coding projects list. (2019-01)"},
             {fact: "Why was it built? This is the place where I am showcasing all of my coding work"},
             {fact: "Interesting fact: After building the core of this single page app, updating the content happens very easily."},
           ],
@@ -397,7 +397,7 @@ let app = new Vue({
             {bullet: "Vue, HTML, CSS."}
           ],
           highlights: [
-            {fact: "JSON file viewer. 2018/12"},
+            {fact: "JSON file viewer. (2018-12)"},
             {fact: "Why was it built? I wanted something that would help me confirm if strings of text were accurately matching with extracted images."},
             {fact: "Interesting fact: There is a lot of string manipulation in order to clean up a large JSON string and remain with the important components of it."},
           ],
@@ -428,7 +428,7 @@ let app = new Vue({
             {bullet: "Similar project in the Vanilla section."}
           ],
           highlights: [
-            {fact: "Several practice exercises and coding examples. 2018/09"},
+            {fact: "Several practice exercises and coding examples. (2018-09)"},
             {fact: "Why was it built? It has been useful for me to text my aquired knowledge by keeping my notes and by creating my own exercises"},
             {fact: "Interesting fact: New Vue instances are created for every section of the tutorial"},
           ],
@@ -459,7 +459,7 @@ let app = new Vue({
             {bullet: "Similar project in the Vanilla section."}
           ],
           highlights: [
-            {fact: "Play drums from your keyboard. 2018-07"},
+            {fact: "Play drums from your keyboard. (2018-07)"},
             {fact: "Why was it built? Good practice of vue and css skills"},
             {fact: "Interesting fact: There is a Vanilla js version for the same project"},
           ],
@@ -491,7 +491,7 @@ let app = new Vue({
             {bullet: "Vanilla JavaScript, Vanilla CSS."}
           ],
           highlights: [
-            {fact: "Enter coordinates, see Google Street View Image. 2018/06"},
+            {fact: "Enter coordinates, see Google Street View Image. (2018-06)"},
             {fact: "Why was it built? It was interesting for me to see if I could make something that would be matched with the Open Street Maps project."},
             {fact: "Interesting fact: This was easier than I thought. the API call was straighforward but if a lot of users start using this, then there is a fee for getting data from Google."},
           ],
@@ -524,7 +524,7 @@ let app = new Vue({
             {bullet: "Vue, Vanilla CSS."}
           ],
           highlights: [
-            {fact: "Learn CSS and practice in a WYSIWYG environment. 2019-01"},
+            {fact: "Learn CSS and practice in a WYSIWYG environment. (2018-10)"},
             {fact: "Why was it built? It helps me understand some CSS principles and ti can create my own examples that other folks can later use"},
             {fact: "Interesting fact: Reusable vue components make the process of building this project very interesting."},
           ],
@@ -558,7 +558,7 @@ let app = new Vue({
             {bullet: "Vue, Vanilla CSS."}
           ],
           highlights: [
-            {fact: "Create xPath rules without the worry of spelling errors. 2019-04"},
+            {fact: "Create xPath rules without the worry of spelling errors. (2019-04)"},
             {fact: "Why was it built? My work requires a lot of xPath rules and I see how folks were having a hard time generating the rules without errors."},
             {fact: "Interesting fact: The vue models make it easy to modify input data as the rule is being built."},
           ],
