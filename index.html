@@ -82,6 +82,7 @@
               >
 
                 <article v-for="(project, index) in projects"
+                class="articleProjectTitle"
                 v-if="project.language === activeModals"
                 :id="'carousel'+project.id"
                 :key="project.key"
@@ -91,6 +92,7 @@
                 >
                   {{project.key}}: {{project.title}}
                 </a>
+                <span class="spanBubble">{{project.highlights[0].fact}}</span>
                 </article>
 
               </section>

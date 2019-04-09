@@ -78,9 +78,9 @@ let app = new Vue({
             {bullet: "Node, Express, knex, psql, JQuery, handlebars, CSS."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Customized to-do lists. 2007/03"},
+            {fact: "Why was it built? I helped a colleague with his capstone project by creating the backend, database logic, backend - frontend connectivity"},
+            {fact: "Interesting fact: The user can update and customize the lists."},
           ],
           language: "jQuery",
           images: [
@@ -112,9 +112,9 @@ let app = new Vue({
             {bullet: "Node, Express, psql, JavaScript, handlebars, html, CSS"}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Blog with a WYSIWYG editor. 2017/02"},
+            {fact: "Why was it built? It was my capstone project. I liked the idea of creating something that would allow people to save thoughts"},
+            {fact: "Interesting feature: Ability to upload images, video and modify the display of text"},
           ],
           language: "Vanilla",
           images: [
@@ -144,9 +144,9 @@ let app = new Vue({
             {bullet: "HTML, Vanilla CSS."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Basic CSS tutorial. 2017/01"},
+            {fact: "Why was it built? It was some kind of homework for my coding school"},
+            {fact: "Interesting fact: As you progress through the pages, you will see more CSS being added."},
           ],
           language: "Vanilla",
           images: [
@@ -176,9 +176,9 @@ let app = new Vue({
             {bullet: "JavaScript, Ajax calls, CSS, HTML"}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "See the discography of your favorite artist.2017/01"},
+            {fact: "Why was it built? It was built as a school assignment. I wanted to learn on API calls"},
+            {fact: "Interesting fact: Different API calls in spotify with promises."},
           ],
           language: "Vanilla",
           images: [
@@ -209,9 +209,9 @@ let app = new Vue({
             {bullet: "Node, JavaScript, CSS, HTML"}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Image filters through algo calculations. 2016/12"},
+            {fact: "Why was it built? Class project. I wanted to learn some techniques on loading and editing images online."},
+            {fact: "Interesting fact: Images can be saved in different formats"},
           ],
           language: "Vanilla",
           images: [
@@ -240,9 +240,9 @@ let app = new Vue({
             {bullet: "JavaScript, AJAX, CSS, HTML"}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Sports news highlights from different sources. 2016/08"},
+            {fact: "Why was it built? I wanted to learn on api calls"},
+            {fact: "Interesting fact: All the api calls are done from one source."},
           ],
           language: "Vanilla",
           images: [
@@ -271,9 +271,9 @@ let app = new Vue({
             {bullet: "JQuery, AJAX, CSS, HTML"}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Play hangman online. 2016/08"},
+            {fact: "Why was it built? This was my first online project."},
+            {fact: "Interesting fact: You can cheat by looking at the developer tools."},
           ],
           language: "jQuery",
           images: [
@@ -302,9 +302,9 @@ let app = new Vue({
             {bullet: "JavaScript, CSS, HTML."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Working clock displaying computer time. 2018/09"},
+            {fact: "Why was it built? Good practice for CSS transforms and timeouts"},
+            {fact: "Interesting fact:"},
           ],
           language: "Vanilla",
           images: [
@@ -333,9 +333,9 @@ let app = new Vue({
             {bullet: "Similar project in the Vue section."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Play the drums from your keyboard. 2018-05"},
+            {fact: "Why was it built? Good practice for Javascript and CSS"},
+            {fact: "Interesting fact: I built the same project in Vue.js too"},
           ],
           language: "Vanilla",
           images: [
@@ -365,9 +365,9 @@ let app = new Vue({
             {bullet: "Vue, CSS, HTML."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "My coding projects list. 2019/01"},
+            {fact: "Why was it built? This is the place where I am showcasing all of my coding work"},
+            {fact: "Interesting fact: After building the core of this single page app, updating the content happens very easily."},
           ],
           language: "Vue",
           images: [
@@ -397,9 +397,9 @@ let app = new Vue({
             {bullet: "Vue, HTML, CSS."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "JSON file viewer. 2018/12"},
+            {fact: "Why was it built? I wanted something that would help me confirm if strings of text were accurately matching with extracted images."},
+            {fact: "Interesting fact: There is a lot of string manipulation in order to clean up a large JSON string and remain with the important components of it."},
           ],
           language: "Vue",
           images: [
@@ -423,14 +423,14 @@ let app = new Vue({
           git: "https://github.com/papostolopoulos/tutorials/tree/master/vue/vue_website_tutorial",
           code: "Need to add the code, description, images and video footage",
           description: [
-            {bullet: "Drum Kit. Press the keys and hear the drums playing."},
+            {bullet: "Vue tutorial and exercises based on vuejs.org"},
             {bullet: "Vue, CSS, HTML."},
             {bullet: "Similar project in the Vanilla section."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Several practice exercises and coding examples. 2018/09"},
+            {fact: "Why was it built? It has been useful for me to text my aquired knowledge by keeping my notes and by creating my own exercises"},
+            {fact: "Interesting fact: New Vue instances are created for every section of the tutorial"},
           ],
           language: "Vue",
           images: [
@@ -459,9 +459,9 @@ let app = new Vue({
             {bullet: "Similar project in the Vanilla section."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Play drums from your keyboard. 2018-07"},
+            {fact: "Why was it built? Good practice of vue and css skills"},
+            {fact: "Interesting fact: There is a Vanilla js version for the same project"},
           ],
           language: "Vue",
           images: [
@@ -491,9 +491,9 @@ let app = new Vue({
             {bullet: "Vanilla JavaScript, Vanilla CSS."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Enter coordinates, see Google Street View Image. 2018/06"},
+            {fact: "Why was it built? It was interesting for me to see if I could make something that would be matched with the Open Street Maps project."},
+            {fact: "Interesting fact: This was easier than I thought. the API call was straighforward but if a lot of users start using this, then there is a fee for getting data from Google."},
           ],
           language: "Vanilla",
           images: [
@@ -517,16 +517,16 @@ let app = new Vue({
           code_url: "",
           code: "var exampleArea = Vue.component(\"example-area\",{\n  template: `\n  <div>\n    <div class=\"divExample\">\n      <textarea\n      class=\"textAreaPracticeHtml\"\n      placeholder=\"Add your html\"\n      v-model=\"textAreaPracticeHtml\"\n      @keyup=\"htmlCssCombine($event)\"\n      ></textarea>\n      <textarea\n      class=\"textAreaPracticeCss\"\n      placeholder=\"Add your css\"\n      v-model = \"textAreaPracticeCss\"\n      @keyup=\"htmlCssCombine($event)\"\n      ></textarea>\n      <iframe src=\"\" width=\"\" height=\"\" class=\"iFramePractice\" id=\"testFrame\"></iframe>\n    </div>\n    <span class=\"spanExampleArea\"><slot></slot></span>\n    <div class=\"buttonExampleArea\">\n    <button type=\"button\" @click=\"resetContent\">Reset</button>\n    </div>\n  </div>\n  `,\n  data: function() {\n    return {\n      textAreaPracticeHtml: \"\",\n      textAreaPracticeCss: \"\",\n    }\n  },\n  computed: {\n    iframeContentUpdate() {\n      return \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n    }\n  },\n  methods: {\n    htmlCssCombine(event){\n      event.path[1].children[2].contentDocument.body.innerHTML = this.iframeContentUpdate;\n    },\n    preSetContent(){ //Content extracted from the <span> <slot>\n      this.textAreaPracticeCss =\n      this.$el.children[1].innerHTML\n      .split(\"</span>\")[0]\n      .replace(\"<span>\", \"\")\n      .replace(/\s[^\S]/g, \"\")\n      .replace(/\{/g, \"{\n\t\")\n      .replace(/;[^\}\*]/g, \";\n\t\")\n      .replace(/(\*\/)[^\}]/g, \"$1\n\t\")\n      .replace(/\}/g, \"}\n\n\")\n      .trim();\n\n      this.textAreaPracticeHtml =\n      this.$el.children[1].innerHTML\n      .split(\"</span>\")[1]\n      .replace(/(\s){2,}/gm, \" \")\n      .replace(/(<\/\w+>)/g, \"\n$1\")\n      .replace(/(<\w+>)/g, \"\n$1\n\t\")\n      .trim();\n    },\n    preSetiFrameContent(){ //Content that is being pre-loaded from the computed property\n      this.$el.children[0].children[2].contentDocument.body.innerHTML =\n      \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n    },\n    resetContent(){\n      this.preSetContent();\n      this.preSetiFrameContent();\n    }\n  },\n  beforeMount(){\n  },\n  mounted() {\n    this.preSetContent();\n    this.preSetiFrameContent();\n  }\n});\n\n\n\n\nvar practiceArea = Vue.component(\"practice-area\",{\n  template: `\n  <div>\n    <div class=\"divPractice\">\n      <textarea\n      class=\"textAreaPracticeHtml\"\n      placeholder=\"Add your html\"\n      v-model=\"textAreaPracticeHtml\"\n      @keyup=\"htmlCssCombine($event)\"\n      ></textarea>\n      <textarea\n      class=\"textAreaPracticeCss\"\n      placeholder=\"Add your css\"\n      v-model = \"textAreaPracticeCss\"\n      @keyup=\"htmlCssCombine($event)\"\n      ></textarea>\n      <iframe src=\"\" width=\"\" height=\"\" class=\"iFramePractice\"></iframe>\n    </div>\n    <span class=\"spanSolutionArea\"><slot></slot></span>\n    <div class=\"buttonExampleArea\">\n      <button @click=\"solutionContentExecute\">Solution</button>\n      <button @click=\"yourEdits\">Your edits</button>\n    </div>\n  </div>\n  `,\n  data: function() {\n    return {\n      textAreaPracticeHtml: \"\",\n      textAreaPracticeCss: \"\",\n      iFrameUserContent: \"\",\n    }\n  },\n  computed: {\n    iframeContentUpdate() {\n      return \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n    }\n  },\n  methods: {\n    //Updates the iFrame content on the keyUp events.\n    htmlCssCombine(event){\n      event.path[1].children[2].contentDocument.body.innerHTML = this.iframeContentUpdate;\n    },\n\n    //content loaded from the <span> <slot> tag when click on \"solution\" button\n    solutionContent(){\n      this.iFrameUserContent = \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n\n      this.textAreaPracticeCss =\n      this.$el.children[1].innerHTML\n      .split(\"</span>\")[0]\n      .replace(\"<span>\", \"\")\n      .replace(/(\s){2,}/gm, \" \")\n      .replace(/\s[^\S]/g, \"\")\n      .replace(/\{/g, \"{\n\t\")\n      .replace(/;[^\}\*]/g, \";\n\t\")\n      .replace(/(\*\/)[^\}]/g, \"$1\n\t\")\n      .replace(/\}/g, \"}\n\n\")\n      .trim();\n\n      this.textAreaPracticeHtml =\n      this.$el.children[1].innerHTML\n      .split(\"</span>\")[1]\n      .replace(/\s{2,}/gm, \"\")\n      .replace(/(<\/\w+>)/g, \"\n$1\")\n      .replace(/(<\w+>)/g, \"\n$1\n\t\")\n      .trim();\n    },\n    solutioniFrameContent(){\n      this.$el.children[0].children[2].contentDocument.body.innerHTML =\n      \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n    },\n    yourEdits(){\n      this.$el.children[0].children[2].contentDocument.body.innerHTML = this.iFrameUserContent;\n\n      this.textAreaPracticeCss =\n      this.iFrameUserContent\n      .split(\"</style>\")[0]\n      .replace(\"<style>\", \"\")\n      .replace(/\s[^\S]/g, \"\")\n      .replace(/\{/g, \"{\n\t\")\n      .replace(/;[^\}\*]/g, \";\n\t\")\n      .replace(/(\*\/)[^\}]/g, \"$1\n\t\")\n      .replace(/\}/g, \"}\n\n\")\n      .trim();\n\n      this.textAreaPracticeHtml =\n      this.iFrameUserContent\n      .split(\"</style>\")[1]\n      .replace(/(\s){2,}/gm, \" \")\n      .replace(/(<\/\w+>)/g, \"\n$1\")\n      .replace(/(<\w+>)/g, \"\n$1\n\t\")\n      .trim();\n    },\n    solutionContentExecute(){\n      this.solutionContent();\n      this.solutioniFrameContent();\n    },\n  }, //End of methods\n\n  mounted() {\n    // this.solutionContent();\n    // this.solutioniFrameContent();\n  }\n});\n\n\n\n\n\nvar app = new Vue({\n  el: \"#container\",\n  data: {\n    chapters: [],\n    activePage: \"Introduction\",\n    indexPage: \"\",\n    activeSection: \"\",\n  }, //End of data\n  methods: {\n\n    //UPDATES THE DISPLAY OF THE <SECTION> ELEMENTS - DISPLAYS THE ONE THAT IS\n    //CURRENTLY CLICKED FROM THE <ASIDE> LINKS\n    //CHANGES THE FORMAT / DISPLAY OF THE HEADINGS IN THE <ASIDE> TAG\n    activeTag(event){\n\n      //Updates the display of all sections. Makes the active section visible and the others not\n      let sectionActive = \"section\" + this.modifyActivePage;\n      let sections = document.querySelectorAll(\"section\");\n      for (let i = 0; i < sections.length; i++) {\n        sectionActive === sections[i].id ?\n        sections[i].style.display = \"block\" :\n        sections[i].style.display = \"none\";\n      }\n\n\n      //Updates the styling of the aside tags h1 headings to bold\n      let asideAnchors = document.querySelectorAll(\"aside a\");\n      let starter = -Infinity;\n\n      for (let i = 0; i < asideAnchors.length; i++) {\n\n        //Remove the bolding from the anchor that has a parent that is h1\n        asideAnchors[i].className = asideAnchors[i].className.replace(/\s?anchorActiveTag/, \"\");\n\n        //Remove all the classes from the list elements\n        asideAnchors[i].parentNode.parentNode.className = asideAnchors[i].parentNode.parentNode.className.replace(/\s?anchor(Active|Inactive)(Tag|Heading)/g, \"\");\n\n        //Hide all the <li> elements that do not nest an h1\n        if (asideAnchors[i].parentNode.localName !== \"h1\") asideAnchors[i].parentNode.parentNode.className += \" anchorInactiveHeading\";\n\n        //For starting the while loop at the position right after the h1 that represents the displayed section\n        if (asideAnchors[i].className.includes(\"anchor\" + this.modifyActivePage)) starter = i + 1;\n      }\n\n      //That is for h2 - h3 aside headings to be visible\n      while(asideAnchors[starter].parentNode.localName !== \"h1\"){\n        asideAnchors[starter].parentNode.parentNode.className = \"anchorActiveHeading\";\n        starter ++;\n      }\n\n      //Give to the (h1 --> anchor) a class that makes it bold\n      document.querySelector(\"a.anchor\" + this.modifyActivePage).className += \" anchorActiveTag\";\n    }, //End of activeTag method\n\n\n    //CREATES ALL THE \"HEADINGS\" OBJECT ELEMENTS FOR THE \"CHAPTERS\" DATA PROPERTY.\n    //THEN THE DATA IN THE \"CHAPTERS\" PROPERTY ARE USED FOR THE FORMATION OF THE\n    //HEADINGS IN THE ASIDE TAG\n    headingsFormation(){\n      let hList = document.querySelectorAll(\"h1,h2,h3,h4,h5,h6\");\n      let sectionName = \"Introduction\"\n\n      hList.forEach((el, idx)=>{\n        let newHeading = {};\n\n        //If statement so that the headings in the <aside> tag are disregarded OR\n        //If they are inside a <span> in the example area\n        if (!el.innerText.includes(\"chapter.text\")) {\n          if (!el.parentElement.className.includes(\"exampleArea\")) {\n            newHeading.heading = el.localName;\n            newHeading.text = el.innerText;\n\n            if (el.localName === \"h1\") sectionName = el.innerText.replace(/\s/g, \"\");\n            newHeading.sectionName = sectionName;\n\n            this.chapters.push(newHeading);\n          }\n        }\n      });\n    }, //End of headingsFormation method\n\n\n    //CREATES IDS FOR ALL THE HEADING TAGS THAT DO NOT BELONG IN THE ASIDE TAG\n    makeId(){\n      let hList = document.querySelectorAll(\"h1,h2,h3,h4,h5,h6\");\n\n      for(let i = 0; i < hList.length; i++){\n        if (hList[i].parentNode.className === \"spanSolutionArea\") continue;\n\n        if (hList[i].parentNode.localName !== \"li\"){\n          if (hList[i].parentNode.className === \"divExampleContainer\" || hList[i].parentNode.className === \"divPracticeContainer\") {\n            hList[i].id =\n            hList[i].localName + \"_\" +\n            hList[i].innerText.replace(/\s/g, \"-\") +\n            \"(\" + hList[i].parentNode.parentNode.id + \")\";\n          }\n          else {\n            hList[i].id = hList[i].localName + \"_\" + hList[i].innerText.replace(/\s/g, \"-\");\n          }\n        }\n      }\n    } //End of makeId method\n  }, //End of methods\n\n  computed: {\n    modifyActivePage() {\n      return this.activePage.replace(/[^A-z]/g, \"\");\n    }\n  },\n\n  beforeMount(){\n    this.headingsFormation();\n  },\n  mounted(){\n    this.makeId();\n    this.activeTag();\n  }\n});\n",
           description: [
-            {bullet: "Project is still in the works. Expected to be done in summer of 2019."},
+            {bullet: "Project is still in the works."},
             {bullet: "CSS tutorial built with Vue components."},
             {bullet: "Single page application with viewable content based on the user's browsing pattern."},
             {bullet: "The user can enter HTML and CSS in practice textareas and see the result of his code in real time"},
             {bullet: "Vue, Vanilla CSS."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Learn CSS and practice in a WYSIWYG environment. 2019-01"},
+            {fact: "Why was it built? It helps me understand some CSS principles and ti can create my own examples that other folks can later use"},
+            {fact: "Interesting fact: Reusable vue components make the process of building this project very interesting."},
           ],
           language: "Vue",
           images: [
@@ -558,9 +558,9 @@ let app = new Vue({
             {bullet: "Vue, Vanilla CSS."}
           ],
           highlights: [
-            {fact: "Higlhlight 1"},
-            {fact: "Higlhlight 2"},
-            {fact: "Higlhlight 3"},
+            {fact: "Create xPath rules without the worry of spelling errors. 2019-04"},
+            {fact: "Why was it built? My work requires a lot of xPath rules and I see how folks were having a hard time generating the rules without errors."},
+            {fact: "Interesting fact: The vue models make it easy to modify input data as the rule is being built."},
           ],
           language: "Vue",
           images: [
