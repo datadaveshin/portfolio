@@ -113,19 +113,42 @@
 
         <footer>
           <span>
-            <a href="mailto: papostolopoulos@protonmail.com"
-            title="Email me at papostolopoulos@protonmail.com">
+            <a href="mailto: papostolopoulos@protonmail.com">
               <i class="fas fa-envelope"></i>
-            </a> |
-            <a href="https://www.linkedin.com/in/parisapostolopoulos/" target="_blank" title="Visit my LinkedIn page">
+            </a>
+            <span class="spanBubble spanBubbleWebsiteLink"
+            :class="{spanBubbleBackgroundVanilla: active[0].Vanilla, spanBubbleBackgroundVue: active[1].Vue, spanBubbleBackgroundjQuery: active[2].jQuery}"
+            >
+              Send me an email
+            </span>
+            |
+            <a href="https://www.linkedin.com/in/parisapostolopoulos/" target="_blank">
               <i class="fab fa-linkedin-in"></i>
-            </a> |
-            <a href="https://github.com/papostolopoulos" target="_blank" title="Visit my github page">
+            </a>
+            <span class="spanBubble spanBubbleWebsiteLink"
+            :class="{spanBubbleBackgroundVanilla: active[0].Vanilla, spanBubbleBackgroundVue: active[1].Vue, spanBubbleBackgroundjQuery: active[2].jQuery}"
+            >
+              Visit my LinkedIn page
+            </span>
+            |
+            <a href="https://github.com/papostolopoulos" target="_blank">
               <i class="fab fa-github"></i>
-            </a> |
-            <a href="https://docs.google.com/document/d/1lPWcJ7GO5fzVQGeyxt9YIF_g22C0Qkr0Cznon-z514I/edit?usp=sharing" target="_blank" title="Read a copy of my resume">
+            </a>
+            <span class="spanBubble spanBubbleWebsiteLink"
+            :class="{spanBubbleBackgroundVanilla: active[0].Vanilla, spanBubbleBackgroundVue: active[1].Vue, spanBubbleBackgroundjQuery: active[2].jQuery}"
+            >
+              Visit my github page
+            </span>
+            |
+            <a href="https://docs.google.com/document/d/1lPWcJ7GO5fzVQGeyxt9YIF_g22C0Qkr0Cznon-z514I/edit?usp=sharing" target="_blank">
               <i class="fas fa-file"></i>
-            </a> |
+            </a>
+            <span class="spanBubble spanBubbleWebsiteLink"
+            :class="{spanBubbleBackgroundVanilla: active[0].Vanilla, spanBubbleBackgroundVue: active[1].Vue, spanBubbleBackgroundjQuery: active[2].jQuery}"
+            >
+              Read a copy of my resume
+            </span>
+            |
             &copy 2018 - today
           </span>
         </footer>
