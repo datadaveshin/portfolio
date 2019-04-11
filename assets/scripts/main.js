@@ -708,16 +708,28 @@ let app = new Vue({
       //OPEN THE MODAL
       modalOpen() {
         var getModalId = event.target.id.replace("aModalOpen", "modal");
+        console.log(getModalId);
+        // window[getModalId].className += " activeModal";
+        console.log(window[getModalId]);
+        // window[getModalId].style.transition = "opacity 1.5s";
+        // window[getModalId].style.opacity = "1";
+        // window[getModalId].style.visibility = "visible";
         window[getModalId].style.display = "flex";
+        // window[getModalId].style.width = "100vw";
+        // window[getModalId].style.height = "100vh";
 
 
+        //This is for the image and the text in the modal
         this.modalDisplay = "flex";
-        this.changeCounterValue();
+        this.changeCounterValue(); //This is for toggling through the images
       },
 
       //CLOSE THE MODAL FROM THE X ICON
       modalClose(event) {
         var getModalId = event.path[1].id.replace("divCloseModal", "modal");
+        // console.log(window[getModalId].className);
+        // window[getModalId].className = window[getModalId].className.replace(/ activeModal/, "");
+        // console.log(typeof window[getModalId].className);
         window[getModalId].style.display = "none";
 
         this.modalDisplay = "none";

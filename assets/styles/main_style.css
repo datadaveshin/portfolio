@@ -186,6 +186,12 @@ when hovering over the project titles */
   margin-left: 10px;
 }
 
+.spanBubbleFooterPosition{
+  bottom: 45px;
+  width: 100px;
+  left: -45px;
+}
+
 a:hover + .spanBubble{
   visibility: visible;
   z-index: 1;
@@ -197,11 +203,11 @@ a:hover + .spanBubble{
 }
 
 .spanBubbleBackgroundVue{
-  background-color: rgb(66, 184, 131, .5);
+  background-color: rgb(66, 184, 131);
 }
 
 .spanBubbleBackgroundjQuery{
-  background-color: rgba(18, 26, 38, .5);
+  background-color: rgb(18, 26, 38);
 }
 
 footer{
@@ -213,11 +219,20 @@ footer{
   position: absolute;
   text-align: center;
   width: 90vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-footer span{
-  line-height: 8vh;
+.divFooterElement{
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
 }
+
+/* footer span{
+  line-height: 8vh;
+} */
 
 a{
   color: white;
@@ -237,6 +252,12 @@ a:hover{
 /* OPEN THE FOLLOWING TWO WHEN YOU ARE READY */
   position: fixed; /*activate position to fixed when done with formatting modal*/
   display: none; /*Put it back to "none" when you are done with formatting*/
+  /* visibility: hidden;  */
+  /*This is for the transition effect*/
+  /* opacity: 0;  */
+  /*This is for the transition effect*/
+  /* transition: all 1s ease;  */
+  /* width 0.5s height 0.5s*/
   left: 0;
   top: 0;
   z-index: 1;
@@ -245,6 +266,14 @@ a:hover{
   background-position:center;
   background-repeat: no-repeat;
   background-size: 100vw;
+}
+
+.activeModal{
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+  width: 100vw;
+  height: 100vh;
 }
 
 .borderVanilla{
