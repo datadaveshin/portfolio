@@ -87,6 +87,7 @@
                 :id="'carousel'+project.id"
                 :key="project.key"
                 >
+                <!-- :href="'#modal-'+project.id" -->
                 <a @click="modalOpen"
                 :id = "'aModalOpen-' + project.id"
                 >
@@ -201,7 +202,7 @@
               <div class="divModalLeftHeader">
                 <h2>
                   <a @click="expandCodeModal($event)">Sample code</a> |
-                  <a :href="project.git" target="_blank" title="Check out the github page">
+                  <a :href="project.git" target="_blank">
                     <i class="fab fa-github"></i>
                   </a>
                   <span class="spanBubble spanBubbleWebsiteLink"
@@ -268,7 +269,11 @@
 
 
             <div class="divModalRightL2">
-              <!-- This is the divmodalL2 -->
+              <div class="divHighlights"
+              :class="{borderVanilla: active[0].Vanilla, borderVue: active[1].Vue, borderjQuery: active[2].jQuery}"
+              >
+                  {{project.highlights[counter].fact}}
+              </div>
             </div>
 
 

@@ -79,7 +79,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Customized to-do lists. (2017-03)"},
-            {fact: "Why was it built? I helped a colleague with his capstone project by creating the backend, database logic, backend - frontend connectivity"},
+            {fact: "Why was it built?\nI helped a colleague with his capstone project by creating the backend, database logic, backend - frontend connectivity"},
             {fact: "Interesting fact: The user can update and customize the lists."},
           ],
           language: "jQuery",
@@ -113,8 +113,8 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Blog with a WYSIWYG editor. (2017-02)"},
-            {fact: "Why was it built? It was my capstone project. I liked the idea of creating something that would allow people to save thoughts"},
-            {fact: "Interesting feature: Ability to upload images, video and modify the display of text"},
+            {fact: "Why was it built?\nIt was my capstone project. I liked the idea of creating something that would allow people to save thoughts"},
+            {fact: "Interesting fact: Ability to upload images, video and modify the display of text"},
           ],
           language: "Vanilla",
           images: [
@@ -145,7 +145,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Basic CSS tutorial. (2016-12)"},
-            {fact: "Why was it built? It was some kind of homework for my coding school"},
+            {fact: "Why was it built?\nIt was some kind of homework for my coding school"},
             {fact: "Interesting fact: As you progress through the pages, you will see more CSS being added."},
           ],
           language: "Vanilla",
@@ -177,7 +177,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "See the discography of your favorite artist. (2017-01)"},
-            {fact: "Why was it built? It was built as a school assignment. I wanted to learn on API calls"},
+            {fact: "Why was it built?\nIt was built as a school assignment. I wanted to learn on API calls"},
             {fact: "Interesting fact: Different API calls in spotify with promises."},
           ],
           language: "Vanilla",
@@ -210,7 +210,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Image filters through algo calculations. (2016-11)"},
-            {fact: "Why was it built? Class project. I wanted to learn some techniques on loading and editing images online."},
+            {fact: "Why was it built?\nClass project. I wanted to learn some techniques on loading and editing images online."},
             {fact: "Interesting fact: Images can be saved in different formats"},
           ],
           language: "Vanilla",
@@ -241,7 +241,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Sports news highlights from different sources. (2016-08)"},
-            {fact: "Why was it built? I wanted to learn on api calls"},
+            {fact: "Why was it built?\nI wanted to learn on api calls"},
             {fact: "Interesting fact: All the api calls are done from one source."},
           ],
           language: "Vanilla",
@@ -272,7 +272,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Play hangman online. (2016-08)"},
-            {fact: "Why was it built? This was my first online project."},
+            {fact: "Why was it built?\nThis was my first online project."},
             {fact: "Interesting fact: You can cheat by looking at the developer tools."},
           ],
           language: "jQuery",
@@ -303,8 +303,8 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Working clock displaying computer time. (2018-09)"},
-            {fact: "Why was it built? Good practice for CSS transforms and timeouts"},
-            {fact: "Interesting fact:"},
+            {fact: "Why was it built?\nGood practice for CSS transforms and timeouts"},
+            {fact: "Interesting fact: transforms happen through a timeout function"},
           ],
           language: "Vanilla",
           images: [
@@ -334,7 +334,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Play the drums from your keyboard. (2018-05)"},
-            {fact: "Why was it built? Good practice for Javascript and CSS"},
+            {fact: "Why was it built?\nGood practice for Javascript and CSS"},
             {fact: "Interesting fact: I built the same project in Vue.js too"},
           ],
           language: "Vanilla",
@@ -366,7 +366,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "My coding projects list. (2019-01)"},
-            {fact: "Why was it built? This is the place where I am showcasing all of my coding work"},
+            {fact: "Why was it built?\nThis is the place where I am showcasing all of my coding work"},
             {fact: "Interesting fact: After building the core of this single page app, updating the content happens very easily."},
           ],
           language: "Vue",
@@ -398,7 +398,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "JSON file viewer. (2018-12)"},
-            {fact: "Why was it built? I wanted something that would help me confirm if strings of text were accurately matching with extracted images."},
+            {fact: "Why was it built?\nI wanted something that would help me confirm if strings of text were accurately matching with extracted images."},
             {fact: "Interesting fact: There is a lot of string manipulation in order to clean up a large JSON string and remain with the important components of it."},
           ],
           language: "Vue",
@@ -429,7 +429,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Several practice exercises and coding examples. (2018-09)"},
-            {fact: "Why was it built? It has been useful for me to text my aquired knowledge by keeping my notes and by creating my own exercises"},
+            {fact: "Why was it built?\nIt has been useful for me to text my aquired knowledge by keeping my notes and by creating my own exercises"},
             {fact: "Interesting fact: New Vue instances are created for every section of the tutorial"},
           ],
           language: "Vue",
@@ -460,7 +460,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Play drums from your keyboard. (2018-07)"},
-            {fact: "Why was it built? Good practice of vue and css skills"},
+            {fact: "Why was it built?\nGood practice of vue and css skills"},
             {fact: "Interesting fact: There is a Vanilla js version for the same project"},
           ],
           language: "Vue",
@@ -492,7 +492,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Enter coordinates, see Google Street View Image. (2018-06)"},
-            {fact: "Why was it built? It was interesting for me to see if I could make something that would be matched with the Open Street Maps project."},
+            {fact: "Why was it built?\nIt was interesting for me to see if I could make something that would be matched with the Open Street Maps project."},
             {fact: "Interesting fact: This was easier than I thought. the API call was straighforward but if a lot of users start using this, then there is a fee for getting data from Google."},
           ],
           language: "Vanilla",
@@ -525,7 +525,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Learn CSS and practice in a WYSIWYG environment. (2018-10)"},
-            {fact: "Why was it built? It helps me understand some CSS principles and ti can create my own examples that other folks can later use"},
+            {fact: "Why was it built?\nIt helps me understand some CSS principles and ti can create my own examples that other folks can later use"},
             {fact: "Interesting fact: Reusable vue components make the process of building this project very interesting."},
           ],
           language: "Vue",
@@ -559,7 +559,7 @@ let app = new Vue({
           ],
           highlights: [
             {fact: "Create xPath rules without the worry of spelling errors. (2019-04)"},
-            {fact: "Why was it built? My work requires a lot of xPath rules and I see how folks were having a hard time generating the rules without errors."},
+            {fact: "I thought it would be fun to build something that others can use."},
             {fact: "Interesting fact: The vue models make it easy to modify input data as the rule is being built."},
           ],
           language: "Vue",
@@ -708,16 +708,7 @@ let app = new Vue({
       //OPEN THE MODAL
       modalOpen() {
         var getModalId = event.target.id.replace("aModalOpen", "modal");
-        console.log(getModalId);
-        // window[getModalId].className += " activeModal";
-        console.log(window[getModalId]);
-        // window[getModalId].style.transition = "opacity 1.5s";
-        // window[getModalId].style.opacity = "1";
-        // window[getModalId].style.visibility = "visible";
-        window[getModalId].style.display = "flex";
-        // window[getModalId].style.width = "100vw";
-        // window[getModalId].style.height = "100vh";
-
+        window[getModalId].className += " activeModal";
 
         //This is for the image and the text in the modal
         this.modalDisplay = "flex";
@@ -727,10 +718,7 @@ let app = new Vue({
       //CLOSE THE MODAL FROM THE X ICON
       modalClose(event) {
         var getModalId = event.path[1].id.replace("divCloseModal", "modal");
-        // console.log(window[getModalId].className);
-        // window[getModalId].className = window[getModalId].className.replace(/ activeModal/, "");
-        // console.log(typeof window[getModalId].className);
-        window[getModalId].style.display = "none";
+        window[getModalId].className = window[getModalId].className.replace(/ activeModal/, "");
 
         this.modalDisplay = "none";
         this.counter = 0;
@@ -794,8 +782,10 @@ let app = new Vue({
         let intervalId = setInterval(function(){
           if (self.modalDisplay !== "flex") clearInterval(intervalId);
           self.counter < 2 ? self.counter++ : self.counter = 0;
-        }, 3000);
+          console.log(self.counter);
+        }, 5000);
       }
+
     }, //End of methods
     beforeMount(){
       this.pathCreate();

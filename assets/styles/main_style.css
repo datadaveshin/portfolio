@@ -199,15 +199,18 @@ a:hover + .spanBubble{
 }
 
 .spanBubbleBackgroundVanilla{
+  text-shadow: 1px 1px 2px rgb(100, 85, 2);
   background-color: rgb(250, 220, 52);
 }
 
 .spanBubbleBackgroundVue{
+  text-shadow: 1px 1px 2px rgb(27, 75, 53);
   background-color: rgb(66, 184, 131);
 }
 
 .spanBubbleBackgroundjQuery{
-  background-color: rgb(18, 26, 38);
+  background-color: rgba(18, 26, 38, .5);
+  /* text-shadow: 1px 1px 2px rgb(18, 26, 38); */
 }
 
 footer{
@@ -247,20 +250,15 @@ a:hover{
 }
 
 .articleModals{
-  /* color: black; */
+  display: flex;
   color: white;
-/* OPEN THE FOLLOWING TWO WHEN YOU ARE READY */
   position: fixed; /*activate position to fixed when done with formatting modal*/
-  display: none; /*Put it back to "none" when you are done with formatting*/
-  /* visibility: hidden;  */
-  /*This is for the transition effect*/
-  /* opacity: 0;  */
-  /*This is for the transition effect*/
-  /* transition: all 1s ease;  */
-  /* width 0.5s height 0.5s*/
+  /* visibility: none; */ /*This is for the transition effect*/
+  opacity: 0; /*This is for the transition effect*/
+  transition: opacity 1s ease-out, z-index 1.5s ease-out;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: -1;
   width: 100vw;
   height: 100vh;
   background-position:center;
@@ -271,9 +269,9 @@ a:hover{
 .activeModal{
   display: flex;
   opacity: 1;
-  visibility: visible;
-  width: 100vw;
-  height: 100vh;
+  /* visibility: visible; */
+  z-index: 1;
+  transition: all 1s;
 }
 
 .borderVanilla{
@@ -284,6 +282,10 @@ a:hover{
   color: rgb(100, 85, 2);
 }
 
+.backgroungVanilla{
+  background-color: rgb(100, 85, 2);
+}
+
 .borderVue{
   border: 2px solid rgb(27, 75, 53);
 }
@@ -292,12 +294,20 @@ a:hover{
   color: rgb(27, 75, 53);
 }
 
+.backgroungVue{
+  background-color: rgb(27, 75, 53);
+}
+
 .borderjQuery{
   border: 2px solid rgb(18, 26, 38);
 }
 
 .fontjQuery{
   color: rgb(18, 26, 38);
+}
+
+.backgroungjQuery{
+  background-color: rgb(18, 26, 38);
 }
 
 .articleModals h1{
@@ -366,6 +376,27 @@ a:hover{
   height: 20%;
 }
 
+.divHighlights{
+  transition: all 1s ease;
+  display: flex;
+  height: 80%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 5px;
+  width: 90%;
+  background-color: rgba(255,255,255,.2);
+  /* background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; */
+}
+
+/* .divHighlights:after{
+  content: "Hello there";
+} */
+
 .divModalRightL3{
   height: 50%;
   display: grid;
@@ -404,6 +435,7 @@ a:hover{
   width: 31vw;
   background-repeat: no-repeat;
   background-size: cover;
+  transition: all 1s;
 }
 
 .divImageIcon:hover {
