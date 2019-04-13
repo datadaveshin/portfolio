@@ -171,7 +171,7 @@ when hovering over the project titles */
   z-index: -1;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s;
+  transition: opacity 1s;
   border-radius: 5%;
   color: white;
   text-align: center;
@@ -187,7 +187,7 @@ when hovering over the project titles */
 }
 
 .spanBubbleFooterPosition{
-  bottom: 45px;
+  bottom: 50px;
   width: 100px;
   left: -45px;
 }
@@ -379,6 +379,7 @@ a:hover{
 .divHighlights{
   transition: all 1s ease;
   display: flex;
+  content: "hahaha";
   height: 80%;
   align-items: center;
   justify-content: center;
@@ -451,10 +452,18 @@ a:hover{
   z-index: 2;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,.5);
   display: none;
+  background-color: rgba(0,0,0,.5);
   align-items: center;
   justify-content: center;
+  transition: all 2s;
+}
+
+.activeImageModal{
+  display: flex;
+  opacity: 1;
+  /* visibility: visible; */
+  z-index: 2;
   transition: all 2s;
 }
 
@@ -474,18 +483,24 @@ a:hover{
   background-color: rgba(0,0,0,.6);
   height: 96vh;
   overflow: auto;
+  outline: 0 solid rgba(0,0,0,.6);;
   color: white;
   grid-area: divModalLeft;
   padding: 0 10px;
+  transition: all 2s ease;
+  z-index: 2;
 }
 
-.divImageModalClose{
+.divModalLeftExpand{
+  outline: 2.1vw solid rgba(0,0,0,.6);
+  width: 100vw;
+  height: 100vh;
+  transition: all 2s;
+}
+
+/* .divImageModalClose{
   display: table;
-}
-
-.divImageModalClose a font{
-  /* line-height: 16vh; */
-}
+} */
 
 .divCodeModalClose, .divImageModalClose{
   position: fixed;
@@ -509,7 +524,7 @@ a:hover{
   margin-bottom: 20px;
   width: 80%;
   position: sticky;
-  top: 60px;
+  top: 3.5vh;
 }
 
 code{

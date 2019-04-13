@@ -727,6 +727,8 @@ let app = new Vue({
       imageModalOpen(event){
         //Get the id from the "imageScreenshot". Change the name to match that of the modal
         let divImageId = event.target.id.replace("imageScreenshot", "divImageModal");
+        console.log(window[divImageId]);
+        // window[divImageId].className += " activeImageModal"
         //Change the display from "none" to "flex"
         window[divImageId].style.display="flex";
       },
@@ -737,19 +739,16 @@ let app = new Vue({
 
       //EXPAND THE CODE MODAL TO FULL SCREEN
       expandCodeModal(event){
-        this.addStyle(event.path[3], this.updateStyle.expandCodeModal);
+        event.path[3].className += " divModalLeftExpand"
+        // this.addStyle(event.path[3], this.updateStyle.expandCodeModal);
         event.path[3].children[1].style.display = "block";
-        // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
-        //This is what you need to do if you decide to transfer the above in a new object.
-        // let targetDiv = document.getElementById("divTransform");
-        // this.addStyle(targetDiv, this.updateStyle.clean);
       },
 
       //MINIMIZE THE CODE MODAL TO THE LEFT SIDE OF THE SCREEN BY CLICKING THE X BUTTON
       codeModalClose(event){
-        this.addStyle(event.path[2], this.updateStyle.codeModalClose);
+        event.path[2].className = event.path[2].className.replace(" divModalLeftExpand", "");
+        // this.addStyle(event.path[2], this.updateStyle.codeModalClose);
         event.path[1].style.display = "none";
-        // event.path[3].style.transition = "all 2s"; //Deactivated because it is not visually pleasing
       },
 
       //MINIMIZE THE CODE MODAL BY CLICKING IN THE BODY OF THE SCREEN
