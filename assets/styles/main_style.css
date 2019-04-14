@@ -379,7 +379,6 @@ a:hover{
 .divHighlights{
   transition: all 1s ease;
   display: flex;
-  content: "hahaha";
   height: 80%;
   align-items: center;
   justify-content: center;
@@ -389,14 +388,7 @@ a:hover{
   padding: 5px;
   width: 90%;
   background-color: rgba(255,255,255,.2);
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain; */
 }
-
-/* .divHighlights:after{
-  content: "Hello there";
-} */
 
 .divModalRightL3{
   height: 50%;
@@ -442,25 +434,26 @@ a:hover{
 .divImageIcon:hover {
   cursor: pointer;
   border: 2px solid black;
-  box-shadow: inset 100vw 100vh rgba(0, 0, 0, .2);
+  /* box-shadow: inset 100vw 100vh rgba(0, 0, 0, .2); */
 }
 
 .divImageModal{
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 2;
+  z-index: -1;
   width: 100vw;
   height: 100vh;
-  display: none;
+  opacity: 0;
   background-color: rgba(0,0,0,.5);
   align-items: center;
   justify-content: center;
   transition: all 2s;
+  display: flex;
 }
 
 .activeImageModal{
-  display: flex;
+  /* display: flex; */
   opacity: 1;
   /* visibility: visible; */
   z-index: 2;
@@ -496,6 +489,7 @@ a:hover{
   width: 100vw;
   height: 100vh;
   transition: all 2s;
+  display: block;
 }
 
 /* .divImageModalClose{
@@ -511,8 +505,15 @@ a:hover{
   height: 8vh;
   border-radius: 50%;
   color: white;
-  transition-property: color;
-  transition-duration: 300ms;
+  transition: all .3s;
+}
+
+.divCodeModalClose{
+  display: none;
+}
+
+.divModalCloseVisible{
+  display: block;
 }
 
 .divCodeModalClose:hover, .divImageModalClose:hover{

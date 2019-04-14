@@ -517,7 +517,6 @@ let app = new Vue({
           code_url: "",
           code: "var exampleArea = Vue.component(\"example-area\",{\n  template: `\n  <div>\n    <div class=\"divExample\">\n      <textarea\n      class=\"textAreaPracticeHtml\"\n      placeholder=\"Add your html\"\n      v-model=\"textAreaPracticeHtml\"\n      @keyup=\"htmlCssCombine($event)\"\n      ></textarea>\n      <textarea\n      class=\"textAreaPracticeCss\"\n      placeholder=\"Add your css\"\n      v-model = \"textAreaPracticeCss\"\n      @keyup=\"htmlCssCombine($event)\"\n      ></textarea>\n      <iframe src=\"\" width=\"\" height=\"\" class=\"iFramePractice\" id=\"testFrame\"></iframe>\n    </div>\n    <span class=\"spanExampleArea\"><slot></slot></span>\n    <div class=\"buttonExampleArea\">\n    <button type=\"button\" @click=\"resetContent\">Reset</button>\n    </div>\n  </div>\n  `,\n  data: function() {\n    return {\n      textAreaPracticeHtml: \"\",\n      textAreaPracticeCss: \"\",\n    }\n  },\n  computed: {\n    iframeContentUpdate() {\n      return \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n    }\n  },\n  methods: {\n    htmlCssCombine(event){\n      event.path[1].children[2].contentDocument.body.innerHTML = this.iframeContentUpdate;\n    },\n    preSetContent(){ //Content extracted from the <span> <slot>\n      this.textAreaPracticeCss =\n      this.$el.children[1].innerHTML\n      .split(\"</span>\")[0]\n      .replace(\"<span>\", \"\")\n      .replace(/\s[^\S]/g, \"\")\n      .replace(/\{/g, \"{\n\t\")\n      .replace(/;[^\}\*]/g, \";\n\t\")\n      .replace(/(\*\/)[^\}]/g, \"$1\n\t\")\n      .replace(/\}/g, \"}\n\n\")\n      .trim();\n\n      this.textAreaPracticeHtml =\n      this.$el.children[1].innerHTML\n      .split(\"</span>\")[1]\n      .replace(/(\s){2,}/gm, \" \")\n      .replace(/(<\/\w+>)/g, \"\n$1\")\n      .replace(/(<\w+>)/g, \"\n$1\n\t\")\n      .trim();\n    },\n    preSetiFrameContent(){ //Content that is being pre-loaded from the computed property\n      this.$el.children[0].children[2].contentDocument.body.innerHTML =\n      \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n    },\n    resetContent(){\n      this.preSetContent();\n      this.preSetiFrameContent();\n    }\n  },\n  beforeMount(){\n  },\n  mounted() {\n    this.preSetContent();\n    this.preSetiFrameContent();\n  }\n});\n\n\n\n\nvar practiceArea = Vue.component(\"practice-area\",{\n  template: `\n  <div>\n    <div class=\"divPractice\">\n      <textarea\n      class=\"textAreaPracticeHtml\"\n      placeholder=\"Add your html\"\n      v-model=\"textAreaPracticeHtml\"\n      @keyup=\"htmlCssCombine($event)\"\n      ></textarea>\n      <textarea\n      class=\"textAreaPracticeCss\"\n      placeholder=\"Add your css\"\n      v-model = \"textAreaPracticeCss\"\n      @keyup=\"htmlCssCombine($event)\"\n      ></textarea>\n      <iframe src=\"\" width=\"\" height=\"\" class=\"iFramePractice\"></iframe>\n    </div>\n    <span class=\"spanSolutionArea\"><slot></slot></span>\n    <div class=\"buttonExampleArea\">\n      <button @click=\"solutionContentExecute\">Solution</button>\n      <button @click=\"yourEdits\">Your edits</button>\n    </div>\n  </div>\n  `,\n  data: function() {\n    return {\n      textAreaPracticeHtml: \"\",\n      textAreaPracticeCss: \"\",\n      iFrameUserContent: \"\",\n    }\n  },\n  computed: {\n    iframeContentUpdate() {\n      return \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n    }\n  },\n  methods: {\n    //Updates the iFrame content on the keyUp events.\n    htmlCssCombine(event){\n      event.path[1].children[2].contentDocument.body.innerHTML = this.iframeContentUpdate;\n    },\n\n    //content loaded from the <span> <slot> tag when click on \"solution\" button\n    solutionContent(){\n      this.iFrameUserContent = \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n\n      this.textAreaPracticeCss =\n      this.$el.children[1].innerHTML\n      .split(\"</span>\")[0]\n      .replace(\"<span>\", \"\")\n      .replace(/(\s){2,}/gm, \" \")\n      .replace(/\s[^\S]/g, \"\")\n      .replace(/\{/g, \"{\n\t\")\n      .replace(/;[^\}\*]/g, \";\n\t\")\n      .replace(/(\*\/)[^\}]/g, \"$1\n\t\")\n      .replace(/\}/g, \"}\n\n\")\n      .trim();\n\n      this.textAreaPracticeHtml =\n      this.$el.children[1].innerHTML\n      .split(\"</span>\")[1]\n      .replace(/\s{2,}/gm, \"\")\n      .replace(/(<\/\w+>)/g, \"\n$1\")\n      .replace(/(<\w+>)/g, \"\n$1\n\t\")\n      .trim();\n    },\n    solutioniFrameContent(){\n      this.$el.children[0].children[2].contentDocument.body.innerHTML =\n      \"<style>\" + this.textAreaPracticeCss + \"</style>\" + this.textAreaPracticeHtml;\n    },\n    yourEdits(){\n      this.$el.children[0].children[2].contentDocument.body.innerHTML = this.iFrameUserContent;\n\n      this.textAreaPracticeCss =\n      this.iFrameUserContent\n      .split(\"</style>\")[0]\n      .replace(\"<style>\", \"\")\n      .replace(/\s[^\S]/g, \"\")\n      .replace(/\{/g, \"{\n\t\")\n      .replace(/;[^\}\*]/g, \";\n\t\")\n      .replace(/(\*\/)[^\}]/g, \"$1\n\t\")\n      .replace(/\}/g, \"}\n\n\")\n      .trim();\n\n      this.textAreaPracticeHtml =\n      this.iFrameUserContent\n      .split(\"</style>\")[1]\n      .replace(/(\s){2,}/gm, \" \")\n      .replace(/(<\/\w+>)/g, \"\n$1\")\n      .replace(/(<\w+>)/g, \"\n$1\n\t\")\n      .trim();\n    },\n    solutionContentExecute(){\n      this.solutionContent();\n      this.solutioniFrameContent();\n    },\n  }, //End of methods\n\n  mounted() {\n    // this.solutionContent();\n    // this.solutioniFrameContent();\n  }\n});\n\n\n\n\n\nvar app = new Vue({\n  el: \"#container\",\n  data: {\n    chapters: [],\n    activePage: \"Introduction\",\n    indexPage: \"\",\n    activeSection: \"\",\n  }, //End of data\n  methods: {\n\n    //UPDATES THE DISPLAY OF THE <SECTION> ELEMENTS - DISPLAYS THE ONE THAT IS\n    //CURRENTLY CLICKED FROM THE <ASIDE> LINKS\n    //CHANGES THE FORMAT / DISPLAY OF THE HEADINGS IN THE <ASIDE> TAG\n    activeTag(event){\n\n      //Updates the display of all sections. Makes the active section visible and the others not\n      let sectionActive = \"section\" + this.modifyActivePage;\n      let sections = document.querySelectorAll(\"section\");\n      for (let i = 0; i < sections.length; i++) {\n        sectionActive === sections[i].id ?\n        sections[i].style.display = \"block\" :\n        sections[i].style.display = \"none\";\n      }\n\n\n      //Updates the styling of the aside tags h1 headings to bold\n      let asideAnchors = document.querySelectorAll(\"aside a\");\n      let starter = -Infinity;\n\n      for (let i = 0; i < asideAnchors.length; i++) {\n\n        //Remove the bolding from the anchor that has a parent that is h1\n        asideAnchors[i].className = asideAnchors[i].className.replace(/\s?anchorActiveTag/, \"\");\n\n        //Remove all the classes from the list elements\n        asideAnchors[i].parentNode.parentNode.className = asideAnchors[i].parentNode.parentNode.className.replace(/\s?anchor(Active|Inactive)(Tag|Heading)/g, \"\");\n\n        //Hide all the <li> elements that do not nest an h1\n        if (asideAnchors[i].parentNode.localName !== \"h1\") asideAnchors[i].parentNode.parentNode.className += \" anchorInactiveHeading\";\n\n        //For starting the while loop at the position right after the h1 that represents the displayed section\n        if (asideAnchors[i].className.includes(\"anchor\" + this.modifyActivePage)) starter = i + 1;\n      }\n\n      //That is for h2 - h3 aside headings to be visible\n      while(asideAnchors[starter].parentNode.localName !== \"h1\"){\n        asideAnchors[starter].parentNode.parentNode.className = \"anchorActiveHeading\";\n        starter ++;\n      }\n\n      //Give to the (h1 --> anchor) a class that makes it bold\n      document.querySelector(\"a.anchor\" + this.modifyActivePage).className += \" anchorActiveTag\";\n    }, //End of activeTag method\n\n\n    //CREATES ALL THE \"HEADINGS\" OBJECT ELEMENTS FOR THE \"CHAPTERS\" DATA PROPERTY.\n    //THEN THE DATA IN THE \"CHAPTERS\" PROPERTY ARE USED FOR THE FORMATION OF THE\n    //HEADINGS IN THE ASIDE TAG\n    headingsFormation(){\n      let hList = document.querySelectorAll(\"h1,h2,h3,h4,h5,h6\");\n      let sectionName = \"Introduction\"\n\n      hList.forEach((el, idx)=>{\n        let newHeading = {};\n\n        //If statement so that the headings in the <aside> tag are disregarded OR\n        //If they are inside a <span> in the example area\n        if (!el.innerText.includes(\"chapter.text\")) {\n          if (!el.parentElement.className.includes(\"exampleArea\")) {\n            newHeading.heading = el.localName;\n            newHeading.text = el.innerText;\n\n            if (el.localName === \"h1\") sectionName = el.innerText.replace(/\s/g, \"\");\n            newHeading.sectionName = sectionName;\n\n            this.chapters.push(newHeading);\n          }\n        }\n      });\n    }, //End of headingsFormation method\n\n\n    //CREATES IDS FOR ALL THE HEADING TAGS THAT DO NOT BELONG IN THE ASIDE TAG\n    makeId(){\n      let hList = document.querySelectorAll(\"h1,h2,h3,h4,h5,h6\");\n\n      for(let i = 0; i < hList.length; i++){\n        if (hList[i].parentNode.className === \"spanSolutionArea\") continue;\n\n        if (hList[i].parentNode.localName !== \"li\"){\n          if (hList[i].parentNode.className === \"divExampleContainer\" || hList[i].parentNode.className === \"divPracticeContainer\") {\n            hList[i].id =\n            hList[i].localName + \"_\" +\n            hList[i].innerText.replace(/\s/g, \"-\") +\n            \"(\" + hList[i].parentNode.parentNode.id + \")\";\n          }\n          else {\n            hList[i].id = hList[i].localName + \"_\" + hList[i].innerText.replace(/\s/g, \"-\");\n          }\n        }\n      }\n    } //End of makeId method\n  }, //End of methods\n\n  computed: {\n    modifyActivePage() {\n      return this.activePage.replace(/[^A-z]/g, \"\");\n    }\n  },\n\n  beforeMount(){\n    this.headingsFormation();\n  },\n  mounted(){\n    this.makeId();\n    this.activeTag();\n  }\n});\n",
           description: [
-            {bullet: "Project is still in the works."},
             {bullet: "CSS tutorial built with Vue components."},
             {bullet: "Single page application with viewable content based on the user's browsing pattern."},
             {bullet: "The user can enter HTML and CSS in practice textareas and see the result of his code in real time"},
@@ -728,27 +727,33 @@ let app = new Vue({
         //Get the id from the "imageScreenshot". Change the name to match that of the modal
         let divImageId = event.target.id.replace("imageScreenshot", "divImageModal");
         console.log(window[divImageId]);
-        // window[divImageId].className += " activeImageModal"
+        console.log(window[divImageId].firstElementChild);
+        window[divImageId].className += " activeImageModal"
         //Change the display from "none" to "flex"
-        window[divImageId].style.display="flex";
+        // window[divImageId].firstElementChild.style.display="flex"
+        // window[divImageId].style.display="flex";
       },
 
       imageModalClose(event){
-        event.path[2].style.display = "none";
+        event.path[2].className = event.path[2].className.replace(" activeImageModal", "");
+        // event.path[2].style.display = "none";
       },
 
       //EXPAND THE CODE MODAL TO FULL SCREEN
       expandCodeModal(event){
+        if(event.path[3].className.includes("divModalLeftExpand")) return;
+
         event.path[3].className += " divModalLeftExpand"
         // this.addStyle(event.path[3], this.updateStyle.expandCodeModal);
-        event.path[3].children[1].style.display = "block";
+        event.path[3].children[1].className += " divModalCloseVisible";
       },
 
       //MINIMIZE THE CODE MODAL TO THE LEFT SIDE OF THE SCREEN BY CLICKING THE X BUTTON
       codeModalClose(event){
         event.path[2].className = event.path[2].className.replace(" divModalLeftExpand", "");
+        event.path[1].className = event.path[1].className.replace(/ divModalCloseVisible/, "");
         // this.addStyle(event.path[2], this.updateStyle.codeModalClose);
-        event.path[1].style.display = "none";
+        // event.path[1].style.display = "none";
       },
 
       //MINIMIZE THE CODE MODAL BY CLICKING IN THE BODY OF THE SCREEN
@@ -759,20 +764,6 @@ let app = new Vue({
               event.path[2].children[1].style.display = "none";
               this.addStyle(event.path[2], this.updateStyle.codeModalClose);
             }
-      },
-
-      modalbackImage() {
-        console.log("I am creating classes");
-      },
-
-      //CREATE  CAROUSEL
-      carouselCreate() {
-        console.log("carousel created");
-      },
-
-      //CREATE ALL MODALS
-      modalCreateClass() {
-        console.log("modal create fired");
       },
 
       //CHANGE THE VALUE OF THE COUNTER SO THAT THE IMAGES CHANGE IN THE MODAL DISPLAY

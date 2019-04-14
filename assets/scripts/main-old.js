@@ -1,211 +1,152 @@
-// NAVIGATION TAG AND ELEMENTS
-let navTags = Vue.component('nav-tags', {
-  props: ['section'],
-  template: `
-    <nav>
-      <ul>
-        <li v-for="section in sections"
-        v-if="section.active"
-        v-bind:name = "section.name"
-        style="color: black;">
-          {{section.text}}
-        </li>
+/*jshint esversion: 6 */
+// MAIN VUE INSTANCE
+let app = new Vue({
+    el: "#divContainer",
+    data: {
+      active: [ //defines which page to render - see div with it divTransform in html
+          {Vanilla: true},
+          {Vue: false},
+          {jQuery: false}
+      ],
+      imagePath: "assets/images/img-",
+      videoPath: "assets/videos/vid-",
+      textPath: "assets/txt_files/code-",
 
-        <li
-        v-else
-        v-bind:name="section.text"
-        v-on:mouseover="classTransitionOver($event)"
-        v-on:mouseout="classTransitionLeave($event)"
-        >
-          <a
-          v-bind:key="section.id"
-          v-bind:name="section.text"
-          v-on:click="classChange($event)"
-          >
-            {{section.text}}
-          </a>
-        </li>
-      </ul>
-    </nav>
-  `,
-  data: function() {
-    return {
       sections: [
         {id: 1, text: "Vanilla", active: true},
         {id:2, text: "Vue", active: false},
         {id: 3, text: "jQuery", active: false}
       ],
-      hoverStyle: {
-        Vanilla: {
+
+      updateStyle: {
+        Vanilla: { //This is for the hovering over the vanilla link
           backgroundColor: "rgb(250, 220, 52)",
           backgroundImage: 'url("assets/images/logo-javascript.png")',
           boxShadow: "inset 100vw 100vh rgba(250, 220, 52, .5)",
-          transition: "all .5s"
+          transition: "all .3s"
         },
-        Vue: {
+        Vue: { //This is for the hovering over the Vue link
           backgroundColor: "rgba(66, 184, 131, .0001)",
           backgroundImage: 'url("assets/images/logo-vue.png")',
           boxShadow: "inset 100vw 100vh rgba(66, 184, 131, .5)",
-          transition: "all .5s"
+          transition: "all .3s"
         },
-        jQuery: {
+        jQuery: { //This is for the hovering over the jQuery link
           backgroundColor: "rgba(18, 26, 38, .0001)",
           backgroundImage: 'url("assets/images/logo-jquery.png")',
           boxShadow: "inset 100vw 100vh rgba(18, 26, 38, .5)",
-          transition: "all .5s"
+          transition: "all .3s"
         },
-        clean: {
+        clean: { //This is for the mousing out of the Vanilla, Vue or jQuery links in header
           backgroundColor: "",
           backgroundImage: '',
           boxShadow: "",
-          transition: "all .5s"
+          transition: "all .3s"
+        },
+        expandCodeModal: {
+          position: "fixed",
+          zIndex: 2,
+          left: 0,
+          top: 0,
+          width: "100vw",
+          height: "100vh"
+        },
+        codeModalClose: {
+          position: "static",
+          zIndex: 1,
+          width: "32vw",
+          height: "96vh"
         }
-      }
-    }
-  },
-  methods: {
-    // CHANGE THE CLASS OF THE BACKGROUND AND THE SELECTED NAV ELEMENT
-    classChange: function(event) {
-      let sectionsActiveArr = this.sections;
-      let attr = event.target.getAttribute("name");
-      let activeTag = app.$data.active;
+      },  //End of updateStyle
 
-      //Change the property "active" in the "sections" array of the Vue component's data
-      sectionsActiveArr.forEach(function(el) {
-        el.text === attr ? el.active = true : el.active = false;
-      });
-
-      //Change the properties in the "active" array (within data in the Vue instance)
-      activeTag.forEach(function(el) {
-        for (let key in el){
-          key === attr ? el[key] = true : el[key] = false;
-        }
-      });
-    },
-
-    // EFFECT THAT ACTIVATES THE TRANSITION WHEN MOUSING OVER
-    classTransitionOver: function(event) {
-      let attr = event.target.getAttribute("name");
-      let targetDiv = document.getElementById("divTransform");
-      this.addStyle(targetDiv, this.hoverStyle[attr]);
-    },
-
-    // EFFECT THAT DEACTIVATES THE TRANSITION WHEN THE MOUSE LEAVES
-    classTransitionLeave: function(event) {
-      let targetDiv = document.getElementById("divTransform");
-      this.addStyle(targetDiv, this.hoverStyle.clean);
-    },
-
-    // LOOP THAT UPDATES THE INLINE STYLE OF THE ELEMENT THAT IS MOUSED OVER (FOR TRANSITION)
-    addStyle: function(el, styles) {
-      for (let key in styles){
-        el.style[key] = styles[key];
-      }
-    }
-  },
-  computed: {
-
-  }
-});
-
-
-function testFunction() {
-  console.log(navTags.extendOptions.data());
-}
-
-testFunction();
-
-
-let sectionTags = Vue.component("section-tags", {
-  props: ["project"],
-  template:
-  `
-    <section style="font-size: 30px; margin: 80px; color: black">
-      Hello, this page is still in the works. I am currently working on different
-      projects and I will update this page when I am done with building other things.
-      If you wish to see a list of my past projects, you can click
-      <a href="index.html" target="_blank">here</a>
-    </section>
-  `,
-  data: function() {
-    return {
-      nav: navTags.extendOptions.data().sections
-    }
-  },
-  methods: {
-
-  }
-});
-
-
-
-
-
-// MAIN VUE INSTANCE
-let app = new Vue({
-    el: "#divContainer",
-    data: {
-      active: [ //defines which page to render
-          {Vanilla: true},
-          {Vue: false},
-          {jQuery: false}
-      ],
-      imagePath: "./assets/images/img-",
-
+      activeModals: "Vanilla",
+      counter: 0, //This is for the image and text transition inside each modal
+      modalDisplay: "none", //This is for the image and text transition
 
       projects: [
         {
+          key: 1,
           title: "listMe.xyz",
           url: "http://listme.xyz",
           git: "https://github.com/papostolopoulos/listme",
-          code: "code in script? or iframe? or scrape off the code from page and present?",
+          code_url: "",
+          code: "",
           description: [
-            {bullet: "Full stack CRUD todo list."},
-            {bullet: "Create, read, update and delete lists of todo items"},
-            {bullet: "Node, Express, knex, psql, JQuery, handlebars, CSS"}
+            {bullet: "Full stack CRUD to-do list."},
+            {bullet: "Create, read, update and delete lists of todo items."},
+            {bullet: "Create, update or delete user account."},
+            {bullet: "Node, Express, knex, psql, JQuery, handlebars, CSS."}
+          ],
+          highlights: [
+            {fact: "Customized to-do lists. (2017-03)"},
+            {fact: "Why was it built?\nI helped a colleague with his capstone project by creating the backend, database logic, backend - frontend connectivity"},
+            {fact: "Interesting fact: The user can update and customize the lists."},
           ],
           language: "jQuery",
           images: [
-            {image: this.imagePath + "listMejQuery1.jpg"},
-            {image: this.imagePath + "listMejQuery2.jpg"},
-            {image: this.imagePath + "listMejQuery3.jpg"},
+            {image: ""},
+            {image: ""},
+            {image: ""},
           ],
-          video_url: "",
-          id: "listMejQuery"
+          video_url: "https://youtube.com/embed/QI_-P_XE8fo",
+          id: "listMejQuery",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
+          key: 2,
           title: "writeit.pro",
           url: "http://writeit.pro",
           git: "https://github.com/papostolopoulos/writeit",
+          code_url: "",
           code: "",
           description:
           [
             {bullet: "Full stack blog."},
             {bullet: "WYSIWYG text editor."},
             {bullet: "Image, video upload."},
-            {bullet: "Responsive"},
+            {bullet: "Responsive / mobile."},
             {bullet: "Node, Express, psql, JavaScript, handlebars, html, CSS"}
           ],
+          highlights: [
+            {fact: "Blog with a WYSIWYG editor. (2017-02)"},
+            {fact: "Why was it built?\nIt was my capstone project. I liked the idea of creating something that would allow people to save thoughts"},
+            {fact: "Interesting fact: Ability to upload images, video and modify the display of text"},
+          ],
           language: "Vanilla",
           images: [
-            {image: this.imagePath + "writeItVanilla1.jpg"},
-            {image: this.imagePath + "writeItVanilla2.jpg"},
-            {image: this.imagePath + "writeItVanilla3.jpg"},
+            {image: ""},
+            {image: ""},
+            {image: ""},
           ],
-          video_url: "",
-          id: "writeItVanilla"
+          video_url: "https://youtube.com/embed/DB0xETCAt4E",
+          id: "writeItVanilla",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
+          key: 3,
           title: "CSS Tutorial",
-          url: "https://papostolopoulos.github.io/css-exploration/index.html",
+          url: "https://papostolopoulos.github.io/css-exploration/index-vanilla.html",
           git: "https://github.com/papostolopoulos/css-exploration",
+          code_url: "",
           code: "",
           description: [
-            {bullet: "CSS tutorial for the users interested learning basic aspects of CSS"},
-            {bullet: "Analyzed Reset, Specificity, the Box Model, Positioning, Typography, Backgrounds, Responsive Design"},
-            {bullet: "HTML, Vanilla CSS"}
+            {bullet: "CSS tutorial with basic aspects of CSS."},
+            {bullet: "Reset, Specificity, the Box Model, Positioning, Typography, Backgrounds, Responsive Design."},
+            {bullet: "Responsive, mobile."},
+            {bullet: "HTML, Vanilla CSS."}
+          ],
+          highlights: [
+            {fact: "Basic CSS tutorial. (2016-12)"},
+            {fact: "Why was it built?\nIt was some kind of homework for my coding school"},
+            {fact: "Interesting fact: As you progress through the pages, you will see more CSS being added."},
           ],
           language: "Vanilla",
           images: [
@@ -213,20 +154,32 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
-          id: "cssTutorialVanilla"
+          video_url: "https://youtube.com/embed/k-3_nybOPAQ",
+          id: "cssTutorialVanilla",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
+          key: 4,
           title: "Spotify Discography Search",
           url: "https://git.io/vyfiO",
-          git: "",
+          git: "https://github.com/papostolopoulos/spotify",
+          code_url: "",
           code: "",
           description: [
-            {bullet: "Search engine with API calls to the Spotify API."},
-            {bullet: "The user can search for artists' discographies and review the song titles and album covers"},
+            {bullet: "API calls to the Spotify API."},
+            {bullet: "Search for artists' discographies."},
+            {bullet: "Review the song titles and album covers"},
             {bullet: "JavaScript, Ajax calls, CSS, HTML"}
           ],
+          highlights: [
+            {fact: "See the discography of your favorite artist. (2017-01)"},
+            {fact: "Why was it built?\nIt was built as a school assignment. I wanted to learn on API calls"},
+            {fact: "Interesting fact: Different API calls in spotify with promises."},
+          ],
           language: "Vanilla",
           images: [
             {image: ""},
@@ -234,18 +187,31 @@ let app = new Vue({
             {image: ""},
           ],
           video_url: "",
-          id: "spotifyDiscographyVanilla"
+          id: "spotifyDiscographyVanilla",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
-          title: "Image editing",
+          key: 5,
+          title: "Image filtering",
           url: "https://goo.gl/s9sHDS",
-          git: "",
+          git: "https://github.com/papostolopoulos/image_filtering",
+          code_url: "",
           code: "",
           description: [
-            {bullet: "Image editing console."},
-            {bullet: "This is a barebones image filtering environment. The user can open images from the hard drive or online sources and apply filters or save in a different image format"},
+            {bullet: "Image editing and filters application."},
+            {bullet: "Open images from the hard drive or online sources."},
+            {bullet: "Filters for brightness, contrast, transparency, grayscale, blur etc."},
+            {bullet: "Save in a different image formats."},
             {bullet: "Node, JavaScript, CSS, HTML"}
+          ],
+          highlights: [
+            {fact: "Image filters through algo calculations. (2016-11)"},
+            {fact: "Why was it built?\nClass project. I wanted to learn some techniques on loading and editing images online."},
+            {fact: "Interesting fact: Images can be saved in different formats"},
           ],
           language: "Vanilla",
           images: [
@@ -253,57 +219,92 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
-          id: "imageEditingVanilla"
+          video_url: "https://youtube.com/embed/RYklsgi93uA",
+          id: "imageEditingVanilla",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
-          title: "SportyTourist",
+          key: 6,
+          title: "SportyTourist.com",
           url: "http://sportytourist.com",
           git: "https://github.com/papostolopoulos/sportytourist",
+          code_url: "",
           code: "",
           description: [
             {bullet: "Sports news aggregator."},
             {bullet: "News API calls"},
             {bullet: "JavaScript, AJAX, CSS, HTML"}
           ],
+          highlights: [
+            {fact: "Sports news highlights from different sources. (2016-08)"},
+            {fact: "Why was it built?\nI wanted to learn on api calls"},
+            {fact: "Interesting fact: All the api calls are done from one source."},
+          ],
           language: "Vanilla",
           images: [
             {image: ""},
-            {image: "link here"},
-            {image: "link here"},
+            {image: ""},
+            {image: ""},
           ],
-          video_url: "",
-          id: "sportyTouristVanilla"
+          video_url: "https://youtube.com/embed/85MEVokytgs",
+          id: "sportyTouristVanilla",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
-          title: "Hangman",
+          key: 7,
+          title: "hangman.pro",
           url: "http://hangman.pro",
           git: "https://github.com/papostolopoulos/hangman",
+          code_url: "",
           code: "",
           description: [
             {bullet: "Game of hangman."},
             {bullet: "Random word pick and play."},
             {bullet: "JQuery, AJAX, CSS, HTML"}
           ],
+          highlights: [
+            {fact: "Play hangman online. (2016-08)"},
+            {fact: "Why was it built?\nThis was my first online project."},
+            {fact: "Interesting fact: You can cheat by looking at the developer tools."},
+          ],
           language: "jQuery",
           images: [
             {image: ""},
-            {image: "link here"},
-            {image: "link here"},
+            {image: ""},
+            {image: ""},
           ],
-          video_url: "",
-          id: "hangmanjQuery"
+          video_url: "https://youtube.com/embed/hpI6RAwc0g0",
+          id: "hangmanjQuery",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
+          key: 8,
           title: "Clock",
           url: "https://papostolopoulos.github.io/js30/02-clock/index-vanilla.html",
           git: "https://github.com/papostolopoulos/js30/tree/master/02-clock",
+          code_url: "",
           code: "",
           description: [
-            {bullet: "A clock that updates automatically by firing interval calls."}
+            {bullet: "A clock."},
+            {bullet: "Updates automatically by firing interval calls."},
+            {bullet: "JavaScript, CSS, HTML."}
+          ],
+          highlights: [
+            {fact: "Working clock displaying computer time. (2018-09)"},
+            {fact: "Why was it built?\nGood practice for CSS transforms and timeouts"},
+            {fact: "Interesting fact: transforms happen through a timeout function"},
           ],
           language: "Vanilla",
           images: [
@@ -311,18 +312,30 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
-          id: "clockVanilla"
+          video_url: "https://youtube.com/embed/qc0xtBvhYE8",
+          id: "clockVanilla",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
-          title: "Drum Kit",
+          key: 9,
+          title: "Drum Kit - Vanilla",
           url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vanilla.html",
           git: "https://github.com/papostolopoulos/js30/tree/master/01-drum_kit",
+          code_url: "",
           code: "",
           description: [
             {bullet: "Drum Kit. Press the keys and hear the drums playing."},
-            {bullet: "Vanilla JavaScript, CSS, HTML."}
+            {bullet: "Vanilla JavaScript, CSS, HTML."},
+            {bullet: "Similar project in the Vue section."}
+          ],
+          highlights: [
+            {fact: "Play the drums from your keyboard. (2018-05)"},
+            {fact: "Why was it built?\nGood practice for Javascript and CSS"},
+            {fact: "Interesting fact: I built the same project in Vue.js too"},
           ],
           language: "Vanilla",
           images: [
@@ -330,18 +343,31 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
-          id: "drumKitVanilla"
+          video_url: "https://youtube.com/embed/gHnogNy7aSk",
+          id: "drumKitVanilla",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
-          title: "Drum Kit",
-          url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vue.html",
-          git: "https://github.com/papostolopoulos/js30/tree/master/01-drum_kit",
+          key: 10,
+          title: "addEventListener.xyz",
+          url: "http://addEventListener.xyz",
+          code_url: "YOU NEED TO ADD A COPY OF THE CODE. YOU NEED TO ADD IMAGES. YOU NEED TO ADD VIDEO FOOTAGE",
+          git: "https://github.com/papostolopoulos/portfolio",
           code: "",
           description: [
-            {bullet: "Drum Kit. Press the keys and hear the drums playing."},
+            {bullet: "Single page application"},
+            {bullet: "A Personal web page with a list of all the coding projects"},
+            {bullet: "Multiple class transitions, CSS transformations and interactive display through a single Vue instance."},
             {bullet: "Vue, CSS, HTML."}
+          ],
+          highlights: [
+            {fact: "My coding projects list. (2019-01)"},
+            {fact: "Why was it built?\nThis is the place where I am showcasing all of my coding work"},
+            {fact: "Interesting fact: After building the core of this single page app, updating the content happens very easily."},
           ],
           language: "Vue",
           images: [
@@ -349,20 +375,125 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
-          id: "drumKitVue"
+          video_url: "https://youtube.com/embed/X2GlA4nhJb4",
+          id: "addEventListenerVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
         },
 
         {
+          key: 11,
+          title: "JSON files copy-paste viewer",
+          url: "https://papostolopoulos.github.io/xPathDataExtraction/copypaste/copypaste4.html",
+          code_url: "",
+          git: "https://github.com/papostolopoulos/xPathDataExtraction/copypaste",
+          code: "",
+          description: [
+            {bullet: "This is a project that was done for internal company work. It doesn't work with random files."},
+            {bullet: "The user can paste a JSON file from an internal work tool and view the results as per array element."},
+            {bullet: "He can filter the results as needed."},
+            {bullet: "Vue, HTML, CSS."}
+          ],
+          highlights: [
+            {fact: "JSON file viewer. (2018-12)"},
+            {fact: "Why was it built?\nI wanted something that would help me confirm if strings of text were accurately matching with extracted images."},
+            {fact: "Interesting fact: There is a lot of string manipulation in order to clean up a large JSON string and remain with the important components of it."},
+          ],
+          language: "Vue",
+          images: [
+            {image: ""},
+            {image: ""},
+            {image: ""},
+          ],
+          video_url: "https://youtube.com/embed/FEzatw3eGjk",
+          id: "jsonCopyPasteVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
+        },
+
+        {
+          key: 12,
+          title: "A Vue tutorial",
+          url: "https://papostolopoulos.github.io/tutorials/vue/vue_website_tutorial/000-vue_introduction.html",
+          code_url: "",
+          git: "https://github.com/papostolopoulos/tutorials/tree/master/vue/vue_website_tutorial",
+          code: "",
+          description: [
+            {bullet: "Vue tutorial and exercises based on vuejs.org"},
+            {bullet: "Vue, CSS, HTML."},
+            {bullet: "Similar project in the Vanilla section."}
+          ],
+          highlights: [
+            {fact: "Several practice exercises and coding examples. (2018-09)"},
+            {fact: "Why was it built?\nIt has been useful for me to text my aquired knowledge by keeping my notes and by creating my own exercises"},
+            {fact: "Interesting fact: New Vue instances are created for every section of the tutorial"},
+          ],
+          language: "Vue",
+          images: [
+            {image: ""},
+            {image: ""},
+            {image: ""},
+          ],
+          video_url: "https://youtube.com/embed/4PPgpb3XgfI",
+          id: "vueTutorialVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
+        },
+
+        {
+          key: 13,
+          title: "Drum Kit - Vue",
+          url: "https://papostolopoulos.github.io/js30/01-drum_kit/index-vue.html",
+          code_url: "",
+          git: "https://github.com/papostolopoulos/js30/tree/master/01-drum_kit",
+          code: "",
+          description: [
+            {bullet: "Drum Kit. Press the keys and hear the drums playing."},
+            {bullet: "Vue, CSS, HTML."},
+            {bullet: "Similar project in the Vanilla section."}
+          ],
+          highlights: [
+            {fact: "Play drums from your keyboard. (2018-07)"},
+            {fact: "Why was it built?\nGood practice of vue and css skills"},
+            {fact: "Interesting fact: There is a Vanilla js version for the same project"},
+          ],
+          language: "Vue",
+          images: [
+            {image: ""},
+            {image: ""},
+            {image: ""},
+          ],
+          video_url: "https://youtube.com/embed/HNRwOGbi2sU",
+          id: "drumKitVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
+        },
+
+        {
+          key: 14,
           title: "Street View Image Modal",
           url: "https://git.io/vppLs",
           git: "https://github.com/papostolopoulos/streetViewModal",
+          code_url: "",
           code: "",
           description: [
             {bullet: "Modal that displays static Google Street View image."},
-            {bullet: "Camera rotation and zooming"},
-            {bullet: "Google maps API call"},
-            {bullet: "Vanilla JavaScript, Vanilla CSS"}
+            {bullet: "Camera rotation and zooming."},
+            {bullet: "Google maps API call."},
+            {bullet: "Vanilla JavaScript, Vanilla CSS."}
+          ],
+          highlights: [
+            {fact: "Enter coordinates, see Google Street View Image. (2018-06)"},
+            {fact: "Why was it built?\nIt was interesting for me to see if I could make something that would be matched with the Open Street Maps project."},
+            {fact: "Interesting fact: This was easier than I thought. the API call was straighforward but if a lot of users start using this, then there is a fee for getting data from Google."},
           ],
           language: "Vanilla",
           images: [
@@ -370,26 +501,286 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "",
-          id: "streetViewModalVanilla"
-        }
+          video_url: "https://youtube.com/embed/Ce009inkFAA",
+          id: "streetViewModalVanilla",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
+        },
 
-    ], //end of positions
+        {
+          key: 15,
+          title: "CSS Tutorial - Vue",
+          url: "https://papostolopoulos.github.io/css-exploration/index.html",
+          git: "https://github.com/papostolopoulos/css-exploration",
+          code_url: "",
+          code: "",
+          description: [
+            {bullet: "Project is still in the works."},
+            {bullet: "CSS tutorial built with Vue components."},
+            {bullet: "Single page application with viewable content based on the user's browsing pattern."},
+            {bullet: "The user can enter HTML and CSS in practice textareas and see the result of his code in real time"},
+            {bullet: "Vue, Vanilla CSS."}
+          ],
+          highlights: [
+            {fact: "Learn CSS and practice in a WYSIWYG environment. (2018-10)"},
+            {fact: "Why was it built?\nIt helps me understand some CSS principles and ti can create my own examples that other folks can later use"},
+            {fact: "Interesting fact: Reusable vue components make the process of building this project very interesting."},
+          ],
+          language: "Vue",
+          images: [
+            {image: ""},
+            {image: ""},
+            {image: ""},
+          ],
+          video_url: "https://youtube.com/embed/weG_SlyUaXM",
+          id: "cssTutorialVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
+        },
+
+
+        {
+          key: 16,
+          title: "xPath Generator",
+          url: "https://papostolopoulos.github.io/xPathDataExtraction/copypaste/xPathGenerator.html",
+          git: "https://github.com/papostolopoulos/copypaste",
+          code_url: "",
+          code: "",
+          description: [
+            {bullet: "Single page application"},
+            {bullet: "Allows the user to create and modify xPath rules"},
+            {bullet: "The user has the option to update the rules even when they are created."},
+            {bullet: "Different page components allow the user to modify the different rule components through the model updates."},
+            {bullet: "Vue, Vanilla CSS."}
+          ],
+          highlights: [
+            {fact: "Create xPath rules without the worry of spelling errors. (2019-04)"},
+            {fact: "I thought it would be fun to build something that others can use."},
+            {fact: "Interesting fact: The vue models make it easy to modify input data as the rule is being built."},
+          ],
+          language: "Vue",
+          images: [
+            {image: ""},
+            {image: ""},
+            {image: ""},
+          ],
+          video_url: "https://www.youtube.com/embed/YRh_VZG0TJ4",
+          id: "xPathGeneratorVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          }
+        },
+
+
+    ], //end of projects
 
 
     }, //End of data
     methods: {
-      doSomething: function () {
-        console.log("clicked!");
+
+      // CHANGE THE CLASS OF THE BACKGROUND AND THE SELECTED NAV ELEMENT FROM HEADERS
+      headersClassChange(event) {
+        let attrName = event.target.getAttribute("name");
+        this.classChange(attrName);
       },
-      showMe: function() {
-        this.projects.map(function(el) {
-          console.log(el);
+
+
+      // CHANGE THE CLASS OF THE BACKGROUND AND THE SELECTED NAV ELEMENT
+      classChange(attr){
+        //Change the activePage property. This one will define which images will be
+        //displayed in the carousel
+        // this.activePage = attr;
+
+        //Change the property "active" for each object element in the "sections" array
+        this.sections.forEach((el) => el.text === attr ? el.active = true : el.active = false);
+
+        //Change the properties in the "active" array (within data in the Vue instance)
+        this.active.forEach((el) => {
+          for (let key in el) key === attr ? el[key] = true : el[key] = false;
         });
+
+        //This is for changing the active class of the <divTransform> tag
+        this.activeModals = attr;
+      },
+
+
+      //CHANGE PAGES FROM ARROWS
+      changePage(event){
+        let targetDiv = window["divTransform"];
+        let arrowId = event.target.id.replace(/(div)?Arrow/i, "").toLowerCase();
+        let arr = this.sections;
+
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].active) {
+            if (arr[i].id === 3 && arrowId === "right" && arr[i].active === true) {
+              this.classChange(arr[0].text);
+              this.addStyle(targetDiv, this.updateStyle[arr[0].text]);
+              break;
+            }
+            else if (arr[i].id === 1 && arrowId === "left" && arr[i].active === true) {
+              this.classChange(arr[2].text);
+              this.addStyle(targetDiv, this.updateStyle[arr[2].text]);
+              break;
+            }
+            else {
+              arrowId === "right" ?
+              (this.classChange(arr[i + 1].text), this.addStyle(targetDiv, this.updateStyle[arr[i + 1].text])) :
+              (this.classChange(arr[i - 1].text), this.addStyle(targetDiv, this.updateStyle[arr[i - 1].text]));
+              break;
+            }
+          }
+        }
+
+        this.sections.forEach((el, idx, arr)=>{
+
+        });
+      },
+
+
+      // EFFECT THAT ACTIVATES THE TRANSITION WHEN MOUSING OVER
+      classTransitionOver(event) {
+        let attr = event.target.getAttribute("name");
+        let targetDiv = window["divTransform"];
+        this.addStyle(targetDiv, this.updateStyle[attr]);
+      },
+
+
+      // EFFECT THAT DEACTIVATES THE TRANSITION WHEN THE MOUSE LEAVES
+      classTransitionOut(event) {
+        let targetDiv = window["divTransform"];
+        this.addStyle(targetDiv, this.updateStyle.clean);
+      },
+
+
+      // LOOP THAT UPDATES THE INLINE STYLE OF THE ELEMENT THAT IS MOUSED OVER (FOR TRANSITION)
+      addStyle(el, styles) {
+        for (let key in styles){
+          el.style[key] = styles[key];
+        }
+      },
+
+
+      //CREATES THE PATHS FOR ALL THE IMAGES IN THE PROJECTS ARRAY INSIDE "DATA"
+      //ADDS THE BACKGROUND IMAGE IN MODALS
+      //ADDS THE BOX SHADOW IN MODALS
+      //CREATES THE PATHS FOR ALL THE VIDEOS IN THE PROJECTS ARRAY INSIDE DATA
+      pathCreate() {
+        let self = this;
+        let projectsArr = this.projects;
+        let codePath = "";
+
+        projectsArr.forEach((el) => {
+
+
+          //Add path in projects[i].images.image
+          el.images.forEach((ele, idx) => ele.image = self.imagePath + el.id + (idx+1) + ".jpg");
+
+
+          // DEACTIVATED IT - TRYING TO SEE IF IT LOOKS BETTER WITHOUT A BG IMAGE IN MODAL
+          //Add path in projects[i].bgImage.backgroundImage
+          // backgroundImage: 'url("assets/images/logo-vue.png")'
+          // el.bgImage.backgroundImage = "url(" + el.images[0].image + ")"
+
+
+          // DEACTIVATED IT. SEE ABOVE COMMENT
+          //Add attribute value for boxShadow for each modal
+          // el.language === "Vanilla" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(250, 220, 52, .5)" :
+          // el.language === "Vue" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(66, 184, 131, .5)" :
+          // el.language === "jQuery" ? el.bgImage.boxShadow = "inset 100vw 100vh rgba(18, 26, 38, .5)" :
+          // null;
+
+
+          //DEACTIVATED TO SEE IF THE YOUTUBE LINKS WORK BETTER
+          // Add path in projects[i].video_url
+          // el.video_url = self.videoPath + el.id + ".mp4";
+
+
+          //Add path in projects[i].code_url textPath: "assets/txt_files/code-"
+          el.code_url = self.textPath + el.id + ".json";
+        });
+      },
+
+      //OPEN THE MODAL
+      modalOpen() {
+        var getModalId = event.target.id.replace("aModalOpen", "modal");
+        window[getModalId].className += " activeModal";
+
+        //This is for the image and the text in the modal
+        this.modalDisplay = "flex";
+        this.changeCounterValue(); //This is for toggling through the images
+      },
+
+      //CLOSE THE MODAL FROM THE X ICON
+      modalClose(event) {
+        var getModalId = event.path[1].id.replace("divCloseModal", "modal");
+        window[getModalId].className = window[getModalId].className.replace(/ activeModal/, "");
+
+        this.modalDisplay = "none";
+        this.counter = 0;
+      },
+
+      imageModalOpen(event){
+        //Get the id from the "imageScreenshot". Change the name to match that of the modal
+        let divImageId = event.target.id.replace("imageScreenshot", "divImageModal");
+
+        // window[divImageId].className += " activeImageModal"
+        //Change the display from "none" to "flex"
+        window[divImageId].style.display="flex";
+      },
+
+      imageModalClose(event){
+        // event.path[2].className = event.path[2].className.replace(" activeImageModal", "");
+        event.path[2].style.display = "none";
+      },
+
+      //EXPAND THE CODE MODAL TO FULL SCREEN
+      expandCodeModal(event){
+        if(event.path[3].className.includes("divModalLeftExpand")) return;
+
+        event.path[3].className += " divModalLeftExpand"
+        // this.addStyle(event.path[3], this.updateStyle.expandCodeModal);
+        event.path[3].children[1].className += " divModalCloseVisible";
+      },
+
+      //MINIMIZE THE CODE MODAL TO THE LEFT SIDE OF THE SCREEN BY CLICKING THE X BUTTON
+      codeModalClose(event){
+        event.path[2].className = event.path[2].className.replace(" divModalLeftExpand", "");
+        event.path[1].className = event.path[1].className.replace(/ divModalCloseVisible/, "");
+        // this.addStyle(event.path[2], this.updateStyle.codeModalClose);
+        // event.path[1].style.display = "none";
+      },
+
+      //MINIMIZE THE CODE MODAL BY CLICKING IN THE BODY OF THE SCREEN
+      divCodeModalClose(event){
+        if (event.target.localName === "pre" &&
+            event.path[2].className === "divModalLeft" &&
+            event.path[2].style.position === "fixed") {
+              event.path[2].children[1].style.display = "none";
+              this.addStyle(event.path[2], this.updateStyle.codeModalClose);
+            }
+      },
+
+
+      //CHANGE THE VALUE OF THE COUNTER SO THAT THE IMAGES CHANGE IN THE MODAL DISPLAY
+      changeCounterValue() {
+        let self = this;
+        let intervalId = setInterval(function(){
+          if (self.modalDisplay !== "flex") clearInterval(intervalId);
+          self.counter < 2 ? self.counter++ : self.counter = 0;
+
+        }, 5000);
       }
+
+    }, //End of methods
+    beforeMount(){
+      this.pathCreate();
     },
     computed: {
-
-    }
+    } //End of computed properties
   }
 );
