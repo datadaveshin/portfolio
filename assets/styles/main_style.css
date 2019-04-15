@@ -64,18 +64,21 @@ nav ul li {
   background-image: url("../images/logo-javascript.png");
   box-shadow: inset 100vw 100vh rgba(250, 220, 52, .5);
   transition: all 2s;
+  -webkit-transition: all 2s;
 }
 
 .divHoverClassVue {
   background-image: url("../images/logo-vue.png");
   box-shadow: inset 100vw 100vh rgba(66, 184, 131, .5);
   transition: all 2s;
+  -webkit-transition: all 2s;
 }
 
 .divHoverClassjQuery {
   background-image: url("../images/logo-jquery.png");
   box-shadow: inset 100vw 100vh rgba(18, 26, 38, .5);
   transition: all 2s;
+  -webkit-transition: all 2s;
 }
 
 header{
@@ -140,8 +143,8 @@ when hovering over the project titles */
   font-size: 10vh;
   text-align: center;
   line-height: 10vh;
-  transition-property: color;
-  transition-duration: 300ms;
+  transition: color 300ms;
+  -webkit-transition: color 300ms;
 }
 
 .divArrow:hover {
@@ -172,6 +175,7 @@ when hovering over the project titles */
   opacity: 0;
   visibility: hidden;
   transition: opacity 1s;
+  -webkit-transition: opacity 1s;
   border-radius: 5%;
   color: white;
   text-align: center;
@@ -240,8 +244,8 @@ footer{
 a{
   color: white;
   text-decoration: none;
-  transition-property: color;
-  transition-duration: 300ms;
+  transition: color 300ms;
+  -webkit-transition: color 300ms;
 }
 
 a:hover{
@@ -256,6 +260,7 @@ a:hover{
   /* visibility: none; */ /*This is for the transition effect*/
   opacity: 0; /*This is for the transition effect*/
   transition: opacity 1s ease-out, z-index 1.5s ease-out;
+  -webkit-transition: opacity 1s ease-out, z-index 1.5s ease-out;
   left: 0;
   top: 0;
   z-index: -1;
@@ -272,6 +277,7 @@ a:hover{
   /* visibility: visible; */
   z-index: 1;
   transition: all 1s;
+  -webkit-transition: all 1s;
 }
 
 .borderVanilla{
@@ -331,8 +337,8 @@ a:hover{
   right: 3vh;
   top: 3vh;
   width: 8vh;
-  transition-duration: 300ms;
-  transition-property: color;
+  transition: color 300ms;
+  -webkit-transition: color 300ms;
   z-index: 1;
 }
 
@@ -378,6 +384,7 @@ a:hover{
 
 .divHighlights{
   transition: all 1s ease;
+  -webkit-transition: all 1s ease;
   display: flex;
   height: 80%;
   align-items: center;
@@ -429,6 +436,7 @@ a:hover{
   background-repeat: no-repeat;
   background-size: cover;
   transition: all 1s;
+  -webkit-transition: all 1s;
 }
 
 .divImageIcon:hover {
@@ -449,6 +457,7 @@ a:hover{
   align-items: center;
   justify-content: center;
   transition: all 2s;
+  -webkit-transition: all 2s;
   display: flex;
 }
 
@@ -458,6 +467,7 @@ a:hover{
   /* visibility: visible; */
   z-index: 2;
   transition: all 2s;
+  -webkit-transition: all 2s;
 }
 
 .divImageModalContent{
@@ -481,6 +491,7 @@ a:hover{
   grid-area: divModalLeft;
   padding: 0 10px;
   transition: all 2s ease;
+  -webkit-transition: all 2s ease;
   z-index: 2;
 }
 
@@ -489,12 +500,9 @@ a:hover{
   width: 100vw;
   height: 100vh;
   transition: all 2s;
+  -webkit-transition: all 2s;
   display: block;
 }
-
-/* .divImageModalClose{
-  display: table;
-} */
 
 .divCodeModalClose, .divImageModalClose{
   position: fixed;
@@ -506,6 +514,7 @@ a:hover{
   border-radius: 50%;
   color: white;
   transition: all .3s;
+  -webkit-transition: all .3s;
 }
 
 .divCodeModalClose{
