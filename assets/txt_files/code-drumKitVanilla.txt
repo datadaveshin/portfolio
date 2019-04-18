@@ -1,1 +1,87 @@
-<!DOCTYPE html>\n<html lang=\'en\'>\n<head>\n  <meta charset=\'UTF-8\'>\n  <title>JS Drum Kit - Paris Apostolopoulos version</title>\n  <link href=\'https://fonts.googleapis.com/css?family=Raleway\' rel=\'stylesheet\'>\n  <link rel=\'stylesheet\' href=\'style-vanilla.css\'>\n</head>\n<body>\n\n\n  <div class=\'keys\'>\n    <div data-key=\'65\' class=\'key\'>\n      <kbd>A</kbd>\n      <span class=\'sound\'>clap</span>\n    </div>\n    <div data-key=\'83\' class=\'key\'>\n      <kbd>S</kbd>\n      <span class=\'sound\'>hihat</span>\n    </div>\n    <div data-key=\'68\' class=\'key\'>\n      <kbd>D</kbd>\n      <span class=\'sound\'>kick</span>\n    </div>\n    <div data-key=\'70\' class=\'key\'>\n      <kbd>F</kbd>\n      <span class=\'sound\'>openhat</span>\n    </div>\n    <div data-key=\'71\' class=\'key\'>\n      <kbd>G</kbd>\n      <span class=\'sound\'>boom</span>\n    </div>\n    <div data-key=\'72\' class=\'key\'>\n      <kbd>H</kbd>\n      <span class=\'sound\'>ride</span>\n    </div>\n    <div data-key=\'74\' class=\'key\'>\n      <kbd>J</kbd>\n      <span class=\'sound\'>snare</span>\n    </div>\n    <div data-key=\'75\' class=\'key\'>\n      <kbd>K</kbd>\n      <span class=\'sound\'>tom</span>\n    </div>\n    <div data-key=\'76\' class=\'key\'>\n      <kbd>L</kbd>\n      <span class=\'sound\'>tink</span>\n    </div>\n  </div>\n\n  <audio data-key=\'65\' src=\'sounds/clap.wav\'></audio>\n  <audio data-key=\'83\' src=\'sounds/hihat.wav\'></audio>\n  <audio data-key=\'68\' src=\'sounds/kick.wav\'></audio>\n  <audio data-key=\'70\' src=\'sounds/openhat.wav\'></audio>\n  <audio data-key=\'71\' src=\'sounds/boom.wav\'></audio>\n  <audio data-key=\'72\' src=\'sounds/ride.wav\'></audio>\n  <audio data-key=\'74\' src=\'sounds/snare.wav\'></audio>\n  <audio data-key=\'75\' src=\'sounds/tom.wav\'></audio>\n  <audio data-key=\'76\' src=\'sounds/tink.wav\'></audio>\n\n<script>\n  let divKey = document.getElementsByClassName(\'key\');\n  function addEffect(letter){\n    for(el of divKey){\n      let elLetter = el.firstElementChild.textContent.toLowerCase();\n      let elSound = el.lastElementChild.textContent;\n      let selectSound = document.querySelector(`audio[src=\'sounds/${elSound}.wav\']`);\n      if(elLetter === letter) {\n        el.classList.add(\'playing\');\n        selectSound.currentTime = 0;\n        selectSound.play();\n        setTimeout(() => removeEffect(letter), 70);\n      }\n    }\n  }\n  function removeEffect(letter) {\n    for(el of divKey){\n      let elLetter = el.firstElementChild.textContent.toLowerCase();\n      if(elLetter === letter) el.classList.remove(\'playing\');\n    }\n  }\n  window.onkeydown = event => addEffect(event.key.toLowerCase());\n</script>\n\n\n</body>\n</html>
+<!DOCTYPE html>
+<html lang=\'en\'>
+<head>
+  <meta charset=\'UTF-8\'>
+  <title>JS Drum Kit - Paris Apostolopoulos version</title>
+  <link href=\'https://fonts.googleapis.com/css?family=Raleway\' rel=\'stylesheet\'>
+  <link rel=\'stylesheet\' href=\'style-vanilla.css\'>
+</head>
+<body>
+
+
+  <div class=\'keys\'>
+    <div data-key=\'65\' class=\'key\'>
+      <kbd>A</kbd>
+      <span class=\'sound\'>clap</span>
+    </div>
+    <div data-key=\'83\' class=\'key\'>
+      <kbd>S</kbd>
+      <span class=\'sound\'>hihat</span>
+    </div>
+    <div data-key=\'68\' class=\'key\'>
+      <kbd>D</kbd>
+      <span class=\'sound\'>kick</span>
+    </div>
+    <div data-key=\'70\' class=\'key\'>
+      <kbd>F</kbd>
+      <span class=\'sound\'>openhat</span>
+    </div>
+    <div data-key=\'71\' class=\'key\'>
+      <kbd>G</kbd>
+      <span class=\'sound\'>boom</span>
+    </div>
+    <div data-key=\'72\' class=\'key\'>
+      <kbd>H</kbd>
+      <span class=\'sound\'>ride</span>
+    </div>
+    <div data-key=\'74\' class=\'key\'>
+      <kbd>J</kbd>
+      <span class=\'sound\'>snare</span>
+    </div>
+    <div data-key=\'75\' class=\'key\'>
+      <kbd>K</kbd>
+      <span class=\'sound\'>tom</span>
+    </div>
+    <div data-key=\'76\' class=\'key\'>
+      <kbd>L</kbd>
+      <span class=\'sound\'>tink</span>
+    </div>
+  </div>
+
+  <audio data-key=\'65\' src=\'sounds/clap.wav\'></audio>
+  <audio data-key=\'83\' src=\'sounds/hihat.wav\'></audio>
+  <audio data-key=\'68\' src=\'sounds/kick.wav\'></audio>
+  <audio data-key=\'70\' src=\'sounds/openhat.wav\'></audio>
+  <audio data-key=\'71\' src=\'sounds/boom.wav\'></audio>
+  <audio data-key=\'72\' src=\'sounds/ride.wav\'></audio>
+  <audio data-key=\'74\' src=\'sounds/snare.wav\'></audio>
+  <audio data-key=\'75\' src=\'sounds/tom.wav\'></audio>
+  <audio data-key=\'76\' src=\'sounds/tink.wav\'></audio>
+
+<script>
+  let divKey = document.getElementsByClassName(\'key\');
+  function addEffect(letter){
+    for(el of divKey){
+      let elLetter = el.firstElementChild.textContent.toLowerCase();
+      let elSound = el.lastElementChild.textContent;
+      let selectSound = document.querySelector(`audio[src=\'sounds/${elSound}.wav\']`);
+      if(elLetter === letter) {
+        el.classList.add(\'playing\');
+        selectSound.currentTime = 0;
+        selectSound.play();
+        setTimeout(() => removeEffect(letter), 70);
+      }
+    }
+  }
+  function removeEffect(letter) {
+    for(el of divKey){
+      let elLetter = el.firstElementChild.textContent.toLowerCase();
+      if(elLetter === letter) el.classList.remove(\'playing\');
+    }
+  }
+  window.onkeydown = event => addEffect(event.key.toLowerCase());
+</script>
+
+
+</body>
+</html>

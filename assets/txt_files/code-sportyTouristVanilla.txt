@@ -1,1 +1,203 @@
-var sourcesArr = [\n  {\n    source: \'ESPN\',\n    url: \'https://newsapi.org/v1/articles?source=espn&sortBy=top&apiKey=909efd3e931c4e16bde5565b8d10f113\'\n  },\n  {\n    source: \'ESPN Cric Info\',\n    url: \'https://newsapi.org/v1/articles?source=espn-cric-info&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\',\n  },\n  {\n    source: \'Fox Sports\',\n    url: \'https://newsapi.org/v1/articles?source=fox-sports&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'\n  },\n  {\n    source: \'NFL News\',\n    url: \'https://newsapi.org/v1/articles?source=nfl-news&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'\n  },\n  {\n    source: \'SKY Sports News\',\n    url: \'https://newsapi.org/v1/articles?source=sky-sports-news&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'\n  },\n  {\n  source: \'BBC Sports\',\n  url: \'https://newsapi.org/v1/articles?source=bbc-sport&sortBy=top&apiKey=909efd3e931c4e16bde5565b8d10f113\'\n  },\n  {\n    source: \'FourFourTwo\',\n    url: \'https://newsapi.org/v1/articles?source=four-four-two&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'\n  },\n  {\n    source: \'talkSport\',\n    url: \'https://newsapi.org/v1/articles?source=talksport&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'\n  },\n  {\n    source: \'TheSPORTbible\',\n    url: \'https://newsapi.org/v1/articles?source=the-sport-bible&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'\n  },\n  {\n    source: \'Football Italia\',\n    url: \'https://newsapi.org/v1/articles?source=football-italia&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'\n  }\n];\nvar expandedSourcesArr = [];\n//shuffle the array\nfunction shuffleArray(array) {\n    for (var i = array.length - 1; i &gt; 0; i--) {\n        var j = Math.floor(Math.random() * (i + 1));\n        var temp = array[i];\n        array[i] = array[j];\n        array[j] = temp;\n    }\n    return array;\n  }\n\n//reload the page\nfunction pageReload(time) {\n  setTimeout(reloadFun, time);\n}\n//callback for reloading the page\nfunction reloadFun() {\n  window.location.reload(true);\n}\n\nwindow.onload = function() {\n  shuffleArray(sourcesArr);\n  heroSectionArticles(sourcesArr);\n  sportsSectionArticles(sourcesArr);\n\n  toggleHeroClass();\n  toggleArticleClasses();\n  pageReload(600000);\n};//End of onload function\n\n\nfunction expandSources(arrWithSources, endArr) {\n  for (var i = 0; i &lt; arrWithSources.length; i++) {\n    let sourcesUrl = arrWithSources[i].url;\n    $.getJSON(sourcesUrl, function (result) {\n      endArr.push(result);\n      // console.log(result);\n    });\n  }\n}\nexpandSources(sourcesArr, expandedSourcesArr);\n// console.log(expandedSourcesArr);\n//---------------------HERO CONTENT CREATION------------------------------\n//creation and append of the article tags in the main Grid\nfunction heroSectionArticles(arrWithSources) {\n  let heroSection = document.getElementById(\'heroSection\');\n  let sourcesUrl = arrWithSources[0].url;\n  let heroArticle = document.createElement(\'article\');\n  heroArticle.className += \'heroArticleClass\';\n  // heroArticle.className += \' transform\'; Not needed because I am not applying special effect\n  arrWithSources[0] = heroArticle;\n  apiData(0, sourcesUrl);\n  heroSection.appendChild(heroArticle);\n}\n\n\n//------------------MAIN GRID CONTENT CREATION----------------------------\n//creation and append of the article tags in the main Grid\nfunction sportsSectionArticles(arrWithSources) {\n  let sportsSection = document.getElementById(\'sportsSection\');\n  for (let i = 1; i &lt; arrWithSources.length; i++) {\n    let sourcesUrl = arrWithSources[i].url;\n\n    function jSonArr(url) {\n      $.getJSON(url, function (result) {\n        // console.log(result);\n      });\n    }\n    jSonArr(sourcesUrl);\n\n    let sportsArticle = document.createElement(\'article\');\n    sportsArticle.className += \'sportsArticleClass\';\n    // sportsArticle.className += \' transform\'; //not needed because I am not applying special effect\n    arrWithSources[i] = sportsArticle;\n    apiData(i, sourcesUrl);\n    sportsSection.appendChild(sportsArticle);\n  }\n}\n\n//api Data retrieval\nfunction apiData(idxForSourcesArr, url) {\n  // console.log(\'The url is: \' + url);\n  $.ajax({\n    url: url,\n    method: \'GET\',\n    success: sportsNewsResult\n    // error: bbcNewsError\n  });\n\n  // Inner function in order to close over idxForSourcesArr\n  function sportsNewsResult(data) {\n    //articles\n    let resultTitle = document.createElement(\'h3\');\n    let resultSource = document.createElement(\'h4\');\n    let imageDiv = document.createElement(\'div\');\n    let heroImageDiv = document.createElement(\'div\');//////////////////////////////\n    let resultImage = document.createElement(\'img\');\n    let resultArticle = document.createElement(\'p\');\n    let articleSourceAnchor = document.createElement(\'a\');\n\n    let moreButtonDiv = document.createElement(\'div\');\n    let moreButtonAnchor = document.createElement(\'a\');\n\n    resultTitle.textContent = data.articles[0].title;\n    imageDiv.className += \'imageDiv\';\n    heroImageDiv.className += \'heroImageDiv\';/////////////////////////////////\n    moreButtonDiv.className += \'moreButtonDiv\';\n\n    articleSourceAnchor.setAttribute(\'href\', data.articles[0].url);\n    articleSourceAnchor.setAttribute(\'target\', \'_blank\');\n    resultImage.setAttribute(\'alt\', \'Sorry, there is no image provided by the source\');\n    articleSourceAnchor.innerText = \'Source: \' + data.source + \' via newsapi.org \';\n    resultImage.src = data.articles[0].urlToImage;\n    resultArticle.textContent = data.articles[0].description;\n    moreButtonAnchor.innerText = \'More\';\n\n    //\n    imageDiv.appendChild(resultImage);\n    resultSource.appendChild(articleSourceAnchor);\n    moreButtonDiv.appendChild(moreButtonAnchor);\n    sourcesArr[idxForSourcesArr].appendChild(imageDiv);\n    sourcesArr[idxForSourcesArr].appendChild(resultTitle);\n    sourcesArr[idxForSourcesArr].appendChild(resultSource);\n    sourcesArr[idxForSourcesArr].appendChild(resultArticle);\n    sourcesArr[idxForSourcesArr].appendChild(moreButtonDiv);\n\n  }\n} //End of apiData function\n\n// function bbcNewsError {\n//\n// }\n\n//-------------------TOGGLES------------------------------\n//toggle between classes for expanding the hero article content\nfunction toggleHeroClass() {\n  $(\'.heroArticleClass\').on(\'click\', function(){\n    $(this).toggleClass(\'heroArticleExpanded\');\n    $(this).children(\'div\').toggleClass(\'heroImageDivExpanded\');\n    $(this).children(\'div\').toggleClass(\'imageDiv\');\n    $(this).children(\'.moreButtonDiv\').removeClass(\'imageDiv\');\n\n    $(\'.sportsArticleExpanded\').removeClass(\'sportsArticleExpanded\');\n    $(\'.imageDivExpanded\').removeClass(\'imageDivExpanded\');\n  });\n}\n\n//toggle between classes for expanding the article content\nfunction toggleArticleClasses() {\n  $(\'.sportsArticleClass\').on(\'click\', function(){\n    $(this).toggleClass(\'sportsArticleExpanded\');\n    $(this).children(\'.imageDiv\').toggleClass(\'imageDivExpanded\');\n\n    $(this).siblings().removeClass(\'sportsArticleExpanded\');\n    $(\'.heroArticleExpanded\').removeClass(\'heroArticleExpanded\');\n    $(\'.heroImageDivExpanded\').addClass(\'heroImageDiv\');\n    $(\'.heroImageDivExpanded\').removeClass(\'heroImageDivExpanded\');\n    $(this).siblings().children(\'div\').removeClass(\'imageDivExpanded\');\n  });\n}
+var sourcesArr = [
+  {
+    source: \'ESPN\',
+    url: \'https://newsapi.org/v1/articles?source=espn&sortBy=top&apiKey=909efd3e931c4e16bde5565b8d10f113\'
+  },
+  {
+    source: \'ESPN Cric Info\',
+    url: \'https://newsapi.org/v1/articles?source=espn-cric-info&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\',
+  },
+  {
+    source: \'Fox Sports\',
+    url: \'https://newsapi.org/v1/articles?source=fox-sports&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'
+  },
+  {
+    source: \'NFL News\',
+    url: \'https://newsapi.org/v1/articles?source=nfl-news&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'
+  },
+  {
+    source: \'SKY Sports News\',
+    url: \'https://newsapi.org/v1/articles?source=sky-sports-news&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'
+  },
+  {
+  source: \'BBC Sports\',
+  url: \'https://newsapi.org/v1/articles?source=bbc-sport&sortBy=top&apiKey=909efd3e931c4e16bde5565b8d10f113\'
+  },
+  {
+    source: \'FourFourTwo\',
+    url: \'https://newsapi.org/v1/articles?source=four-four-two&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'
+  },
+  {
+    source: \'talkSport\',
+    url: \'https://newsapi.org/v1/articles?source=talksport&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'
+  },
+  {
+    source: \'TheSPORTbible\',
+    url: \'https://newsapi.org/v1/articles?source=the-sport-bible&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'
+  },
+  {
+    source: \'Football Italia\',
+    url: \'https://newsapi.org/v1/articles?source=football-italia&sortBy=latest&apiKey=909efd3e931c4e16bde5565b8d10f113\'
+  }
+];
+var expandedSourcesArr = [];
+//shuffle the array
+function shuffleArray(array) {
+    for (var i = array.length - 1; i &gt; 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+  }
+
+//reload the page
+function pageReload(time) {
+  setTimeout(reloadFun, time);
+}
+//callback for reloading the page
+function reloadFun() {
+  window.location.reload(true);
+}
+
+window.onload = function() {
+  shuffleArray(sourcesArr);
+  heroSectionArticles(sourcesArr);
+  sportsSectionArticles(sourcesArr);
+
+  toggleHeroClass();
+  toggleArticleClasses();
+  pageReload(600000);
+};//End of onload function
+
+
+function expandSources(arrWithSources, endArr) {
+  for (var i = 0; i &lt; arrWithSources.length; i++) {
+    let sourcesUrl = arrWithSources[i].url;
+    $.getJSON(sourcesUrl, function (result) {
+      endArr.push(result);
+      // console.log(result);
+    });
+  }
+}
+expandSources(sourcesArr, expandedSourcesArr);
+// console.log(expandedSourcesArr);
+//---------------------HERO CONTENT CREATION------------------------------
+//creation and append of the article tags in the main Grid
+function heroSectionArticles(arrWithSources) {
+  let heroSection = document.getElementById(\'heroSection\');
+  let sourcesUrl = arrWithSources[0].url;
+  let heroArticle = document.createElement(\'article\');
+  heroArticle.className += \'heroArticleClass\';
+  // heroArticle.className += \' transform\'; Not needed because I am not applying special effect
+  arrWithSources[0] = heroArticle;
+  apiData(0, sourcesUrl);
+  heroSection.appendChild(heroArticle);
+}
+
+
+//------------------MAIN GRID CONTENT CREATION----------------------------
+//creation and append of the article tags in the main Grid
+function sportsSectionArticles(arrWithSources) {
+  let sportsSection = document.getElementById(\'sportsSection\');
+  for (let i = 1; i &lt; arrWithSources.length; i++) {
+    let sourcesUrl = arrWithSources[i].url;
+
+    function jSonArr(url) {
+      $.getJSON(url, function (result) {
+        // console.log(result);
+      });
+    }
+    jSonArr(sourcesUrl);
+
+    let sportsArticle = document.createElement(\'article\');
+    sportsArticle.className += \'sportsArticleClass\';
+    // sportsArticle.className += \' transform\'; //not needed because I am not applying special effect
+    arrWithSources[i] = sportsArticle;
+    apiData(i, sourcesUrl);
+    sportsSection.appendChild(sportsArticle);
+  }
+}
+
+//api Data retrieval
+function apiData(idxForSourcesArr, url) {
+  // console.log(\'The url is: \' + url);
+  $.ajax({
+    url: url,
+    method: \'GET\',
+    success: sportsNewsResult
+    // error: bbcNewsError
+  });
+
+  // Inner function in order to close over idxForSourcesArr
+  function sportsNewsResult(data) {
+    //articles
+    let resultTitle = document.createElement(\'h3\');
+    let resultSource = document.createElement(\'h4\');
+    let imageDiv = document.createElement(\'div\');
+    let heroImageDiv = document.createElement(\'div\');//////////////////////////////
+    let resultImage = document.createElement(\'img\');
+    let resultArticle = document.createElement(\'p\');
+    let articleSourceAnchor = document.createElement(\'a\');
+
+    let moreButtonDiv = document.createElement(\'div\');
+    let moreButtonAnchor = document.createElement(\'a\');
+
+    resultTitle.textContent = data.articles[0].title;
+    imageDiv.className += \'imageDiv\';
+    heroImageDiv.className += \'heroImageDiv\';/////////////////////////////////
+    moreButtonDiv.className += \'moreButtonDiv\';
+
+    articleSourceAnchor.setAttribute(\'href\', data.articles[0].url);
+    articleSourceAnchor.setAttribute(\'target\', \'_blank\');
+    resultImage.setAttribute(\'alt\', \'Sorry, there is no image provided by the source\');
+    articleSourceAnchor.innerText = \'Source: \' + data.source + \' via newsapi.org \';
+    resultImage.src = data.articles[0].urlToImage;
+    resultArticle.textContent = data.articles[0].description;
+    moreButtonAnchor.innerText = \'More\';
+
+    //
+    imageDiv.appendChild(resultImage);
+    resultSource.appendChild(articleSourceAnchor);
+    moreButtonDiv.appendChild(moreButtonAnchor);
+    sourcesArr[idxForSourcesArr].appendChild(imageDiv);
+    sourcesArr[idxForSourcesArr].appendChild(resultTitle);
+    sourcesArr[idxForSourcesArr].appendChild(resultSource);
+    sourcesArr[idxForSourcesArr].appendChild(resultArticle);
+    sourcesArr[idxForSourcesArr].appendChild(moreButtonDiv);
+
+  }
+} //End of apiData function
+
+// function bbcNewsError {
+//
+// }
+
+//-------------------TOGGLES------------------------------
+//toggle between classes for expanding the hero article content
+function toggleHeroClass() {
+  $(\'.heroArticleClass\').on(\'click\', function(){
+    $(this).toggleClass(\'heroArticleExpanded\');
+    $(this).children(\'div\').toggleClass(\'heroImageDivExpanded\');
+    $(this).children(\'div\').toggleClass(\'imageDiv\');
+    $(this).children(\'.moreButtonDiv\').removeClass(\'imageDiv\');
+
+    $(\'.sportsArticleExpanded\').removeClass(\'sportsArticleExpanded\');
+    $(\'.imageDivExpanded\').removeClass(\'imageDivExpanded\');
+  });
+}
+
+//toggle between classes for expanding the article content
+function toggleArticleClasses() {
+  $(\'.sportsArticleClass\').on(\'click\', function(){
+    $(this).toggleClass(\'sportsArticleExpanded\');
+    $(this).children(\'.imageDiv\').toggleClass(\'imageDivExpanded\');
+
+    $(this).siblings().removeClass(\'sportsArticleExpanded\');
+    $(\'.heroArticleExpanded\').removeClass(\'heroArticleExpanded\');
+    $(\'.heroImageDivExpanded\').addClass(\'heroImageDiv\');
+    $(\'.heroImageDivExpanded\').removeClass(\'heroImageDivExpanded\');
+    $(this).siblings().children(\'div\').removeClass(\'imageDivExpanded\');
+  });
+}

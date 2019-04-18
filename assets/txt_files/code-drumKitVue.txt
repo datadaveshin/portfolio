@@ -1,1 +1,171 @@
-<!DOCTYPE html>\n<html lang=\'en\' dir=\'ltr\'>\n  <head>\n    <meta charset=\'utf-8\'>\n    <title>Drum kit in Vue.js</title>\n    <script src=\'vue.js\'></script>\n\n    <style media=\'screen\'>\n      html {\n        margin: 0;\n        padding: 0;\n        font-family: arial;\n        font-size: 150%;\n        background: url(./drummer-vue.jpg);\n        background-size: cover;\n      }\n      h1 {\n        margin: auto;\n      }\n      .units {\n        display: inline-block;\n        border: 5px solid black;\n        background-color: rgba(255, 0, 0, .5);\n        margin: 10px;\n        padding: 5px;\n        min-width: 90px;\n        width: 12vh;\n        text-align: center;\n        transition: all 0.07s ease;\n      }\n      .units_play {\n        transform: scale(1.3);\n        border-color: rgb(255, 0, 0);\n        color: rgb(255, 0, 0);\n        background-color: rgba(0, 0, 0, .5);\n      }\n      #boxes{\n        /* This is from the tutorial */\n        /* display: flex;\n        flex: 1;\n        min-height: 100vh;\n        align-items: center;\n        justify-content: center; */\n        width: 100%;\n        margin: auto;\n        text-align: center;\n        position: absolute;\n        transform: translate(-50%, -50%);\n        top: 50%;\n        left: 50%;\n      }\n    </style>\n\n  </head>\n  <body>\n\n    <div id=\'boxes\'>\n\n      <unit\n      v-for=\'el in letters\'\n      :letter=\'el\'\n      :key=\'el.id\'\n      :class=\'[\'units\' , {units_play: playing}]\'>\n      </unit>\n\n\n      <sound\n      v-for=\'el in letters\'\n      :drum=\'el\' :key=\'el.id\'\n      :data-key=\'el.dataKey\'\n      :src=\'\'sounds/\'+el.sound+\'.wav\'\'>\n      </sound>\n    </div>\n\n\n\n\n\n    <script>\n      Vue.component(\'unit\', {\n        props: [\'letter\'],\n        template:\n        `<div :data-key=\'letter.dataKey\'>\n          <h1>\n            {{letter.text}}\n          </h1>\n          <span>{{letter.sound}}</span>\n          </div>\n        `\n      });\n      Vue.component(\'sound\', {\n        props: [\'drum\'],\n        template: `<audio></audio>`\n      });\n      new Vue({\n        el: \'#boxes\',\n        data: {\n          letters: [\n            {\n              text: \'A\',\n              dataKey: 65,\n              sound: \'clap\'\n            },\n            {\n              text: \'S\',\n              dataKey: 83,\n              sound: \'hihat\'\n            },\n            {\n              text: \'D\',\n              dataKey: 68,\n              sound: \'kick\'\n            },\n            {\n              text: \'F\',\n              dataKey: 70,\n              sound: \'openhat\'\n            },\n            {\n              text: \'G\',\n              dataKey: 71,\n              sound: \'boom\'\n            },\n            {\n              text: \'H\',\n              dataKey: 72,\n              sound: \'ride\'\n            },\n            {\n              text: \'J\',\n              dataKey: 74,\n              sound: \'snare\'\n            },\n            {\n              text: \'K\',\n              dataKey: 75,\n              sound: \'tom\'\n            },\n            {\n              text: \'L\',\n              dataKey: 76,\n              sound: \'tink\'\n            }\n          ],\n          playing: false\n        },\n        mounted: function() {\n           //Create array with keys\' numeric value\n          var vm = this;\n          var dataKeys = vm.letters.map((el)=>el.dataKey);\n          // Add an event listener at the global level to monitor the key presses\n          window.addEventListener(\'keydown\', function(e) {\n            if (dataKeys.includes(e.keyCode)) {\n              //Animation\n              var animDiv = document.querySelector(`div[data-key=\'${e.keyCode}\']`);\n              setTimeout(function() {\n                animDiv.classList.remove(\'units_play\');\n              }, 50);\n              //Sound play\n              var playSound = document.querySelector(`audio[data-key=\'${e.keyCode}\']`);\n              animDiv.classList.add(\'units_play\');\n              playSound.currentTime = 0;\n              playSound.play();\n            }\n          });\n        }\n      });\n    </script>\n\n  </body>\n</html>
+<!DOCTYPE html>
+<html lang=\'en\' dir=\'ltr\'>
+  <head>
+    <meta charset=\'utf-8\'>
+    <title>Drum kit in Vue.js</title>
+    <script src=\'vue.js\'></script>
+
+    <style media=\'screen\'>
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: arial;
+        font-size: 150%;
+        background: url(./drummer-vue.jpg);
+        background-size: cover;
+      }
+      h1 {
+        margin: auto;
+      }
+      .units {
+        display: inline-block;
+        border: 5px solid black;
+        background-color: rgba(255, 0, 0, .5);
+        margin: 10px;
+        padding: 5px;
+        min-width: 90px;
+        width: 12vh;
+        text-align: center;
+        transition: all 0.07s ease;
+      }
+      .units_play {
+        transform: scale(1.3);
+        border-color: rgb(255, 0, 0);
+        color: rgb(255, 0, 0);
+        background-color: rgba(0, 0, 0, .5);
+      }
+      #boxes{
+        /* This is from the tutorial */
+        /* display: flex;
+        flex: 1;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center; */
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div id=\'boxes\'>
+
+      <unit
+      v-for=\'el in letters\'
+      :letter=\'el\'
+      :key=\'el.id\'
+      :class=\'[\'units\' , {units_play: playing}]\'>
+      </unit>
+
+
+      <sound
+      v-for=\'el in letters\'
+      :drum=\'el\' :key=\'el.id\'
+      :data-key=\'el.dataKey\'
+      :src=\'\'sounds/\'+el.sound+\'.wav\'\'>
+      </sound>
+    </div>
+
+
+
+
+
+    <script>
+      Vue.component(\'unit\', {
+        props: [\'letter\'],
+        template:
+        `<div :data-key=\'letter.dataKey\'>
+          <h1>
+            {{letter.text}}
+          </h1>
+          <span>{{letter.sound}}</span>
+          </div>
+        `
+      });
+      Vue.component(\'sound\', {
+        props: [\'drum\'],
+        template: `<audio></audio>`
+      });
+      new Vue({
+        el: \'#boxes\',
+        data: {
+          letters: [
+            {
+              text: \'A\',
+              dataKey: 65,
+              sound: \'clap\'
+            },
+            {
+              text: \'S\',
+              dataKey: 83,
+              sound: \'hihat\'
+            },
+            {
+              text: \'D\',
+              dataKey: 68,
+              sound: \'kick\'
+            },
+            {
+              text: \'F\',
+              dataKey: 70,
+              sound: \'openhat\'
+            },
+            {
+              text: \'G\',
+              dataKey: 71,
+              sound: \'boom\'
+            },
+            {
+              text: \'H\',
+              dataKey: 72,
+              sound: \'ride\'
+            },
+            {
+              text: \'J\',
+              dataKey: 74,
+              sound: \'snare\'
+            },
+            {
+              text: \'K\',
+              dataKey: 75,
+              sound: \'tom\'
+            },
+            {
+              text: \'L\',
+              dataKey: 76,
+              sound: \'tink\'
+            }
+          ],
+          playing: false
+        },
+        mounted: function() {
+           //Create array with keys\' numeric value
+          var vm = this;
+          var dataKeys = vm.letters.map((el)=>el.dataKey);
+          // Add an event listener at the global level to monitor the key presses
+          window.addEventListener(\'keydown\', function(e) {
+            if (dataKeys.includes(e.keyCode)) {
+              //Animation
+              var animDiv = document.querySelector(`div[data-key=\'${e.keyCode}\']`);
+              setTimeout(function() {
+                animDiv.classList.remove(\'units_play\');
+              }, 50);
+              //Sound play
+              var playSound = document.querySelector(`audio[data-key=\'${e.keyCode}\']`);
+              animDiv.classList.add(\'units_play\');
+              playSound.currentTime = 0;
+              playSound.play();
+            }
+          });
+        }
+      });
+    </script>
+
+  </body>
+</html>

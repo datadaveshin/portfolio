@@ -1,1 +1,127 @@
-$(document).ready(function(){\n  var alphabet = [\'a\', \'b\', \'c\', \'d\', \'e\', \'f\', \'g\', \'h\', \'i\', \'j\', \'k\', \'l\', \'m\', \'n\', \'o\', \'p\', \'q\', \'r\', \'s\', \'t\', \'u\', \'v\', \'w\', \'x\', \'y\', \'z\', \' \', \'\'\', \'-\'];\n  var imageChanger = 1;\n\n  //FUNCTIONS\n  //1. New random word\n  function newRandomWord(){\n    var url = \'https://wordsapiv1.p.mashape.com/words/?random=true\';\n    fetch(url, {\n      method: \'GET\',\n      headers: {\n        \'X-Mashape-Key\': \'N5TPAl6S0Dmsh231cDKa7vKInQxwp1iMvEWjsniJfs7d8e0C86\',\n        \'Accept\': \'application/json\',\n        \'Content-Type\': \'application/json\'\n      }\n    })\n    .then(function(response) {\n      return response.json();\n    })\n    .then(function(data) {\n      return data.word;\n    })\n    .then(function(word) {\n      var randomWord = word.toLowerCase();\n      var newRow = $(\'tr\');\n      console.log(\'The new random word is: \' + randomWord);\n      for (var i = 0; i &lt; randomWord.length; i++) {\n        newRow.append($(\'&lt;td class=\'randomWordTd randomWordTdWhite\'&gt;\' + randomWord[i] + \'&lt;/td&gt;\'));\n      }\n      $(\'#randomWordTable\').append(function(){\n          $(newRow).show(2000);\n      });\n      $(\'.remainingLetters\').html(\'&lt;h3&gt;You have \' + randomWord.length + \' letters remaining for guessing&lt;/h3&gt;\');\n      $(\'#usedLetters\').empty();\n      $(\'#wordSubmit\').off(); //You can move this in the \'new game action\'. Also put and elseif statement in the event the user clicks on wordSubmit but has not entered a word\n      $(\'#wordSubmit\').click(function(){\n        var $wordGuess = $(\'#iKnowTheWord\').val().toLowerCase();\n        if ($wordGuess === randomWord) {\n          $(\'#infoMessage\').html(\'&lt;h3&gt;That is great! You have guessed the word. YOU WON!&lt;/h3&gt;\');\n          $(\'#imageArea\').html(\'&lt;img class=\'finalImage\' src=\'assets/images/escape.gif\'&gt;\');\n          $(\'#iKnowTheWord\').val(\'\');\n        }\n        else {\n          console.log(\'word guess is: \', $wordGuess, \'the random word is\', randomWord);\n          $(\'#infoMessage\').html(\'&lt;h3&gt;Sorry, the right word is \' + randomWord + \'. You lost :-(&lt;/h3&gt;\');\n          $(\'#imageArea\').html(\'&lt;img src=\'assets/images/12.jpg\'&gt;\');\n          $(\'#iKnowTheWord\').val(\'\');\n        }\n      });\n    });\n  }\n\n  //2. New letter entry\n\n  function newLetterEntry() {\n    var $letterGuess = $(\'#newLetter\').val().toLowerCase();\n    // alert($letterGuess);\n    var counter = 0;\n    var $wordToGuess = $(\'td[class=\'randomWordTd randomWordTdWhite\']\').text();\n    var $guessedLetters = $(\'td[class=\'randomWordTd randomWordTdBlack\']\').text();\n    var wordLength = $wordToGuess.length;\n    // console.log(\'The remaining letters are: \' + $wordToGuess);\n    // console.log(\'The found letters are: \' + $guessedLetters);\n    var usedLettersString = $(\'#usedLetters\').text()\n    if (usedLettersString.indexOf($letterGuess) !== -1 || $guessedLetters.indexOf($letterGuess) !== -1) {\n      $(\'#infoMessage\').html(\'&lt;h3&gt;You have already tried to guess this letter. Try again.\');\n    }\n    else {\n      for (var i = 0; i &lt; wordLength; i++) {\n        // console.log(\'checking on position \' + i + \' for the element \' + $wordToGuess[i] + \' and with image changer \' + imageChanger);\n        if ($letterGuess === $wordToGuess[i]) {\n          // console.log(\'Inside the if statement. $letterGuess is \' + $letterGuess + \' and $wordToGuess is \' + $wordToGuess[i] + \' for position \' + i);\n          $(\'#infoMessage\').html(\'&lt;h3&gt;That is correct! The letter \'\' + $letterGuess + \'\' is included in the secret word&lt;/h3&gt;\');\n          $($(\'td[class=\'randomWordTd randomWordTdWhite\']\')[i - counter]).removeClass(\'randomWordTdWhite\').addClass(\'randomWordTdBlack\');\n          counter +=1;\n          $(\'.remainingLetters\').html(\'&lt;h3&gt;You have \' + ($wordToGuess.length - counter) + \' letters remaining for guessing&lt;/h3&gt;\');\n          // console.log(\'counter is \' + counter + \' and word length is \' + wordLength);\n          if (wordLength - counter === 0) {\n            $(\'#infoMessage\').html(\'&lt;h3&gt;That is great! You have guessed the word. YOU WON!&lt;/h3&gt;\');\n            $(\'#imageArea\').html(\'&lt;img class=\'finalImage\' src=\'assets/images/escape.gif\'&gt;\');\n          }\n        }\n        else if ($wordToGuess.indexOf($letterGuess) !== -1 && $letterGuess !== $wordToGuess[i]) {\n          continue;\n        }\n        else {\n          imageChanger += 1;\n          // console.log(\'imageChanger is \' + imageChanger);\n          if (imageChanger &gt;= 12) {\n            $(\'#infoMessage\').html(\'&lt;h3&gt;Sorry, you lost. The word is \'\' + $(\'td\').text() + \'\'. Better luck next time.\');\n            $(\'#imageArea\').html(\'&lt;img src=\'assets/images/12.jpg\'&gt;\');\n            break;\n          }\n          else {\n            $(\'#infoMessage\').html(\'&lt;h3&gt;Bummer. The letter \'\' + $letterGuess + \'\' is not included in the secret word.&lt;/h3&gt;\');\n            $(\'#imageArea\').html(\'&lt;img src=\'assets/images/\' + imageChanger + \'.jpg\'&gt;\');\n            $(\'#usedLetters\').append($letterGuess + \' \');\n            break;\n          }\n        } //else if the letter is not matching\n      } //End of for loop for evaluating the letter matching\n    } //else if the letter has not been evaluated already\n\n  } //End of newLetterEntry function\n\n  //GAME FLOW\n  $(\'.startButton\').click(function(){\n    $(\'tr\').empty();\n    $(\'#infoMessage\').empty();\n    $(\'#newLetter\').val(\'\');\n    $(\'#imageArea\').html(\'&lt;img src=\'assets/images/1.jpg\'&gt;\');\n    imageChanger = 1;\n    newRandomWord();\n  });  //End of $(\'.startButton\').click\n\n  $(\'#letterSubmit\').click(function(){\n    var $newLetter = $(\'#newLetter\').val().toLowerCase();\n    if ($newLetter.length === 0 || alphabet.indexOf($newLetter) === -1) {\n      $(\'#infoMessage\').html(\'&lt;h3&gt;Please enter a valid alphabet letter&lt;/h3&gt;\');\n    }\n    else {\n      newLetterEntry();\n    }\n    $(\'#newLetter\').val(\'\');\n  });\n\n});
+$(document).ready(function(){
+  var alphabet = [\'a\', \'b\', \'c\', \'d\', \'e\', \'f\', \'g\', \'h\', \'i\', \'j\', \'k\', \'l\', \'m\', \'n\', \'o\', \'p\', \'q\', \'r\', \'s\', \'t\', \'u\', \'v\', \'w\', \'x\', \'y\', \'z\', \' \', \'\'\', \'-\'];
+  var imageChanger = 1;
+
+  //FUNCTIONS
+  //1. New random word
+  function newRandomWord(){
+    var url = \'https://wordsapiv1.p.mashape.com/words/?random=true\';
+    fetch(url, {
+      method: \'GET\',
+      headers: {
+        \'X-Mashape-Key\': \'N5TPAl6S0Dmsh231cDKa7vKInQxwp1iMvEWjsniJfs7d8e0C86\',
+        \'Accept\': \'application/json\',
+        \'Content-Type\': \'application/json\'
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      return data.word;
+    })
+    .then(function(word) {
+      var randomWord = word.toLowerCase();
+      var newRow = $(\'tr\');
+      console.log(\'The new random word is: \' + randomWord);
+      for (var i = 0; i &lt; randomWord.length; i++) {
+        newRow.append($(\'&lt;td class=\'randomWordTd randomWordTdWhite\'&gt;\' + randomWord[i] + \'&lt;/td&gt;\'));
+      }
+      $(\'#randomWordTable\').append(function(){
+          $(newRow).show(2000);
+      });
+      $(\'.remainingLetters\').html(\'&lt;h3&gt;You have \' + randomWord.length + \' letters remaining for guessing&lt;/h3&gt;\');
+      $(\'#usedLetters\').empty();
+      $(\'#wordSubmit\').off(); //You can move this in the \'new game action\'. Also put and elseif statement in the event the user clicks on wordSubmit but has not entered a word
+      $(\'#wordSubmit\').click(function(){
+        var $wordGuess = $(\'#iKnowTheWord\').val().toLowerCase();
+        if ($wordGuess === randomWord) {
+          $(\'#infoMessage\').html(\'&lt;h3&gt;That is great! You have guessed the word. YOU WON!&lt;/h3&gt;\');
+          $(\'#imageArea\').html(\'&lt;img class=\'finalImage\' src=\'assets/images/escape.gif\'&gt;\');
+          $(\'#iKnowTheWord\').val(\'\');
+        }
+        else {
+          console.log(\'word guess is: \', $wordGuess, \'the random word is\', randomWord);
+          $(\'#infoMessage\').html(\'&lt;h3&gt;Sorry, the right word is \' + randomWord + \'. You lost :-(&lt;/h3&gt;\');
+          $(\'#imageArea\').html(\'&lt;img src=\'assets/images/12.jpg\'&gt;\');
+          $(\'#iKnowTheWord\').val(\'\');
+        }
+      });
+    });
+  }
+
+  //2. New letter entry
+
+  function newLetterEntry() {
+    var $letterGuess = $(\'#newLetter\').val().toLowerCase();
+    // alert($letterGuess);
+    var counter = 0;
+    var $wordToGuess = $(\'td[class=\'randomWordTd randomWordTdWhite\']\').text();
+    var $guessedLetters = $(\'td[class=\'randomWordTd randomWordTdBlack\']\').text();
+    var wordLength = $wordToGuess.length;
+    // console.log(\'The remaining letters are: \' + $wordToGuess);
+    // console.log(\'The found letters are: \' + $guessedLetters);
+    var usedLettersString = $(\'#usedLetters\').text()
+    if (usedLettersString.indexOf($letterGuess) !== -1 || $guessedLetters.indexOf($letterGuess) !== -1) {
+      $(\'#infoMessage\').html(\'&lt;h3&gt;You have already tried to guess this letter. Try again.\');
+    }
+    else {
+      for (var i = 0; i &lt; wordLength; i++) {
+        // console.log(\'checking on position \' + i + \' for the element \' + $wordToGuess[i] + \' and with image changer \' + imageChanger);
+        if ($letterGuess === $wordToGuess[i]) {
+          // console.log(\'Inside the if statement. $letterGuess is \' + $letterGuess + \' and $wordToGuess is \' + $wordToGuess[i] + \' for position \' + i);
+          $(\'#infoMessage\').html(\'&lt;h3&gt;That is correct! The letter \'\' + $letterGuess + \'\' is included in the secret word&lt;/h3&gt;\');
+          $($(\'td[class=\'randomWordTd randomWordTdWhite\']\')[i - counter]).removeClass(\'randomWordTdWhite\').addClass(\'randomWordTdBlack\');
+          counter +=1;
+          $(\'.remainingLetters\').html(\'&lt;h3&gt;You have \' + ($wordToGuess.length - counter) + \' letters remaining for guessing&lt;/h3&gt;\');
+          // console.log(\'counter is \' + counter + \' and word length is \' + wordLength);
+          if (wordLength - counter === 0) {
+            $(\'#infoMessage\').html(\'&lt;h3&gt;That is great! You have guessed the word. YOU WON!&lt;/h3&gt;\');
+            $(\'#imageArea\').html(\'&lt;img class=\'finalImage\' src=\'assets/images/escape.gif\'&gt;\');
+          }
+        }
+        else if ($wordToGuess.indexOf($letterGuess) !== -1 && $letterGuess !== $wordToGuess[i]) {
+          continue;
+        }
+        else {
+          imageChanger += 1;
+          // console.log(\'imageChanger is \' + imageChanger);
+          if (imageChanger &gt;= 12) {
+            $(\'#infoMessage\').html(\'&lt;h3&gt;Sorry, you lost. The word is \'\' + $(\'td\').text() + \'\'. Better luck next time.\');
+            $(\'#imageArea\').html(\'&lt;img src=\'assets/images/12.jpg\'&gt;\');
+            break;
+          }
+          else {
+            $(\'#infoMessage\').html(\'&lt;h3&gt;Bummer. The letter \'\' + $letterGuess + \'\' is not included in the secret word.&lt;/h3&gt;\');
+            $(\'#imageArea\').html(\'&lt;img src=\'assets/images/\' + imageChanger + \'.jpg\'&gt;\');
+            $(\'#usedLetters\').append($letterGuess + \' \');
+            break;
+          }
+        } //else if the letter is not matching
+      } //End of for loop for evaluating the letter matching
+    } //else if the letter has not been evaluated already
+
+  } //End of newLetterEntry function
+
+  //GAME FLOW
+  $(\'.startButton\').click(function(){
+    $(\'tr\').empty();
+    $(\'#infoMessage\').empty();
+    $(\'#newLetter\').val(\'\');
+    $(\'#imageArea\').html(\'&lt;img src=\'assets/images/1.jpg\'&gt;\');
+    imageChanger = 1;
+    newRandomWord();
+  });  //End of $(\'.startButton\').click
+
+  $(\'#letterSubmit\').click(function(){
+    var $newLetter = $(\'#newLetter\').val().toLowerCase();
+    if ($newLetter.length === 0 || alphabet.indexOf($newLetter) === -1) {
+      $(\'#infoMessage\').html(\'&lt;h3&gt;Please enter a valid alphabet letter&lt;/h3&gt;\');
+    }
+    else {
+      newLetterEntry();
+    }
+    $(\'#newLetter\').val(\'\');
+  });
+
+});

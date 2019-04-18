@@ -70,7 +70,7 @@
 
         <main>
           <div id="divCarousel">
-            <div class="divArrow" id="divArrowLeft" @click.stop="changePage">
+            <div class="divArrow" id="divArrowLeft" @click="changePage">
               <i class="fas fa-angle-left" id="arrowLeft"></i>
             </div>
 
@@ -103,7 +103,7 @@
               </section>
 
 
-            <div class="divArrow" id="divArrowRight" @click.stop="changePage">
+            <div class="divArrow" id="divArrowRight" @click="changePage">
               <i class="fas fa-angle-right" id="ArrowRight"></i>
             </div>
           </div>
@@ -196,7 +196,7 @@
 
 
 
-          <div class="divModalLeft" :id="'divModalLeft-'+project.id" @click.stop="divCodeModalClose($event)">
+          <div class="divModalLeft" :id="'divModalLeft-'+project.id" @click="divCodeModalClose($event)">
             <!-- <div class="divModalLeftHeaderContainer"> -->
 
               <div class="divModalLeftHeader">
@@ -223,7 +223,7 @@
             <!--End of divModalLeftHeaderContainer -->
             <code>
               <pre>
-                {{project.code}}
+                {{project.code.trim()}}
 
               </pre>
             </code>

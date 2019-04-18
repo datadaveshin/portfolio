@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang=\'en\' dir=\'ltr\'>
+  <head>
+    <meta charset=\'utf-8\'>
+    <link rel=\'stylesheet\' href=\'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css\' integrity=\'sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB\' crossorigin=\'anonymous\'>
+    <script src=\'https://cdn.jsdelivr.net/npm/vue/dist/vue.js\'></script>
+    <title>xPath Generator</title>
+
+
+    <style media=\'screen\'>
+
+      *{
+        box-sizing: border-box;
+      }
+
+      .divContainer{
+        display: grid;
+        grid-template-rows: 85vh 15vh;
+        grid-template-columns: 60vw 40vw;
+        grid-template-areas:
+
+        \'sectionOptions sectionElements\'
+        \'sectionResult sectionResult\';
+      }
+
+      .sectionOptions{
+        grid-area: sectionOptions;
+        display: grid;
+        grid-template-columns: 45% 55%;
+        grid-template-rows: 60% 3% 17% 20%;
+        grid-template-areas:
+        \'branches functions\'
+        \'brackets functions\'
+        \'brackets operators\'
+        \'attributes parameters\';
+        font-size: 0.85em;
+      }
+
+      .branches, .functions, .brackets, .operators, .attributes, .parameters{
+        padding: 10px;
+      }
+
+      .branches{
+        grid-area: branches;
+        border-right: 2px solid rgb(0,0,128);
+        border-top: 2px solid rgb(0,0,128);
+      }
+
+      .branches:hover{
+        background: rgba(0,0,128,.1);
+      }
+
+      .branches h3{
+        color: rgb(0,0,128);
+      }
+
+      .branches hr{
+        margin: 3%;
+      }
+
+      .divBranchesAbsoluteRelative{
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .divBranchesInputs{
+        display: flex;
+        flex-flow: column wrap;
+        height: 80%;
+        align-content: space-around;
+      }
+
+      .divBranchesInputs input:focus + span{
+        color: rgb(0,0,128);
+      }
+
+      .brackets{
+        grid-area: brackets;
+        border-right: 2px solid rgb(0,100,0);
+        border-top: 2px solid rgb(0,100,0);
+      }
+
+      .brackets:hover{
+        background-color: rgba(0,100,0,.1);
+      }
+
+      .brackets h3{
+        color: rgb(0,100,0); /*Dark green*/
+      }
+
+      .divBracketsInputs{
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+      }
+
+      .divBracketsInputs label{
+        margin: 0;
+      }
+
+      .divBracketsInputs input:focus + span{
+        color: rgb(0,100,0);
+      }
+
+      .divBracketsInputs table{
+        width: 100%;
+      }
+
+      .divBracketsInputs table td{
+        text-align: center;
+        vertical-align: middle;
+        padding: 0;
+      }
+
+      .operators{
+        grid-area: operators;
+        border-top: 2px solid rgb(255,140,0);
+        border-right: 2px solid rgb(255,140,0);
+      }
+
+      .operators:hover{
+        background-color: rgba(255,140,0,.1);
+      }
+
+      .operators h3{
+        color: rgb(255,140,0);
+      }
+
+      .divOperatorsInputs{
+        display: flex;
+        flex-flow: column wrap;
+        height: 80%;
+        align-content: space-around;
+      }
+
+      .divOperatorsInputs input:focus + span{
+        color: rgb(255,140,0);
+      }
+
+      .functions{
+        grid-area: functions;
+        border-right: 2px solid rgb(128,0,32);
+        border-top: 2px solid rgb(128,0,32);
+      }
+
+      .functions:hover{
+        background-color: rgba(128,0,32,.1);
+      }
+
+      .functions h3{
+        color: rgb(128,0,32);
+      }
+
+      .divFunctionsInputs{
+        display: flex;
+        flex-flow: column wrap;
+        height: 90%;
+        align-content: space-around;
+        font-size: .79rem;
+        padding: 1px;
+      }
+
+      .divFunctionsInputs input:focus + span{
+        color: rgb(128,0,32);
+      }
+
+      .functionSpansFontSize{
+        color: red;
+      }
+
+      .attributes{
+        grid-area: attributes;
+        border-top: 2px solid rgb(184,134,11);
+        border-right: 2px solid rgb(184,134,11);
+      }
+
+      .attributes:hover{
+        background-color: rgba(184,134,11, .1);
+      }
+
+      .attributes h3{
+        color: rgb(184,134,11);
+      }
+
+      .divAttributesInputs{
+        display: flex;
+        align-content: space-around;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .divAttributesInputs label{
+        margin-right: 2px;
+      }
+
+      .divAttributesInputs input:focus + span{
+        color: rgb(184,134,11);
+      }
+
+      .parameters{
+        grid-area: parameters;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 30% 30% 40%;
+        grid-template-areas:
+        \'gridParamsHeading\'
+        \'gridParamsLevel1\'
+        \'gridParamsLevel2\';
+        border-top: 2px solid rgb(128,0,128); /*purple*/
+        border-right: 2px solid rgb(128,0,128);
+      }
+
+      .parameters:hover{
+        background-color: rgba(128,0,128, .1);
+      }
+
+      .parameters h3{
+        color: rgb(128,0,128);
+      }
+
+      .gridParamsHeading{
+        grid-area: gridParamsHeading
+      }
+
+      .gridParamsLevel1{
+        grid-area: gridParamsLevel1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .gridParamsLevel1 label{
+        margin-right: 10px;
+      }
+
+      .gridParamsLevel1 input:focus + span{
+        color: rgb(128,0,128);
+      }
+
+      .gridParamsLevel2{
+        grid-area: gridParamsLevel2;
+        display: flex;
+        justify-content: center;
+      }
+
+      h3, h4{
+        text-align: center;
+      }
+
+      label:hover{
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      input:focus + span{
+        font-weight: bold;
+      }
+
+      .sectionOptions span::after {
+        display: block;
+        content: attr(data-bold);
+        font-weight: bold;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+      }
+
+      .sectionElements{
+        grid-area: sectionElements;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 40% 15% 45%;
+        grid-template-areas:
+        \'divFunctionsSequenceArrElements\'
+        \'divFunctionConcatenation\'
+        \'divPathArrayElements\';
+        background-color: rgb(245,245,245);
+      }
+
+      .sectionElements input{
+        margin: 5px;
+        padding: 5px 0 5px 5px;
+      }
+
+      .divFunctionsSequenceArrElements,
+      .divFunctionConcatenation,
+      .divPathArrayElements{
+        padding: 10px;
+      }
+
+      .divFunctionsSequenceArrElements{
+        grid-area: divFunctionsSequenceArrElements;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 10% 75% 15%;
+        grid-template-areas:
+        \'divFunctionsSequenceArrHeader\'
+        \'divFunctionsSequenceArrInputs\'
+        \'divFunctionsConcatButton\';
+        line-height: 1;
+        border-top: 2px solid rgb(128,0,32);
+        border-right: 2px solid rgb(128,0,32);
+      }
+
+      .divFunctionsSequenceArrElements h3{
+        color: rgb(128,0,32);
+      }
+
+      .spanActiveFunctionTitle{
+        font-weight: bold;
+        font-size: 1.3rem;
+        min-width: 450px;
+        width: 450px;
+        color: rgb(128,0,32);
+      }
+
+      .divFunctionsSequenceArrInputs{
+        grid-area: divFunctionsSequenceArrInputs;
+        overflow: auto;
+        position: relative;
+      }
+
+      .divFunctionsSequenceArrInputs label input{
+        border: 2px solid rgb(128,0,32); /*Burgundy*/
+        border-radius: 5%;
+        margin: 2px;
+      }
+
+      .divFunctionsSequenceArrInputs label input:hover{
+        background-color: rgba(255,0,255, .2); /*Magenda*/
+      }
+
+      .divFunctionsSequenceArrInputs label input:focus{
+        background-color: rgba(255, 0, 255, .4);
+        color: rgb(128,0,32);
+        outline: none;
+      }
+
+      .divFunctionsConcatButton{
+        display: flex;
+        justify-content: flex-end;
+        align-content: flex-end;
+      }
+
+      #buttonConcatAxes{
+        padding: 3px;
+        font-weight: bold;
+        color: rgb(128,0,32);
+        border: 2px solid rgb(128,0,32);
+        margin: 0;
+      }
+
+      #buttonConcatAxes:hover{
+        cursor: pointer;
+        background-color: rgba(128,0,32, .2);
+      }
+
+      #buttonConcatAxes:active{
+        background-color: rgb(128,0,32);
+        color: white;
+      }
+
+      #buttonConcatAxes:focus{
+        outline: none;
+      }
+
+      .divFunctionConcatenation{
+        grid-area: divFunctionConcatenation;
+        word-wrap: break-word;
+        overflow: auto;
+        border-top: 2px solid rgb(47,79,79); /*dark slate gray*/
+        border-right: 2px solid rgb(47,79,79);
+      }
+
+      .divFunctionConcatenation h3{
+        color: rgb(47,79,79);
+      }
+
+      .divPathArrayElements{
+        grid-area: divPathArrayElements;
+        overflow: auto;
+        border-top: 2px solid rgb(0,0,128); /*Navy blue*/
+        border-right: 2px solid rgb(0,0,128); /*Navy blue*/
+      }
+
+      .divPathArrayElements h3{
+        color: rgb(0,0,128);
+      }
+
+      .divPathArrayElements label input{
+        border: 2px solid rgb(0,0,128); /*Navy blue*/
+        border-radius: 5%
+      }
+
+      .divPathArrayElements label input:hover{
+        background-color: rgba(0,255,255, .2); /*aqua*/
+      }
+
+      .divPathArrayElements label input:focus{
+        background-color: rgba(0,255,255, .4);
+        color: rgb(0,0,128);
+        outline: none;
+      }
+
+      .sectionResult{
+        grid-area: sectionResult;
+        display: grid;
+        grid-template-columns: 18vw 82vw;
+        grid-template-rows: 100%;
+        grid-template-areas:
+        \'divFooter divResult\'
+      }
+
+      .divFooter{
+        background-color: black;
+        color: white;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-flow: column wrap;
+      }
+
+      .divFooter a{
+        color: white;
+      }
+
+      .divResult{
+        border: 2px solid black;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 20% 80%;
+        grid-template-areas:
+        \'divResultHeader\'
+        \'divResultTextArea\';
+        background-color: rgb(220, 220, 220);
+      }
+
+      #textAreaFullPath{
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+      }
+
+      .divResultTextArea{
+        padding: 10px;
+        position: relative;
+      }
+
+      #buttonCopyxPath{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        border: 2px solid black;
+        font-weight: bold;
+      }
+
+      #buttonCopyxPath:hover{
+        pointer: cursor;
+        background-color: rgba(0,0,0, .4);
+      }
+
+      #buttonCopyxPath:active{
+        background-color: black;
+        color: white;
+      }
+
+      #buttonCopyxPath:focus{
+        outline: none;
+      }
+
+      .divBranchesInputs label{
+        position: relative;
+      }
+
+      .spanBubble{
+        position: absolute;
+        width: 150px;
+        font-size: .8em;
+        font-weight: bold;
+        padding: 5px;
+        color: white;
+        border-radius: 7%;
+        font-family: arial;
+        /* margin-top: 10px;
+        margin-left: -5px; */
+        z-index: 0;
+        opacity: 0;
+        visibility: 0;
+        transition: opacity 0.3s;
+      }
+
+      .branches .spanBubble{
+        background-color: rgba(0,0,128, .8);
+      }
+
+      .functions .spanBubble{
+        background-color: rgba(128,0,32, .8);
+      }
+
+      .brackets .spanBubble{
+        background-color: rgba(0,100,0, .8);
+      }
+
+      .operators .spanBubble{
+        background-color: rgba(255,140,0, .8);
+      }
+
+      .attributes .spanBubble{
+        background-color: rgba(184,134,11, .8);
+      }
+
+      .parameters .spanBubble{
+        background-color: rgba(128,0,128, .8);
+      }
+
+      .divLabelContainer{
+        position: relative;
+      }
+
+      .divLabelContainer label{
+        display: inline-block;
+      }
+
+      .divFooter .spanBubble{
+        position: absolute;
+        bottom: 30%;
+        left: 30%;
+        border: 2px solid black;
+        width: auto;
+        border-radius: 0;
+        background-color: white;
+        z-index: -1;
+      }
+
+      .spanBubble code{
+        color: yellow;
+        font-size: 1em;
+      }
+
+      label:hover + .spanBubble, h3:hover + .spanBubble{
+        visibility: visible;
+        opacity: 1;
+        z-index: 1;
+      }
+
+    </style>
+
+  </head>
+
+
+
+
+
+
+
+  <body>
+    <main id=\'mainSlot\'>
+      <div class=\'divContainer\'>
+
+        <section class=\'sectionOptions\'>
+          <div class=\'branches\'>
+            <h3>Axes / Node</h3>
+
+
+            <div class=\'divBranchesAbsoluteRelative\'>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'absoluteRelativeAxis\' v-model=\'absoluteRelativeAxis\' value=\'absolute\'>
+                  <span data-bold=\'---Absolute path\'>Absolute path</span>
+                </label>
+                <span class=\'spanBubble\'>Path starts from the root element (<code>/</code> at the front)</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'absoluteRelativeAxis\' v-model=\'absoluteRelativeAxis\' value=\'relative\'>
+                  <span data-bold=\'---Relative path\'>Relative path</span>
+                </label>
+                <span class=\'spanBubble\'>Path starts from position relative to the current node (.)</span>
+              </div>
+            </div>
+            <hr>
+            <div class=\'divBranchesInputs\'>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---None\'>None</span>
+                </label>
+                <span class=\'spanBubble\'>No path expression selected</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/self::\' name=\'axisOption\' v-model=\'axis\' @click=\'node = \'node()\'\'>
+                  <span data-bold=\'---. (/self::node())\'>. (/self::node())</span>
+                </label>
+                <span class=\'spanBubble\'>Use <code>.</code> if you want to shortcut your xPath</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/parent::\' name=\'axisOption\' v-model=\'axis\' @click=\'node = \'node()\'\'>
+                  <span data-bold=\'---.. (/parent::node())\'>.. (/parent::node())</span>
+                </label>
+                <span class=\'spanBubble\'>Select parent node. Use <code>..</code> if you want to shortcut your xPath</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'//\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---// (descendant-or-self::)\'>// (descendant-or-self::)</span>
+                </label>
+                <span class=\'spanBubble\'>Select descendants or existing node. Use <code>//</code> if you want to shortcut your xPath</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/ancestor::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/ancestor::\'>/ancestor::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the ancestors of the current node (parents, grandparents etc)</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/ancestor-or-self::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/ancestor-or-self::\'>/ancestor-or-self::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the ancestors of the current node (parents, grandparents etc) or the node itself</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/attribute::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'/attribute:: (@)\'>/attribute:: (@)</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  Select an attribute of the existing node. Use <code>@</code> to
+                  shortcut your xpath. Use the Attributes section.
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/child::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/child::\'>/child::</span>
+                </label>
+                <span class=\'spanBubble\'>Select any of the immediate children of the current node</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/descendant::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/descendant::\'>/descendant::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the descendants of the current node (children, grandchildren etc)</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/descendant-or-self::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/descendant-or-self::\'>/descendant-or-self::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the descendants of the current node (children, grandchildren etc) or the node itself</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/following::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/following::\'>/following::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the nodes that are following the current node (siblings or other branches in the document)</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/following-sibling::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/following-sibling::\'>/following-sibling::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the immediate siblings that follow the current node</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/namespace::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/namespace::\'>/namespace::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the namespace nodes of the current node</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/parent::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/parent::\'>/parent::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the parent of the current node</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/preceding::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/preceding::\'>/preceding::</span>
+                </label>
+                <span class=\'spanBubble\'>Select all preceding nodes of the current node (parent, grandparents etc)</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/preceding-sibling::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/preceding-sibling::\'>/preceding-sibling::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the preceding siblings of the current node</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' value=\'/self::\' name=\'axisOption\' v-model=\'axis\'>
+                  <span data-bold=\'---/self::\'>/self::</span>
+                </label>
+                <span class=\'spanBubble\'>Select the current node itself</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'text\' name=\'addNode\' v-model=\'node\' @keyup.enter=\'addBranch($event)\' size=\'12\'>
+                  <span data-bold=\'---Node\'>Node</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  Enter the node\'s name. Press \'enter\' when done. <br>
+                   - If you want, you can use this input field to enter other xPath elements.
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class=\'brackets\'>
+            <h3>Predicates / Parenthesis</h3>
+            <div class=\'divBracketsInputs\'>
+              <table>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>Open</td>
+                  <td>Close</td>
+                  <td>None</td>
+                </tr>
+                <tr>
+                  <td>Brackets</td>
+                  <td>
+                    <div class=\'divLabelContainer\'>
+                      <label>
+                        <input type=\'radio\' name=\'brackets\' value=\'[\' v-model=\'brackets\' @click=\'addBrackets($event)\'>
+                        <span data-bold=\'---[\'>[</span>
+                      </label>
+                      <span class=\'spanBubble\'>Open square bracket <code>[</code></span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class=\'divLabelContainer\'>
+                      <label>
+                        <input type=\'radio\' name=\'brackets\' value=\']\' v-model=\'brackets\' @click=\'addBrackets($event)\'>
+                        <span data-bold=\'---]\'>]</span>
+                      </label>
+                      <span class=\'spanBubble\'>Close square bracket <code>]</code></span>
+                    </div>
+                  </td>
+                  <td rowspan=\'2\'>
+                    <div class=\'divLabelContainer\'>
+                      <label>
+                        <input type=\'radio\' name=\'brackets\' value=\'\' v-model=\'brackets\'>
+                      </label>
+                      <span class=\'spanBubble\'>No option selected</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Parenthesis</td>
+                  <td>
+                    <div class=\'divLabelContainer\'>
+                      <label>
+                        <input type=\'radio\' name=\'brackets\' value=\'(\' v-model=\'brackets\' @click=\'addBrackets($event)\'>
+                        <span data-bold=\'---(\'>(</span>
+                      </label>
+                      <span class=\'spanBubble\'>Open parenthesis <code>(</code></span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class=\'divLabelContainer\'>
+                      <label>
+                        <input type=\'radio\' name=\'brackets\' value=\')\' v-model=\'brackets\' @click=\'addBrackets($event)\'>
+                        <span data-bold=\'---)\'>)</span>
+                      </label>
+                      <span class=\'spanBubble\'>Close parenthesis <code>)</code></span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+
+
+
+          <div class=\'functions\'>
+            <h3>Functions</h3>
+            <div class=\'divFunctionsInputs\'>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'\' v-model=\'activeFunction\' disabled>
+                  <span data-bold=\'---None\'>None</span>
+                </label>
+                <span class=\'spanBubble\'>No function selected</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'boolean\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---boolean()\'>boolean()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The boolean function evaluates an expression and returns true or false. | <code>boolean(expression)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'ceiling\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---ceiling()\'>ceiling()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The ceiling function evaluates a decimal number and returns the
+                  smallest integer greater than or equal to the decimal number.
+                  | <code>ceiling(number)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'choose\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---choose()\'>choose()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The choose function returns one of the specified objects based
+                  on a boolean parameter. | <code>choose(boolean , object1, object2)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'concat\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---concat()\'>concat()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The concat function concatenates two or more strings and returns
+                  the resulting string. | <code>concat(string1 ,string2 [,stringn]*)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'contains\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---contains()\'>contains()</span>
+                </label>
+                <span class=\'spanBubble\'>The contains function determines whether
+                  the first argument string contains the second argument string
+                  and returns boolean true or false. | <code>contains(haystack, needle)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'count\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---count()\'>count()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The count function counts the number of nodes in a node-set and
+                  returns an integer. | <code>count(node-set)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'current\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---current()\'>current()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The current function can be used to get the context node in an
+                  XSLT instruction. | <code>current()</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'document\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---document()\'>document()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The document finds a node-set in an external document, or multiple
+                  external documents, and returns the resulting node-set. |
+                  <code>document(URI [,node-set])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'element-available\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---element-available()\'>element-available()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The element-available function determines if an element is available
+                  and returns true or false. | <code>element-available(QName)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'false\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---false()\'>false()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The false function returns boolean false. | <code>false()</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'floor\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---floor()\'>floor()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The floor function evaluates a decimal number and returns the
+                  largest integer less than or equal to the decimal number. |
+                  <code>floor(number)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'format-number\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---format-number()\'>format-number()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The format-number function evaluates a number and returns a string
+                  representing the number in a given format. |
+                  <code>format-number(number ,pattern [,decimal-format])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'function-available\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---function-available()\'>function-available()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The function-available function determines if a given function
+                  is available and returns boolean true or false. |
+                  <code>function-available(name)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'generate-id\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---generate-id()\'>generate-id()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The generate-id function generates a unique id for the first node
+                  in a given node-set and returns a string containing that id. |
+                  <code>generate-id( [node-set])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'key\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---key()\'>key()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The key function returns a node-set of nodes that have the given
+                  value for the given key. | <code>key(keyname ,value)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'lang\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---lang()\'>lang()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The lang function determines whether the context node matches
+                  the given language and returns boolean true or false. |
+                  <code>lang(string)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'last\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---last()\'>last()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The last function returns a number equal to the context size
+                  from the expression evaluation context. | <code>last()</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'local-name\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---local-name()\'>local-name()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The local-name function returns a string representing the local
+                  name of the first node in a given node-set. |
+                  <code>local-name( [node-set])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'name\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---name()\'>name()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The name function returns a string representing the QName of the
+                  first node in a given node-set. | <code>name([node-set])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'namespace-url\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---namespace-url()\'>namespace-url()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The namespace-uri function returns a string representing the
+                  namespace URI of the first node in a given node-set. |
+                  <code>namespace-uri([node-set])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'normalize-space\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---normalize-space()\'>normalize-space()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The normalize-space function strips leading and trailing white-space
+                  from a string, replaces sequences of whitespace characters by a
+                  single space, and returns the resulting string. |
+                  <code>normalize-space([string])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'not\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---not()\'>not()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The not function evaluates a boolean expression and returns the
+                  opposite value. | <code>not(expression)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'number\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---number()\'>number()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The number function converts an object to a number and returns the
+                  number. | <code>number([object])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'position\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---position()\'>position()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The position function returns a number equal to the context position
+                  from the expression evaluation context. | <code>position()</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'round\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---round()\'>round()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The round function returns a number that is the nearest integer to
+                  the given number. | <code>round(decimal)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'starts-with\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---starts-with()\'>starts-with()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The starts-with checks whether the first string starts with the
+                  second string and returns true or false. |
+                  <code>starts-with(haystack, needle)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'string\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---string()\'>string()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The string function converts the given argument to a string. |
+                  <code>string([object])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'string-length\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---string-length()\'>string-length()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The string-length function returns a number equal to the number
+                  of characters in a given string. | <code>string-length([string])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'substring\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---substring()\'>substring()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The substring function returns a part of a given string. |
+                  <code>substring(string ,start [,length])</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'substring-after\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---substring-after()\'>substring-after()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The substring-after function returns a string that is the rest of
+                  a given string after a given substring. |
+                  <code>substring-after(haystack ,needle)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'substring-before\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---substring-before()\'>substring-before()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The substring-before function returns a string that is the part of
+                  a given string before a given substring. |
+                  <code>substring-before(haystack ,needle)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'sum\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---sum()\'>sum()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The sum function returns a number that is the sum of the numeric
+                  values of each node in a given node-set. | <code>sum(node-set)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'system-property\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---system-property()\'>system-property()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The system-property function returns an object representing the
+                  given system-property. | <code>system-property(name)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'translate\' v-model=\'activeFunction\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---translate()\'>translate()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The translate function evaluates a string and a set of characters
+                  to translate and returns the translated string. |
+                  <code>translate(string, abc, XYZ)</code>
+                </span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'activeFunction\' value=\'true\' @click=\'addFunction($event)\'>
+                  <span data-bold=\'---true()\'>true()</span>
+                </label>
+                <span class=\'spanBubble\'>
+                  The true function returns a boolean value of true. | <code>true()</code>
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class=\'operators\'>
+            <h3>Operators</h3>
+            <div class=\'divOperatorsInputs\'>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'\' v-model=\'operator\'>
+                  None
+                </label>
+                <span class=\'spanBubble\'>No operator selected.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'and\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---and\'>and</span>
+                </label>
+                <span class=\'spanBubble\'>Boolean. Two conditions need to be true.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'or\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---or\'>or</span>
+                </label>
+                <span class=\'spanBubble\'>Boolean. One of two conditions need to be true.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'|\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---|\'>|</span>
+                </label>
+                <span class=\'spanBubble\'>Two node sets are computed.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'=\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---=\'>=</span>
+                </label>
+                <span class=\'spanBubble\'>Boolean. Contition needs to be equal to a value.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'!=\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---!=\'>!=</span>
+                </label>
+                <span class=\'spanBubble\'>Not equal. Condition needs to not be equal to a value.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'+\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---+\'>+</span>
+                </label>
+                <span class=\'spanBubble\'>Addition.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'-\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'----\'>-</span>
+                </label>
+                <span class=\'spanBubble\'>Subtraction.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'*\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---*\'>*</span>
+                </label>
+                <span class=\'spanBubble\'>Multiplication.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'div\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---div\'>div</span>
+                </label>
+                <span class=\'spanBubble\'>Division</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'<\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---&lt;\'>&lt;</span>
+                </label>
+                <span class=\'spanBubble\'>Boolean. Smaller than.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'<=\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---&lt;=\'>&lt;=</span>
+                </label>
+                <span class=\'spanBubble\'>Boolean. Smaller or equal than.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'>\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---&gt;\'>&gt;</span>
+                </label>
+                <span class=\'spanBubble\'>Boolean. Greater than.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'>=\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---&gt;=\'>&gt;=</span>
+                </label>
+                <span class=\'spanBubble\'>Boolean. Greater or equal than.</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'inputOperator\' value=\'mod\' v-model=\'operator\' @click=\'addOperators($event)\'>
+                  <span data-bold=\'---mod\'>mod</span>
+                </label>
+                <span class=\'spanBubble\'>Modulus</span>
+              </div>
+            </div><!-- End of divOperatorsInputs -->
+          </div><!-- End of operators section -->
+
+
+
+
+          <div class=\'attributes\'>
+            <h3>Attributes</h3>
+            <div class=\'divAttributesInputs\'>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' value=\'\' v-model=\'attribute\'>
+                  <span data-bold=\'---None\'>None</span>
+                </label>
+                <span class=\'spanBubble\'>No attribute selected</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' value=\'@alt\' v-model=\'attribute\' @click=\'addAttributes($event)\'>
+                  <span data-bold=\'---@alt\'>@alt</span>
+                </label>
+                <span class=\'spanBubble\'>Attribute alt</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' value=\'@class\' v-model=\'attribute\' @click=\'addAttributes($event)\'>
+                  <span data-bold=\'---@class\'>@class</span>
+                </label>
+                <span class=\'spanBubble\'>Attribute class</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' value=\'@href\' v-model=\'attribute\' @click=\'addAttributes($event)\'>
+                  <span data-bold=\'---@href\'>@href</span>
+                </label>
+                <span class=\'spanBubble\'>Attribute href</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' value=\'@id\' v-model=\'attribute\' @click=\'addAttributes($event)\'>
+                  <span data-bold=\'---@id\'>@id</span>
+                </label>
+                <span class=\'spanBubble\'>Attribute id</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' value=\'@name\' v-model=\'attribute\' @click=\'addAttributes($event)\'>
+                  <span data-bold=\'---@name\'>@name</span>
+                </label>
+                <span class=\'spanBubble\'>Attribute name</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' v-model=\'attribute\' value=\'@src\' @click=\'addAttributes($event)\'>
+                  <span data-bold=\'---@src\'>@src</span>
+                </label>
+                <span class=\'spanBubble\'>Attribute src</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' v-model=\'attribute\' value=\'@style\' @click=\'addAttributes($event)\'>
+                  <span data-bold=\'---@style\'>@style</span>
+                </label>
+                <span class=\'spanBubble\'>Attribute style</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' value=\'@title\' v-model=\'attribute\' @click=\'addAttributes($event)\'>
+                  <span data-bold=\'---@title\'>@title</span>
+                </label>
+                <span class=\'spanBubble\'>Attribute title</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'radio\' name=\'attribute\' value=\'@value\' v-model=\'attribute\' @click=\'addAttributes($event)\'>
+                  <span data-bold=\'---@value\'>@value</span>
+                </label>
+                <span class=\'spanBubble\'>Attribute value</span>
+              </div>
+              <div class=\'divLabelContainer\'>
+                <label>
+                  <input type=\'text\' name=\'attribute\' value=\'\' v-model=\'attribute\' @keyup.enter=\'addAttributes($event)\' size=\'8\'>
+                  <span data-bold=\'---Other\'>Other</span>
+                </label>
+                <span class=\'spanBubble\'>Enter other attribute.</span>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class=\'parameters\'>
+            <div class=\'gridParamsHeading\'>
+              <h3>{{activeFunctionArr[activeFunctionArr.length - 1]}} Parameters</h3>
+            </div>
+
+
+            <div class=\'gridParamsLevel1\'>
+              <div class=\'divCheckboxParams\'>
+                <div class=\'divLabelContainer\'>
+                  <label v-show=\'showNumberInput\'>
+                    <input type=\'checkbox\' name=\'numberEntry\' value=\'\' v-model=\'numberEntry\'>
+                    <span data-bold=\'---Number entry\'>Number entry</span>
+                  </label>
+                  <span class=\'spanBubble\'>
+                    Select this option if the value entered needs to be a number
+                  </span>
+                </div>
+                <div class=\'divLabelContainer\'>
+                  <label v-show=\'showTranslateInput\'>
+                    <input type=\'checkbox\' name=\'translateString\' v-model=\'translateString\'>
+                    <span data-bold=\'---Both Upper and lowercase\'>Both Upper and lowercase</span>
+                  </label>
+                  <span class=\'spanBubble\'>
+                    Select this option if you want the string to be translated
+                  </span>
+                </div>
+              </div>
+              <div class=\'divStringParam\'>
+                <div class=\'divLabelContainer\'>
+                  <label  v-show=\'showParamInput\'>
+                    <input type=\'text\' name=\'parameterString\' v-model=\'parameterString\'  @keyup.enter=\'addParameters($event)\'>
+                    <span data-bold=\'---Value\'>Value</span>
+                  </label>
+                  <span class=\'spanBubble\'>
+                    Enter your parameter value. Press \'enter\' when done.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class=\'gridParamsLevel2\'>
+              <div class=\'divAlert\'>
+                {{paramAlert}}
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <!-- End of section Options -->
+
+
+        <section class=\'sectionElements\'>
+          <div class=\'divFunctionsSequenceArrElements\'>
+            <div class=\'divFunctionsSequenceArrHeader\'>
+            <h3>Active Functions</h3>
+            </div>
+
+            <div class=\'divFunctionsSequenceArrInputs\'>
+              <span v-for=\'(element, idx) in functionsSequenceArr\' :key=\'element.id\'>
+                <span v-if=\'functionsSequenceArr[idx].toString().includes(\'(\') && !functionsSequenceArr[idx].toString().includes(\'/\')\'>
+                  <br>
+                  <label>
+                    <span v-once class=\'spanActiveFunctionTitle\'>
+                      {{element.replace(/(\((.*)?\)?)/g, \'\')}}:
+                    </span>
+                    <input type=\'text\' :name=\'idx\'  :size=\'functionsSequenceArr[idx].toString().length + 1\' v-model=\'functionsSequenceArr[idx]\' @keyup=\'checkAndPushToPathArray()\'>
+                  </label>
+                </span>
+
+
+                <label v-else>
+                  <input type=\'text\' :name=\'idx\'  :size=\'functionsSequenceArr[idx].toString().length + 1\' v-model=\'functionsSequenceArr[idx]\' @keyup=\'checkAndPushToPathArray()\'>
+                </label>
+
+              </span>
+            </div>
+
+            <div class=\'divFunctionsConcatButton\'>
+              <input class=\'buttonForAction\' id=\'buttonConcatAxes\' type=\'button\' name=\'\' value=\'Concat last two axes\' @click=\'concatFunctionElements()\'>
+            </div>
+          </div>
+
+          <div class=\'divFunctionConcatenation\'>
+            <h3>Concatenated Function elements</h3>
+            {{functionsSequenceArrJoin}}
+          </div>
+
+          <div class=\'divPathArrayElements\'>
+            <h3>All elements</h3>
+            <label v-for=\'(element, idx) in pathArray\'>
+              <input type=\'text\' :name=\'idx\' :size=\'pathArray[idx].toString().length\' v-model=\'pathArray[idx]\'>
+            </label>
+          </div>
+        </section>
+        <!-- End of section Elements -->
+
+        <section class=\'sectionResult\'>
+
+          <div class=\'divFooter\'>
+            <div class=\'divFooterHeader\'>
+              <h3>xPath Generator</h3>
+              <span class=\'spanBubble\'>
+                <img src=\'http://infohost.nmt.edu/tcc/help/pubs/xslt/axes.jpg\' alt=\'xPath Chart\'>
+              </span>
+            </div>
+            <h5><a href=\'http://addeventlistener.xyz\' target=\'_blank\'>@papostolopoulos</a> - 2019</h5>
+          </div>
+
+          <div class=\'divResult\'>
+            <div class=\'divResultHeader\'>
+              <h3>xPath Result</h3>
+            </div>
+
+            <div class=\'divResultTextArea\'>
+              <textarea name=\'textAreaFullPath\' id=\'textAreaFullPath\' :value=\'fullPath\'></textarea>
+              <br>
+              <label for=\'\'>
+                <input type=\'button\' name=\'buttonCopyxPath\' id=\'buttonCopyxPath\' value=\'Copy xPath\' @click=\'copyxPath()\'>
+              </label>
+            </div>
+
+          </div>
+
+        </section>
+        <!-- End of section Result -->
+
+
+      </div><!-- End of divContainer -->
+    </main>
+
+  </body>
+
+
+
+
+
+
+
+
+
+  <script>
+
+    var app = new Vue({
+      el: \'#mainSlot\',
+      data: {
+        axis:\'\',
+        node: \'\', //The node that is added after the axis
+        brackets: \'\', // If new brackets are opening or not
+        operator: \'\', //or, and, and not, not
+        activeFunction: \'\', //populated when a function is selected - convert into array?
+        activeFunctionArr: [],
+        translateString: false, //checkbox for when the \'translate\' option is selected
+        numberEntry: false, //When true, the submited entry will not be in quotes
+        absoluteRelativeAxis: \'absolute\',
+        parameterString: \'\', //populated when a string is entered in the input slot for each function (in parameters)
+        paramAlert: \'\',
+        //Perhaps need to modify this to get multiple values
+        //Not sure if I should use the above
+        attribute: \'\', //Attributes that are inside functions or brackets
+        pathArray: [], //array with full path of all different additions
+        functionsSequenceArr: [], //array of all functions and parameters that are selected
+        //functionsCounter: 0
+
+      }, //End of data
+      methods:{
+        //Adds strings to the pathArray OR
+        //If there are strings in the functionsSequenceArr then it adds to the functionsSequenceArr instead
+        addBranch(event){
+          this.zeroProperties(event.target.name);
+          let axisEventValue = this.absoluteRelativeAxis === \'absolute\' ?
+          this.axis + event.target.value : this.axis.slice(1) + event.target.value
+
+          //Add the string to the function array
+          if (this.functionsCounter > 0) {
+            console.log(\'In functionsCounter\');
+            let functionStr = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
+            // Add a comma if this is not the beginning of the function
+            if(functionStr[functionStr.toString().length-1] !== \'(\') this.functionsSequenceArr.push(\', \');
+
+            this.functionsSequenceArr.push(axisEventValue);
+          }
+          //Add string to the path array
+          else this.pathArray.push(axisEventValue);
+
+          this.node = \'\';
+        }, //End of AddBranch
+
+
+
+        addBrackets(event){
+          this.zeroProperties(event.target.name);
+          if (this.functionsCounter > 0) {
+            this.functionsSequenceArr.push(event.target.value);
+            if (event.target.value === \')\') {
+              //this.functionsCounter --;
+              this.activeFunctionArr.pop();
+              this.activeFunction = this.activeFunctionArr[this.activeFunctionArr.length - 1] || \'\';
+              return this.checkAndPushToPathArray();
+              // this is supposed to be added to the computed properties
+              // if (this.functionsCounter === 0) {
+              //   this.pathArray.push(this.functionsSequenceArr.join(\'\'));
+              //   this.functionsSequenceArr = [];
+              // }
+            }
+            if(event.target.value === \'(\'){
+              //this.functionsCounter ++;
+              this.activeFunctionArr.push(this.activeFunctionArr[this.activeFunctionArr.length - 1]);
+            }
+          }
+          else if(this.pathArray.length > 0 && event.target.value !== \')\'){
+            this.pathArray.push(event.target.value);
+          }
+        }, //End of addBrackets
+
+
+
+        addOperators(event){
+          this.zeroProperties(event.target.name);
+          let operatorsRegex = /and|or|\||=|!=|\+|-|\*|div|<|<=|>|>=|mod/;
+          console.log(\'in addOperator\');
+          console.log(this.functionsSequenceArr[this.functionsSequenceArr.length - 1]);
+          //When the functions counter is larger than 0 or
+          //when the functionsCounter is zero but there are elements in the functionsSequenceArr
+          if ((this.functionsCounter > 0 ||
+          /[a-z]+\(\)$/.test(this.functionsSequenceArr[this.functionsSequenceArr.length - 1])) &&
+          !operatorsRegex.test(this.functionsSequenceArr[this.functionsSequenceArr.length - 1])) {
+            this.functionsSequenceArr.push(event.target.value);
+          }
+          //functionsCounter is 0 and functionsSequenceArr is empty so push in pathArray
+          else if(this.pathArray.length !== 0 &&
+          !operatorsRegex.test(this.pathArray[this.pathArray.length - 1])){
+            console.log(\'else if for pushing operator in the pathArray\');
+            this.pathArray.push(event.target.value);
+          }
+          console.log(\'about to hit zero\', this.operator);
+          this.operator = \'\';
+          console.log(this.operator);
+        },
+
+
+
+        addAttributes(event){
+
+          if (this.functionsCounter === 0 && this.pathArray.length === 0) {
+            this.paramAlert = \'You need to enter a node path or a function first\';
+            return;
+          }
+
+          if (this.functionsCounter > 0 || this.functionsSequenceArr.length > 0) {
+            console.log(\'if statemenet for adding attribute in the functionsSequenceArr\');
+            if (this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes(\'@\')) {
+              this.paramAlert = \'An attribute already exists in the previous entry.\';
+            }
+            else {
+              //If the previous element in the array is a branch, then push the attribute with a forward
+              //slash, otherwise just push the attribute
+              this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes(\'::\') ||
+              this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes(\'//\') ||
+              this.functionsSequenceArr[this.functionsSequenceArr.length - 1] === \'.\' ?
+              this.functionsSequenceArr.push(\'/\' + event.target.value) :
+              this.functionsSequenceArr.push(event.target.value);
+              this.attribute = \'\';
+              return this.zeroProperties(event.target.name);
+            }
+          }
+
+          if(this.pathArray.length !== 0) {
+            if (this.pathArray[this.pathArray.length - 1].includes(\'@\')) {
+              this.paramAlert = \'An attribute already exists in the previous entry.\'
+            }
+            else {
+              console.log(\'else if for adding attribute in the pathArray\');
+              //If the previous element in the array is a branch, then push the attribute with a forward
+              //slash, otherwise just push the attribute
+              this.pathArray[this.pathArray.length - 1].includes(\'::\') ||
+              this.pathArray[this.pathArray.length - 1].includes(\'//\') ||
+              this.pathArray[this.pathArray.length - 1] === \'.\'?
+              this.pathArray.push(\'/\' + event.target.value) :
+              this.pathArray.push(event.target.value);
+              this.attribute = \'\';
+              return this.zeroProperties(event.target.name);
+            }
+          }
+        },
+
+
+
+        //Adds a function name with parenthesis ( in the functionsSequenceArr
+        addFunction(event){
+          this.zeroProperties(event.target.name);
+
+          //Alert the user that the function only takes node sets
+          if (event.target.value === \'count\') {
+            this.paramAlert = \'This function only takes node sets\';
+          }
+
+          //Mark the number entry checkbox as selected
+          if (event.target.value === \'ceiling\' ||
+          event.target.value === \'floor\' ||
+          event.target.value === \'round\') {
+            this.numberEntry = true;
+            this.paramAlert = \'This function only takes a number entry\';
+          }
+
+
+
+          console.log(\'In add function. The counter before the addition is:\', this.functionsCounter);
+
+          //Add a comma before if the previous entry is a parameter and not a function
+          if (this.functionsSequenceArr.length > 0) {
+            let lastElement = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
+            if (!/[\(\)]/.test(lastElement[lastElement.length - 1]) &&
+            !lastElement[lastElement.length - 1].includes(\'node()\')) {
+              this.functionsSequenceArr.push(\',\');
+            }
+          }
+
+          //If the functions do not take any parameters, then open and close the parenthesis
+          if (event.target.value === \'current\' ||
+              event.target.value === \'false\' ||
+              event.target.value === \'last\' ||
+              event.target.value === \'position\' ||
+              event.target.value === \'true\') {
+            this.functionsSequenceArr.push(event.target.value + \'()\'); //Array with all the functions and params
+            return this.checkAndPushToPathArray();
+          }
+          // otherwise just open the parenthesis
+          else {
+            this.functionsSequenceArr.push(event.target.value + \'(\');
+            this.activeFunctionArr.push(event.target.value);
+            //this.functionsCounter ++;
+          }
+        }, //End of addFunction
+
+
+
+        addParameters(event){
+
+          //When a parameter is added in a function
+          if (this.functionsCounter > 0) {
+            console.log(\'functionsCounter larger than 0. It is\', this.functionsCounter);
+            console.log(\'this.numberEntry is\', this.numberEntry, \'and this.translateString is\', this.translateString);
+            //If number entry has been selected
+            if(this.numberEntry) return this.evaluateAndEnterNumberValue(event.target.value, this.functionsSequenceArr);
+            //Translate option has been selected
+            else if (this.translateString) return this.translateAndPush(event.target.value);
+            //The string is pushed in the functionsSequenceArr
+            else{
+              let lastElement = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
+              if (lastElement[lastElement.length - 1] === \'(\') {
+                this.functionsSequenceArr.push(\'\\'\' + event.target.value + \'\\'\')
+              }
+              else {
+                this.functionsSequenceArr.push(\',\');
+                this.functionsSequenceArr.push(\'\\'\' + event.target.value + \'\\'\')
+              }
+
+              this.parameterString = \'\';
+              return this.zeroProperties(event.target.name);
+            }
+          }
+          //When a parameter is added in the functionsSequenceArr
+          else if (this.functionsSequenceArr.length > 0) {
+            console.log(\'functionsCounter 0 but functionsSequenceArr has elements\');
+            if(this.numberEntry) return this.evaluateAndEnterNumberValue(event.target.value, this.functionsSequenceArr);
+            else {
+              this.functionsSequenceArr.push(\'\\'\' + event.target.value + \'\\'\');
+              this.parameterString = \'\';
+              return this.zeroProperties(event.target.name);
+            }
+          }
+          //When a parameter is added in the pathArray
+          else {
+            console.log(\'functionsCounter and functionsSequenceArr are both empty\');
+            //If number entry has been selected
+            if(this.numberEntry) return this.evaluateAndEnterNumberValue(event.target.value, this.pathArray);
+            else {
+              this.pathArray.push(\'\\'\' + event.target.value + \'\\'\');
+              this.parameterString = \'\';
+              return this.zeroProperties(event.target.name);
+            }
+          }
+
+          //When a parameter is added after an operator but not in a function
+          if (this.operator !== \'\') {
+            if(this.numberEntry) return this.evaluateAndEnterNumberValue(event.target.name, this.pathArray)
+            else {
+              this.pathArray.push(\'\\'\' + event.target.value + \'\\'\');
+              this.parameterString = \'\';
+              return this.zeroProperties(event.target.name);
+            }
+          }
+
+      }, //End of addParameters()
+
+
+
+        //Concatenates the last elements that are in the functionsSequenceArr and are separated by a comma
+        concatFunctionElements(){
+          console.log(this.functionsSequenceArr);
+
+          if (this.functionsSequenceArr.length > 3 &&
+          this.functionsSequenceArr[this.functionsSequenceArr.length-2] === \', \' &&
+          this.functionsSequenceArr[this.functionsSequenceArr.length-3][0] === \'/\') {
+            this.functionsSequenceArr[this.functionsSequenceArr.length-3] += this.functionsSequenceArr.pop();
+            this.functionsSequenceArr.pop();
+          }
+          else {
+            this.paramAlert = \'The array is not big enough for concatenation or the element for concatenation is not an axis\';
+          }
+        }, //End of concat Function Elements
+
+
+
+        evaluateAndEnterNumberValue(eventValue, arr){
+          if (!Number(eventValue)) {
+            this.parameterString = \'\';
+            this.numberEntry = false;
+            this.paramAlert = \'Invalid number entry\';
+          }
+          else {
+            arr.push(Number(eventValue));
+            this.paramAlert = \'\';
+            this.parameterString = \'\';
+            this.zeroProperties(event.target.name)
+          }
+        },
+
+
+
+        translateAndPush(eventValue){
+          console.log(\'In translate\', this.functionsSequenceArr[this.functionsSequenceArr.length - 1]);
+          if (this.functionsSequenceArr[this.functionsSequenceArr.length - 1].endsWith(\'(\')) {
+            this.paramAlert = \'You need to enter an attribute or an axis before the string parameter\';
+            return;
+          }
+          else {
+            let translateStringElements = \'\';
+            for (let i = 0; i < this.parameterString.length; i++) {
+              if(!translateStringElements.includes(this.parameterString[i].toLowerCase()) && /\w/.test(this.parameterString[i]))
+              translateStringElements += this.parameterString[i].toLowerCase();
+            }
+            this.functionsSequenceArr.push(\`translate(${this.functionsSequenceArr.pop()}, \'${translateStringElements.toUpperCase()}\', \'${translateStringElements}\'), \'${eventValue.toLowerCase()}\'\`);
+            console.log(\'close to zero\', event.target.name);
+            this.parameterString = \'\';
+            this.zeroProperties(event.target.name);
+          }
+        }, //End of translateAndPush
+
+
+
+        //Zero all the properties of the data object
+        zeroProperties(eventName){
+          if(eventName !== \'addNode\') this.axis = \'\';
+          if(eventName !== \'brackets\') this.brackets = \'\';
+          if(eventName !== \'inputOperator\') this.operator = \'\';
+          // this.activeFunction = \'\';
+          this.translateString = false;
+          this.numberEntry = false;
+          this.paramAlert = \'\';
+          if(eventName !== \'attribute\') this.attribute = \'\';
+          if(eventName !== \'parameterString\') this.parameterString = \'\';
+        }, //End of zero properties
+
+
+
+        adjustLabelSize(){
+          let labels = document.getElementsByClassName(\'divFunctionsInputs\')[0].children;
+          for (var i = 0; i < labels.length; i++) {
+            let spanText = labels[i].children[1].textContent;
+            if (spanText.length > 15) labels[i].className += \'functionSpansFontSize\';
+          }
+        },
+
+
+
+        updateFunctionsSequenceArr(event){
+          console.log(\'in function\');
+          console.log(event.target.value);
+          console.log(event.target.name);
+        },
+
+
+
+
+        checkAndPushToPathArray(){
+          console.log(\'In checkAndPushToPathArray\');
+          if (this.functionsCounter === 0) {
+            this.pathArray.push(this.functionsSequenceArr.join(\'\'));
+            this.functionsSequenceArr = [];
+          }
+        },
+
+
+
+        copyxPath(){
+          document.getElementById(\'textAreaFullPath\').select();
+          document.execCommand(\'copy\');
+        }
+
+
+      }, //End of methods
+      computed: {
+        fullPath(){
+          let fullPath = this.pathArray.join(\'\');
+          let replaceStrArr = [
+            {oldStr: /\)or/g, newStr: \'or
+\'},
+            {oldStr: /\|/g, newStr: \'
+|
+\'}
+          ];
+
+          replaceStrArr.forEach(function(el){
+            fullPath = fullPath.replace(el.oldStr, el.newStr);
+          });
+
+          return fullPath;
+        },
+
+        functionsSequenceArrJoin(){
+          return this.functionsSequenceArr.join(\'\');
+        },
+
+
+        //For displaying the Number checkbox
+        showNumberInput(){
+          return this.activeFunction === \'boolean\' ||
+          this.activeFunction === \'ceiling\' ||
+          this.activeFunction === \'choose\' ||
+          this.activeFunction === \'floor\' ||
+          this.activeFunction === \'position\' ||
+          this.activeFunction === \'round\' ||
+          this.activeFunction === \'sum\' ||
+          this.activeFunction === \'\'
+          this.operator !== \'\'
+          ? true : false;
+        },
+
+
+        //For displaying the translate checkbox
+        showTranslateInput(){
+          return this.activeFunction === \'contains\' ? true : false;
+        },
+
+        showParamInput(){
+          return this.activeFunction !== \'count\'
+        },
+
+        functionsCounter(){
+          return this.functionsSequenceArr.join(\'\').replace(/[^\(]/g,\'\').length -
+          this.functionsSequenceArr.join(\'\').replace(/[^\)]/g,\'\').length;
+        }
+      }, //end of computed properties
+      mounted() {
+        // this.adjustLabelSize();
+      }
+    });
+
+
+  </script>
+
+</html>
