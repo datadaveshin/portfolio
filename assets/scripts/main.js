@@ -782,8 +782,6 @@ let app = new Vue({
         let codePath = "";
 
         projectsArr.forEach(el => {
-          console.log("Hello I am the parse JSON method");
-          console.log(this.textPath + el.id + '.txt');
           let txtObj = new XMLHttpRequest();
           txtObj.overrideMimeType("application/json");
           txtObj.open('GET', this.textPath + el.id + '.txt', true); // Replace 'my_data' with the path to your file
