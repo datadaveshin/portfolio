@@ -777,9 +777,9 @@ let app = new Vue({
       },
 
       parseJson(){
-        let self = this;
+        //Source used:
+        // https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
         let projectsArr = this.projects;
-        let codePath = "";
 
         projectsArr.forEach(el => {
           let txtObj = new XMLHttpRequest();
