@@ -614,7 +614,7 @@ let app = new Vue({
             {image: ""},
             {image: ""},
           ],
-          video_url: "https://www.youtube.com/watch?v=A_oKxT0wGTc",
+          video_url: "https://www.youtube.com/embed/A_oKxT0wGTc",
           id: "howPerformantVue",
           bgImage: {
             backgroundImage: "",
