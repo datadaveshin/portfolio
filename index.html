@@ -92,6 +92,7 @@
                 :id = "'aModalOpen-' + project.id"
                 >
                   {{project.key}}: {{project.title}}
+                  <span v-for="star in project.starRating"><i class="fas fa-star fa-xs"></i></span>
                 </a>
                 <span class="spanBubble spanBubbleProjectDescription"
                 :class="{spanBubbleBackgroundVanilla: active[0].Vanilla, spanBubbleBackgroundVue: active[1].Vue, spanBubbleBackgroundjQuery: active[2].jQuery}"

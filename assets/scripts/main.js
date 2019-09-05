@@ -93,7 +93,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 4
         },
 
         {
@@ -127,7 +128,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 5
         },
 
         {
@@ -159,7 +161,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 1
         },
 
         {
@@ -191,7 +194,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 1
         },
 
         {
@@ -224,7 +228,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 2
         },
 
         {
@@ -255,7 +260,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 3
         },
 
         {
@@ -286,7 +292,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 4
         },
 
         {
@@ -317,7 +324,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 4
         },
 
         {
@@ -348,7 +356,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 4
         },
 
         {
@@ -377,7 +386,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 5
         },
 
         {
@@ -409,7 +419,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 4
         },
 
         {
@@ -440,7 +451,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 3
         },
 
         {
@@ -471,7 +483,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 4
         },
 
         {
@@ -503,7 +516,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 3
         },
 
         {
@@ -535,7 +549,8 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 4
         },
 
 
@@ -569,7 +584,43 @@ let app = new Vue({
           bgImage: {
             backgroundImage: "",
             boxShadow: ""
-          }
+          },
+          starRating: 5
+        },
+
+
+        {
+          key: 17,
+          title: "How Performant?",
+          url: "https://papostolopoulos.github.io/xPathDataExtraction/copypaste/howPerformant.html",
+          git: "https://github.com/papostolopoulos/copypaste",
+          code_url: "",
+          code: "",
+          description: [
+            {bullet: "Single page application"},
+            {bullet: "Allows the user to test the performance of one or two functions"},
+            {bullet: "The function tests against different types of arguments"},
+            {bullet: "The method performance.now() is used to test the function."},
+            {bullet: "Vue, Vanilla CSS."}
+          ],
+          highlights: [
+            {fact: "Test the execution time of JavaScript functions. (2019-09)"},
+            {fact: "Parsing arguments through arrays and objects with variant type of elements was the greatest challenge."},
+            {fact: "Interesting fact: The returned value represents the time elapsed since the time origin (source: MDN)."},
+          ],
+          language: "Vue",
+          images: [
+            {image: ""},
+            {image: ""},
+            {image: ""},
+          ],
+          video_url: "https://www.youtube.com/watch?v=A_oKxT0wGTc",
+          id: "howPerformantVue",
+          bgImage: {
+            backgroundImage: "",
+            boxShadow: ""
+          },
+          starRating: 5
         },
 
 

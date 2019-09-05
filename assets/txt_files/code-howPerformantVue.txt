@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="icon"
+      type="image/png"
+      href="favicon.ico">
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <title>How Performant - Test the performance of JavaScript functions</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.js"></script>
+
+    <style media="screen">
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      body{
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/
+      }
+
+      h1{
+        font-size: 2em;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      #container{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 7vh 89vh 4vh;
+        grid-template-areas:
+        "header"
+        "main"
+        "footer";
+      }
+
+      #header{
+        grid-area: header;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/
+        color: rgba(255, 255, 255, .8);
+        border-bottom: 2px solid rgb(7, 136, 155); /*teal 07889b*/
+
+      }
+
+      .title{
+        font-family: "Montserrat", sans-serif;
+        font-size: 2em;
+        font-variant: small-caps;
+
+      }
+
+      .subtitle{
+        font-size: .8em;
+        font-weight: bold;
+      }
+
+      #main{
+        display: grid;
+        grid-template-columns: 33.3% 66.6%;
+        grid-template-rows: 100%;
+        grid-template-areas:
+        "sectionPasteParams sectionPasteFunctions"
+        "sectionPasteParams sectionPasteFunctions";
+        grid-area: main;
+      }
+
+      .sectionPasteParams{
+        padding: 0 10px 10px 10px;
+        grid-area: sectionPasteParams;
+        overflow: auto;
+        background-color: rgb(102, 185, 191); /*powder 66b9bf*/
+        color: rgba(255, 255, 255, .8);
+        border-right: 2px solid rgb(7, 136, 155); /*teal 07889b*/
+        border-left: 2px solid rgb(7, 136, 155); /*teal 07889b*/
+      }
+
+      .divNumOfArgumentsSets{
+        position: sticky;
+        top: 0;
+        background-color: rgb(102, 185, 191); /*powder 66b9bf*/
+      }
+
+      .divNumOfArgumentsSets hr{
+        border: 3px solid rgb(7, 136, 155); /*teal 07889b*/
+        margin-top: 10px;
+      }
+
+      .divInputNumOfArguments{
+        display: flex;
+        justify-content: center;
+      }
+
+      #inputNumOfArgumentsSets{
+        width: 80px;
+        text-align: center;
+        font-size: 1.5em;
+        border: 2px solid rgb(7, 136, 155); /*teal 07889b*/
+        color: rgb(7, 136, 155); /*teal 07889b*/
+        padding: 5px 5px 5px 20px;
+      }
+
+      #inputNumOfArgumentsSets:focus{
+        background-color: rgb(206, 247, 253);/*90% from teal 07889b*/
+        color: rgb(7, 136, 155); /*teal 07889b*/
+        outline: none;
+      }
+
+      #inputNumOfArgumentsSets:hover{
+        cursor: pointer;
+      }
+
+      .divDataTypeContainer{
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .divFunctionArgument{
+        margin-top: 10px;
+        border-bottom: 1px solid rgb(7, 136, 155); /*teal 07889b*/
+        padding-bottom: 10px;
+      }
+
+      .textAreaArgumentsPaste{
+        width: 100%;
+        height: 10vh;
+        padding: 5px;
+        margin-top: 5px;
+        font-size: 0.8em;
+        color: rgb(7, 136, 155); /*teal 07889b*/
+        outline: none;
+        border: 1px solid rgb(7, 136, 155); /*teal 07889b*/
+      }
+
+      .textAreaArgumentsPaste:focus{
+        background-color: rgb(206, 247, 253);/*90% from teal 07889b*/
+      }
+
+      .divLabelDataTypeSingle{
+        display: flex;
+        align-items: center;
+      }
+
+      .labelArgumentsDataTypes{
+        margin-right: 10px;
+        height: 30px;
+        line-height: 30px;
+        position: relative;
+      }
+
+      .labelArgumentsDataTypes:hover{
+        cursor: pointer;
+        color: rgb(7, 136, 155); /*teal 07889b*/
+      }
+
+      .labelArgumentsDataTypes:hover .spanFakeRadio{
+        background-color: rgb(7, 136, 155);
+      }
+
+      .labelArgumentsDataTypes:active{
+        color: rgb(227, 114, 34); /*tangerine e37222*/;
+      }
+
+      .labelArgumentsDataTypes:active .spanFakeRadio{
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/;
+      }
+
+      input[name*="inputRadioDataType"]{
+        position: absolute;
+        opacity: 0;
+      }
+
+      input[name*="inputRadioDataType"]:checked + span + span{
+        color: rgb(7, 136, 155); /*teal 07889b*/;
+      }
+
+      input[name*="inputRadioDataType"]:checked + span{
+        background-color: rgb(7, 136, 155); /*teal 07889b*/;
+      }
+
+      input[name*="inputRadioDataType"]:checked + span:after{
+        display: block;
+      }
+
+      .spanFakeRadio{
+        position: absolute;
+        top: 5px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: rgba(255, 255, 255, .8);
+        border-radius: 50%;
+        border: 1px solid rgb(7, 136, 155); /*teal 07889b*/
+      }
+
+      .spanFakeRadio:after{
+        content:"";
+        position: absolute;
+        display: none;
+        top: 5px;
+      	left: 5px;
+      	width: 8px;
+      	height: 8px;
+      	border-radius: 50%;
+      	background-color: rgba(255, 255, 255, .8);
+      }
+
+      .spanFakeRadio:hover{
+        background-color: rgb(7, 136, 155); /*teal 07889b*/
+      }
+
+      .spanFakeRadio:active{
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/;
+      }
+
+      .spanRadioExplanation{
+        padding-left: 25px;
+      }
+
+      input:hover{
+        cursor: pointer;
+      }
+
+      .divErrorEntry{
+        padding-top: 10px;
+        color: rgba(128, 0, 0, .8);
+      }
+
+      .sectionPasteFunctions{
+        grid-area: sectionPasteFunctions;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        height: 90vh;
+      }
+
+      .sectionFunction1, .sectionFunction2{
+        width: 50%;
+        padding: 0 10px 10px 10px;
+        height: 90vh;
+        color: rgba(255, 255, 255, .8);
+        transition: width 2s, padding 2s;
+      }
+
+      .sectionFunction1{
+        overflow: auto;
+        background-color: rgb(238, 170, 123) /*tan eeaa7b*/;
+        border-right: 2px solid rgb(227, 114, 34); /*tangerine e37222*/
+      }
+
+      .sectionFunction1Expanded{
+        width: 100%;
+      }
+
+      .sectionFunction2Shrank{
+        width: 0;
+        padding: 0;
+      }
+
+      .sectionFunction2{
+        overflow: auto;
+        background-color: rgb(238, 170, 123) /*tan*/;
+      }
+
+      .divFunctionPasteArea{
+        position: sticky;
+        top: 0;
+        height: 180px;
+        margin-bottom: 80px;
+      }
+
+      #divFunction1HeaderContainer{
+        display: grid;
+        grid-template-columns: 93% 7%;
+        grid-template-rows: 100%;
+        grid-template-areas:
+        "header1 arrow";
+      }
+
+      .divFunction1Header{
+        grid-area: header1;
+      }
+
+      .divFunction1Arrow{
+        grid-area: arrow;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 2s;
+      }
+
+      .divFunction1Arrow:hover{
+        cursor: pointer;
+      }
+
+      .divFunction1ArrowRotated{
+        transform: rotate(-180deg);
+      }
+
+      .textAreaFunctionPaste{
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        font-size: 0.8em;
+        outline: none;
+        border: 2px solid rgb(227, 114, 34); /*tangerine e37222*/
+        color: rgb(227, 114, 34); /*tangerine e37222*/
+      }
+
+      .textAreaFunctionPaste:focus{
+        background-color: rgb(249, 226, 210) /*80% of tangerine e37222*/
+      }
+
+      .buttonTestFunction{
+        font-size: 1.2em;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 2px solid rgb(227, 114, 34); /*tangerine e37222*/;
+        color: rgb(227, 114, 34); /*tangerine e37222*/;
+        outline: none;
+      }
+
+      .buttonTestFunction:hover{
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/;
+        color: rgba(255, 255, 255, .8);
+        cursor: pointer;
+      }
+
+      .buttonTestFunction:active{
+        background-color: rgb(102, 185, 191); /*powder 66b9bf*/
+        border: 2px solid rgb(7, 136, 155); /*teal 07889b*/
+        color: rgba(255, 255, 255, .8);
+        cursor: pointer;
+      }
+
+      .divFunctionErrorAlertArea{
+        padding-top: 10px;
+        color: rgba(128, 0, 0, .8);
+      }
+
+      .divFunctionResultsArea{
+        overflow: auto;
+        padding: 15px 0 0 0;
+        font-size: 1em;
+        margin: 0;
+        transition: font-size 1s, margin 1s;
+      }
+
+      .divFunctionResultsArea:hover{
+        font-size: 1.3em;
+        margin: 0 -10px;
+        z-index:1;
+      }
+
+      .divFunctionResultsArea hr{
+        border: 1px solid rgba(255, 255, 255, .8);
+        margin-top: 5px;
+      }
+
+      .divFunctionResultsArea:nth-child(even){
+        background-color: rgb(243, 197, 165); /*80% of tan eeaa7b*/
+      }
+
+      .spanOutput, .spanMs{
+        display: block;
+        padding-left: 10px;
+      }
+
+      .spanOutput b, .spanMs b{
+        color: rgb(227, 114, 34); /*tangerine e37222*/
+      }
+
+      #footer{
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/
+        grid-area: footer;
+        line-height: 4vh;
+        text-align: center;
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, .8);
+        border-top: 2px solid rgb(7, 136, 155); /*teal 07889b*/
+        font-family: "Montserrat", sans-serif;
+      }
+
+      #footer a{
+        color: rgba(255, 255, 255, .8);
+      }
+
+      #footer a:hover{
+        color: rgba(255, 255, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <header id="header">
+        <div class="title">
+          How Performant?
+        </div>
+        <div class="subtitle">
+          Compare JavaScript Functions - See their execution time
+        </div>
+      </header>
+      <main id="main">
+        <section class="sectionPasteParams">
+          <div class="divNumOfArgumentsSets">
+            <h1>Function arguments</h1>
+            <div class="divInputNumOfArguments">
+              <label class="labelNumOfArgumentsSets">
+                Number of function arguments:
+                <input type="number"
+                name="inputNumOfArgumentsSets"
+                id="inputNumOfArgumentsSets"
+                v-model="numOfArgumentsSets"
+                @change="changeArgumentsArrLength($event)"
+                @keyup="changeArgumentsArrLength($event)"
+                min="0"
+                max="10"
+                width="2"
+                >
+              </label>
+              <!-- <div class="divNumOfArgumentsError" v-show="numOfArgumentsError">
+                The error goes here and it looks really good
+              </div> -->
+            </div>
+
+            <hr>
+            <!-- <p>
+              Paste your arguments in the following slots.
+              One data type per slot.
+              If you want to run your function multiple times and with different
+              arguments each time then paste them in the same slot with a line break.
+              If a different amount of arguments is going to be pasted on each slot,
+              then the function will be run as many times as the slot with the most
+              arguments pasted. In order to match the difference between arguments,
+              then there will be an iteration of the less arguments in the final
+              function invocations.
+            </p> -->
+          </div>
+
+
+
+          <div class="divArgumentsSets" v-for="set in Number(numOfArgumentsSets)">
+            <function-arg :id="'argSet' + set"></function-arg>
+          </div>
+
+        </section>
+
+
+
+        <section class="sectionPasteFunctions">
+          <section class="sectionFunction1"
+          :class="{'sectionFunction1Expanded': expandSectionFunction1}"
+          >
+            <div class="divFunctionPasteArea">
+              <div class="divFunctionHeading" id="divFunction1HeaderContainer">
+                <div class="divFunction1Header">
+                  <h1>Function 1</h1>
+                </div>
+                <div class="divFunction1Arrow"
+                :class="{'divFunction1ArrowRotated': function1ArrowRotate}"
+                @click="adjustFunction1Field($event)"
+                >
+                  <i class="fas fa-arrow-alt-circle-right fa-2x"></i>
+                </div>
+              </div>
+              <textarea
+              id="textAreaFunction1"
+              v-model="function1String"
+              name="textAreaFunction1"
+              class="textAreaFunctionPaste"
+              placeholder="Type or paste your function in this field"
+              ></textarea>
+              <button type="button" name="button" class="buttonTestFunction" @click="testFunctionPerformance()">test function</button>
+              <div class="divFunctionMS">
+                <h3>Total milliseconds for all functions: {{function1Totalms.toFixed(2)}}</h3>
+              </div>
+              <div class="divFunctionErrorAlertArea" v-show="function1Error">
+                {{function1ErrorMessage}}
+              </div>
+              <div class="divFunctionResultsArea"
+              v-for="result in function1Result">
+              <span class="spanOutput">
+                <b>Output:</b>
+                <span>{{result.output}}</span>
+              </span>
+              <span class="spanMs">
+                <b>ms:</b>
+                <span>{{result.ms}}</span>
+              </span>
+              <hr>
+              </div>
+            </div>
+
+
+          </section>
+
+
+
+          <section class="sectionFunction2"
+          :class="{'sectionFunction2Shrank': shrinkSectionFunction2}"
+          >
+            <div class="divFunctionPasteArea">
+              <h1>Function 2</h1>
+              <textarea
+              id="textAreaFunction2"
+              v-model="function2String"
+              name="textAreaFunction2"
+              class="textAreaFunctionPaste"
+              placeholder="Type or paste your function in this field"
+              ></textarea>
+              <button type="button" name="button" class="buttonTestFunction" @click="testFunctionPerformance()">test function</button>
+              <div class="divFunctionMS">
+                <h3>Total milliseconds for all functions: {{function2Totalms.toFixed(2)}}</h3>
+              </div>
+              <div class="divFunctionErrorAlertArea" v-show="function2Error">
+                {{function2ErrorMessage}}
+              </div>
+              <div class="divFunctionResultsArea"
+              v-for="result in function2Result">
+              <span class="spanOutput">
+                <b>Output:</b>
+                <span>{{result.output}}</span>
+              </span>
+              <span class="spanMs">
+                <b>ms:</b>
+                <span>{{result.ms}}</span>
+              </span>
+              <hr>
+              </div>
+            </div>
+          </section>
+        </section>
+
+
+      </main>
+
+      <footer id="footer">
+        <a href="http://addeventlistener.xyz" target="_blank">@papostolopoulos</a> |
+        September 2019
+      </footer>
+    </div>
+
+
+
+
+
+
+    <script type="text/javascript">
+
+//----Vue component----
+      Vue.component('function-arg', {
+        props: ["set"],
+        data(){
+          return {
+            errorEntry: false,
+            dataType: "string",
+            textAreaValues: "",
+            arrayElements: [],
+            objectElements: {}
+          }
+        },
+        methods:{
+          //takes all the values in the textArea and splits them on every line break
+          //Depending on the dataType selected, it converts them from string to the right
+          //data type. Then it returns an array of all the elements.
+          processTextAreaValues(){
+
+            console.log("In the start of the processTextAreaValues()");
+            this.errorEntry = false;
+            let finalArr = [];
+            let startArr = this.textAreaValues.split("\n");
+            console.log(`The array created after the split for iteration and evaluation is:`, startArr);
+
+
+            //If function selected
+            if (this.dataType === "function"){
+              console.log("selected data type = function");
+              let functionsArr = this.textAreaValues.split(/(?<=\})\s*((?=function)|(?=(var|let|const)\s[A-z_\$]\w*\s*=\s*function))/);
+              console.log("the functionsArr is", functionsArr);
+              for (let i = 0; i < functionsArr.length; i++) {
+                if (functionsArr[i] === "" || functionsArr[i] === undefined){
+                  functionsArr.splice(i, 1);
+                  i--;
+                }
+                else {
+                  console.log("Result from function selection before the evalFunction:", functionsArr[i]);
+                  let evalFunctionProduct = this.evalFunction(functionsArr[i]);
+                  if (evalFunctionProduct === "error") {
+                    this.errorEntry = true;
+                    return;
+                  }
+                  finalArr.push(evalFunctionProduct);
+                }
+              }
+              return finalArr;
+            } //end of if for function
+
+            //If object selected
+            if (this.dataType === "object"){
+              console.log("selected dataType = object");
+              let objectsArr = this.textAreaValues.split(/\n(?=\{)/);
+              for (let i = 0; i < objectsArr.length; i++) {
+                objectsArr[i][0] === "{" ? objectsArr[i] = objectsArr[i] : objectsArr[i] = "{" + objectsArr[i];
+                console.log("Result from function selection before the evalFunction:", objectsArr[i]);
+                let evalObjectProduct = this.evalObject(objectsArr[i], this.objectElements);
+                if (evalObjectProduct === "error"){
+                  this.errorEntry = true;
+                  return;
+                }
+                else {
+                  this.objectElements = {};
+                  this.arrayElements = [];
+                  finalArr.push(evalObjectProduct);
+                } //End of else
+              }
+              return finalArr;
+            } //End of if object selected
+
+            //If string selected - Not sure about this - Need to see if I want to trigger alerts when string
+            //starts as an array or object or says true or false or starts with number etc
+            if (this.dataType === "string"){
+              let stringsArr = this.textAreaValues.split(/\n/);
+              console.log("selected dataType = string and stringsArr is", stringsArr);
+
+              //Find if there are tildas (`) in the strings. That might mean sentences
+              //that are spanning to different lines so they need to be connected
+              let pairTildas = this.textAreaValues.replace(/[^`]/g, "").length % 2 === 0;
+              if (pairTildas) {
+                for (let j = 0; j < stringsArr.length; j++) {
+                  if (stringsArr[j][0] === "`" && stringsArr[j][stringsArr[j].length - 1] !== "`") {
+                    let replaceStr = stringsArr[j];
+                    let elemsCounter = 1;
+                    for (var k = j+1; k < stringsArr.length; k++) {
+                      replaceStr += stringsArr[k];
+                      elemsCounter += 1;
+                      if (stringsArr[k][stringsArr[k].length - 1] === "`") {
+                        stringsArr.splice(j, elemsCounter, replaceStr);
+                        break;
+                      }
+                    } //End of Second loop (k)
+
+                  }
+                } //End of first loop, j
+              } //End of if(pairTildas)
+
+              for (let i = 0; i < stringsArr.length; i++) {
+                let evalStringProduct = this.evalString(stringsArr[i]);
+                if (evalStringProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                finalArr.push(evalStringProduct);
+              }
+              return finalArr;
+            } //End of if this.dataType === string
+
+
+
+            for (let i = 0; i < startArr.length; i++) {
+              console.log("In the for loop for i:", i, "and startArr[i]:", startArr[i]);
+
+              //If array selected
+              if (this.dataType === "array"){
+                console.log("selected data type: array");
+                let evalArrayProduct = this.evalArray(startArr[i], this.arrayElements);
+                if(evalArrayProduct === "error"){
+                  this.errorEntry = true;
+                  return;
+                }
+                else {
+                  this.arrayElements = [];
+                  this.objectElements = {};
+                  finalArr.push(evalArrayProduct);
+                }
+              } //end of array being selected
+
+              //If boolean selected
+              if (this.dataType === "boolean"){
+                let evalBooleanProduct = this.evalBoolean(startArr[i]);
+                if (evalBooleanProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                 finalArr.push(evalBooleanProduct);
+              }
+              //If null selected
+              if (this.dataType === "null"){
+                let evalNullProduct = this.evalNull(startArr[i]);
+                if (evalNullProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                finalArr.push(evalNullProduct);
+              }
+              //If number selected
+              if (this.dataType === "number"){
+                let evalNumberProduct = this.evalNumber(startArr[i]);
+                if (evalNumberProduct === "error") {
+                  this.errorEntry = true
+                  return;
+                }
+                finalArr.push(evalNumberProduct);
+              }
+              //If regexp selected
+              if (this.dataType === "regexp"){
+                let evalRegExpProduct = this.evalRegExp(startArr[i]);
+                if (evalRegExpProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                finalArr.push(evalRegExpProduct);
+              }
+              //If undefined selected
+              if (this.dataType === "undefined"){
+                let evalUndefinedProduct = this.evalUndefined(startArr[i]);
+                if (evalUndefinedProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                finalArr.push(evalUndefinedProduct);
+              }
+            } //End of for loop
+
+            console.log("The array to be sent to the main component is:", finalArr);
+
+            //Update the new data in the app component every time there is a change
+            //in the textArea or the radio buttons
+
+            // I AM CLOSING THE NEXT LINE AND I AM RETURNING FINAL ARRAY INSTEAD because
+            // THE ARRAY WILL BE PULLED FROM THE refreshArgumentsArr() that is in the MAIN
+            // vue component
+            // app.$data.argumentsArr[this.argIdNum - 1] = finalArr;
+            return finalArr;
+          }, //End of processTextAreaValues
+
+
+          //Evaluates if the array is properly structured
+          evalArray(arrStr, arr) {
+            if(arrStr === "") return;
+
+            console.log("Beginning of evalArray. arrStr is:", arrStr, typeof arrStr);
+            if (arrStr === "[]"){
+              console.log("In if statement. arrStr is empty so we are returning ", arr);
+              let finishEval = arr.slice();
+              arr = [];
+              return finishEval;
+            }
+            else{ // if(/\[.+\]/.test(arrStr))
+              if (arrStr[0] !== "[" || arrStr[arrStr.length-1] !== "]"){
+                console.log("In the error because the first or the last character of the string do not indicate an array");
+                return "error";
+              }
+              else {
+                console.log("In the else of the eval array. The arrStr before the slice:", arrStr);
+                arrStr = arrStr.slice(1, arrStr.length-1);
+                console.log("In the else of the eval array. The arrStr after the slice:", arrStr);
+                let es5FunctionRegEx = "function\\s+[^0-9\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*\\s*\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*\\{.*\\}";
+                let es6FunctionRegEx = "\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*=>\\s*\\{.*\\}";
+
+                //Number
+                if(arrStr.search(/\d+(\.\d+)?,/) === 0 || arrStr.search(/\d+(\.\d+)?\s*$/) === 0) {
+                  console.log("else if for number to be pushed:", Number(arrStr.match(/\d+(\.\d+)?/)[0]));
+                  arr.push(Number(arrStr.match(/\d+(\.\d+)?/)[0]));
+                  arrStr = arrStr.slice(arrStr.match(/\d+(\.\d+)?/)[0].length + 1);
+                  // arrStr = arrStr.slice(arrStr.indexOf(",") + 1);
+                  arrStr = arrStr.trim();
+                  console.log("end of else if with arrStr being:", arrStr);
+                  return this.evalArray("[" + arrStr + "]", arr);
+                }
+
+                //true
+                else if (arrStr.indexOf("true,") === 0 || arrStr.search(/true\s*$/) === 0) {
+                  console.log("else if for true");
+                  arr.push(true);
+                  arrStr = arrStr.slice(5);
+                  arrStr = arrStr.trim();
+                  return this.evalArray("[" + arrStr + "]", arr);
+                }
+
+                //false
+                else if (arrStr.indexOf("false,") === 0 || arrStr.search(/false\s*$/) === 0) {
+                  console.log("else if for false");
+                  arr.push(false);
+                  arrStr = arrStr.slice(6);
+                  arrStr = arrStr.trim();
+                  return this.evalArray("[" + arrStr + "]", arr);
+                }
+
+                //null
+                else if (arrStr.indexOf("null,") === 0 || arrStr.search(/null\s*$/) === 0) {
+                  console.log("else if for null");
+                  arr.push(null);
+                  arrStr = arrStr.slice(5);
+                  arrStr = arrStr.trim();
+                  return this.evalArray("[" + arrStr + "]", arr);
+                }
+
+                //Undefined
+                else if (arrStr.indexOf("undefined,") === 0 || arrStr.search(/undefined\s*$/) === 0) {
+                  console.log("else if for undefined");
+                  arr.push(undefined);
+                  arrStr = arrStr.slice(10);
+                  arrStr = arrStr.trim();
+                  return this.evalArray("[" + arrStr + "]", arr);
+                }
+
+                //string
+                else if (arrStr.search(/["'`]/) === 0) {
+                  console.log("else if for string");
+                  let firstQuote = arrStr[0];
+                  if (arrStr.indexOf(firstQuote + ",") > 0) {
+                    arr.push(arrStr.substring(1, arrStr.indexOf(firstQuote + ",")));
+                    arrStr = arrStr.slice(arrStr.indexOf(firstQuote + ",") + 2);
+                    arrStr = arrStr.trim()
+                  }
+                  else if (arrStr.lastIndexOf(firstQuote) === arrStr.length-1) {
+                      arr.push(arrStr.substring(1, arrStr.length-1));
+                      arrStr = "";
+                  }
+                  return this.evalArray("[" + arrStr + "]", arr);
+                }
+
+                //function es5 es6
+                else if (arrStr.search(RegExp(es5FunctionRegEx)) === 0 ||  arrStr.search(RegExp(es6FunctionRegEx)) === 0) {
+
+                  console.log("else if for function");
+                  let params = arrStr.slice(arrStr.indexOf("(") + 1, arrStr.indexOf(")")).split(/,\s*/);
+                  console.log("params are", params);
+                  console.log("arrStr is", arrStr.match(/function\s+[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/));
+                  //If there is a function and separated by a comma with other array elements
+                  if(arrStr.search(RegExp(es5FunctionRegEx + ",")) !== -1 ||
+                  arrStr.search(RegExp(es6FunctionRegEx + ",")) !== -1){
+                    console.log("In if for functions");
+                    params.push(arrStr.slice(arrStr.indexOf("{") + 1, arrStr.indexOf("}, ")));
+                    arr.push(new Function(...params));
+                    arrStr = arrStr.slice(arrStr.indexOf("}, ") + 3).trim();
+                    console.log("arrStr is", arrStr);
+                  }
+                  //if the function is the last element of the array
+                  else if ((RegExp(es5FunctionRegEx).test(arrStr) && arrStr.match(RegExp(es5FunctionRegEx))[0].length === arrStr.length) ||
+                  RegExp(es6FunctionRegEx).test(arrStr) && arrStr.match(RegExp(es6FunctionRegEx))[0].length === arrStr.length) {
+                    console.log("in else if for functions");
+                    params.push(arrStr.slice(arrStr.indexOf("{") + 1, arrStr.lastIndexOf("}")));
+                    arr.push(new Function(...params));
+                    arrStr = "";
+                    console.log(arrStr);
+                  }
+                  return this.evalArray("[" + arrStr + "]", arr);
+                }
+
+                //array
+                else if (arrStr.indexOf("[") === 0){
+                  console.log("else if for array");
+
+                  if (this.sliceArrObj("[", "]", arrStr)) {
+                    let arrStrSubstring = arrStr.substring(0, this.sliceArrObj("[", "]", arrStr));
+                    console.log("arrStrSubstring is", arrStrSubstring);
+                    //Push in arr array the function for evaluating arrays or objects (recursively), with the related substring
+                    arr.push(this.evalArray(arrStrSubstring, []));
+
+                    //slice the arrayString at the level of the substring
+                    arrStr = arrStr.slice(this.sliceArrObj("[", "]", arrStr) + 1);
+                    arrStr = arrStr.trim();
+                    return this.evalArray("[" + arrStr + "]", arr);
+                  }
+                }
+
+                //object
+                else if (arrStr.indexOf("{") === 0){
+                  console.log("else if for object");
+
+                  if (this.sliceArrObj("{", "}", arrStr)) {
+                    let arrStrSubstring = arrStr.substring(0, this.sliceArrObj("{", "}", arrStr));
+                    console.log("arrStrSubstring is", arrStrSubstring);
+                    //Push in arr array the function for evaluating objects, with the related substring
+                    arr.push(this.evalObject(arrStrSubstring, {}));
+
+                    //slice the arrayString at the level of the substring
+                    arrStr = arrStr.slice(this.sliceArrObj("{", "}", arrStr) + 1);
+                    arrStr = arrStr.trim();
+                    return this.evalArray("[" + arrStr + "]", arr);
+                  }
+                }
+
+                //There was no identification of any data type so error is returned
+                else {
+                  console.log("The data type was not matched");
+                  return "error";
+                }
+              }
+            } //End of top else
+          }, //End of evalArray
+
+
+          //Evaluates if the Boolean is properly structured
+          evalBoolean(el){
+
+            if (el.trim() === "true") return true;
+            if (el.trim() === "false") return false;
+            if (el.trim() === "") return;
+            return "error";
+          },
+
+
+          //Evaluates if the function is properly structured
+          evalFunction(el){
+
+            el = el.trim();
+            console.log("In evalFunction. The el in the evaFunction is:", el);
+            // console.log(event);
+
+            if (!el.startsWith("function") ||
+            !el.search(/(var|let|const)\s[A-z_\$]\w*\s*=\s*\(([A-z_\$]\w*,?\s*)*\)\s*=>/ !== 0) ||
+            !el.endsWith("}")) return "error";
+
+            let params = el.slice(el.indexOf("(") + 1, el.indexOf(")")).split(/,\s*/);
+            params.push(el.slice(el.indexOf("{") + 1, el.lastIndexOf("}")));
+            console.log("The function parameters are:", params);
+
+            return new Function(...params);
+          },
+
+
+          //Evaluates if the null is properly structured
+          evalNull(el){
+            if (el.trim() === "") return;
+            return el.trim() === "null" ? null : "error";
+          },
+
+
+          //Evaluates if the number is properly structured
+          evalNumber(el){
+
+            return isNaN(Number(el.trim())) ? "error" : Number(el);
+          },
+
+
+          //evaluates if the object is properly structured
+          evalObject(el, obj){
+            console.log("el is", el);
+
+            el = el.trim();
+            if (el === "{") return;
+            if (el === "{}") return obj;
+
+            if (!el.startsWith("{") || !el.endsWith("}")) return "error";
+            console.log("In eval Object. el is", el, "Need to convert from string to object");
+
+            //Put quotes in the keys of the object so it can pass the JSON.parse
+            //Put quotes in all the "undefined" as well
+            el = el
+            .replace(/([\{,])(\s*)(\w+)(\s*)(:)/g, "$1$2\"$3\"$4$5") //Add quotes at the start and the end of the keys
+            .replace(/(:\s+)(undefined)([,\n])/, "$1\"$2\"$3"); //put quotes around all the undefined
+            console.log("After the addition of quotations in the keys:", el);
+
+            // IF THERE IS A FUNCTION AS A VALUE OF ONE OF THE OBJECT'S PROPERTIES:
+            // 1. Create a variable that is pulling out all the functions from the obj.
+            // 2. replace unecessary text at the beginning and end of each element.
+            // 3. Replace all the double quotes to single quotes and replace all the line breaks
+            if ((/(:\s)(function\s*\((?:[^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)*\)\s*\{[\S\s]+\})(,?\s)/g).test(el)) {
+              let functionStrings =
+              el
+              .match(/(:\s)(function\s*\((?:[^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)*\)\s*\{[\S\s]+\})(,?\s)/g)
+              .map((ele) => ele.slice(ele.indexOf("function"), ele.lastIndexOf("}") + 1))
+              .map((elm) => elm.replace(/"/g, "'").replace(/\n/g, ""));
+              console.log(functionStrings);
+
+              //Replace all the function strings into "A function goes here"
+              el = el.replace(/(:\s)(function\s*\((?:[^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)*\)\s*\{[\S\s]+\})(,?\s)/g, "$1A function goes here$3");
+
+              //Add all the functions back in the object as -cleaned- string formats
+              while (functionStrings.length > 0) {
+                el = el.replace(/A function goes here/, '"' + functionStrings.shift() + '"');
+              }
+            }
+
+
+            //Parse the string into an object
+            obj = JSON.parse(el);
+
+            for(let key in obj){
+              if (obj[key] === "undefined") obj[key] = undefined;
+              if (/function.*\}/.test(obj[key])) {
+                let params = obj[key].slice(obj[key].indexOf("(") + 1, obj[key].indexOf(")")).split(/,\s*/);
+                params.push(obj[key].slice(obj[key].indexOf("{") + 1, obj[key].lastIndexOf("}")));
+
+                obj[key] = new Function(...params);
+              }
+
+              //What if the string is an array?
+            } //End of the for loop
+            return obj;
+          },
+
+
+          // evaluates if the regular expression is properly structured
+          evalRegExp(el){
+
+            el = el.trim();
+            if(el === "") return;
+            let elFlags = el.slice(el.lastIndexOf("/") + 1);
+            let flags = "igmsuy";
+            let source = el.slice(1, el.lastIndexOf("/"));
+            console.log(elFlags, flags, source);
+
+            //The last character is not a /
+            if (elFlags === 0 && el.length - 1 !== el.lastIndexOf("/")) return "error";
+
+            //some of the flag characters are incorrect
+            if (elFlags.length > 0) {
+              for (var i = 0; i < elFlags.length; i++) {
+                if (!flags.includes(elFlags[i])) return "error";
+              }
+            }
+
+            //The first character is not a /
+            if (el[0] !== "/") return "error";
+
+            let sourceCheck = source.replace(/[^\(\)\[\]\{\}]/g, "");
+            console.log(sourceCheck);
+
+            while (sourceCheck.length > 0) {
+              if (/\[\]/.test(sourceCheck) || /\(\)/.test(sourceCheck) || /\{\{/.test(sourceCheck)) {
+                sourceCheck = sourceCheck.replace(/\[\]/, "").replace(/\(\)/, "").replace(/\{\}/, "");
+              }
+              else return "error";
+            }
+
+            return new RegExp(source, elFlags);
+          },
+
+
+          //Evaluates if the string is properly structured
+          evalString(el){
+
+            console.log("In the evalString method for el", el);
+
+            //Get rid of extra quotation marks that might already exist at the input field
+            return el.replace(/^(?:["'`]+)?(.*[^"'`])(?:["'`]+)?\s*$/gm, "$1").trim();
+          },
+
+
+          //Evaluates if the undefined is properly structured
+          evalUndefined(el){
+            if(el === "") return;
+            return el === "undefined" ? undefined : "error";
+          },
+
+
+          //finds if the opening and closing brackets are structured correctly
+          //in an array or an object
+          sliceArrObj(openBrkt, closeBrkt, arr) {
+              let counter = 1;
+              let subStr = arr.slice(1);
+              for (let i = 0; i < subStr.length; i++) {
+                if(subStr[i] === openBrkt) counter++;
+                else if(subStr[i] === closeBrkt){
+                  counter--;
+                  if(counter === 0) return i+2;
+                }
+                else continue;
+              } //End of for loop for substring
+              return false;
+          },
+
+        }, //End of methods
+        computed: {
+          //Create the ID for the div tag that includes the arguments textArea
+          argIdNum(){
+            return this.$attrs.id.replace(/[A-z]/g, "");
+          },
+          // sendTextAreaValues(){
+          //   return processTextAreaValues();
+          // }
+
+        },
+        template:
+        `
+          <div class="divFunctionArgument" :key="set">
+            <h2>Argument {{argIdNum}}</h2>
+            <label class="labelArgumentsText">
+              <textarea
+                class="textAreaArgumentsPaste"
+                placeholder="Enter the function's argument.\nIf you are entering more than one options for the same argument type, separate them with a line break"
+                v-model="textAreaValues"
+                @keyup="processTextAreaValues($event.target.value)">
+
+              </textarea>
+            </label>
+            <h4>Argument data type:</h4>
+            <div class="divLabelDataType">
+              <form>
+                <div class="divDataTypeContainer">
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="array" v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Array</span>
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="boolean"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Boolean</span>
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType" value="null"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Null</span>
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="number" v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Number</span>
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="object"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Object literal</span>
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="regexp"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">RegExp</span>
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="string"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">String</span>
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="undefined" v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Undefined</span>
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="function"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Callback function</span>
+                    </label>
+                  </div>
+                </div>
+              </form>
+
+            </div> <!--End of divLabelDataType-->
+
+            <div class="divErrorEntries">
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'array'">
+                Incorrect array entry(ies). Make sure you have entered arrays that start and end with
+                square brackets - [].
+                Also make sure that each one of the array elements does not have any errors when entered (example: a mistyped function or a number with incorrect decimals).
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'boolean'">
+                Incorrect boolean entry(ies). Make sure you have entered only boolean values (true, false).
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'function'">
+                Incorrect function entry(ies). Make sure you have entered the function in
+                the correct format, with opening and closing curly braces.
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'null'">
+                Incorrect null entry(ies). Make sure you have entered only null values (null).
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'number'">
+                Incorrect number entry(ies). Make sure you have entered only numeric values (integers or floats).
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'object'">
+                Incorrect object literal entry(ies). Make sure you have entered
+                an object that opens and closes with curly braces - {}.
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'regexp'">
+                Incorrect regex entry(ies). Make sure you have entered a regular
+                expression that  opens and closes with slashes.
+                Make sure that the format of the regex (parenthesis, brackets etc)
+                is correct. Make sure that the flags are correct.
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'undefined'">
+                Incorrect undefined entry(ies). Make sure you have entered only "undefined" as a value.
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+            </div>
+          </div>
+        `
+      }); //End of Vue component
+
+
+
+
+
+
+
+//----MAIN VUE INSTANCE----
+      let app = new Vue({
+        el: "#main",
+        data: {
+          expandSectionFunction1: false,
+          shrinkSectionFunction2: false,
+          function1ArrowRotate: false,
+          numOfArgumentsSets: 0, //number of components - number of arguments for functions
+          numOfArgumentsError: false,
+          argumentsArr: [], //The array that has all the initial arguments
+          function1String: "",
+          function2String: "",
+          function1Result: [],
+          function2Result: [],
+          function1Totalms: 0,
+          function2Totalms: 0,
+          function1Error: false,
+          function2Error: false,
+          function1ErrorMessage: "",
+          function2ErrorMessage: "",
+          maxElementsNum: 0 //The most number of elements that an argument set has
+        },
+        methods: {
+          // Expands or decreases the width of sectionFunction1
+          adjustFunction1Field(event){
+            console.log("before the ternary", this.expandSectionFunction1);
+            if (this.expandSectionFunction1 === false) {
+              this.expandSectionFunction1 = true;
+              this.shrinkSectionFunction2 = true;
+              this.function1ArrowRotate = true;
+            }
+            else {
+              this.expandSectionFunction1 = false;
+              this.shrinkSectionFunction2 = false;
+              this.function1ArrowRotate = false;
+            }
+            console.log("after the ternary", this.expandSectionFunction1);
+          },
+
+
+          //updates the length of the argumentsArr based on the addition or subtraction
+          //of new components
+          changeArgumentsArrLength(event){
+            if (event.target.value > 10) event.target.value = 10;
+            /*
+            I need to decide if I want to keep this if statement or if an argument
+            with an empty string should be placed every time I add a new textArea.
+            The ternary operator that is commented out does that.
+            This if statement just pops off an element every time I substract a text
+            area.
+            */
+            while (Number(this.numOfArgumentsSets) < this.argumentsArr.length) {
+              this.argumentsArr.pop();
+            }
+            // Number(this.numOfArgumentsSets) > this.argumentsArr.length ?
+            // this.argumentsArr.push("") :
+            // this.argumentsArr.pop();
+          },
+
+
+          //Evaluate the strings that are pasted in the function textAreas and confirm they
+          //are valid functions
+          evalMainFunctions(el){
+            el = el.trim();
+            if (el === this.function1String.trim()) {
+              console.log("Entering the if statement for function1");
+              this.function1Error = false;
+              if (this.evalFunctionStartEnd(el)) {
+                console.log("deeper for 1");
+                this.function1Error = true;
+                this.function1ErrorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
+                return "error";
+              }
+            }
+            else if(el === this.function2String.trim()){
+              console.log("entering the if statement for function2");
+              this.function2Error = false;
+              if (this.evalFunctionStartEnd(el)) {
+                console.log("deeper for 2");
+                this.function2Error = true;
+                this.function2ErrorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
+                return "error";
+              }
+            }
+
+
+            let params = el.slice(el.indexOf("(") + 1, el.indexOf(")")).split(/,\s*/);
+            params.push(el.slice(el.indexOf("{") + 1, el.lastIndexOf("}")));
+            console.log("The function parameters are:", params);
+            console.log("about to return the new function");
+
+
+            try {
+              new Function(...params)
+            }
+            catch (error) {
+              console.log("caught");
+              if (el === this.function1String.trim()) {
+                this.function1Error = true;
+                this.function1ErrorMessage = error.toString();
+              }
+              if (el === this.function2String.trim())
+              {
+                this.function2Error = true;
+                this.function2ErrorMessage = error.toString();
+              }
+            }
+
+            return new Function(...params);
+          },
+
+
+
+          //
+          evalFunctionStartEnd(e){
+            if (!e.startsWith("function") ||
+            !e.search(/(var|let|const)\s[A-z_\$]\w*\s*=\s*\(([A-z_\$]\w*,?\s*)*\)\s*=>/ !== 0) ||
+            !e.endsWith("}")) return true;
+
+            return false;
+          },
+
+
+
+          testFunctionPerformance(){
+            console.log("starting function testFunctionPerformance");
+            // if both function strings are empty, return without running function
+            if (this.function1String === "" && this.function2String === "") return;
+
+            //Create function. Evaluate if it is a valid function
+            let function1, function2;
+
+            if (this.function1String !== "") function1 = this.evalMainFunctions(this.function1String);
+            if (this.function2String !== "") function2 = this.evalMainFunctions(this.function2String);
+
+
+            // If one of the two functions has an error, return without running function
+            //PERHAPS I NEED TO EXPAND THIS WITH AN ERROR ALERT
+            console.log("function1: ", function1, "function2: ", function2);
+            if (function1 === "error" || function2 === "error") return;
+
+            //return the argumentsArr in its initial status
+            this.refreshArgumentsArr();
+            //return function1Result and function2Result in its initial status
+            this.refreshFunctionResults();
+            this.function1Totalms = 0;
+            this.function2Totalms = 0;
+            this.function1Result = [];
+            this.function2Result = [];
+
+            //How can I make sure that if any elements are removed from the argument slots, this recalculates
+            let leveledArguments = this.levelArguments();
+            console.log(this.levelArguments());
+            console.log("leveledArguments is ", leveledArguments);
+            //To be pushed in function1Result or function2Result
+
+            if (function1){
+              this.function1Result = this.functionExtraction(function1, leveledArguments, 1);
+              for (let i = 0; i < this.function1Result.length; i++) {
+                this.function1Totalms += this.function1Result[i].ms
+              }
+            }
+            if (function2){
+              this.function2Result = this.functionExtraction(function2, leveledArguments, 2);
+              for (let i = 0; i < this.function2Result.length; i++) {
+                this.function2Totalms += this.function2Result[i].ms
+              }
+            }
+          },
+
+
+          //calculates performance and returns function's product and ms.
+          //What is returned is an array with objects with properties that have keys
+          //"ms" and "output"
+          functionExtraction(func, funcArguments, num){
+            let finalOutput = [];
+            console.log("about to start functionExtraction");
+            console.log(`the data used are:
+              func: ${func}
+              funcArguments: ${funcArguments}`);
+
+              //Test if the function has any errors
+              this.catchErrors(func, funcArguments, num);
+
+            // If there are no arguments used in the function, then return the function's
+            // product without any parameters
+            if (!funcArguments) {
+              let functionResult = {};
+              let timeStart = performance.now();
+              func();
+              let timeEnd = performance.now();
+
+              functionResult.ms = timeEnd - timeStart; //Adding ms of function in object
+              functionResult.output = func();
+              finalOutput.push(functionResult);
+
+              console.log("Invoking func()", func());
+              console.log(`The time it took to invoke was, ${timeEnd - timeStart}, milliseconds`);
+            }
+            else {
+              for (let i = 0; i < funcArguments.length; i++) {
+                let functionResult = {};
+                let timeStart = performance.now();
+                func(...funcArguments[i]);
+                let timeEnd = performance.now();
+
+                functionResult.ms = timeEnd - timeStart;
+                functionResult.output = func(...funcArguments[i]);
+                finalOutput.push(functionResult);
+                console.log("Invoking func(...params)", func(...funcArguments[i]));
+                console.log(`The time it took to invoke was, ${timeEnd - timeStart}, milliseconds`);
+              } //End of for loop
+
+            } //end of else statement
+
+            return finalOutput;
+          },
+
+
+          /*Take all the array elements from this.argumensArr and convert them in
+          array elements of the same length.*/
+          levelArguments(){
+            console.log("invoking levelArguments()");
+
+            //Zero the this.maxElementsNum first
+            this.maxElementsNum = 0;
+            let args = this.argumentsArr.slice();
+            console.log("this.argumentsArr is", this.argumentsArr);
+            if (this.argumentsArr.length === 0) return;
+
+
+            // Iterate through all the elements of this.argumentsArr.
+            // If the length of the element is larger than the this.maxElementsNum
+            // then the this.maxElementsNum has to become equal to the element's length.
+            for (let i = 0; i < this.argumentsArr.length; i++) {
+              if (args[i].length > this.maxElementsNum) this.maxElementsNum = args[i].length;
+            }
+
+
+            // Iterate through all the elements of this.argumentsArr one more time
+            // If the element's length is less than the this.maxElementsNum
+            // Create a nested loop with i < element's length
+            // push elements from the beginning of the element
+            // every time after you push, check if the element's length is equal
+            // to the this.maxElementsNum. If so, then break
+            for (let j = 0; j < args.length; j++) {
+              let element = args[j];
+              console.log("Looping through j for loop. element is", element);
+              if (element.length < this.maxElementsNum) {
+                for (let k = 0; k < this.maxElementsNum; k++) {
+                  args[j].push(element[k]);
+                  if(args[j].length === this.maxElementsNum) break;
+                }
+              }
+            }
+
+            // this.refreshArgumentsArr();
+            console.log("In the end of this.levelArguments(), the argumentsArr is ", args, "About to start the arrayFlip()");
+            return this.arrayFlip(args);
+          }, //End of levelArguments()
+
+
+          //used to return the array to its initial status
+          refreshArgumentsArr(){
+            console.log("In function refreshArgumentsArr. Will run processTextAreaValues through this");
+            this.argumentsArr = [];
+            console.log("this.numOfArgumentsSets is", this.numOfArgumentsSets);
+            for (var i = 0; i < Number(this.numOfArgumentsSets); i++) {
+              this.argumentsArr.push(app.$children[i].processTextAreaValues());
+            }
+
+            console.log("after the iteration in refreshArgumentsArr, the argumentsArr is", this.argumentsArr);
+
+            //need to iterate through the children of the component
+            //If the elements of the children are less or more than the elements
+            //of each respective argument in the this.argumentsArr, then update
+            //Should I create a separate property in the instance that updates from
+            //The argumentsArr through the levelArguments?
+          },
+
+
+          //used to zero out function1Result and function2Result
+          refreshFunctionResults(){
+            this.function1Result = [];
+            this.function2Result = [];
+          },
+
+
+          //used to flip the array's elements from rows to columns so that every element
+          //of the array is a set of different arguments.
+          arrayFlip(arr) {
+            console.log("In the arrayFlip with arr =", arr);
+            let endArr = [];
+
+            for (let i = 0; i < arr[0].length; i++) {
+              endArr.push([]);
+            }
+
+            for (let j = 0; j < arr.length; j++) {
+              for (let k = 0; k < arr[j].length; k++) {
+                endArr[k].push(arr[j][k]);
+              }
+            }
+            console.log("Endarr is ", endArr);
+            return endArr;
+          },
+
+
+
+          catchErrors(fnctn, args, num){
+            try {
+              /*If arguments exist, they are in an array. Therefore I use a for
+              loop to go over them and confirm that all are working. Otherwise,
+              throw an error*/
+              if (!args) fnctn();
+              else{
+                for (var i = 0; i < args.length; i++) {
+                  fnctn(...args[i]);
+                }
+              }
+            }
+            catch(error) {
+              console.error(error);
+              if (num === 1) {
+                this.function1Error = true;
+                this.function1ErrorMessage = error.toString();
+              }
+              else if (num === 2) {
+                this.function2Error = true;
+                this.function2ErrorMessage = error.toString();
+              }
+
+            }
+          },
+
+
+        }, //End of methods
+        computed: {
+        } //End of computed
+      });
+
+    </script>
+
+  </body>
+</html>
