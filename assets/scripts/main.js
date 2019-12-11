@@ -266,8 +266,8 @@ let app = new Vue({
 
         {
           key: 7,
-          title: "hangman.pro",
-          url: "http://hangman.pro",
+          title: "Hangman game",
+          url: "https://papostolopoulos.github.io/hangman/",
           git: "https://github.com/papostolopoulos/hangman",
           code_url: "",
           code: "",
