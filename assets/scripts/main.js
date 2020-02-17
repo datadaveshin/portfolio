@@ -67,7 +67,7 @@ let app = new Vue({
         {
           key: 1,
           title: "listMe.xyz",
-          url: "http://listme.xyz",
+          url: "https://listme-xyz.herokuapp.com/",
           git: "https://github.com/papostolopoulos/listme",
           code_url: "",
           code: "",
